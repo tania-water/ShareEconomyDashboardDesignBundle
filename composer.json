@@ -1,0 +1,28 @@
+{
+    "name": "Ibtikar/ShareEconomyDashboardDesignBundle",
+    "type": "laravel-library",
+    "description": "Ibtikar share economy dashboard design bundle",
+    "keywords": ["Backend Dashboard Design"],
+    "homepage": "https://github.com/Ibtikar/ShareEconomyDashboardDesignBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ibtikar"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Ibtikar\\ShareEconomyDashboardDesignBundle\\": ""
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "src/{$name}": ["Ibtikar/ShareEconomyDashboardDesignBundle"]
+        }
+    }
+}
