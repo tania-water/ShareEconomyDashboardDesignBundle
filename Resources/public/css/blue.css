@@ -1,0 +1,38 @@
+a{
+    color:#53D2BA;
+}
+a:focus,a:hover{
+    color:#19C1D1;
+}
+.bg-primary {
+  background-color: #53D2BA;
+  border-color: #53D2BA;
+  color: #fff;
+}
+
+.bg-slate-800 {
+    min-height:100%;
+background: #1abf9d; /* Old browsers */
+background: -moz-linear-gradient(top, #1abf9d 0%, #1baaba 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #1abf9d 0%,#1baaba 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #1abf9d 0%,#1baaba 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', endColorstr='#1baaba',GradientType=0 ); /* IE6-9  */   
+        color: #fff;
+}
+
+.btn-primary{
+    background:#53D2BA;
+    border-color:#53D2BA;
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+    background:#4DEACB;
+    border-color:#4DEACB;
+}
+.btn-primary:active:hover, .btn-primary.active:hover, .open > .dropdown-toggle.btn-primary:hover, .btn-primary:active:focus, .btn-primary.active:focus, .open > .dropdown-toggle.btn-primary:focus, .btn-primary.focus:active, .btn-primary.active.focus, .open > .dropdown-toggle.btn-primary.focus{
+        background:#4DEACB;
+    border-color:#4DEACB;
+}
+.badge-primary{
+       background:#53D2BA;
+       border-color: #53D2BA;;
+}

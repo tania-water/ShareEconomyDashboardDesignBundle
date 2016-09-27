@@ -1,0 +1,92 @@
+{% extends "IbtikarShareEconomyDashboardDesignBundle::defined_variables.html.twig" %}
+
+{% block page %}
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ locale in rtlLocales ? 'rtl' : 'ltr' }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% trans %}Welcome to your dashboard{% endtrans %}{% endblock %}</title>
+        <!-- Favicons AND TOUCH ICONS   -->
+        <link rel="icon" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/favicon.ico') }}">
+        <link rel="apple-touch-icon" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/apple-touch-icon.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/apple-touch-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/apple-touch-icon-114x114.png') }}">
+        {% block stylesheets %}
+        <!-- Global stylesheets -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/core.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/components.css') }}" rel="stylesheet" type="text/css">
+        <!-- /global stylesheets -->
+        <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/custom.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ currentTheme ~ '.css') }}" rel="stylesheet" type="text/css">
+        {% endblock %}
+    </head>
+
+    <body class="login-container bg-slate-800">
+
+        <!-- Page container -->
+        <div class="page-container loginPage">
+
+            <!-- Page content -->
+            <div class="page-content">
+
+                <!-- Main content -->
+                <div class="content-wrapper">
+
+                    <div class="panel panel-body login-form">
+
+                        {% if supportedLocales|length > 1 %}
+                            {% for supportedLocale in supportedLocales if locale != supportedLocale %}
+
+                                {% set localeLanguage = supportedLocale == 'en' ? 'English' : supportedLocale == 'ar' ? 'عربي' : '' %}
+                                {% set localeFlag = supportedLocale == 'en' ? 'gb' : supportedLocale == 'ar' ? 'sa' : '' %}
+
+                        <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all())|merge({'_locale': supportedLocale})) }}">
+                            <img alt="{{ localeLanguage }}" class="position-left" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/flags/' ~ localeFlag ~ '.png') }}">
+                            {{ localeLanguage }}
+                        </a>
+                            {% endfor %}
+                        {% endif %}
+
+                        <div class="text-center loginLogo">
+                            <img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/login-logo.png') }}" alt="{{ projectName|trans }}" class="img-responsive"/>
+                        </div>
+
+                        {% block body %}{% endblock %}
+                    </div>
+
+                    {% block footer %}
+                    {% endblock %}
+
+                </div>
+                <!-- /main content -->
+
+            </div>
+            <!-- /page content -->
+
+        </div>
+        <!-- /page container -->
+
+        {% block javascripts %}
+        <!-- Core JS files -->
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/loaders/pace.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/libraries/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/libraries/bootstrap.min.js') }}"></script>
+        <!-- /core JS files -->
+        <!-- Theme JS files -->
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/forms/styling/uniform.min.js') }}"></script>
+        <!-- /theme JS files -->
+        <script>
+            $(function () {
+                // Style checkboxes and radios
+                $('.styled').uniform();
+            });
+        </script>
+        {% endblock %}
+    </body>
+</html>
+{% endblock %}
