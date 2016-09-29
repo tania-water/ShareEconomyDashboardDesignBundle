@@ -621,6 +621,7 @@ $(function() {
     $('[data-popup="tooltip"]').tooltip();
 
 
+
 });
 
 

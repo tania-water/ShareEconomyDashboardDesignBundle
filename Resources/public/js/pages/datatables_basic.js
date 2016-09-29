@@ -18,13 +18,43 @@ $(function() {
     // Setting datatable defaults
     $.extend( $.fn.dataTable.defaults, {
         autoWidth: false,
-            order: [[1, 'desc']],
+        order: [[1, 'asc']],
         columnDefs: [{ 
+            bSort : false,
             orderable: false,
-            width: '100px'
+            width: '30px',
+            targets: [0]
+        },
+         { 
+            width: '200px',
+            targets: [1]
+        },
+                 { 
+            width: '200px',
+            targets: [2]
+        },
+        
+                 { 
+            width: '200px',
+            targets: [3]
+        },
+        
+                 { 
+            width: '200px',
+            targets: [4]
+        },
+                
+                 { 
+            width: '200px',
+            targets: [5]
+        },
+         { 
+            bSort : false,
+            orderable: false,
+            width: '200px',
+            targets: [-1]
         }],
-
-        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+        dom: '<"datatable-scroll"t><"datatable-footer"lip>',
         language: {
             search: '<span>بحث:</span> _INPUT_',
             lengthMenu: '<span>اظهار:</span> _MENU_',

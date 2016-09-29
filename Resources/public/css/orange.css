@@ -4,10 +4,31 @@ a{
 a:focus,a:hover{
     color:#FF8142;
 }
+body{
+  background:url("../images/orange/bg.png") center bottom repeat-x #FFF8F4;
+}
 .bg-primary {
   background-color: #EE6F2C;
   border-color: #EE6F2C;
   color: #fff;
+}
+.bg-number {
+  background: #EE6F2C;
+}
+.activeLink {
+  color: #EE6F2C;
+}
+.btn-link:hover, .btn-link:focus {
+    color:  #EE6F2C;
+}
+.nav-tabs.nav-tabs-highlight > li.active > a, .nav-tabs.nav-tabs-highlight > li.active > a:hover, .nav-tabs.nav-tabs-highlight > li.active > a:focus {
+    border-top-color: #EE6F2C;
+}
+.text-primary {
+    color: #EE6F2C;
+}
+.text-primary, .text-primary:hover, .text-primary:focus {
+    color: #EE6F2C !important;
 }
 
 .bg-slate-800 {
@@ -31,4 +52,14 @@ color: #fff;
 .badge-primary{
        background:#EE6F2C;
        border-color: #EE6F2C;;
+}
+.table > thead > tr > th {
+    border-bottom: 2px solid #EE6F2C;
+}
+.pace .pace-progress{
+    background:#EE6F2C;
+}
+
+.dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover, .dataTables_paginate .paginate_button.current:focus{
+    background-color: #EE6F2C;
 }

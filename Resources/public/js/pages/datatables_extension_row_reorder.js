@@ -20,7 +20,7 @@ $(function() {
         autoWidth: false,
 //         bSort : false,
         bPaginate: false,
-        dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
+        dom: '<"datatable-scroll"t><"datatable-footer"lip>',
         language: {
             search: '<span>Filter:</span> _INPUT_',
             lengthMenu: '<span>Show:</span> _MENU_',
@@ -54,6 +54,8 @@ $(function() {
         rowReorder: {
             selector: 'tr'
         },
+
+//        responsive: true,
         columnDefs: [
 
             { 
@@ -74,7 +76,6 @@ $(function() {
         }
         ]
     });
-
 
 
     // Responsive integration

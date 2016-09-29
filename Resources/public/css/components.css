@@ -2718,7 +2718,7 @@ label.checkbox-switch.checkbox-inline {
   cursor: not-allowed;
 }
 .select2-selection--multiple .select2-selection__choice {
-  background-color: #455A64;
+  background-color: #30303A;
   color: #fff;
   border-radius: 3px;
   cursor: default;
@@ -16442,7 +16442,7 @@ thead .htCollapseButton:after {
 }
 .datatable-header,
 .datatable-footer {
-  padding: 20px 20px 0 20px;
+  padding: 20px 15px 0 20px;
 }
 .datatable-header:after,
 .datatable-footer:after {
@@ -16761,7 +16761,7 @@ thead .htCollapseButton:after {
 *
 * ---------------------------------------------------------------------------- */
 .dt-rowReorder-float {
-  position: absolute!important;
+  position: relative !important;
   table-layout: static;
   outline: 1px dashed #777;
   outline-offset: -1px;
@@ -16770,10 +16770,16 @@ thead .htCollapseButton:after {
   cursor: move;
   opacity: 0.9;
   filter: alpha(opacity=90);
+  max-width: 100px;
+  width: 100px;
+  right: 0px;
 }
 .dt-rowReorder-moving {
   outline: 1px solid #777;
   outline-offset: -1px;
+  background: #ddd;
+    max-width:100px;
+    width:100px;
 }
 .dt-rowReorder-noOverflow {
   overflow-x: hidden;
@@ -16782,6 +16788,7 @@ thead .htCollapseButton:after {
   text-align: center;
   cursor: move;
 }
+
 /* ------------------------------------------------------------------------------
 *
 *  # Fixed columns
@@ -18714,16 +18721,15 @@ thead .htCollapseButton:after {
  *
  * ---------------------------------------------------------------------------- */
 .error-title {
-  color: #fff;
+  color: #30303A;
   font-size: 200px;
   line-height: 1;
   margin-top: 40px;
   margin-bottom: 40px;
   font-weight: 300;
-  text-stroke: 1px transparent;
   display: block;
-  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
 }
+
 @media (max-width: 768px) {
   .error-title {
     font-size: 130px;

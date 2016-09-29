@@ -58,7 +58,7 @@ body {
     border-bottom-color:#53D2BA;
 }
 .actions{
-    background: #eee;
+    background: #f2f2f2;
     padding: 10px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
@@ -66,9 +66,7 @@ body {
 h5.panel-title, .h5.panel-title {
     font-size: 20px;
 }
-.activeLink{
-    color: #53D2BA;
-}
+
 .pace-demo{
     background-color:#444;
 }
@@ -92,15 +90,10 @@ textarea{
     background:#eee;
     color:#333;
 }
-.pace .pace-progress{
-    background:#53D2BA;
-}
+
 .noty_message{
     text-align:center !important;
     display:block;
-}
-.dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover, .dataTables_paginate .paginate_button.current:focus{
-    background-color: #53D2BA;
 }
 .popover{
     max-width:250px;
@@ -153,9 +146,7 @@ textarea{
 .whiteText{
     color:#fff;   
 }
-.table > thead > tr > th {
-    border-bottom: 2px solid #53D2BA;
-}
+
 .text-nowrap > thead > tr > th {
     background:#eee;
     padding-top:10px;
@@ -218,10 +209,6 @@ textarea{
     text-align:center;
 }
 
-
-.btn-lg, .btn-group-lg > .btn{
-    padding:10px 30px;
-}
 .table .icon-move{
     font-size:12px;
     margin-left:5px;
@@ -248,18 +235,7 @@ textarea{
     padding-top:20px;
     padding-bottom:20px;
 }
-.nav-tabs.nav-tabs-highlight > li.active > a, .nav-tabs.nav-tabs-highlight > li.active > a:hover, .nav-tabs.nav-tabs-highlight > li.active > a:focus {
-    border-top-color: #53D2BA;
-}
-.text-primary {
-    color: #53D2BA;
-}
-.text-primary, .text-primary:hover, .text-primary:focus {
-    color: #53D2BA !important;
-}
-.btn-link:hover, .btn-link:focus {
-    color: #53D2BA;
-}
+
 .gu-mirror{
     right: 50px;
 }
@@ -331,6 +307,46 @@ textarea{
 .datatable-row-full tr:hover{
     cursor: move;
 }
+.dataTables_length {
+  display: inline-block;
+  float: right !important;
+  margin: -5px 20px 20px;
+}
+.dataTables_info {
+  float: right !important;
+  display: inline;
+}
+.advanced-search{
+border-top: 1px solid #ddd;
+margin-top: 10px;
+    padding: 15px;
+}
+
+.searchhidden{
+    display: none;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu{
+max-width: 400px;
+width: 100%;
+margin: 0px;
+padding: 0px;
+    direction: ltr;
+}
+.bootstrap-datetimepicker-widget .list-unstyled{
+  margin: 0px auto;
+  padding: 10px;
+}
+.bootstrap-datetimepicker-widget .timepicker{
+    text-align: center;
+}
+.bootstrap-datetimepicker-widget .timepicker td{
+    display: inline-table
+}
+.selectAllRow{
+    background: red;
+    border: 2px solid red;
+}
+
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
@@ -343,8 +359,12 @@ textarea{
 /* Small Devices, Tablets */
 @media only screen and (max-width : 767px) {
 
-
-
+.dataTables_paginate{
+    clear: both;
+}
+.page-container{
+    min-height:100px !important;
+}
 }
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {

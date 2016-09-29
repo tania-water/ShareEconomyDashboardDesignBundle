@@ -4,10 +4,29 @@ a{
 a:focus,a:hover{
     color:#19C1D1;
 }
+body{
+  background:#F7FFFE;
+}
 .bg-primary {
   background-color: #53D2BA;
   border-color: #53D2BA;
   color: #fff;
+}
+.activeLink{
+    color: #53D2BA;
+}
+
+.nav-tabs.nav-tabs-highlight > li.active > a, .nav-tabs.nav-tabs-highlight > li.active > a:hover, .nav-tabs.nav-tabs-highlight > li.active > a:focus {
+    border-top-color: #53D2BA;
+}
+.text-primary {
+    color: #53D2BA;
+}
+.text-primary, .text-primary:hover, .text-primary:focus {
+    color: #53D2BA !important;
+}
+.btn-link:hover, .btn-link:focus {
+    color: #53D2BA;
 }
 
 .bg-slate-800 {
@@ -35,4 +54,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', end
 .badge-primary{
        background:#53D2BA;
        border-color: #53D2BA;;
+}
+.table > thead > tr > th {
+    border-bottom: 2px solid #53D2BA;
+}
+.pace .pace-progress{
+    background:#53D2BA;
+}
+
+.dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover, .dataTables_paginate .paginate_button.current:focus{
+    background-color: #53D2BA;
 }
