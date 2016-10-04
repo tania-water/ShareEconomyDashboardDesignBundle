@@ -1,0 +1,3 @@
+ibtikar_share_economy_dashboard_design_dashboard_home:
+    path:     /
+    defaults: { _controller: IbtikarShareEconomyDashboardDesignBundle:Dashboard:home }
