@@ -12,7 +12,7 @@
         {%- set attr = attr|merge({class: (attr.class|default('form-control'))|trim, placeholder: attr.placeholder|default(label|default(name|humanize))}) -%}
     {% endif %}
     {{- parent() -}}
-    {% if type == 'email' %}
+    {% if type is defined and type == 'email' %}
         <div class="form-control-feedback">
             <i class="icon-mail5 text-muted"></i>
         </div>
