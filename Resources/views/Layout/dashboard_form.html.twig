@@ -1,0 +1,9 @@
+{% extends "IbtikarShareEconomyDashboardDesignBundle:Layout:dashboard.html.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% form_theme form 'IbtikarShareEconomyDashboardDesignBundle:Theme:dashboard.html.twig' %}
+
+{% block body %}
+{{ form(form) }}
+{% endblock %}

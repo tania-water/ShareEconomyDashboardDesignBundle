@@ -1,0 +1,58 @@
+{% extends "form_div_layout.html.twig" %}
+
+{%- block form_row -%}
+    <div class="form-group has-feedback{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{% block form_widget_simple -%}
+    {% if type is not defined or type not in ['file', 'hidden'] %}
+        {%- set attr = attr|merge({class: (attr.class|default('form-control'))|trim, placeholder: attr.placeholder|default(label|default(name|humanize))}) -%}
+    {% endif %}
+    {{- parent() -}}
+    {% if type is defined and type == 'email' %}
+        <div class="form-control-feedback">
+            <i class="icon-mail5 text-muted"></i>
+        </div>
+    {% endif %}
+{%- endblock form_widget_simple %}
+
+{% block form_errors -%}
+    {% if errors|length > 0 -%}
+        {% if not form.parent %}
+            <div class="row">
+                <div class="col-md-12">
+        {% endif %}
+        {%- for error in errors -%}
+            {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger no-border"><button data-dismiss="alert" class="close" type="button"><span>×</span><span class="sr-only">{% trans %}Close{% endtrans %}</span></button>{% endif %}{{ error.message }}{% if form.parent %}</span>{% else %}</div>{% endif %}
+        {%- endfor -%}
+        {% if not form.parent %}
+                </div>
+            </div>
+        {% endif %}
+    {%- endif %}
+{%- endblock form_errors %}
+
+{% block button_row -%}
+    <div class="form-group">
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock button_row %}
+
+{% block button_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('btn btn-primary btn-block'))|trim}) %}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}<i class="{{ attr['icon']|default('icon-circle-left2') }} position-right"></i>
+    </button>
+{%- endblock %}
