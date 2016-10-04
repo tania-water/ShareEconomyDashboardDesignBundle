@@ -1,69 +1,69 @@
 a{
-    color:#EE6F2C;
+    color:#D6494C;
 }
 a:focus,a:hover{
-    color:#FF8142;
+    color:#0EA448;
 }
 body{
-  background:url("../images/orange/bg.png") center bottom repeat-x #FFF8F4;
+  background:url("../images/red/bg-db.png") center bottom repeat #eee;
 }
 .bg-primary {
-  background-color: #EE6F2C;
-  border-color: #EE6F2C;
+  background-color: #D6494C;
+  border-color: #D6494C;
   color: #fff;
 }
 .bg-number {
-  background: #EE6F2C;
+  background: #D6494C;
 }
 .activeLink {
-  color: #EE6F2C;
+  color: #D6494C;
 }
 .btn-link:hover, .btn-link:focus {
-    color:  #EE6F2C;
+    color:  #0EA448;
 }
 .nav-tabs.nav-tabs-highlight > li.active > a, .nav-tabs.nav-tabs-highlight > li.active > a:hover, .nav-tabs.nav-tabs-highlight > li.active > a:focus {
-    border-top-color: #EE6F2C;
+    border-top-color: #D6494C;
 }
 .text-primary {
-    color: #EE6F2C;
+    color: #D6494C;
 }
 .text-primary, .text-primary:hover, .text-primary:focus {
-    color: #EE6F2C !important;
+    color: #D6494C !important;
 }
 
 .bg-slate-800 {
 min-height:100%;
-background:url("../images/orange/bg.png") center bottom repeat-x #EE6F2C; /* Old browsers */
+background:url("../images/red/bg.png") center bottom repeat-x #eee; /* Old browsers */
 color: #fff;
 }
 
 .btn-primary{
-    background:#EE6F2C;
-    border-color:#EE6F2C;
+    background:#D6494C;
+    border-color:#D6494C;
 }
 .btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
-    background:#FF8142;
-    border-color:#FF8142;
+    background:#0EA448;
+    border-color:#0EA448;
 }
 .btn-primary:active:hover, .btn-primary.active:hover, .open > .dropdown-toggle.btn-primary:hover, .btn-primary:active:focus, .btn-primary.active:focus, .open > .dropdown-toggle.btn-primary:focus, .btn-primary.focus:active, .btn-primary.active.focus, .open > .dropdown-toggle.btn-primary.focus{
-        background:#FF8142;
-    border-color:#FF8142;
+        background:#0EA448;
+    border-color:#0EA448;
 }
 .badge-primary{
-       background:#EE6F2C;
-       border-color: #EE6F2C;;
+       background:#D6494C;
+       border-color: #D6494C;;
 }
 .table > thead > tr > th {
-    border-bottom: 2px solid #EE6F2C;
+    border-bottom: 2px solid #D6494C;
 }
 .pace .pace-progress{
-    background:#EE6F2C;
+    background:#D6494C;
 }
 
 .dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover, .dataTables_paginate .paginate_button.current:focus{
-    background-color: #EE6F2C;
+    background-color: #D6494C;
 }
 
 .panel-flat > .panel-heading{
- border-top: 2px solid #EE6F2C;   
+ border-top: 2px solid #D6494C;   
 }

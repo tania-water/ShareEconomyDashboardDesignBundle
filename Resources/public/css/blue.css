@@ -65,3 +65,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', end
 .dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover, .dataTables_paginate .paginate_button.current:focus{
     background-color: #53D2BA;
 }
+
+.panel-flat > .panel-heading{
+ border-top: 2px solid #53D2BA;   
+}

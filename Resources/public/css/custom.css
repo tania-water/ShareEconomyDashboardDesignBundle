@@ -195,11 +195,6 @@ textarea{
     background:#30303A;
     padding:10px;
     z-index:99;
-    border-top:1px solid #eee;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
     margin:0px;  
     position:fixed;
     bottom:0px;
