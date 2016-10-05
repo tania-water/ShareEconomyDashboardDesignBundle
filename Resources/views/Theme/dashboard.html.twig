@@ -52,3 +52,27 @@
         {% endif %}
     {%- endif %}
 {%- endblock form_errors %}
+
+{% block button_row -%}
+    <noscript>
+        <div class="form-group">
+            {{- form_widget(form) -}}
+        </div>
+    </noscript>
+{%- endblock button_row %}
+
+{% block button_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('btn btn-primary btn-block'))|trim}) %}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}<i class="{{ attr['icon']|default('icon-circle-left2') }} position-right"></i>
+    </button>
+{%- endblock %}
