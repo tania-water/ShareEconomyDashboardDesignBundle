@@ -219,15 +219,8 @@
         <div class="page-container">
             <!-- Page content -->
             <div class="page-content">
-                {% for flashMessageType, flashMessageArray in app.session.flashBag.all %}
-                    {% for flashMessage in flashMessageArray %}
-                <div class="alert {{ flashMessageType == 'error' ? 'alert-danger' : flashMessageType == 'success' ? 'alert-success' : 'alert-info' }} no-border">
-                    <button data-dismiss="alert" class="close" type="button"><span>×</span><span class="sr-only">{% trans %}Close{% endtrans %}</span></button>{{ flashMessage }}
-                </div>
-                    {% endfor %}
-                {% endfor %}
-
                 {% block body %}{% endblock %}
+                {% block form_buttons %}{% endblock %}
             </div>
             <!-- /page content -->
         </div>
