@@ -3,14 +3,20 @@
 {%- block form_row -%}
     <div class="form-group has-feedback{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
         {{- form_label(form) -}}
+        {% if type is not defined or type not in ['file', 'hidden'] %}
+        <div class="col-lg-10">
+        {%- endif -%}
         {{- form_widget(form) -}}
         {{- form_errors(form) -}}
+        {% if type is not defined or type not in ['file', 'hidden'] %}
+        </div>
+        {%- endif -%}
     </div>
 {%- endblock form_row -%}
 
 
 {%- block form_start -%}
-    {% set attr = attr|merge({'class': (attr.class|default('form-horizontal'))}) %}
+    {% set attr = attr|merge({'novalidate': '', 'class': (attr.class|default('form-horizontal'))}) %}
     {{- parent() -}}
 {%- endblock form_start -%}
 
@@ -23,7 +29,6 @@
 
 {% block form_widget_simple -%}
     {% if type is not defined or type not in ['file', 'hidden'] %}
-    <div class="col-lg-10">
         {%- set attr = attr|merge({class: (attr.class|default('form-control'))|trim, placeholder: attr.placeholder|default(label|default(name|humanize))}) -%}
     {%- endif -%}
     {{- parent() -}}
@@ -32,9 +37,6 @@
             <i class="icon-mail5 text-muted"></i>
         </div>
     {% endif %}
-    {% if type is not defined or type not in ['file', 'hidden'] %}
-    </div>
-    {%- endif -%}
 {%- endblock form_widget_simple %}
 
 {% block form_errors -%}
