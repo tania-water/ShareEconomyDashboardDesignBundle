@@ -193,7 +193,7 @@ textarea{
 }
 .actionButtons{
     background:#30303A;
-    padding:10px;
+    padding:5px;
     z-index:99;
     margin:0px;  
     position:fixed;
@@ -204,6 +204,9 @@ textarea{
     text-align:center;
 }
 
+.actionButtons .btn{
+    margin: 5px;
+}
 .table .icon-move{
     font-size:12px;
     margin-left:5px;
@@ -341,6 +344,7 @@ padding: 0px;
     background: red;
     border: 2px solid red;
 }
+
 
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
