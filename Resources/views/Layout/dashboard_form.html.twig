@@ -4,6 +4,11 @@
 
 {% form_theme form 'IbtikarShareEconomyDashboardDesignBundle:Theme:dashboard.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block body %}
                 <div class="content-wrapper">
                     {% if breadcrumb is defined and breadcrumb|length > 0 %}
@@ -66,5 +71,6 @@
 
 {% block javascripts %}
     {{ parent() }}
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/forms-layout.js') }}"></script>
 {% endblock %}
