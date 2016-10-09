@@ -66,6 +66,17 @@
             <i class="icon-mail5 text-muted"></i>
         </div>
     {%- endif -%}
+    {% if attr['data-rule-unique'] is defined %}
+        <div class="form-control-feedback dev-inputLoader" style="display: none;">
+            <i class="icon-spinner2 spinner"></i>
+        </div>
+        <div class="form-control-feedback dev-failLoader " style="display: none;">
+            <i class="icon-checkmark-circle"></i>
+        </div>
+        <div class="form-control-feedback dev-successLoader" style="display: none;">
+            <i class="icon-checkmark-circle"></i>
+        </div>
+    {% endif %}
 {%- endblock form_widget_simple %}
 
 {% block form_errors -%}
@@ -107,3 +118,8 @@
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}<i class="{{ attr['icon']|default('icon-circle-left2') }} position-right"></i>
     </button>
 {%- endblock %}
+
+
+{%- block textarea_widget -%}
+<textarea {{ block('widget_attributes') }} cols="5" rows="5" class="form-control">{{ value }}</textarea>
+{%- endblock textarea_widget -%}
