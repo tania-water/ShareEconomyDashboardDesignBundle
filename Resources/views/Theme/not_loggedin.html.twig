@@ -9,7 +9,7 @@
 
 {% block form_widget_simple -%}
     {% if type is not defined or type not in ['file', 'hidden'] %}
-        {%- set attr = attr|merge({class: (attr.class|default('form-control'))|trim, placeholder: attr.placeholder|default(label|default(name|humanize))}) -%}
+        {%- set attr = attr|merge({class: (attr.class|default('form-control')), placeholder: attr.placeholder|default(label|default(name|humanize))}) -%}
     {% endif %}
     {{- parent() -}}
     {% if type is defined and type == 'email' %}

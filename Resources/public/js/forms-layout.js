@@ -15,6 +15,7 @@ jQuery(document).ready(function ($) {
     });
     $('.dev-form-reset-button').on('click', function () {
         $('.dev-main-form-container form').get(0).reset();
+        $('input:checkbox').closest('span').removeClass('checked')
     });
     // global fix for firefox filling password fields
     $('.dev-main-form-container form input[type=password][autocomplete=off]').each(function () {
