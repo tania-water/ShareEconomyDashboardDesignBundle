@@ -7,6 +7,11 @@
     </div>
 {%- endblock form_row -%}
 
+{%- block form_start -%}
+    {% set attr = attr|merge({'novalidate': ''}) %}
+    {{- parent() -}}
+{%- endblock form_start -%}
+
 {% block form_widget_simple -%}
     {% if type is not defined or type not in ['file', 'hidden'] %}
         {%- set attr = attr|merge({class: (attr.class|default('form-control')), placeholder: attr.placeholder|default(label|default(name|humanize))}) -%}
