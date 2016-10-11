@@ -70,7 +70,7 @@
         <div class="form-control-feedback dev-inputLoader dev-loader" style="display: none;">
             <i class="icon-spinner2 spinner"></i>
         </div>
-        <div class="form-control-feedback dev-failLoader dev-loader" style="display: none;">
+        <div class="form-control-feedback dev-failLoader dev-loader" style="{% if form.vars.errors|length ==0 %}display: none;{%endif %}">
             <i class="icon-cancel-circle2"></i>
         </div>
         <div class="form-control-feedback dev-successLoader dev-loader" style="display: none;">
