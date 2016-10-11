@@ -19,7 +19,7 @@
 
 
 {%- block form_start -%}
-    {% set attr = attr|merge({'novalidate': '', 'class': (attr.class|default('form-horizontal'))}) %}
+    {% set attr = attr|merge({'novalidate': '','autocomplete':"off", 'class': (attr.class|default('form-horizontal'))}) %}
     {{- parent() -}}
 {%- endblock form_start -%}
 
@@ -71,7 +71,7 @@
             <i class="icon-spinner2 spinner"></i>
         </div>
         <div class="form-control-feedback dev-failLoader dev-loader" style="display: none;">
-            <i class="icon-checkmark-circle"></i>
+            <i class="icon-cancel-circle2"></i>
         </div>
         <div class="form-control-feedback dev-successLoader dev-loader" style="display: none;">
             <i class="icon-checkmark-circle"></i>
