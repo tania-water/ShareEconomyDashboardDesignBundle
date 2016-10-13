@@ -352,6 +352,17 @@ padding: 0px;
     margin-right: 10px;
 }
 
+
+/* Goody add product */
+.uploadCoverImg{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    
+}
+.uploadCoverImg .btn{
+    margin-left: 5px;
+}
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
