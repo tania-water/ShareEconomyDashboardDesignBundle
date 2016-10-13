@@ -345,6 +345,12 @@ padding: 0px;
     border: 2px solid red;
 }
 
+.iti-mobile .intl-tel-input .country-list .country {
+    text-align: right;
+}
+.intl-tel-input .country-list .country .dial-code {
+    margin-right: 10px;
+}
 
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
@@ -368,13 +374,13 @@ padding: 0px;
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {
     .login-container .page-container .login-form{
-        width:320px;
+        width:280px;
     }
     .login-container .page-container .panel{
         padding:20px;
     }
     .g-recaptcha {
-        transform:scale(0.915);
+        transform:scale(0.8);
     }
 
 

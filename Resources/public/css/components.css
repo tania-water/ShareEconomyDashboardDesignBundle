@@ -7666,7 +7666,6 @@ legend.alpaca-container-label {
  *
  * ---------------------------------------------------------------------------- */
 .ui-pnotify {
-  top: 0px;
   left: 0px;
   position: absolute;
   height: auto;
@@ -7978,7 +7977,6 @@ body > .ui-pnotify-modal-overlay {
 @media (max-width: 480px) {
   .ui-pnotify-mobile-able.ui-pnotify {
     position: fixed;
-    top: 0;
     left: 0;
     right: 0;
     width: auto !important;

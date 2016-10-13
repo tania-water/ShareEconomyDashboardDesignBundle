@@ -5,11 +5,11 @@ a:focus,a:hover{
     color:#0EA448;
 }
 body{
-  background:url("../images/red/bg-db.png") center bottom repeat #eee;
+  background:url("../images/red/bg-db.png") center top repeat #eee;
 }
 .bg-primary {
-  background-color: #D6494C;
-  border-color: #D6494C;
+  background-color: #0EA448;
+  border-color: #0EA448;
   color: #fff;
 }
 .bg-number {
@@ -50,8 +50,8 @@ color: #fff;
     border-color:#0EA448;
 }
 .badge-primary{
-       background:#D6494C;
-       border-color: #D6494C;;
+       background:#0EA448;
+       border-color: #0EA448;;
 }
 .table > thead > tr > th {
     border-bottom: 2px solid #D6494C;

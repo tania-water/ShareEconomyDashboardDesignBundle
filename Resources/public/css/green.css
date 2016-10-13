@@ -6,7 +6,7 @@ a:focus,a:hover{
 }
 
 body{
-   background: url("../images/green/bg-db.png") repeat center center fixed #eee; 
+   background: url("../images/green/bg-db.png") repeat center top fixed #eee; 
 }
 .bg-primary {
   background-color: #54D582;
