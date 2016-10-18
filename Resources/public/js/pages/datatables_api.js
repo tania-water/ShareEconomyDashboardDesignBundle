@@ -19,41 +19,41 @@ $(function() {
     $.extend( $.fn.dataTable.defaults, {
         autoWidth: false,
         order: [[1, 'asc']],
-//        columnDefs: [{
+        columnDefs: [
+//        { 
 //            bSort : false,
 //            orderable: false,
 //            width: '30px',
 //            targets: [0]
 //        },
-//         {
+//         { 
 //            width: '200px',
 //            targets: [1]
 //        },
-//                 {
+//                 { 
 //            width: '200px',
 //            targets: [2]
 //        },
-//
-//                 {
+//        
+//                 { 
 //            width: '200px',
 //            targets: [3]
 //        },
-//
-//                 {
+//        
+//                 { 
 //            width: '200px',
 //            targets: [4]
 //        },
-//
-//                 {
+//                
+//                 { 
 //            width: '200px',
 //            targets: [5]
 //        },
-//         {
-//            bSort : false,
-//            orderable: false,
-//            width: '200px',
-//            targets: [-1]
-//        }],
+         { 
+            bSort : false,
+            width: '200px',
+            targets: [-1]
+        }],
         dom: '<"datatable-scroll"t><"datatable-footer"lip>',
         language: {
             search: '<span>بحث:</span> _INPUT_',
@@ -89,7 +89,7 @@ $(function() {
 
     // Multiple rows selection
     $('.datatable-selection-multiple').DataTable();
-
+    
     $('.datatable-selection-multiple tbody').on('click', 'tr', function() {
         $(this).toggleClass('success');
     });
@@ -100,10 +100,10 @@ $(function() {
         var title = $('.datatable-column-search-inputs thead th').eq( $(this).index() ).text();
         $(this).html('<input type="text" class="form-control input-sm" placeholder="بحث '+title+'" />');
     } );
-
+ 
     // DataTable
     var table = $('.datatable-column-search-inputs').DataTable();
-
+     
     // Apply the filter
     $(".datatable-column-search-inputs thead input").on( 'keyup change', function () {
         table
@@ -124,18 +124,18 @@ $(function() {
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
                         );
-
+ 
                         column
                             .search( val ? '^'+val+'$' : '', true, false )
                             .draw();
                     });
-
+ 
                 column.data().unique().sort().each( function (d, j) {
                     select.append('<option value="'+d+'">'+d+'</option>')
                 });
             });
         }
-
+        
     });
 
 
@@ -156,5 +156,5 @@ $(function() {
 
     // Enable Select2 select for individual column searching
     $('.filter-select').select2();
-
+    
 });

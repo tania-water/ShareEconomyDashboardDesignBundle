@@ -16343,7 +16343,7 @@ thead .htCollapseButton:after {
 .dataTable thead .sorting_desc,
 .dataTable thead .sorting_asc_disabled,
 .dataTable thead .sorting_desc_disabled {
-  padding-left: 40px;
+  padding-right: 20px;
 }
 .dataTable thead .sorting:before,
 .dataTable thead .sorting:after,
@@ -16355,7 +16355,7 @@ thead .htCollapseButton:after {
   font-family: 'icomoon';
   position: absolute;
   top: 50%;
-  left: 20px;
+  right: 5px;
   font-size: 12px;
   margin-top: -6px;
   display: inline-block;
