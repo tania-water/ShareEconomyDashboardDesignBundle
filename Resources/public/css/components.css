@@ -7666,8 +7666,7 @@ legend.alpaca-container-label {
  *
  * ---------------------------------------------------------------------------- */
 .ui-pnotify {
-  left: 0px !important;
-  top: 0px !important;
+  left: 0px;
   position: absolute;
   height: auto;
   z-index: 2;
