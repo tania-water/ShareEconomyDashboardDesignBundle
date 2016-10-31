@@ -293,7 +293,7 @@ right: 50px;
     padding-right: 52px;
     padding-left: 6px;
     text-align: right;
-    direction: rtl;
+    direction: ltr;
 }
 
 .phoneNumber .intl-tel-input .selected-flag .iti-arrow{
