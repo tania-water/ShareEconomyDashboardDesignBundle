@@ -249,7 +249,7 @@ a.badge,
 }
 
 .sidebar-category:last-child{
-     margin-bottom:80px;
+     margin-bottom:80px; 
 }
 .navigation {
   margin: 0;
@@ -1538,7 +1538,7 @@ body[class*=navbar-bottom] .footer:not(.navbar) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
+  
 }
 .pace .pace-progress {
   background: #4FC3F7;
@@ -4863,9 +4863,6 @@ legend.alpaca-container-label {
   position: relative;
   width: auto;
   padding: 0;
-}
-.wizard > .content > .body {
-  padding: 0 20px;
 }
 .wizard > .content > iframe {
   border: 0 none;
@@ -14726,7 +14723,7 @@ a.plupload_disabled:focus {
 .fancybox-wrap {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 8020;
 }
 .fancybox-skin {
@@ -17283,7 +17280,7 @@ thead .htCollapseButton:after {
 *
 *  # Responsive extension
 *
-*  Optimise the table's layout for different screen sizes through the dynamic
+*  Optimise the table's layout for different screen sizes through the dynamic 
 *  insertion and removal of columns from the table
 *
 *  Version: 1.0

@@ -1035,9 +1035,9 @@ textarea {
   margin-bottom: 20px;
   position: relative;
 }
-.form-group .form-group:last-child {
+/*.form-group .form-group:last-child {
   margin-bottom: 0;
-}
+}*/
 @media (max-width: 1024px) {
   .form-group div[class*="col-md-"]:not(.control-label) + div[class*="col-md-"] {
     margin-top: 20px;
@@ -5493,11 +5493,11 @@ a.thumbnail.active {
 }
 .media-right,
 .media > .pull-right {
-  padding-right: 20px;
+  padding-right:15px;
 }
 .media-left,
 .media > .pull-left {
-  padding-left: 20px;
+  padding-left: 15px;
 }
 @media (max-width: 768px) {
   .stack-media-on-mobile {
@@ -6187,7 +6187,7 @@ h6.panel-title,
   padding-bottom: 0;
 }
 .modal-header[class*=bg-] {
-  padding: 15px 20px;
+  padding: 10px 20px;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
 }
@@ -6207,9 +6207,7 @@ h6.panel-title,
 .modal-body .close {
   margin-top: 0!important;
 }
-.modal-footer {
-  padding-top: 0;
-}
+
 .modal-footer.text-center {
   text-align: center;
 }
