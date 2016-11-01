@@ -18,8 +18,9 @@ $(function() {
     // Setting datatable defaults
     $.extend( $.fn.dataTable.defaults, {
         autoWidth: false,
-        order: [[1, 'asc']],
-//        columnDefs: [{
+//        order: [[1, 'asc']],
+        columnDefs: [
+//        {
 //            bSort : false,
 //            orderable: false,
 //            width: '30px',
@@ -48,12 +49,11 @@ $(function() {
 //            width: '200px',
 //            targets: [5]
 //        },
-//         {
-//            bSort : false,
-//            orderable: false,
-//            width: '200px',
-//            targets: [-1]
-//        }],
+         {
+            bSort : false,
+            width: '200px',
+            targets: [-1]
+        }],
         dom: '<"datatable-scroll"t><"datatable-footer"lip>',
         language: {
             search: '<span>بحث:</span> _INPUT_',

@@ -74,3 +74,25 @@ color: #fff;
 .panel-flat > .panel-heading{
  border-top: 2px solid #54D582;   
 }
+
+.wizard > .actions > ul > li > a{
+    background: #54D582;
+}
+.wizard > .steps > ul > li.done .number {
+    background-color: #54D582;
+    border-color: #54D582;
+}
+.wizard > .steps > ul > li.current .number {
+    border-color: #54D582;
+    color: #54D582;
+}
+.wizard > .steps > ul > li:last-child::after{
+        background-color: #54D582;
+}
+.wizard > .steps > ul > li::before, .wizard > .steps > ul > li::after {
+    background-color: #54D582;
+}
+
+.form-horizontal .control-label{
+    color:#54D582
+}

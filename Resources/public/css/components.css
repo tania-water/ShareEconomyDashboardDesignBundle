@@ -4864,9 +4864,6 @@ legend.alpaca-container-label {
   width: auto;
   padding: 0;
 }
-.wizard > .content > .body {
-  padding: 0 20px;
-}
 .wizard > .content > iframe {
   border: 0 none;
   width: 100%;
@@ -14726,7 +14723,7 @@ a.plupload_disabled:focus {
 .fancybox-wrap {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 8020;
 }
 .fancybox-skin {
@@ -16343,7 +16340,7 @@ thead .htCollapseButton:after {
 .dataTable thead .sorting_desc,
 .dataTable thead .sorting_asc_disabled,
 .dataTable thead .sorting_desc_disabled {
-  padding-left: 40px;
+  padding-right: 20px;
 }
 .dataTable thead .sorting:before,
 .dataTable thead .sorting:after,
@@ -16355,7 +16352,7 @@ thead .htCollapseButton:after {
   font-family: 'icomoon';
   position: absolute;
   top: 50%;
-  left: 20px;
+  right: 5px;
   font-size: 12px;
   margin-top: -6px;
   display: inline-block;
