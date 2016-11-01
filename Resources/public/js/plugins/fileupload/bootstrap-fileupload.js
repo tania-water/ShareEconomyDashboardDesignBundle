@@ -133,7 +133,7 @@
       this.$hidden.val(this.original.hiddenVal)
       this.$preview.html(this.original.preview)
 
-      if (this.original.exists) this.$element.addClass('fileupload-exists').removeClass('fileupload-new')
+      if (this.original.exists && (typeof this.$input.attr('data-exist-img') =='undefined') || (typeof this.$input.attr('data-exist-img') !='undefined' && this.$input.attr('data-exist-img')==true) ) this.$element.addClass('fileupload-exists').removeClass('fileupload-new')
        else this.$element.addClass('fileupload-new').removeClass('fileupload-exists')
     },
 
