@@ -315,6 +315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var fileReader = new FileReader();
 	      if (file && file.type.match('image')) {
 	        fileReader.readAsDataURL(file);
+                $('input.' + _constants.CLASS_NAMES.FILE_INPUT).attr('data-size', file.size);
 	        fileReader.onload = this.onFileReaderLoaded.bind(this);
 	        fileReader.onerror = this.onFileReaderError.bind(this);
 	      } else if (file) {
@@ -390,6 +391,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'onPreImageLoaded',
 	    value: function onPreImageLoaded() {
+
 	      if (this.shouldRejectImage({
 	        imageWidth: this.preImage.width,
 	        imageHeight: this.preImage.height,
