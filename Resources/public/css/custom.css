@@ -460,7 +460,7 @@ input.cropit-image-zoom-input {
     text-align: center;
     margin-top: 30px;
 }
-.modal-footer i{
+#uploadImg .modal-footer i{
     font-size: 30px;
 }
 .bigIcon{

@@ -7689,12 +7689,12 @@ body > .ui-pnotify {
 }
 .ui-pnotify.stack-top-left,
 .ui-pnotify.stack-bottom-left {
-  right: 20px;
-  left: auto;
+  left: 0px;
+  bottom: auto;
+ 
 }
 .ui-pnotify.stack-bottom-right,
 .ui-pnotify.stack-bottom-left {
-  bottom: 20px;
   top: auto;
 }
 .ui-pnotify.stack-modal {
@@ -7996,8 +7996,8 @@ body > .ui-pnotify-modal-overlay {
   .ui-pnotify-mobile-able.ui-pnotify.stack-bottom-left {
     right: 0;
     left: 0;
-    bottom: 0;
-    top: auto;
+    bottom: auto;
+    top:0px;
   }
   .ui-pnotify-mobile-able.ui-pnotify.stack-bottom-right .ui-pnotify-shadow,
   .ui-pnotify-mobile-able.ui-pnotify.stack-bottom-left .ui-pnotify-shadow,
