@@ -1,8 +1,10 @@
 {% extends "form_div_layout.html.twig" %}
 
 {%- block form_row -%}
-    <div class="form-group has-feedback{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+    <div class="form-group has-feedback{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %} {% if form.vars.attr['parent-class'] is defined %} {{form.vars.attr['parent-class']}}{% endif %}">
+        {%- if type is not defined or type not in ['file', 'hidden'] and  attr['data-remove-label'] is not defined -%}
         {{- form_label(form) -}}
+        {%- endif -%}
         {%- if type is defined and type == 'file' and attr['data-image-type'] is defined -%}
         <div class="col-lg-12">
         {%- endif -%}
@@ -38,11 +40,13 @@
 
     {# adding profile file upload input style #}
     {%- if type is defined and type == 'file' and attr['data-image-type'] is defined and attr['data-image-type'] == 'profile' -%}
-        <div class="fileupload fileupload-new" data-provides="fileupload">
+    <div class="fileupload {% if attr['data-image-url'] is defined and attr['data-image-url']!='' %}fileupload-exists{%else %}fileupload-new{%endif%}" data-provides="fileupload">
             <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;">
+                <img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg') }}" alt="{{ attr['data-image-alt']|default('Profile image'|trans) }}">
+            </div>
+            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 200px; line-height: 20px;">
                 <img src="{{ asset(attr['data-image-url']|default('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg')) }}" alt="{{ attr['data-image-alt']|default('Profile image'|trans) }}">
             </div>
-            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 200px; line-height: 20px;"></div>
             <div class="uploadCoverImg">
                 <span class="btn btn-default btn-file btn-primary" style=" cursor: pointer;">
                     <span class="fileupload-new" onfocus="myFunction(this)" style="cursor: pointer">{% trans %}Choose picture{% endtrans %}</span>
@@ -55,18 +59,18 @@
     {# adding profile file upload input style #}
     {%- if type is defined and type == 'file' and attr['data-image-type'] is defined and attr['data-image-type'] == 'profile' -%}
                 </span>
-                <a href="#" class="btn btn-default fileupload-exists btn-primary" data-dismiss="fileupload">{% trans %}Delete{% endtrans %}</a>
+                <a href="#" class="btn btn-default fileupload-exists btn-primary {% if attr['data-image-url'] is defined and attr['data-image-url']!='' %}dev-btn-fileupload-remove{%endif%}" data-dismiss="fileupload">{% trans %}Delete{% endtrans %}</a>
             </div>
         </div>
     {%- endif -%}
 
     {# adding email input style #}
-    {%- if type is defined and type == 'email' -%}
+    {%- if type is defined and type == 'email' and attr['data-validate-element'] is not defined-%}
         <div class="form-control-feedback">
             <i class="icon-mail5 text-muted"></i>
         </div>
     {%- endif -%}
-    {% if attr['data-rule-unique'] is defined %}
+    {% if attr['data-validate-element'] is defined %}
         <div class="form-control-feedback dev-inputLoader dev-loader" style="display: none;">
             <i class="icon-spinner2 spinner"></i>
         </div>
@@ -123,3 +127,30 @@
 {%- block textarea_widget -%}
 <textarea {{ block('widget_attributes') }} cols="5" rows="5" class="form-control">{{ value }}</textarea>
 {%- endblock textarea_widget -%}
+
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+    {%- for child in form %}
+
+    {% if child.vars.block_prefixes.2 == 'radio' %}
+        <label class="radio-inline">
+            {{- form_widget(child, {'attr': form.vars.attr}) -}}
+            {{child.vars.value|trans({}, translation_domain) }}
+        </label>
+    {% else %}
+        {{- form_widget(child) -}}
+        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+    {% endif %}
+    {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+
+{% block phone_widget %}
+{% spaceless %}
+        {{- form_widget(form.phone) -}}
+        {{- form_widget(form.countryCode) -}}
+        {{ form_errors(form.phone) }}
+
+{% endspaceless %}
+{% endblock phone_widget %}

@@ -67,3 +67,39 @@ color: #fff;
 .panel-flat > .panel-heading{
  border-top: 2px solid #D6494C;   
 }
+
+.wizard > .actions > ul > li > a{
+    background: #D6494C;
+}
+.wizard > .steps > ul > li.done .number {
+    background-color: #D6494C;
+    border-color: #D6494C;
+}
+.wizard > .steps > ul > li.current .number {
+    border-color: #D6494C;
+    color: #D6494C;
+}
+.wizard > .steps > ul > li:last-child::after{
+        background-color: #D6494C;
+}
+.wizard > .steps > ul > li::before, .wizard > .steps > ul > li::after {
+    background-color: #D6494C;
+}
+.login-container .page-container .panel{
+    padding-top: 0px;
+    border-top: 4px solid #C72027;
+}
+.navbar-brand {
+  height:100px;
+  padding: 0 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+.navbar-brand > img{
+    height: 100px;
+}
+.navbar {
+  padding-right: 120px;
+}

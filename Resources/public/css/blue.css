@@ -69,3 +69,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', end
 .panel-flat > .panel-heading{
  border-top: 2px solid #53D2BA;   
 }
+
+.wizard > .actions > ul > li > a{
+    background: #53D2BA;
+}
+.wizard > .steps > ul > li.done .number {
+    background-color: #53D2BA;
+    border-color: #53D2BA;
+}
+.wizard > .steps > ul > li.current .number {
+    border-color: #53D2BA;
+    color: #53D2BA;
+}
+.wizard > .steps > ul > li:last-child::after{
+        background-color: #53D2BA;
+}
+.wizard > .steps > ul > li::before, .wizard > .steps > ul > li::after {
+    background-color: #53D2BA;
+}

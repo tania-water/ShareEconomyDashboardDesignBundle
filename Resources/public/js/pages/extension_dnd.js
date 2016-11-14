@@ -111,25 +111,6 @@ $(function() {
 
 
 
-    // Select2 select
-    // ------------------------------
 
-    // Basic
-    $('.select').select2();
-    
-
-
-    // Styled form components
-    // ------------------------------
-
-    // Checkboxes, radios
-    $(".styled").uniform({
-        radioClass: 'choice'
-    });
-
-    // File input
-    $(".file-styled").uniform({
-        fileButtonClass: 'action btn bg-warning-400'
-    });
 
 });

@@ -10,11 +10,13 @@
 "Profile image": "صورة شخصية"
 "Change": "تعديل"
 "Choose picture": "إختر الصورة"
-"Delete": "مسح"
+"Delete": "حذف"
 # home page
 "Welcome": "أهلا بك يا"
 'Save': 'حفظ'
 'Change Columns List': خانات الجدول
+"Yes" : نعم
+"Cancel": إلغاء
 
 # Menu
 "Main menu": "القائمة الرئيسية"
