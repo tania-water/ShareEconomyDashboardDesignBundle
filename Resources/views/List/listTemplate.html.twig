@@ -1,0 +1,101 @@
+<table class="table table-hover table-striped datatable-column-search-inputs" width="100%">
+    <thead>
+        {% if list.isSearchable %}
+        <tr id="filterrow">
+            <th> بحث في الخانات </th>
+            {% for column in list.columns %}
+                {% if column[1].name is defined %}
+                    {%set colName = column[1].name %}
+                {% else %}
+                    {%set colName = column[0] %}
+                {% endif %}
+                    <th data-name="{{column[0]}}">{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
+            {% endfor %}
+            <th class='text-right'>
+                <button class="dev-btn-search btn btn-defualt"><i class="icon-search4"></i></button>
+            </th>
+        </tr>
+        {% endif %}
+        <tr>
+            {% if list.bulkActions|length > 0 %}
+                <th data-name='bulk' class="dev-checkbox-all text-center">
+                    <div class="form-group">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" class="styled" checked="checked">
+                        </label>
+                    </div>
+                </th>
+            {% elseif list.isSearchable %}
+                <th></th>
+            {% endif %}
+            {% for column in list.columns %}
+                {% if column[1].name is defined %}
+                    {%set colName = column[1].name %}
+                {% else %}
+                    {%set colName = column[0] %}
+                {% endif %}
+                    <th data-name='{{colName}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
+            {% endfor %}
+            {% if list.actions|length > 0 %}
+                <th data-name='actions' class="text-center">العمليات</th>
+            {% elseif list.isSearchable %}
+                <th></th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+            {% for entity in list.pagination %}
+                <tr>
+                    {% if list.bulkActions|length > 0 %}
+                        <td class="text-center">
+                            <div class="form-group">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled" checked="checked">
+                                </label>
+                            </div>
+                        </td>
+                    {% elseif list.isSearchable %}
+                        <td></td>
+                    {% endif %}
+                    {% for column in list.columns %}
+                        <td>
+                            {% if column[1].type is defined and column[1].type != 'text' %}
+                                {% if column[1].type == 'date' %}
+                                    {{ attribute(entity, column[0])|date(list.defaultDateFormat) }}
+                                {% endif %}
+                            {% else %}
+                                {% if attribute(entity, column[0])|length > 50 %}
+                                    {{ attribute(entity, column[0])|slice(0, 50) }}
+                                {% else %}
+                                    {{ attribute(entity, column[0]) }}
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                    {% if list.actions|length > 0 %}
+                        <td class="text-center" style="white-space: nowrap;">
+                            {% if 'edit' in list.actions %}
+                                <a class="btn btn-defualt" href="Role-add.php" data-popup="tooltip" title="تعديل" data-placement="bottom" ><i class="icon-pencil"></i></a>
+                            {% endif %}
+                            {% if 'delete' in list.actions %}
+                                <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="انت علي وشك حذف comments هل ترغب في حذفه  " data-html="true"
+                                   data-html="true" data-content="
+                                   <button type='button' class='btn btn-danger btn-block'>و ايقاف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
+                                   <button type='button' class='btn btn-danger btn-block'>و حذف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
+                                   "> <i class="icon-trash"></i></a>
+                            {% endif %}
+                            {% if 'activation' in list.actions %}
+                                <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="  هل ترغب في ايقاف الموظف  " data-html="true"
+                                   data-html="true" data-content="
+                                   <button type='button' class='btn btn-danger'>نعم</button>
+                                   <button type='button' class='btn btn-defualt'>الغاء</button>
+                                   "> <i class="icon-user-check"></i></a>
+                            {% endif %}
+                        </td>
+                    {% elseif list.isSearchable %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+    </tbody>
+</table>

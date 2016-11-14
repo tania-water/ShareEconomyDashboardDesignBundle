@@ -98,20 +98,30 @@ $(function() {
     // Setup - add a text input to each footer cell
     $('.datatable-column-search-inputs thead tr#filterrow th').not(':last-child').not(':first-child').each( function () {
         var title = $('.datatable-column-search-inputs thead th').eq( $(this).index() ).text();
-        $(this).html('<input type="text" class="form-control input-sm" placeholder="بحث '+title+'" />');
+        $(this).html('<input type="text" class="dev-search-input form-control input-sm" placeholder="بحث '+title+'" />');
     } );
 
     // DataTable
     var table = $('.datatable-column-search-inputs').DataTable();
 
     // Apply the filter
-    $(".datatable-column-search-inputs thead input").on( 'keyup change', function () {
-        table
-            .column( $(this).parent().index()+':visible' )
-            .search( this.value )
-            .draw();
-    } );
+//    $(".datatable-column-search-inputs thead input").on( 'keyup change', function () {
+//        table
+//            .column( $(this).parent().index()+':visible' )
+//            .search( this.value )
+//            .draw();
+//    } );
 
+    $(".dev-btn-search").on('click', function(){
+        table.draw();
+    });
+
+    $(".dev-search-input").on('keyup', function(e){
+        if(e.which == 13){
+            if($(this).val() != '')
+                $(".dev-btn-search").click();
+        }
+    });
 
     // Individual column searching with selects
     $('.datatable-column-search-selects').DataTable({
