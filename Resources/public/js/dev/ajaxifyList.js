@@ -356,6 +356,16 @@ $(document).ready(function () {
         }
     });
 
+    $(".dev-btn-search").on('click', function(){
+        table.draw();
+    });
+
+    $(".dev-search-input").on('keyup', function(e){
+        if(e.which == 13){
+            if($(this).val() != '')
+                $(".dev-btn-search").click();
+        }
+    });
 });
 jQuery(document).on('ajaxComplete', function (event, response) {
     if (response) {

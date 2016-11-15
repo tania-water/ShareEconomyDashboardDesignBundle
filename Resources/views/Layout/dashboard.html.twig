@@ -229,9 +229,7 @@
         <div class="page-container">
             <!-- Page content -->
             <div class="page-content">
-                {% block side_menu %}
-{#                {% include 'IbtikarShareEconomyDashboardDesignBundle:Layout:sidebar.html.twig' %}#}
-                {% endblock %} 
+                {% block side_menu %}{% endblock %}
                 {% block body %}{% endblock %}
                 {% block form_buttons %}{% endblock %}
             </div>
@@ -254,7 +252,6 @@
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/loaders/blockui.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/ui/nicescroll.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/ui/drilldown.js') }}"></script>
-{#        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/pages/layout_sidebar_sticky_custom.js') }}"></script>#}
         <!-- /core JS files -->
 
         <!-- alerts messages -->
