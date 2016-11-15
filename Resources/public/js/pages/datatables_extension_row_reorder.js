@@ -26,7 +26,7 @@ $(function() {
             lengthMenu: '<span>Show:</span> _MENU_',
             paginate: { 'first': 'First', 'last': 'Last', 'next': '&larr;', 'previous': '&rarr;' }
         },
-        
+
         drawCallback: function () {
             $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
         },
@@ -50,25 +50,25 @@ $(function() {
 
     // Full row selection
     $('.datatable-row-full').DataTable({
-        
+
         rowReorder: {
             selector: 'tr'
         },
 
-//        responsive: true,
+        responsive: true,
         columnDefs: [
 
-            { 
+            {
             bSort : false,
             orderable: false,
             width: '100px',
             targets: [1]
-        },          { 
+        },          {
             bSort : false,
             orderable: false,
-            targets: [0,2,3,4,5]
+            targets: [0,2,3,4]
         },
-                     { 
+                     {
             bSort : false,
             orderable: false,
             width: '200px',
@@ -91,18 +91,18 @@ $(function() {
     var table = $('.datatable-row-events').DataTable({
         rowReorder: true
     });
- 
+
     // Setup event
     table.on('row-reorder', function (e, diff, edit) {
         var result = 'Reorder started on row: '+edit.triggerRow.data()[1]+'<br>';
- 
+
         for (var i=0, ien=diff.length ; i<ien ; i++) {
             var rowData = table.row( diff[i].node ).data();
- 
+
             result += rowData[1]+' updated to be in position '+
                 diff[i].newData+' (was '+diff[i].oldData+')<br>';
         }
- 
+
         $('#event-result').html('Event result:<br>'+result);
     });
 
@@ -120,5 +120,5 @@ $(function() {
         minimumResultsForSearch: Infinity,
         width: 'auto'
     });
-    
+
 });
