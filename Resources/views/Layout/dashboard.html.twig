@@ -229,7 +229,9 @@
         <div class="page-container">
             <!-- Page content -->
             <div class="page-content">
+                {% block side_menu %}
 {#                {% include 'IbtikarShareEconomyDashboardDesignBundle:Layout:sidebar.html.twig' %}#}
+                {% endblock %} 
                 {% block body %}{% endblock %}
                 {% block form_buttons %}{% endblock %}
             </div>
