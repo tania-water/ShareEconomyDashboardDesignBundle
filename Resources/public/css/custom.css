@@ -686,8 +686,11 @@ input[type='range']::-moz-range-thumb {
 .libraryDrop{
     min-width: 240px;
 }
-.datatable-row-full thead .sorting_asc::after{
+.datatable-row-full thead .sorting_asc::after,.datatable-full thead .sorting_asc::after{
     content: "";
+}
+.GoogleImages .thumb img{
+   height: 200px; 
 }
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
