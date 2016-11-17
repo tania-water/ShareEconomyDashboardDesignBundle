@@ -99,6 +99,10 @@ textarea{
     color:#333;
 }
 
+table td.text-center{
+    white-space: nowrap;
+}
+
 .noty_message{
     text-align:center !important;
     display:block;
@@ -136,7 +140,7 @@ textarea{
     text-align:center;
 }
 .loginLogo img{
-    margin:0 auto;  
+    margin:0 auto;
 }
 .login-container .page-container .login-form{
     width:460px;
@@ -148,7 +152,7 @@ textarea{
     color:#333;
 }
 .whiteText{
-    color:#fff;   
+    color:#fff;
 }
 
 .text-nowrap > thead > tr > th {
@@ -176,7 +180,7 @@ textarea{
     padding: 2px;
 }
 .filterHeader.panel-default{
-    margin-bottom:0px;   
+    margin-bottom:0px;
     border-right-color:#444;
     border-left-color:#444;
 }
@@ -199,12 +203,12 @@ textarea{
     background:#30303A;
     padding:5px;
     z-index:99;
-    margin:0px;  
+    margin:0px;
     position:fixed;
     bottom:0px;
     width:100%;
     right:0px;
-    left:0px; 
+    left:0px;
     text-align:center;
 }
 
@@ -217,7 +221,7 @@ textarea{
     color: #fff;
     padding: 10px;
     font-size:14px;
-    text-align: center;   
+    text-align: center;
     background: #999;
     border-radius: 50%;
 
@@ -237,7 +241,7 @@ textarea{
     -ms-transform-origin:top right;
 }
 .topSettings{
-    background:#30303A; 
+    background:#30303A;
     margin-bottom:0px !important;
     color:#53D2BA;
     border-radius:3px 3px 0px 0px;
@@ -475,7 +479,7 @@ input.cropit-image-zoom-input {
     position: absolute;
     top: -4px;
     right: 0px;
-    color: #ccc; 
+    color: #ccc;
 }
 .rotation-btns span:hover{
     cursor: pointer;
@@ -537,7 +541,7 @@ input.cropit-image-zoom-input {
     overflow: hidden;
 }
 .moreNotifications i{
-    font-size:24px; 
+    font-size:24px;
     line-height: 50px;
 }
 table tr td .thumbnail{
@@ -621,7 +625,7 @@ input[type='range']::-moz-range-thumb {
     color: #fff;
     padding: 10px;
     font-size:14px;
-    text-align: center;   
+    text-align: center;
     background: #999;
     border-radius: 50%;
 
@@ -690,7 +694,7 @@ input[type='range']::-moz-range-thumb {
     content: "";
 }
 .GoogleImages .thumb img{
-   height: 200px; 
+   height: 200px;
 }
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
