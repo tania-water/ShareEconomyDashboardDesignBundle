@@ -5,14 +5,19 @@
         {%- if type is not defined or type not in ['file', 'hidden'] and  attr['data-remove-label'] is not defined -%}
         {{- form_label(form) -}}
         {%- endif -%}
-        {%- if type is defined and type == 'file' and attr['data-image-type'] is defined -%}
-        <div class="col-lg-12">
-        {%- endif -%}
-        {%- if type is not defined or type not in ['file', 'hidden'] -%}
-        <div class="col-lg-10">
+        {% if attr['dev-full-width-widget'] is defined and attr['dev-full-width-widget'] %}
+            <div class="col-lg-12">
+        {%else%}
+            {%- if type is defined and type == 'file' and attr['data-image-type'] is defined -%}
+            <div class="col-lg-12">
+            {%- endif -%}
+            {%- if type is not defined or type not in ['file', 'hidden'] -%}
+            <div class="col-lg-10">
+            {%- endif -%}
         {%- endif -%}
         {{- form_widget(form) -}}
         {{- form_errors(form) -}}
+        {% if attr['data-error-after-selector'] is defined and attr['data-error-after-selector'] == '.dev-after-element' %}<div class="dev-after-element"></div>{% endif %}
         {%- if type is not defined or type not in ['file', 'hidden'] or type == 'file' and attr['data-image-type'] is defined -%}
         </div>
         {%- endif -%}
@@ -145,6 +150,18 @@
     </div>
 {%- endblock choice_widget_expanded -%}
 
+{%- block choice_widget_options -%}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}">
+                {% set options = choice %}
+                {{- block('choice_widget_options') -}}
+            </optgroup>
+        {%- else -%}
+        <option data-image="{{ asset( attribute(choice.data, attr['data-img-method'] is defined?attr['data-img-method']:'webPath')|default(attr['data-img-default'] is defined?attr['data-img-default']:'bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg'))}}" value="{{ choice.value }}"{% if choice.attr %} {% set attr = choice.attr %}{{ block('attributes') }}{% endif %}{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</option>
+        {%- endif -%}
+    {% endfor %}
+{%- endblock choice_widget_options -%}
 
 {% block phone_widget %}
 {% spaceless %}
