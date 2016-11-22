@@ -16342,6 +16342,7 @@ thead .htCollapseButton:after {
 .dataTable thead .sorting_desc_disabled {
   padding-right: 20px;
 }
+
 .dataTable thead .sorting:before,
 .dataTable thead .sorting:after,
 .dataTable thead .sorting_asc:after,
@@ -16360,6 +16361,16 @@ thead .htCollapseButton:after {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.dataTable thead .sorting:before,
+.dataTable thead .sorting:after,
+.dataTable thead .sorting_asc:after,
+.dataTable thead .sorting_desc:after,
+.dataTable thead .sorting_asc_disabled:after,
+.dataTable thead .sorting_desc_disabled:after {
+  top: 30px !important;
+
+}
+
 .dataTable thead .sorting:before {
   content: '\e9c1';
   margin-top: -2px;

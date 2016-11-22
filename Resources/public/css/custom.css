@@ -248,7 +248,9 @@ textarea{
 }
 
 .modal-body .gu-mirror{
-right: 50px;
+direction: ltr;
+left: auto !important;
+right: 50px !important;
 }
 
 .modal-title .badge{
@@ -772,6 +774,7 @@ table td.text-right{
 .table > thead > tr > th:last-child{
     text-align: right !important;
 }
+
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
