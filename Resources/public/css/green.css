@@ -96,3 +96,11 @@ color: #fff;
 .form-horizontal .control-label{
     color:#54D582
 }
+.tokenfield .token:hover:not([class*="bg-"]), .tokenfield .token:focus:not([class*="bg-"]) {
+  background-color: #54D582;
+}
+
+.fc-event{
+      background-color:#54D582;
+      border-color:#54D582;
+}

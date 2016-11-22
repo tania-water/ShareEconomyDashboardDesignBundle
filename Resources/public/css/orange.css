@@ -85,3 +85,11 @@ color: #fff;
 .wizard > .steps > ul > li::before, .wizard > .steps > ul > li::after {
     background-color: #EE6F2C;
 }
+.tokenfield .token:hover:not([class*="bg-"]), .tokenfield .token:focus:not([class*="bg-"]) {
+  background-color: #EE6F2C;
+}
+
+.fc-event{
+      background-color:#EE6F2C;
+      border-color:#EE6F2C;
+}

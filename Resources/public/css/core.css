@@ -4961,13 +4961,13 @@ ul.dropdown-menu .dropdown-content-heading:first-child {
 *
 * ---------------------------------------------------------------------------- */
 .badge {
-  padding: 2px 6px 1px 6px;
-  font-size: 10px;
-  letter-spacing: 0.1px;
-  vertical-align: baseline;
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: 100px;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  padding: 2px 8px 1px;
+  vertical-align: baseline;
 }
 .btn .badge {
   top: 0;

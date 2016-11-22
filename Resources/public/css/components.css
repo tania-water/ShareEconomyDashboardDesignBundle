@@ -2718,8 +2718,8 @@ label.checkbox-switch.checkbox-inline {
   cursor: not-allowed;
 }
 .select2-selection--multiple .select2-selection__choice {
-  background-color: #30303A;
-  color: #fff;
+      background-color: #eee;
+    color: #333333;
   border-radius: 3px;
   cursor: default;
   float: right;
