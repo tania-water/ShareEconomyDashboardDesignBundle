@@ -762,7 +762,7 @@ input[type='range']::-moz-range-thumb {
 .advanced-map {
     padding:15px;
 }
-.tooltip.bottom {
+.tooltip.bottom ,.tooltip-inner{
   white-space: nowrap;
 }
 .fileupload .thumbnail{
@@ -774,7 +774,9 @@ table td.text-right{
 .table > thead > tr > th:last-child{
     text-align: right !important;
 }
-
+.dataTable thead .sorting_asc, .dataTable thead .sorting_desc, .dataTable thead .sorting {
+  white-space: nowrap;
+}
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
