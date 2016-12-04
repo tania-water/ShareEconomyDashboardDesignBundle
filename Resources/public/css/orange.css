@@ -93,3 +93,7 @@ color: #fff;
       background-color:#EE6F2C;
       border-color:#EE6F2C;
 }
+
+.border-left-primary {
+  border-right-color: #EE6F2C;
+}

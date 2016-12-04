@@ -51,6 +51,42 @@ $(function() {
     });
 
 
+    // advanced saerch 
+    $('#advanced-map-Btn').on('click', function() {
+        if ($(".advanced-map").hasClass("searchhidden")) {
+            $(".advanced-map").slideDown();
+            $(".advanced-map").removeClass('searchhidden');
+            
+                // Subscribing for events
+    $('#us3').locationpicker({
+        location: {latitude: 47.494293, longitude: 19.054151899999965}, 
+        radius: 300,
+        scrollwheel: false,
+        inputBinding: {
+            latitudeInput: $('#us3-lat'),
+            longitudeInput: $('#us3-lon'),
+            radiusInput: $('#us3-radius'),
+            locationNameInput: $('#us3-address')        
+        },
+        enableAutocomplete: true,
+        onchanged: function(currentLocation, radius, isMarkerDropped) {
+            alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
+        }
+    });
+    
+        } else {
+            $(".advanced-map").slideUp();
+            $(".advanced-map").addClass('searchhidden');
+        }
+
+    });
+    
+    
+
+
+    // Subscribing for events
+
+
     //
     // Typeahead address picker
     //

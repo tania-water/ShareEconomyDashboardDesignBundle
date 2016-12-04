@@ -94,3 +94,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', end
       background-color: #53D2BA;
       border-color: #53D2BA;
 }
+.border-left-primary {
+  border-right-color: #53D2BA;
+}

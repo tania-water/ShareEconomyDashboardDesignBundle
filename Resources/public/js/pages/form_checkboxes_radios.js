@@ -57,7 +57,10 @@ $(function() {
         fileButtonClass: 'action btn btn-default',
         fileButtonHtml: '<i class="icon-file-plus"></i>'
     });
-
+    // File input
+    $(".multiUploadImgBtn").uniform({
+        fileButtonHtml: 'رفع الصور'
+    });
 
 
     //
