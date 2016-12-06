@@ -2718,8 +2718,8 @@ label.checkbox-switch.checkbox-inline {
   cursor: not-allowed;
 }
 .select2-selection--multiple .select2-selection__choice {
-  background-color: #30303A;
-  color: #fff;
+      background-color: #eee;
+    color: #333333;
   border-radius: 3px;
   cursor: default;
   float: right;
@@ -16342,6 +16342,7 @@ thead .htCollapseButton:after {
 .dataTable thead .sorting_desc_disabled {
   padding-right: 20px;
 }
+
 .dataTable thead .sorting:before,
 .dataTable thead .sorting:after,
 .dataTable thead .sorting_asc:after,
@@ -16360,6 +16361,16 @@ thead .htCollapseButton:after {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.dataTable thead .sorting:before,
+.dataTable thead .sorting:after,
+.dataTable thead .sorting_asc:after,
+.dataTable thead .sorting_desc:after,
+.dataTable thead .sorting_asc_disabled:after,
+.dataTable thead .sorting_desc_disabled:after {
+/*  top: 30px !important;*/
+
+}
+
 .dataTable thead .sorting:before {
   content: '\e9c1';
   margin-top: -2px;
@@ -18233,50 +18244,52 @@ thead .htCollapseButton:after {
  *  Latest update: Dec 11, 2015
  *
  * ---------------------------------------------------------------------------- */
+
 .timeline {
-  position: relative;
-  height: 100%;
+    height: 100%;
+    position: relative;
 }
-.timeline:before,
-.timeline:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 50%;
-  margin-right: -2px;
-  background-color: #ccc;
-  height: 4px;
-  width: 4px;
-  border-radius: 50%;
-  z-index: 1;
+.timeline::before, .timeline::after {
+    background-color: #ccc;
+    border-radius: 50%;
+    content: "";
+    height: 4px;
+    margin-right: -2px;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    width: 4px;
+    z-index: 1;
 }
-.timeline:after {
-  top: auto;
-  bottom: 0;
+.timeline::after {
+    bottom: 0;
+    top: auto;
 }
 .timeline-container {
-  position: relative;
-  padding-top: 10px;
-  margin-top: -10px;
-  padding-bottom: 1px;
+    margin-top: -10px;
+    padding-bottom: 1px;
+    padding-top: 10px;
+    position: relative;
+    z-index: 1;
 }
-.timeline-container:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 50%;
-  margin-right: -1px;
-  background-color: #ccc;
-  height: 100%;
-  width: 2px;
-  z-index: -1;
+.timeline-container::after {
+    background-color: #ccc;
+    content: "";
+    height: 100%;
+    margin-right: -1px;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    width: 2px;
+    z-index: -1;
 }
 .timeline-row {
-  position: relative;
+    position: relative;
 }
 .timeline-content {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
+
 .timeline-date {
   text-align: center;
   background-color: #f5f5f5;

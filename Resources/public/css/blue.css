@@ -87,3 +87,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', end
 .wizard > .steps > ul > li::before, .wizard > .steps > ul > li::after {
     background-color: #53D2BA;
 }
+.tokenfield .token:hover:not([class*="bg-"]), .tokenfield .token:focus:not([class*="bg-"]) {
+  background-color: #53D2BA;
+}
+.fc-event{
+      background-color: #53D2BA;
+      border-color: #53D2BA;
+}
+.border-left-primary {
+  border-right-color: #53D2BA;
+}

@@ -2,6 +2,7 @@
 {# required configurations #}
 {% set currentTheme = dashboardTheme is defined ? dashboardTheme : 'blue' %}
 {% set supportedLocales = dashboardLocales is defined ? dashboardLocales : ['ar'] %}
+{% set fsupportedLocales = frontendLocales is defined ? frontendLocales : ['ar'] %}
 {% set rtlLocales = rtlLocales is defined ? rtlLocales : ['ar'] %}
 {% set defaultLocale = dashboardDefaultLocale is defined ? dashboardDefaultLocale : 'ar' %}
 {% set locale = app.request.locale and app.request.locale in supportedLocales ? app.request.locale : defaultLocale %}

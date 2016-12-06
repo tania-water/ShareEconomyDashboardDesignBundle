@@ -626,4 +626,6 @@ $(function() {
 
 });
 
-
+$(".alert-primary").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-primary").slideUp(500);
+});
