@@ -59,15 +59,21 @@
                     {% endif %}
                     {% for column in list.columns %}
                         <td>
+                            {% if column[1].method is defined %}
+                                {% set value = attribute(entity, column[1].method) %}
+                            {% else %}
+                                {% set value = attribute(entity, column[0]) %}
+                            {% endif %}   
+                            
                             {% if column[1].type is defined and column[1].type != 'text' %}
                                 {% if column[1].type == 'date' %}
-                                    {{ attribute(entity, column[0])|date(list.defaultDateFormat) }}
+                                    {{ value|date(list.defaultDateFormat) }}
                                 {% endif %}
-                            {% else %}
-                                {% if attribute(entity, column[0])|length > 50 %}
-                                    {{ attribute(entity, column[0])|slice(0, 50) }}
+                            {% else %}                                
+                                {% if value|length > 50 %}
+                                    {{ value|slice(0, 50) }}
                                 {% else %}
-                                    {{ attribute(entity, column[0]) }}
+                                    {{ value }}
                                 {% endif %}
                             {% endif %}
                         </td>

@@ -28,6 +28,8 @@ class DashboardController extends Controller
 
     protected $translationDomain = '';
 
+    protected $pageTitle = '';
+
     protected $pagesLimit = 20;
 
     protected $pagesOffset = 0;
@@ -54,9 +56,13 @@ class DashboardController extends Controller
         if($request->isXmlHttpRequest()){
             return $this->getListJsonData($request,$list);
         }
-        if (!$this->get('templating')->exists($this->entityBundle.':List:'.strtolower($this->className).'.html.twig'))
-            return $this->render('IbtikarShareEconomyDashboardDesignBundle:List:list.html.twig', array('list' =>  $list));
-        return $this->render($this->entityBundle.':List:'.strtolower($this->className).'.html.twig', array('list' =>  $list));
+        if ($this->get('templating')->exists($this->entityBundle.':List:'.strtolower($this->className).'.html.twig'))
+            return $this->render($this->entityBundle.':List:'.strtolower($this->className).'.html.twig', array('list' =>  $list));
+
+        if ($this->get('templating')->exists($this->entityBundle.':List:list.html.twig'))
+            return $this->render($this->entityBundle.':List:list.html.twig', array('list' =>  $list));
+
+        return $this->render('IbtikarShareEconomyDashboardDesignBundle:List:list.html.twig', array('list' =>  $list));
     }
     public function getListQuery(){
         $em = $this->getDoctrine()->getManager();
@@ -163,6 +169,7 @@ class DashboardController extends Controller
             'globalActions'   => $this->listGlobalActions,
             'bulkActions' => $this->listBulkActions,
             'translationDomain' => $this->translationDomain,
+            'pageTitle' => $this->pageTitle,
             'pagesLimit' => $limit,
             'pagesOffset' => $offset,
             'defaultDateFormat' => $this->defaultDateFormat,
