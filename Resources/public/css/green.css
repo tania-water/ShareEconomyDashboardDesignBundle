@@ -104,3 +104,7 @@ color: #fff;
       background-color:#54D582;
       border-color:#54D582;
 }
+
+.border-left-primary {
+  border-right-color: #54D582;
+}

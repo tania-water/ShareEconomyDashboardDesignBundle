@@ -48,11 +48,13 @@
                                                         {% endfor %}
                                                     {% endfor %}
                                                     {% block form_container %}
-                                                    {{ form(form) }}
+                                                        {{ form(form) }}
                                                     {% endblock %}
                                                 </div>
                                             </div>
                                         </div>
+                                            {%block form_extras %}
+                                            {% endblock%}
                                     </div>
                                 </div>
                             </div>

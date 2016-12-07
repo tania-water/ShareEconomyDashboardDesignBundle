@@ -777,6 +777,28 @@ table td.text-right{
 .dataTable thead .sorting_asc, .dataTable thead .sorting_desc, .dataTable thead .sorting {
   white-space: nowrap;
 }
+.contentBox{
+    max-width:500px;
+    border: 1px solid #eee;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 10px;
+}
+.contentBox h4{
+   padding: 10px;
+   margin-bottom: 40px;
+}
+.contentBox hr{
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+.orangeNumber{
+    font-size: 32px;
+    color: #FD9B60;
+}
+.c3-tooltip td > span{
+    margin-right: 6px;
+}
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
