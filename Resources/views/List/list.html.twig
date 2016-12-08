@@ -1,5 +1,14 @@
 {% extends "IbtikarShareEconomyDashboardDesignBundle:Dashboard:genericDashboard.html.twig" %}
 
+
+{% block title %}
+    {% if list.pageTitle %}
+        {{ list.pageTitle|trans({}, list.translationDomain) }}
+    {% else %}
+        {{ list.className|trans({}, list.translationDomain) }}
+    {% endif %}
+{% endblock %}
+
 {% block body %}
     <!-- Main content -->
         <div class="content-wrapper">
