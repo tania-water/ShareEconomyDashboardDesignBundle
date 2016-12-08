@@ -87,23 +87,31 @@
                     {% endfor %}
                     {% if list.actions|length > 0 %}
                         <td class="text-center" style="white-space: nowrap;">
-                            {% if 'edit' in list.actions %}
-                                <a class="btn btn-defualt" href="Role-add.php" data-popup="tooltip" title="تعديل" data-placement="bottom" ><i class="icon-pencil"></i></a>
-                            {% endif %}
-                            {% if 'delete' in list.actions %}
-                                <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="انت علي وشك حذف comments هل ترغب في حذفه  " data-html="true"
-                                   data-html="true" data-content="
-                                   <button type='button' class='btn btn-danger btn-block'>و ايقاف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
-                                   <button type='button' class='btn btn-danger btn-block'>و حذف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
-                                   "> <i class="icon-trash"></i></a>
-                            {% endif %}
-                            {% if 'activation' in list.actions %}
-                                <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="  هل ترغب في ايقاف الموظف  " data-html="true"
-                                   data-html="true" data-content="
-                                   <button type='button' class='btn btn-danger'>نعم</button>
-                                   <button type='button' class='btn btn-defualt'>الغاء</button>
-                                   "> <i class="icon-user-check"></i></a>
-                            {% endif %}
+                            {% for action, actionPath in list.actions %}
+                                
+                                {% if action == 'edit' %}
+                                    <a class="btn btn-defualt" href="{{ path(actionPath , {'id': entity.id}) }}" data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="bottom" ><i class="icon-pencil"></i></a>
+                                {% endif %}
+                            
+                                {% if action == 'delete' %}
+                                    <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="انت علي وشك حذف comments هل ترغب في حذفه  " data-html="true"
+                                       data-html="true" data-content="
+                                       <button type='button' class='btn btn-danger btn-block'>و ايقاف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
+                                       <button type='button' class='btn btn-danger btn-block'>و حذف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
+                                       "> <i class="icon-trash"></i></a>
+                                {% endif %}
+                            
+                                {% if action == 'activation' %}
+                                    <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="  هل ترغب في ايقاف الموظف  " data-html="true"
+                                       data-html="true" data-content="
+                                       <button type='button' class='btn btn-danger'>نعم</button>
+                                       <button type='button' class='btn btn-defualt'>الغاء</button>
+                                       "> <i class="icon-user-check"></i></a>
+                                {% endif %}
+                                {% if action == 'view' %}
+                                    <a class="btn btn-defualt" href="{{ path(actionPath , {'id': entity.id}) }}" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom" ><i class="icon-eye"></i></a>
+                                {% endif %}
+                            {% endfor %}
                         </td>
                     {% elseif list.isSearchable %}
                         <td></td>

@@ -18,5 +18,13 @@
 "Yes" : نعم
 "Cancel": إلغاء
 
+
 # Menu
 "Main menu": "القائمة الرئيسية"
+"View": "عرض"
+"Edit": "تعديل"
+"Delete": "حذف"
+"Activate": "تفعيل"
+"Deactivate": "ايقاف"
+"Approve": "موافق"
+"Reject": "رفض"
