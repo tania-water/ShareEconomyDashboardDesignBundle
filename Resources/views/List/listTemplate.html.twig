@@ -34,7 +34,14 @@
                 {% else %}
                     {%set colName = column[0] %}
                 {% endif %}
-                    <th data-name='{{colName}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
+            
+                {% if column[1].entity is defined %}
+                    {%set sortCol = column[1].entity~'.'~column[0] %}
+                {% else %}
+                    {%set sortCol = column[0] %}
+                {% endif %}
+                
+                    <th data-name='{{sortCol}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
             {% endfor %}
             {% if list.actions|length > 0 %}
                 <th data-name='actions' class="text-center">العمليات</th>

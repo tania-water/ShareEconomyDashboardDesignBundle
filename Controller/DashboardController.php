@@ -85,7 +85,10 @@ class DashboardController extends Controller
         if($request->get('sort')){
             $sort = $request->get('sort');
             $sortOrder = $request->get('columnDir');
-            $query = $query->addOrderBy('e.'.$sort, $sortOrder);
+            if (strpos($sort, "."))
+                $query = $query->addOrderBy($sort, $sortOrder);
+            else
+                $query = $query->addOrderBy('e.'.$sort, $sortOrder);
         }
         else if(count($this->defaultSort)){
             $sort = $this->defaultSort['column'];
@@ -121,8 +124,8 @@ class DashboardController extends Controller
             else{
                 $datatableColumns[$datatableColumnsIndex]['orderable'] = true;
             }
-            $columnArray[] = $column[0];
-            if ($sort == $column[0]) {
+            $columnArray[] = $column;
+            if ((isset($column[1]['entity']) && $column[1]['entity'].'.'.$column[0] == $sort) || $sort == $column[0]) {
                 $sortIndex = $datatableColumnsIndex;
             }
             $datatableColumnsIndex++;
@@ -181,7 +184,6 @@ class DashboardController extends Controller
     public function getListJsonData($request, $renderingParams){
         $entityObjects = array();
         foreach ($renderingParams['pagination'] as $entity) {
-            $oneEntity = array();
             foreach ($renderingParams['columnArray'] as $value) {
                 if ($value == 'checkBox') {
                     $oneEntity['checkBox'] = '';
@@ -216,17 +218,23 @@ class DashboardController extends Controller
                     $oneEntity['actions'] = $actionTd;
                     continue;
                 }
-                $getfunction = "get" . ucfirst($value);
+
+
+                if(isset($value[1]['method']))
+                    $getfunction = $value[1]['method'];
+                else
+                    $getfunction = "get" . ucfirst($value[0]);
+
                 if ($entity->$getfunction() instanceof \DateTime) {
-                    $oneEntity[$value] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
+                    $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
                 } else {
                     $fieldData=$entity->$getfunction();
                     if(is_object($fieldData))
-                        $oneEntity[$value] = $fieldData->__toString();
+                        $oneEntity[$value[0]] = $fieldData->__toString();
                     else if(strlen($fieldData)> 50)
-                        $oneEntity[$value] = substr($fieldData, 0, 49);
+                        $oneEntity[$value[0]] = substr($fieldData, 0, 49);
                     else
-                        $oneEntity[$value] = $fieldData;
+                        $oneEntity[$value[0]] = $fieldData;
                 }
             }
             $entityObjects[] = $oneEntity;
