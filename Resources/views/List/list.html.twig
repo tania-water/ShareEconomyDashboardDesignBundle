@@ -12,6 +12,20 @@
 {% block body %}
     <!-- Main content -->
         <div class="content-wrapper">
+            
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success remove-5s">
+                    <a aria-hidden="true" href="#" data-dismiss="alert" class="close">×</a>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger remove-5s">
+                    <a aria-hidden="true" href="#" data-dismiss="alert" class="close">×</a>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
 
 
             <!-- Basic button -->
