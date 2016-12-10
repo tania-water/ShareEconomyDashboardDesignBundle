@@ -44,7 +44,7 @@
                     <th data-name='{{sortCol}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
             {% endfor %}
             {% if list.actions|length > 0 %}
-                <th data-name='actions' class="text-center">العمليات</th>
+                <th data-name='actions' class="text-center">{{ ('Actions')|trans}}</th>
             {% elseif list.isSearchable %}
                 <th></th>
             {% endif %}
