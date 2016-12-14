@@ -73,6 +73,7 @@ class DashboardController extends Controller
     protected function getListParameters($request){
         $em = $this->getDoctrine()->getManager();
         $query = $this->getListQuery();
+        $this->setPageTitle();
         $limit = $this->pagesLimit;
         if($request->get('limit') && in_array($request->get('limit'), array(10, 20, 50)))
             $limit = $request->get('limit');
@@ -274,5 +275,7 @@ class DashboardController extends Controller
 //        }
 //        return array('columnHeader' => $prepareColumns, 'sort' => $sort);
 //    }
+
+    function setPageTitle(){}
 
 }
