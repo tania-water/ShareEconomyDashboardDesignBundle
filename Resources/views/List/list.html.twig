@@ -12,7 +12,7 @@
 {% block body %}
     <!-- Main content -->
         <div class="content-wrapper">
-            
+
             {% for flashMessage in app.session.flashbag.get('success') %}
                 <div class="alert alert-success remove-5s">
                     <a aria-hidden="true" href="#" data-dismiss="alert" class="close">×</a>
@@ -225,7 +225,7 @@
         var limit = {{ list.pagesLimit }};
         var start = {{ list.pagesOffset }};
         var totalNumber = {{ list.totalNumber }};
-        var ajaxData = '{{ path(app.request.attributes.get('_route')) }}';
+        var ajaxData = '{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}';
         var columns = {{ list.datatableColumns|raw }};
         var sort ={% if list.sort is defined and list.sort %}{{list.sort|raw}}{% else %}null{%endif %};
         var buttons = document.querySelectorAll('.switchery-primary');
