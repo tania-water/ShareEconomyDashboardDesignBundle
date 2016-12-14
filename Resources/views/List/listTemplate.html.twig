@@ -34,13 +34,15 @@
                 {% else %}
                     {%set colName = column[0] %}
                 {% endif %}
-            
-                {% if column[1].entity is defined %}
+
+                {% if column[1].sort is defined %}
+                    {%set sortCol = column[1].sort %}
+                {% elseif column[1].entity is defined %}
                     {%set sortCol = column[1].entity~'.'~column[0] %}
                 {% else %}
                     {%set sortCol = column[0] %}
                 {% endif %}
-                
+
                     <th data-name='{{sortCol}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
             {% endfor %}
             {% if list.actions|length > 0 %}
@@ -70,13 +72,13 @@
                                 {% set value = attribute(entity, column[1].method) %}
                             {% else %}
                                 {% set value = attribute(entity, column[0]) %}
-                            {% endif %}   
-                            
+                            {% endif %}
+
                             {% if column[1].type is defined and column[1].type != 'text' %}
                                 {% if column[1].type == 'date' %}
                                     {{ value|date(list.defaultDateFormat) }}
                                 {% endif %}
-                            {% else %}                                
+                            {% else %}
                                 {% if value|length > 50 %}
                                     {{ value|slice(0, 50) }}
                                 {% else %}
@@ -88,7 +90,7 @@
                     {% if list.actions|length > 0 %}
                         <td class="text-center" style="white-space: nowrap;">
                             {% for action, actionPath in list.actions %}
-                                
+
                                 {% if action == 'edit' %}
                                     {% if actionPath %}
                                         {% set editUrl = path(actionPath , {'id': entity.id}) %}
@@ -97,7 +99,7 @@
                                     {% endif %}
                                     <a class="btn btn-default" href="{{ editUrl }}" data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="bottom" ><i class="icon-pencil"></i></a>
                                 {% endif %}
-                            
+
                                 {% if action == 'delete' %}
                                     <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="انت علي وشك حذف comments هل ترغب في حذفه  " data-html="true"
                                        data-html="true" data-content="
@@ -105,7 +107,7 @@
                                        <button type='button' class='btn btn-danger btn-block'>و حذف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
                                        "> <i class="icon-trash"></i></a>
                                 {% endif %}
-                            
+
                                 {% if action == 'activation' %}
                                     <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="  هل ترغب في ايقاف الموظف  " data-html="true"
                                        data-html="true" data-content="

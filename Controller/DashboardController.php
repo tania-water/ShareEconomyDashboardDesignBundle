@@ -125,7 +125,7 @@ class DashboardController extends Controller
                 $datatableColumns[$datatableColumnsIndex]['orderable'] = true;
             }
             $columnArray[] = $column;
-            if ((isset($column[1]['entity']) && $column[1]['entity'].'.'.$column[0] == $sort) || $sort == $column[0]) {
+            if ((isset($column[1]['sort']) && $column[1]['sort'] == $sort) || (isset($column[1]['entity']) && $column[1]['entity'].'.'.$column[0] == $sort) || $sort == $column[0]) {
                 $sortIndex = $datatableColumnsIndex;
             }
             $datatableColumnsIndex++;
