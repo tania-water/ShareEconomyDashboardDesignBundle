@@ -2,7 +2,7 @@
     <thead>
         {% if list.isSearchable %}
         <tr id="filterrow">
-            <th> بحث في الخانات </th>
+            <th>{% trans %}Search in Fields{% endtrans %}</th>
             {% for column in list.columns %}
 
                 {% if column[1].isSearchable is defined %}

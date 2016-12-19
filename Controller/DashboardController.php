@@ -24,7 +24,7 @@ class DashboardController extends Controller
 
     protected $listBulkActions = array();
 
-    protected $defaultSort = array();
+    protected $defaultSort = array('column' => 'createdAt', 'sort' => 'desc');
 
     protected $translationDomain = '';
 
