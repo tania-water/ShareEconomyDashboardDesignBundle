@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Doctrine\ORM\Query\Expr\Orx;
+use Doctrine\ORM\Query\Expr\Andx;
 
 class DashboardController extends Controller
 {
@@ -86,24 +86,28 @@ class DashboardController extends Controller
         if($request->get('sort')){
             $sort = $request->get('sort');
             $sortOrder = $request->get('columnDir');
-            if (strpos($sort, "."))
-                $query = $query->addOrderBy($sort, $sortOrder);
-            else
-                $query = $query->addOrderBy('e.'.$sort, $sortOrder);
         }
         else if(count($this->defaultSort)){
             $sort = $this->defaultSort['column'];
             $sortOrder = $this->defaultSort['sort'];
-            $query = $query->addOrderBy('e.'.$this->defaultSort['column'], $this->defaultSort['sort']);
         }
+
+        if (strpos($sort, "."))
+            $query = $query->addOrderBy($sort, $sortOrder);
+        else
+            $query = $query->addOrderBy('e.'.$sort, $sortOrder);
+
         if($request->get('searchKey')){
-            $orX = new Orx();
+            $andX = new Andx();
             $searchKey = json_decode($request->get('searchKey'));
             $searchValue = json_decode($request->get('searchValue'));
             for($i=0; $i<count($searchKey); $i++){
-                $orX->add("e.".$searchKey[$i]." like '%".$searchValue[$i]."%'");
+                if (strpos($searchKey[$i], "."))
+                    $andX->add($searchKey[$i]." like '%".$searchValue[$i]."%'");
+                else
+                    $andX->add("e.".$searchKey[$i]." like '%".$searchValue[$i]."%'");
             }
-            $query = $query->andWhere($query->expr()->orX($orX));
+            $query = $query->andWhere($query->expr()->andX($andX));
         }
         $query = $query->getQuery();
         $paginator = new Paginator($query, true);

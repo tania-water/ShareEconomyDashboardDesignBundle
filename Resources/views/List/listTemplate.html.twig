@@ -1,15 +1,28 @@
-<table class="table table-hover table-striped datatable-column-search-inputs" width="100%">
+<table class="list-table table table-hover table-striped datatable-column-search-inputs" width="100%">
     <thead>
         {% if list.isSearchable %}
         <tr id="filterrow">
             <th> بحث في الخانات </th>
             {% for column in list.columns %}
-                {% if column[1].name is defined %}
-                    {%set colName = column[1].name %}
+
+                {% if column[1].isSearchable is defined %}
+                    {% if column[1].name is defined %}
+                        {%set colName = column[1].name %}
+                    {% else %}
+                        {%set colName = column[0] %}
+                    {% endif %}
+
+                    {% if column[1].sort is defined %}
+                        {%set searchCol = column[1].sort %}
+                    {% elseif column[1].entity is defined %}
+                        {%set searchCol = column[1].entity~'.'~column[0] %}
+                    {% else %}
+                        {%set searchCol = column[0] %}
+                    {% endif %}
+                    <th data-name="{{searchCol}}">{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
                 {% else %}
-                    {%set colName = column[0] %}
+                    <th class="notSearchable"></th>
                 {% endif %}
-                    <th data-name="{{column[0]}}">{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
             {% endfor %}
             <th class='text-right'>
                 <button class="dev-btn-search btn btn-defualt"><i class="icon-search4"></i></button>
