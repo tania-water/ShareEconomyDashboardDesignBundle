@@ -5,7 +5,7 @@
             <th>{% trans %}Search in Fields{% endtrans %}</th>
             {% for column in list.columns %}
 
-                {% if column[1].isSearchable is defined %}
+                {% if column[1].isSearchable is not defined %}
                     {% if column[1].name is defined %}
                         {%set colName = column[1].name %}
                     {% else %}
