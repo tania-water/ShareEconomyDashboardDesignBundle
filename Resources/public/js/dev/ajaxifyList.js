@@ -75,15 +75,7 @@ var dataTableDefault = {
     },
     columns: columns,
     dom: '<"datatable-scroll"t><"datatable-footer"lip>',
-    language: {
-        search: '<span>بحث:</span> _INPUT_',
-        lengthMenu: '_MENU_',
-        sLengthMenu: "اظهر _MENU_ ",
-        sInfo: " _START_ - _END_ من _TOTAL_ ",
-        sZeroRecords: "لا يوجد ما تبحث عنه",
-        sInfoEmpty: " 0 - 0 من 0 ",
-        paginate: {'first': 'الاول', 'last': 'الاخير', 'next': '&larr;', 'previous': '&rarr;'}
-    },
+    language: listLanguage,
     drawCallback: function () {
         $('[data-popup="tooltip"]').tooltip({
             trigger: 'hover'

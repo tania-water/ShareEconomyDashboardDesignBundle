@@ -50,6 +50,27 @@ class DashboardController extends Controller
         return $this->render('IbtikarShareEconomyDashboardDesignBundle:Dashboard:home.html.twig');
     }
 
+    private function getEntityPerId($entityId){
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository($this->entityBundle.":".$this->className)->findOneBy(array('id'=>$entityId));
+        return $entity;
+    }
+
+    public function deleteEntity($entity){
+        $em->remove($entity);
+        $this->getFlashBag("success", "Successfully deleted");
+//        return $this->;
+    }
+
+    public function deleteAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $entityId = $request->get('entityId');
+        $entity = $this->getEntityPerId($entityId);
+        if($entity){
+            return $this->deleteEntity($entity);
+        }
+    }
+
     /**
      * @author Moemen Hussein <moemen.hussein@ibtikar.net.sa>
      */
@@ -210,13 +231,9 @@ class DashboardController extends Controller
                         if ($action == 'edit') {
                             $actionTd.= '<a class="dev-td-btn btn btn-defualt" href="Role-add.php" data-popup="tooltip" title="تعديل" data-placement="bottom" ><i class="icon-pencil"></i></a>';
                         }elseif($action == 'delete'){
-                            $actionTd.= '<a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="انت علي وشك حذف comments هل ترغب في حذفه  " data-html="true"
-                               data-html="true" data-content=\'
-                               <button type="button" class="btn btn-danger btn-block">و ايقاف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
-                               <button type="button" class="btn btn-danger btn-block">و حذف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
-                               \'> <i class="icon-trash"></i></a>';
+                            $actionTd.= '<button tabindex="0" class="dev-td-btn btn btn-defualt dev-delete-btn" data-toggle="popover" data-trigger="focus" title="انت علي وشك حذف comments هل ترغب في حذفه  "><i class="icon-trash"></i></button>';
                         }elseif($action == 'activation'){
-                            $actionTd.= '<a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="  هل ترغب في ايقاف الموظف  " data-html="true"
+                            $actionTd.= '<a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="  هل ترغب في ايقاف الموظف  " data-html="true"
                                data-html="true" data-content=\'
                                <button type="button" class="btn btn-danger">نعم</button>
                                <button type="button" class="btn btn-defualt">الغاء</button>

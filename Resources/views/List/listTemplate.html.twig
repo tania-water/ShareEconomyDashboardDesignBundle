@@ -114,11 +114,7 @@
                                 {% endif %}
 
                                 {% if action == 'delete' %}
-                                    <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="انت علي وشك حذف comments هل ترغب في حذفه  " data-html="true"
-                                       data-html="true" data-content="
-                                       <button type='button' class='btn btn-danger btn-block'>و ايقاف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
-                                       <button type='button' class='btn btn-danger btn-block'>و حذف الموظفين الذين لا ينتمون الي مجموعة و دور اخر</button>
-                                       "> <i class="icon-trash"></i></a>
+                                    <button tabindex="0" class="dev-td-btn btn btn-defualt dev-delete-btn" data-toggle="popover" data-trigger="focus" title="انت علي وشك حذف comments هل ترغب في حذفه  "><i class="icon-trash"></i></button>
                                 {% endif %}
 
                                 {% if action == 'activation' %}

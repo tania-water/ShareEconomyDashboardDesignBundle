@@ -231,6 +231,15 @@
         var columns = {{ list.datatableColumns|raw }};
         var sort ={% if list.sort is defined and list.sort %}{{list.sort|raw}}{% else %}null{%endif %};
         var buttons = document.querySelectorAll('.switchery-primary');
+        var listLanguage = {
+                                search: '<span>{{('search')|trans}}:</span> _INPUT_',
+                                lengthMenu: '_MENU_',
+                                sLengthMenu: "{{('show')|trans}} _MENU_ ",
+                                sInfo: " _START_ - _END_ {{('from')|trans}} _TOTAL_ ",
+                                sZeroRecords: '{{('No Result Data')|trans}}',
+                                sInfoEmpty: " 0 - 0 {{('from')|trans}} 0 ",
+                                paginate: {'first': '{{('first')|trans}}', 'last': '{{('last')|trans}}', 'next': '&larr;', 'previous': '&rarr;'}
+                            }
         for (var i = 0, buttonsLength = buttons.length; i < buttonsLength; i++) {
             new Switchery(buttons[i], {color: toggleButtonColor});
         }
