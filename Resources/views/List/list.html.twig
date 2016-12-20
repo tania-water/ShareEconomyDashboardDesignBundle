@@ -67,7 +67,9 @@
                                 </div>
                                 <div class="actions">
 
-
+                                    {% if list.isPrintable %}
+                                        <a href="javascript:window.print()" class="btn btn-default btn-sm" data-popup="tooltip" title="" data-placement="bottom" data-original-title="print"><i class=" icon-printer2"></i> <span class="hidden-sm"></span></a>
+                                    {% endif %}
                                     {#<button type="button" class="btn btn-default btn-sm" id="pnotify-stack-bottom-left"> Alert</button>
 
                                     <a class="btn btn-default btn-sm" id='advanced-search-Btn' data-popup="tooltip" title="" data-placement="bottom" data-original-title="بحث"><i class="icon-zoomin3"></i></a>

@@ -38,6 +38,8 @@ class DashboardController extends Controller
 
     protected  $isSearchable = true;
 
+    protected  $isPrintable = true;
+
     /**
      * Dashboard home page
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
@@ -175,6 +177,7 @@ class DashboardController extends Controller
             'columnArray'   => $columnArray,
             'actions'   => $this->listActions,
             'globalActions'   => $this->listGlobalActions,
+            'isPrintable'   => $this->isPrintable,
             'bulkActions' => $this->listBulkActions,
             'translationDomain' => $this->translationDomain,
             'pageTitle' => $this->pageTitle,
