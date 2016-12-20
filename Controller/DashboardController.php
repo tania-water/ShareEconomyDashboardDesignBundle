@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
     protected  $isSearchable = true;
 
-    protected  $isPrintable = true;
+    protected  $isPrintable = false;
 
     /**
      * Dashboard home page
