@@ -5034,6 +5034,10 @@ ul.dropdown-menu .dropdown-content-heading:first-child {
 *  Latest update: Mar 10, 2016
 *
 * ---------------------------------------------------------------------------- */
+
+table tr td .thumbnail.small-thumbnail{
+    width: 100px;
+}
 .thumbnail {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
