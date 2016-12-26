@@ -112,13 +112,21 @@
                                     {% endif %}
                                     <a class="btn btn-default" href="{{ editUrl }}" data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="bottom" ><i class="icon-pencil"></i></a>
                                 {% endif %}
-
                                 {% if action == 'delete' %}
-                                    <button tabindex="0" class="dev-td-btn btn btn-defualt dev-delete-btn" data-toggle="popover" data-trigger="focus" title="انت علي وشك حذف comments هل ترغب في حذفه  "><i class="icon-trash"></i></button>
+                                    {% if actionPath %}
+                                        {% set deleteUrl = path(actionPath , {'id': entity.id}) %}
+                                    {% else %}
+                                        {% set deleteUrl = path('delete_'~list.className|lower, {'entityId': entity.id}) %}
+                                    {% endif %}
+                                <a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="{{('Delete One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}" data-html="true"
+                                        data-html="true" data-content="
+                                        <button type='button' class='btn btn-danger btn-block dev-delete-btn' data-url='{{deleteUrl}}'>{{('Yes')|trans}}</button>
+                                        <button type='button' class='btn btn-danger btn-block'>{{('Cancel')|trans}}</button>
+                                        "><i class="icon-trash"></i></a>
                                 {% endif %}
 
                                 {% if action == 'activation' %}
-                                    <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus"     title="  هل ترغب في ايقاف الموظف  " data-html="true"
+                                    <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="  هل ترغب في ايقاف الموظف  " data-html="true"
                                        data-html="true" data-content="
                                        <button type='button' class='btn btn-danger'>نعم</button>
                                        <button type='button' class='btn btn-defualt'>الغاء</button>

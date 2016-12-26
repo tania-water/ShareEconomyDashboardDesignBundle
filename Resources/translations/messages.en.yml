@@ -18,9 +18,12 @@
 "first": "first"
 "last": "last"
 "No Result Data": "No Result Data"
+"Delete One Confirmation": "Are you sure you want to delete the %className%?"
 # home page
 "Welcome": "Welcome"
 'Actions': 'Actions'
+"Yes" : Yes
+"Cancel": Cancel
 
 # Menu
 "Main menu": "Main menu"
