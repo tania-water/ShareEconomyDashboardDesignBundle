@@ -60,7 +60,7 @@ class DashboardController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($entity);
         $em->flush();
-        return new JsonResponse(array('status' => 'success', 'message' => 'Successfully deleted'));
+        return new JsonResponse(array('status' => 'success', 'message' => $this->get('translator')->trans('Done Successfully')));
     }
 
     public function deleteAction($entityId){
@@ -68,7 +68,7 @@ class DashboardController extends Controller
         if($entity){
             return $this->deleteEntity($entity);
         }
-        return new JsonResponse(array('status' => 'error', 'message' => 'Already Deleted'));
+        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Failed Operation')));
     }
 
     /**
@@ -231,10 +231,10 @@ class DashboardController extends Controller
                         if ($action == 'edit') {
                             $actionTd.= '<a class="dev-td-btn btn btn-defualt" href="Role-add.php" data-popup="tooltip" title="تعديل" data-placement="bottom" ><i class="icon-pencil"></i></a>';
                         }elseif($action == 'delete'){
-                            $actionTd.= '<a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="'.str_replace("%className%", $this->trans(strtolower($this->className), array(), $this->translationDomain), $this->trans("Delete One Confirmation")).'" data-html="true"
+                            $actionTd.= '<a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="'.str_replace("%className%", $this->get('translator')->trans(strtolower($this->className), array(), $this->translationDomain), $this->get('translator')->trans("Delete One Confirmation")).'" data-html="true"
                                 data-html="true" data-content=\'
-                                <button type="button" class="btn btn-danger btn-block dev-delete-btn" data-url="'.$this->generateUrl("delete_".  strtolower($this->className), array("entityId"=>$entity->getId())).'">'.$this->trans("Yes").'</button>
-                                <button type="button" class="btn btn-danger btn-block">'.$this->trans("Cancel").'</button>
+                                <button type="button" class="btn btn-danger btn-block dev-delete-btn" data-url="'.$this->generateUrl("delete_".  strtolower($this->className), array("entityId"=>$entity->getId())).'">'.$this->get('translator')->trans("Yes").'</button>
+                                <button type="button" class="btn btn-danger btn-block">'.$this->get('translator')->trans("Cancel").'</button>
                                 \'> <i class="icon-trash"></i></a>';
                         }elseif($action == 'activation'){
                             $actionTd.= '<a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="  هل ترغب في ايقاف الموظف  " data-html="true"

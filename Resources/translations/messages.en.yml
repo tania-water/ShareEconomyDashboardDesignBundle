@@ -22,8 +22,11 @@
 # home page
 "Welcome": "Welcome"
 'Actions': 'Actions'
+'Save': 'Save'
 "Yes" : Yes
 "Cancel": Cancel
+"Done Successfully": "Done Successfully"
+"Failed Operation": "Failed Operation"
 
 # Menu
 "Main menu": "Main menu"
