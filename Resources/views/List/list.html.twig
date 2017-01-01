@@ -51,7 +51,8 @@
                         <div class="col-md-12">
                             <!-- view roles -->
                             <div class="panel panel-flat">
-                                <div class="panel-heading">
+                                {% block listHeader    %}
+                                    <div class="panel-heading">
                                     <h5 class="panel-title">{% if list.pageTitle %} {{ list.pageTitle|trans({}, list.translationDomain) }} {% else %} {{ list.className|trans({}, list.translationDomain) }} {% endif %}</h5>
                                     <div class="heading-elements">
                                         {#<span class="label bg-number heading-text">28 دور</span>
@@ -65,6 +66,7 @@
                                         </ul>#}
                                     </div>
                                 </div>
+                                {% endblock listHeader %}
                                 <div class="actions">
 
                                     {% if list.isPrintable %}
