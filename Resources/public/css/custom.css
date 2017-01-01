@@ -248,9 +248,9 @@ textarea{
 }
 
 .modal-body .gu-mirror{
-direction: ltr;
-left: auto !important;
-right: 50px !important;
+    direction: ltr;
+    left: auto !important;
+    right: 50px !important;
 }
 
 .modal-title .badge{
@@ -312,7 +312,7 @@ right: 50px !important;
 .dataTable tbody > tr:first-child > th, .dataTable tbody > tr:first-child > td {
     border-top: 0 none;
     text-overflow: ellipsis;
-/*    overflow: hidden;*/
+    /*    overflow: hidden;*/
 }
 .bg-success{
     background: #62C96E;
@@ -633,10 +633,10 @@ input[type='range']::-moz-range-thumb {
     overflow-y: auto;
 }
 .LibraryFilter{
-  margin: 0 0 10px;
-  padding: 0;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
+    margin: 0 0 10px;
+    padding: 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
 }
 .LibraryFilter li{
     list-style: none;
@@ -655,7 +655,7 @@ input[type='range']::-moz-range-thumb {
     display: none;
 }
 .control-label {
-  font-size: 16px;
+    font-size: 16px;
 }
 .userPic{
     width: 40px;
@@ -666,11 +666,11 @@ input[type='range']::-moz-range-thumb {
     height: 20px;
 }
 .has-feedback-left .custom-combobox .form-control-feedback {
-  left: auto;
-  right: 0px;
+    left: auto;
+    right: 0px;
 }
 .actions .uploader:hover .action,.actions .uploader:focus .action {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .actions .filename{
@@ -680,7 +680,7 @@ input[type='range']::-moz-range-thumb {
     width: 100%;
 }
 .dropdown-menu .divider {
-  padding: 0px;
+    padding: 0px;
 }
 .libraryDrop li{
     padding: 8px 15px;
@@ -692,46 +692,46 @@ input[type='range']::-moz-range-thumb {
     content: "";
 }
 .GoogleImages .thumb img{
-   height: 200px;
+    height: 200px;
 }
 /* rating ------------------------- */
 
 .jq-ry-container {
-  position: relative;
-  line-height: 0;
-  display: block;
-  cursor: pointer;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  direction: ltr;
+    position: relative;
+    line-height: 0;
+    display: block;
+    cursor: pointer;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    direction: ltr;
 }
 .jq-ry-container[readonly="readonly"] {
-  cursor: default;
+    cursor: default;
 }
 .jq-ry-container > .jq-ry-group-wrapper {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
 .jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group {
-  position: relative;
-  line-height: 0;
-  z-index: 10;
-  white-space: nowrap;
+    position: relative;
+    line-height: 0;
+    z-index: 10;
+    white-space: nowrap;
 }
 .jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group > svg {
-  display: inline-block;
+    display: inline-block;
 }
 .jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group.jq-ry-normal-group {
-  width: 100%;
+    width: 100%;
 }
 .jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group.jq-ry-rated-group {
-  width: 0;
-  z-index: 11;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
+    width: 0;
+    z-index: 11;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
 }
 .social-links{
     list-style: none;
@@ -763,7 +763,7 @@ input[type='range']::-moz-range-thumb {
     padding:15px;
 }
 .tooltip.bottom ,.tooltip-inner{
-  white-space: nowrap;
+    white-space: nowrap;
 }
 .fileupload .thumbnail{
     min-width: 200px;
@@ -775,7 +775,7 @@ table td.text-right{
     text-align: right !important;
 }
 .dataTable thead .sorting_asc, .dataTable thead .sorting_desc, .dataTable thead .sorting {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 .contentBox{
     max-width:500px;
@@ -785,8 +785,8 @@ table td.text-right{
     padding: 10px;
 }
 .contentBox h4{
-   padding: 10px;
-   margin-bottom: 40px;
+    padding: 10px;
+    margin-bottom: 40px;
 }
 .contentBox hr{
     margin-bottom: 10px;
@@ -806,9 +806,9 @@ table td.text-right{
 }
 
 @media only screen and (max-width : 1200px) {
-        .fc-view, .fc-view > table {
-  overflow: auto !important;
-}
+    .fc-view, .fc-view > table {
+        overflow: auto !important;
+    }
 }
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
@@ -870,4 +870,57 @@ table td.text-right{
 .list-table > thead > tr > th, .list-table > tbody > tr > th, .list-table > tfoot > tr > th, .list-table > thead > tr > td, .list-table > tbody > tr > td, .list-table > tfoot > tr > td{
     width: 200px;
 
+}
+
+@media print
+{
+    .no-print, .no-print *, .navbar-inverse,.actions, .actions *,.sidebar, .sidebar *,.content-group,.content-group *,
+    ul.navbar-nav,ul.icons-list,#DataTables_Table_0_length,#DataTables_Table_0_previous,#DataTables_Table_0_next,.dataTables_paginate
+    {
+        display: none !important;
+        -webkit-transition: none !important;
+        transition: none !important;
+    }
+
+    .dataTable thead .sorting::before, .dataTable thead .sorting::after, .dataTable thead .sorting_asc::after, .dataTable thead .sorting_desc::after, .dataTable thead .sorting_asc_disabled::after, .dataTable thead .sorting_desc_disabled::after{
+        display: none !important;
+        -webkit-transition: none !important;
+        transition: none !important;
+    }
+    .dataTable thead .sorting, .dataTable thead .sorting_asc, .dataTable thead .sorting_desc, .dataTable thead .sorting_asc_disabled, .dataTable thead .sorting_desc_disabled {
+        padding-right:10px;
+    }
+
+    .datatable-scroll th, .datatable-scroll td {
+        white-space: normal;
+    }
+    .media-left.media-middle > a {
+        display: inline-block !important ;
+        height: 44px !important ;
+        width: 44px !important ;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding-left: 10px;
+        padding-right:10px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    .panel-flat > .panel-heading {
+        padding: 10px;
+    }
+    .heading-elements-toggle{
+        display: none !important;
+        -webkit-transition: none !important;
+        transition: none !important;
+    }
+    .heading-elements, .breadcrumb-elements {
+        display: inline-block;
+    }
+    .heading-elements{
+        left:10px;
+    }
+    .page-container {
+        min-height: 100px !important;
+    }
 }

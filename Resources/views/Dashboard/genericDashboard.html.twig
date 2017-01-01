@@ -2,7 +2,37 @@
 {% block side_menu %}
 {#                {% include 'IbtikarShareEconomyDashboardDesignBundle:Layout:sidebar.html.twig' %}#}
 {% endblock %}
-{% block javascript %}
+{% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript">
+        function showNotificationMsg(title, text, type) {
+            var notificationIcons = {
+                success: {
+                    icon: "icon-checkmark3",
+                    class: "bg-success"
+                },
+                info: {
+                    icon: "icon-info22",
+                    class: "bg-info"
+                },
+                error: {
+                    icon: "icon-blocked",
+                    class: "bg-danger"
+                }
+            };
+            type = (typeof type == "undefined" ? "success" : type);
+            new PNotify({
+                title: title,
+                text: text,
+                icon: notificationIcons[type]['icon'],
+                addclass: notificationIcons[type]['class'],
+                type: type,
+                buttons: {
+                    sticker: false
+                },
+                stack: {"dir1": "up", "dir2": "left", "firstpos1": 60, "firstpos2": 0}
+            });
+        }
+    </script>
 {#        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/pages/layout_sidebar_sticky_custom.js') }}"></script>#}
 {% endblock %}
