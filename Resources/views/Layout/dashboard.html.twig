@@ -97,50 +97,46 @@
                     <div class="navbar-collapse collapse" id="navbar-second-toggle">
                         <ul class="nav navbar-nav">
                             <li><a href="{{ path('ibtikar_share_economy_dashboard_design_dashboard_home') }}"><i class="icon-display4 position-left"></i>{% trans %}Dashboard{% endtrans %}</a></li>
-
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-make-group position-left"></i> {% trans %}Main menu{% endtrans %} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu width-250">
-                                    {% block main_menu %}
+                            {% block main_menu %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-make-group position-left"></i> {% trans %}Main menu{% endtrans %} <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu width-250">
                                         <li><a href='{{path('ibtikar_share_economy_ums_list_users')}}'>{% trans from 'baseuser' %}User{% endtrans %}</a></li>
-                                        {% endblock %}
-                                        {#<li class="dropdown-submenu">
-                                            <a href="#"><i class="icon-task"></i> المنيو </a>
-                                            <ul class="dropdown-menu width-200">
-                                                <li class="dropdown-header highlight">الاختيارات</li>
-                                                <li><a href="task_manager_grid.html">المنيو</a></li>
-                                                <li><a href="task_manager_list.html">المنيو</a></li>
-                                                <li><a href="task_manager_detailed.html">المنيو</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown-submenu">
-                                            <a href="#"><i class="icon-cash3"></i> المنيو ٣</a>
-                                            <ul class="dropdown-menu width-200">
-                                                <li class="dropdown-header highlight">المنيو</li>
-                                                <li><a href="invoice_template.html">المنيو</a></li>
-                                                <li><a href="invoice_grid.html">المنيو</a></li>
-                                                <li><a href="#">المنيو</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown-header">المنيو ٣</li>
-                                        <li class="dropdown-submenu">
-                                            <a href="#"><i class="icon-people"></i> المنيو</a>
-                                            <ul class="dropdown-menu width-200">
-                                                <li class="dropdown-header highlight">المنيو</li>
-                                                <li><a href="user_pages_cards.html">المنيو</a></li>
-                                                <li><a href="user_pages_list.html">المنيو</a></li>
-                                                <li class="dropdown-header highlight">المنيو</li>
-                                                <li><a href="user_pages_profile.html">المنيو</a></li>
-                                                <li><a href="user_pages_profile_cover.html">المنيو</a></li>
-                                            </ul>
-                                        </li>#}
-                                </ul>
-                            </li>
-
+                                            {#<li class="dropdown-submenu">
+                                                <a href="#"><i class="icon-task"></i> المنيو </a>
+                                                <ul class="dropdown-menu width-200">
+                                                    <li class="dropdown-header highlight">الاختيارات</li>
+                                                    <li><a href="task_manager_grid.html">المنيو</a></li>
+                                                    <li><a href="task_manager_list.html">المنيو</a></li>
+                                                    <li><a href="task_manager_detailed.html">المنيو</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown-submenu">
+                                                <a href="#"><i class="icon-cash3"></i> المنيو ٣</a>
+                                                <ul class="dropdown-menu width-200">
+                                                    <li class="dropdown-header highlight">المنيو</li>
+                                                    <li><a href="invoice_template.html">المنيو</a></li>
+                                                    <li><a href="invoice_grid.html">المنيو</a></li>
+                                                    <li><a href="#">المنيو</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown-header">المنيو ٣</li>
+                                            <li class="dropdown-submenu">
+                                                <a href="#"><i class="icon-people"></i> المنيو</a>
+                                                <ul class="dropdown-menu width-200">
+                                                    <li class="dropdown-header highlight">المنيو</li>
+                                                    <li><a href="user_pages_cards.html">المنيو</a></li>
+                                                    <li><a href="user_pages_list.html">المنيو</a></li>
+                                                    <li class="dropdown-header highlight">المنيو</li>
+                                                    <li><a href="user_pages_profile.html">المنيو</a></li>
+                                                    <li><a href="user_pages_profile_cover.html">المنيو</a></li>
+                                                </ul>
+                                            </li>#}
+                                    </ul>
+                                </li>
+                            {% endblock %}
                         </ul>
                     </div>
                 </div>
