@@ -359,7 +359,10 @@ $(document).ready(function () {
             url: $(this).data("url"),
             type: "POST",
             success: function(data){
-                showNotificationMsg('', data.message, data.status);
+                if ('message' in data && 'status' in data) {
+                    showNotificationMsg('', data.message, data.status);
+                }
+
                 table.draw();
             }
         });
@@ -371,6 +374,68 @@ $(document).ready(function () {
                 $(".dev-btn-search").click();
         }
     });
+    
+    // handling multiple check start
+    $('#multipleCheckChanger').on('change', function () {
+        if ($(this).is(':checked')) {
+            $("input[data-type='multipleCheckBox']").prop('checked', true).uniform('refresh');
+            $("a[data-type='multipleCheckActionButton']").show();
+        } else {
+            $("input[data-type='multipleCheckBox']").prop('checked', false).uniform('refresh');
+            $("a[data-type='multipleCheckActionButton']").hide();
+        }
+    });
+
+    $("input[data-type='multipleCheckBox']").on('change', function () {
+        multipleCheckerNewState = true;
+        multipleCheckActionsButtonsShown = false;
+
+        $("input[data-type='multipleCheckBox']").each(function () {
+            if (multipleCheckerNewState === true && !$(this).is(':checked')) {
+                multipleCheckerNewState = false;
+            }
+            
+            if (multipleCheckActionsButtonsShown === false && $(this).is(':checked')){
+                multipleCheckActionsButtonsShown = true;
+            }
+        });
+
+        if (multipleCheckActionsButtonsShown){
+            $("a[data-type='multipleCheckActionButton']").show();
+        } else {
+            $("a[data-type='multipleCheckActionButton']").hide();
+        }
+
+        $('#multipleCheckChanger').prop('checked', multipleCheckerNewState).uniform('refresh');
+    });
+
+    // handling the multiple action request button
+    $("body").delegate("[data-type='multipleCheckAcceptAction']", "click", function () {
+        var URL = $(this).data('url');
+        var ids = [];
+
+        $("input[data-type='multipleCheckBox']").each(function () {
+            if ($(this).is(':checked')) {
+                ids.push($(this).val());
+            }
+        });
+
+        $('form#action_form').find('input#form_data').val(ids.join(","));
+
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            data: $('form#action_form').serialize(),
+            success: function (data) {
+                if ('message' in data && 'status' in data) {
+                    showNotificationMsg('', data.message, data.status);
+                }
+
+                table.draw();
+            }
+        });
+    });
+    // handling multiple check end
 });
 jQuery(document).on('ajaxComplete', function (event, response) {
     if (response) {
