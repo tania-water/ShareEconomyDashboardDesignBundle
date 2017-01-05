@@ -20,6 +20,14 @@ class DashboardController extends Controller
 
     protected $listActions = array();
 
+    /**
+     * path to the template which contains the additional actions.
+     * the row entity will passed to the template as "entity".
+     *
+     * @var string
+     */
+    protected $listAdditionalActionsTemplate;
+
     protected $listGlobalActions = array();
 
     protected $listBulkActions = array();
@@ -74,25 +82,37 @@ class DashboardController extends Controller
     /**
      * @author Moemen Hussein <moemen.hussein@ibtikar.net.sa>
      */
-    public function listAction(Request $request){
+    public function listAction(Request $request)
+    {
         $list = $this->getListParameters($request);
-        if($request->isXmlHttpRequest()){
-            return $this->getListJsonData($request,$list);
+
+        if ($request->isXmlHttpRequest()) {
+            return $this->getListJsonData($request, $list);
         }
-        if ($this->get('templating')->exists($this->entityBundle.':List:'.strtolower($this->className).'.html.twig'))
-            return $this->render($this->entityBundle.':List:'.strtolower($this->className).'.html.twig', array('list' =>  $list));
 
-        if ($this->get('templating')->exists($this->entityBundle.':List:list.html.twig'))
-            return $this->render($this->entityBundle.':List:list.html.twig', array('list' =>  $list));
+        $templateVars = [
+            'list'        => $list,
+            'action_form' => $this->createActionForm()->createView()
+        ];
 
-        return $this->render('IbtikarShareEconomyDashboardDesignBundle:List:list.html.twig', array('list' =>  $list));
+        if ($this->get('templating')->exists($this->entityBundle . ':List:' . strtolower($this->className) . '.html.twig')) {
+            return $this->render($this->entityBundle . ':List:' . strtolower($this->className) . '.html.twig', $templateVars);
+        }
+
+        if ($this->get('templating')->exists($this->entityBundle . ':List:list.html.twig')) {
+            return $this->render($this->entityBundle . ':List:list.html.twig', $templateVars);
+        }
+
+        return $this->render('IbtikarShareEconomyDashboardDesignBundle:List:list.html.twig', $templateVars);
     }
+
     public function getListQuery(){
         $em = $this->getDoctrine()->getManager();
         return $em->createQueryBuilder()
                 ->select('e')
                 ->from($this->entityBundle.':'.$this->className, 'e');
     }
+
     protected function getListParameters($request){
         $em = $this->getDoctrine()->getManager();
         $query = $this->getListQuery();
@@ -197,6 +217,7 @@ class DashboardController extends Controller
             'datatableColumns'   => json_encode($datatableColumns),
             'columnArray'   => $columnArray,
             'actions'   => $this->listActions,
+            'additionalActionsTemplate' => $this->listAdditionalActionsTemplate,
             'globalActions'   => $this->listGlobalActions,
             'isPrintable'   => $this->isPrintable,
             'bulkActions' => $this->listBulkActions,
@@ -210,67 +231,70 @@ class DashboardController extends Controller
         );
     }
 
-    public function getListJsonData($request, $renderingParams){
+    public function getListJsonData($request, $renderingParams)
+    {
         $entityObjects = array();
+        $listParams    = $this->getListParameters($request);
+
         foreach ($renderingParams['pagination'] as $entity) {
+            $templateVars = ['entity' => $entity, 'list' => $listParams];
+
             foreach ($renderingParams['columnArray'] as $value) {
                 if ($value == 'checkBox') {
                     $oneEntity['checkBox'] = '';
-                    if(count($this->listBulkActions)){
-                        $oneEntity['checkBox'] = '<div class="form-group">
-                                                <label class="checkbox-inline">
-                                                    <input type="checkbox" class="styled" checked="checked">
-                                                </label>
-                                            </div>';
+                    if (count($this->listBulkActions)) {
+                        $oneEntity['checkBox'] = $this->renderView('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', $templateVars);
                     }
-                    continue;
-                }
-                if ($value == 'actions') {
-                    $actionTd = '';
-                    foreach ($this->listActions as $action=>$route) {
-                        if ($action == 'edit') {
-                            $actionTd.= '<a class="dev-td-btn btn btn-defualt" href="Role-add.php" data-popup="tooltip" title="تعديل" data-placement="bottom" ><i class="icon-pencil"></i></a>';
-                        }elseif($action == 'delete'){
-                            $actionTd.= '<a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="'.str_replace("%className%", $this->get('translator')->trans(strtolower($this->className), array(), $this->translationDomain), $this->get('translator')->trans("Delete One Confirmation")).'" data-html="true"
-                                data-html="true" data-content=\'
-                                <button type="button" class="btn btn-danger btn-block dev-delete-btn" data-url="'.$this->generateUrl("delete_".  strtolower($this->className), array("entityId"=>$entity->getId())).'">'.$this->get('translator')->trans("Yes").'</button>
-                                <button type="button" class="btn btn-danger btn-block">'.$this->get('translator')->trans("Cancel").'</button>
-                                \'> <i class="icon-trash"></i></a>';
-                        }elseif($action == 'activation'){
-                            $actionTd.= '<a tabindex="0" class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="  هل ترغب في ايقاف الموظف  " data-html="true"
-                               data-html="true" data-content=\'
-                               <button type="button" class="btn btn-danger">نعم</button>
-                               <button type="button" class="btn btn-defualt">الغاء</button>
-                               \'> <i class="icon-user-check"></i></a>';
-                        }
-                    }
-                    $oneEntity['actions'] = $actionTd;
                     continue;
                 }
 
-                if(isset($value[1]['method']))
-                    $getfunction = $value[1]['method'];
-                else
-                    $getfunction = "get" . ucfirst($value[0]);
+                if ($value == 'actions') {
+                    $oneEntity['actions'] = $this->renderView('IbtikarShareEconomyDashboardDesignBundle:List:_listActions.html.twig', $templateVars);
+                    continue;
+                }
+
+                $getfunction = isset($value[1]['method']) ? $value[1]['method'] : "get" . ucfirst($value[0]);
 
                 if ($entity->$getfunction() instanceof \DateTime) {
                     $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
                 } else {
-                    $fieldData=$entity->$getfunction();
-                    if(is_object($fieldData))
+                    $fieldData = $entity->$getfunction();
+
+                    if (is_object($fieldData)) {
                         $oneEntity[$value[0]] = $fieldData->__toString();
-                    else if(strlen($fieldData)> 50)
+                    } elseif (strlen($fieldData) > 50) {
                         $oneEntity[$value[0]] = substr($fieldData, 0, 49);
-                    else
+                    } else {
                         $oneEntity[$value[0]] = $fieldData;
+                    }
                 }
             }
+
             $entityObjects[] = $oneEntity;
         }
-//        $rowsHeader=$this->getColumnHeaderAndSort($request);
-        return new JsonResponse(array('status' => 'success','data' => $entityObjects, "draw" => 0, 'sEcho' => 0,'columns'=>$renderingParams['columns'],
-            "recordsTotal" => $renderingParams['totalNumber'],
-            "recordsFiltered" => $renderingParams['totalNumber']));
+
+        return new JsonResponse([
+            'status'          => 'success',
+            'data'            => $entityObjects,
+            "draw"            => 0,
+            'sEcho'           => 0,
+            'columns'         => $renderingParams['columns'],
+            "recordsTotal"    => $renderingParams['totalNumber'],
+            "recordsFiltered" => $renderingParams['totalNumber']
+        ]);
+    }
+
+    /**
+     * Creates a form for actions like (delete, cancel, activate, deactivate...etc)
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    protected function createActionForm()
+    {
+        return $this->createFormBuilder()
+                ->setMethod('POST')
+                ->add('data', \Symfony\Component\Form\Extension\Core\Type\HiddenType::class)
+                ->getForm();
     }
 
 //    public function getColumnHeaderAndSort($request){

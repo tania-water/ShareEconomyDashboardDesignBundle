@@ -1,0 +1,11 @@
+{% if list.bulkActions|length > 0 %}
+    <td class="text-center">
+        <div class="form-group">
+            <label class="checkbox-inline">
+                <input type="checkbox" class="styled" value="{{ entity.id }}" data-type="multipleCheckBox">
+            </label>
+        </div>
+    </td>
+{% elseif list.isSearchable %}
+    <td></td>
+{% endif %}

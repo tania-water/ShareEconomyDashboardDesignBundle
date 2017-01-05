@@ -34,7 +34,7 @@
                 <th data-name='bulk' class="dev-checkbox-all text-center">
                     <div class="form-group">
                         <label class="checkbox-inline">
-                            <input type="checkbox" class="styled" checked="checked">
+                            <input type="checkbox" class="styled" id="multipleCheckChanger">
                         </label>
                     </div>
                 </th>
@@ -58,7 +58,7 @@
 
                     <th data-name='{{sortCol}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
             {% endfor %}
-            {% if list.actions|length > 0 %}
+            {% if list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
                 <th data-name='actions' class="text-center">{{ ('Actions')|trans}}</th>
             {% elseif list.isSearchable %}
                 <th></th>
@@ -68,17 +68,8 @@
     <tbody>
             {% for entity in list.pagination %}
                 <tr>
-                    {% if list.bulkActions|length > 0 %}
-                        <td class="text-center">
-                            <div class="form-group">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" class="styled" checked="checked">
-                                </label>
-                            </div>
-                        </td>
-                    {% elseif list.isSearchable %}
-                        <td></td>
-                    {% endif %}
+                    {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', {'entity': entity}) }}
+
                     {% for column in list.columns %}
                         <td>
                             {% if column[1].method is defined %}
@@ -100,43 +91,8 @@
                             {% endif %}
                         </td>
                     {% endfor %}
-                    {% if list.actions|length > 0 %}
-                        <td class="text-center" style="white-space: nowrap;">
-                            {% for action, actionPath in list.actions %}
-
-                                {% if action == 'edit' %}
-                                    {% if actionPath %}
-                                        {% set editUrl = path(actionPath , {'id': entity.id}) %}
-                                    {% else %}
-                                        {% set editUrl = path('edit_'~list.className|lower, {'entityId': entity.id}) %}
-                                    {% endif %}
-                                    <a class="btn btn-default" href="{{ editUrl }}" data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="bottom" ><i class="icon-pencil"></i></a>
-                                {% endif %}
-                                {% if action == 'delete' %}
-                                    {% if actionPath %}
-                                        {% set deleteUrl = path(actionPath , {'id': entity.id}) %}
-                                    {% else %}
-                                        {% set deleteUrl = path('delete_'~list.className|lower, {'entityId': entity.id}) %}
-                                    {% endif %}
-                                <a tabindex="0" {% if app.session.get('_locale') == 'en' %}data-placement="left"{% endif %} class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="{{('Delete One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}" data-html="true"
-                                        data-html="true" data-content="
-                                        <button type='button' class='btn btn-danger btn-block dev-delete-btn' data-url='{{deleteUrl}}'>{{('Yes')|trans}}</button>
-                                        <button type='button' class='btn btn-danger btn-block'>{{('Cancel')|trans}}</button>
-                                        "><i class="icon-trash"></i></a>
-                                {% endif %}
-
-                                {% if action == 'activation' %}
-                                    <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="  هل ترغب في ايقاف الموظف  " data-html="true"
-                                       data-html="true" data-content="
-                                       <button type='button' class='btn btn-danger'>نعم</button>
-                                       <button type='button' class='btn btn-defualt'>الغاء</button>
-                                       "> <i class="icon-user-check"></i></a>
-                                {% endif %}
-                                {% if action == 'view' %}
-                                    <a class="btn btn-defualt" href="{{ path(actionPath , {'id': entity.id}) }}" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom" ><i class="icon-eye"></i></a>
-                                {% endif %}
-                            {% endfor %}
-                        </td>
+                    {% if list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
+                        {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listActions.html.twig', {'entity': entity}) }}
                     {% elseif list.isSearchable %}
                         <td></td>
                     {% endif %}
