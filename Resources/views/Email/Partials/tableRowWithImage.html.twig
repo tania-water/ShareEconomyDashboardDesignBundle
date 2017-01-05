@@ -1,0 +1,42 @@
+<tr >
+    <td bgcolor="#f8f8f8">
+
+        <!-- start of right column -->
+        <table width="149" align="right" border="0" cellpadding="0" cellspacing="0" class="devicewidth">
+            <tbody>
+                <tr>
+                    <td >
+                        <table width="149" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidth">
+                            <tbody>
+                                <!-- title -->
+                                <tr>
+                                    <td style="padding: 10px 20px;font-family: Helvetica, arial, sans-serif; font-size: 16px; color:{{ emailColor }};text-align:right; line-height: 24px;">
+                                        {{ row['header'] }}
+                                    </td>
+                                </tr>
+                                <!-- end of title -->
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- end of right column -->
+
+        <!-- Start of left column -->
+        <table width="449" align="left" border="0" cellpadding="0" cellspacing="0" class="devicewidth">
+            <tbody>
+                <!-- content -->
+                <tr>
+                    <td width="60" align="right"  height="60" style="padding: 10px 20px;">
+                        <img width="280" border="0" alt="" src="{{ absolute_url(asset(row['image'])) }}" class="happy">
+                    </td>
+                    <!-- end of content -->
+                </tr>
+            </tbody>
+        </table>
+        <!-- end of left column -->
+
+    </td>
+</tr>{# empty Twig template #}
