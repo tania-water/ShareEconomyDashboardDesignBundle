@@ -256,10 +256,9 @@ class DashboardController extends Controller
     public function getListJsonData($request, $renderingParams)
     {
         $entityObjects = array();
-        $listParams    = $this->getListParameters($request);
 
         foreach ($renderingParams['pagination'] as $entity) {
-            $templateVars = ['entity' => $entity, 'list' => $listParams];
+            $templateVars = ['entity' => $entity, 'list' => $renderingParams];
 
             foreach ($renderingParams['columnArray'] as $value) {
                 if ($value == 'checkBox') {

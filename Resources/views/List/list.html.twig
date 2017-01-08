@@ -73,7 +73,7 @@
                                         <select class="Roleselect" data-type="listFilter" data-name="{{ listFilter.name }}">
                                             <option value="">{{ ("All") | trans }}</option>
                                             {% for val, label in listFilter.filterList %}
-                                                <option value="{{ val }}">{{ label }}</option>
+                                                <option value="{{ val }}"{% if app.request.query.get(listFilter.name) == val %}selected="selected"{% endif %}>{{ label }}</option>
                                             {% endfor %}
                                         </select>
                                     {% endfor %}
