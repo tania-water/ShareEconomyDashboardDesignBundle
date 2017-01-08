@@ -66,6 +66,18 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
+                                
+                                {# add list filters if any #}
+                                {% if list_filters is defined and list_filters | length %}
+                                    {% for listFilter in list_filters %}
+                                        <select class="Roleselect" data-type="listFilter" data-name="{{ listFilter.name }}">
+                                            <option value="">{{ ("All") | trans }}</option>
+                                            {% for val, label in listFilter.filterList %}
+                                                <option value="{{ val }}">{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% endfor %}
+                                {% endif %}
                                        
                                     {#<button type="button" class="btn btn-default btn-sm" id="pnotify-stack-bottom-left"> Alert</button>
 

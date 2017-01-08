@@ -44,8 +44,18 @@ var dataTableDefault = {
             });
             var page = parseInt(table.page(), 10) + parseInt(1, 10);
             var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + table.page.info().length;
-            if(searchKey.length > 0)
+            
+            if(searchKey.length > 0){
                 url+= '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + JSON.stringify(searchValue)
+            }
+
+            // apply filters
+            if ($('[data-type="listFilter"]').length){
+                $('[data-type="listFilter"]').each(function(){
+                    url += "&" + $(this).data('name') + '=' + $(this).val();
+                });
+            }
+
             pushNewState(null, null, url);
         } else {
             url = window.location.href;
@@ -351,6 +361,10 @@ $(document).ready(function () {
     });
 
     $(".dev-btn-search").on('click', function(){
+        table.draw();
+    });
+    
+    $('[data-type="listFilter"]').on('change', function(){
         table.draw();
     });
 

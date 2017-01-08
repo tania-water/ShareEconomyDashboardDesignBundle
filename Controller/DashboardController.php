@@ -48,6 +48,8 @@ class DashboardController extends Controller
 
     protected  $isPrintable = true;
 
+    private $listFilterInterfaceFQNS = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\ListFilterInterface";
+
     /**
      * Dashboard home page
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
@@ -92,7 +94,8 @@ class DashboardController extends Controller
 
         $templateVars = [
             'list'        => $list,
-            'action_form' => $this->createActionForm()->createView()
+            'action_form' => $this->createActionForm()->createView(),
+            'list_filters' => $this->getListFilters()
         ];
 
         if ($this->get('templating')->exists($this->entityBundle . ':List:' . strtolower($this->className) . '.html.twig')) {
@@ -113,7 +116,8 @@ class DashboardController extends Controller
                 ->from($this->entityBundle.':'.$this->className, 'e');
     }
 
-    protected function getListParameters($request){
+    protected function getListParameters(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
         $query = $this->getListQuery();
         $this->setPageTitle();
@@ -152,6 +156,24 @@ class DashboardController extends Controller
             }
             $query = $query->andWhere($query->expr()->andX($andX));
         }
+
+        // apply list filters
+        $listFilters = $this->getListFilters();
+
+        if (count($listFilters)) {
+            foreach ($listFilters as $listFilter) {
+                // validate filters
+                if (!in_array($this->listFilterInterfaceFQNS, class_implements($listFilter))) {
+                    throw new \Exception('List filter class should implements ' . $this->listFilterInterfaceFQNS);
+                }
+
+                // apply filter if its parameter exists
+                if ($request->query->has($listFilter->getName())) {
+                    $query = $listFilter->applyFilter($query, $request->query->get($listFilter->getName()));
+                }
+            }
+        }
+
         $query = $query->getQuery();
         $paginator = new Paginator($query, true);
         $totalNumber = count($paginator);
@@ -328,5 +350,15 @@ class DashboardController extends Controller
 //    }
 
     function setPageTitle(){}
+
+    /**
+     * override this method to apply your filters
+     *
+     * @return array
+     */
+    protected function getListFilters()
+    {
+        return [];
+    }
 
 }
