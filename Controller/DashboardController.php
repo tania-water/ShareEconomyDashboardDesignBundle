@@ -168,7 +168,7 @@ class DashboardController extends Controller
                 }
 
                 // apply filter if its parameter exists
-                if ($request->query->has($listFilter->getName())) {
+                if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName())) {
                     $query = $listFilter->applyFilter($query, $request->query->get($listFilter->getName()));
                 }
             }
