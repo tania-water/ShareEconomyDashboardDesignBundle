@@ -344,7 +344,7 @@ class DashboardController extends Controller
                     if (is_object($fieldData)) {
                         $oneEntity[$value[0]] = $fieldData->__toString();
                     } elseif (strlen($fieldData) > 50) {
-                        $oneEntity[$value[0]] = substr($fieldData, 0, 49);
+                        $oneEntity[$value[0]] = mb_substr($fieldData, 0, 49);
                     } else {
                         $oneEntity[$value[0]] = $fieldData;
                     }
