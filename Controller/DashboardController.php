@@ -48,7 +48,8 @@ class DashboardController extends Controller
 
     protected  $isPrintable = true;
 
-    private $listFilterInterfaceFQNS = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\ListFilterInterface";
+    private $listFilterInterfaceFQNS             = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\ListFilterInterface";
+    private $listAutoCompleteFilterInterfaceFQNS = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\ListAutoCompleteFilterInterface";
 
     protected $maxRecords = null;
 
@@ -221,10 +222,17 @@ class DashboardController extends Controller
         $listFilters = $this->getListFilters();
 
         if (count($listFilters)) {
+            $filtersNames = [];
             foreach ($listFilters as $listFilter) {
                 // validate filters
-                if (!in_array($this->listFilterInterfaceFQNS, class_implements($listFilter))) {
-                    throw new \Exception('List filter class should implements ' . $this->listFilterInterfaceFQNS);
+                if (!in_array($this->listFilterInterfaceFQNS, class_implements($listFilter)) && !in_array($this->listAutoCompleteFilterInterfaceFQNS, class_implements($listFilter))) {
+                    throw new \Exception('List filter class should implements ' . $this->listFilterInterfaceFQNS . ' or ' . $this->listAutoCompleteFilterInterfaceFQNS);
+                }
+
+                if (array_search($listFilter->getName(), $filtersNames) === false) {
+                    $filtersNames[] = $listFilter->getName();
+                } else {
+                    throw new \Exception('Filter named "' . $listFilter->getName() . '" has been found many times. filters names should be unique.');
                 }
 
                 // apply filter if its parameter exists
@@ -418,6 +426,31 @@ class DashboardController extends Controller
     protected function getListFilters()
     {
         return [];
+    }
+
+    /**
+     * get auto-complete filter items
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getListAutoCompleteFilterItems(Request $request)
+    {
+        $output      = ['items' => []];
+        $listFilters = $this->getListFilters();
+
+        if (count($listFilters)) {
+            $filterName = $request->query->get('filterName');
+            $searchKey  = $request->query->get('searchKey');
+
+            foreach ($listFilters as $filter) {
+                if ($filterName == $filter->getName()) {
+                    $output['items'] = $filter->getFilterList($searchKey);
+                }
+            }
+        }
+
+        return new JsonResponse($output);
     }
 
 }
