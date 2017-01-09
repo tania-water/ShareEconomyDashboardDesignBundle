@@ -50,6 +50,10 @@ class DashboardController extends Controller
 
     private $listFilterInterfaceFQNS = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\ListFilterInterface";
 
+    protected $maxRecords = null;
+
+    protected $minRecords = 0;
+
     /**
      * Dashboard home page
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
@@ -58,6 +62,10 @@ class DashboardController extends Controller
     public function homeAction()
     {
         return $this->render('IbtikarShareEconomyDashboardDesignBundle:Dashboard:home.html.twig');
+    }
+
+    public function getFlashBag($status, $message){
+        $this->get('session')->getFlashBag()->add($status, $message);
     }
 
     private function getEntityPerId($entityId){
@@ -70,7 +78,11 @@ class DashboardController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($entity);
         $em->flush();
-        return new JsonResponse(array('status' => 'success', 'message' => $this->get('translator')->trans('Done Successfully')));
+        return new JsonResponse(array('status' => 'success', 'message' => $this->get('translator')->trans('Done Successfully'), 'allowAdd'=>true));
+    }
+
+    protected function deleteFailedOperation(){
+        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Failed Operation'), 'allowAdd'=>true));
     }
 
     public function deleteAction($entityId){
@@ -78,7 +90,55 @@ class DashboardController extends Controller
         if($entity){
             return $this->deleteEntity($entity);
         }
-        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Failed Operation')));
+        return $this->deleteFailedOperation();
+    }
+
+    protected function getCreateFormOptions(){
+        $options = array('translation_domain'=>$this->translationDomain);
+        return $options;
+    }
+
+    protected function prePostParametersCreate(){
+        return array('closeRedirection'=>$this->generateUrl(strtolower($this->className) . '_list'));
+    }
+
+    protected function postValidCreate(Request $request, $entity){
+        $em = $this->get('doctrine')->getManager();
+        $em->persist($entity);
+        $em->flush();
+        $this->getFlashBag("success", "Successfully created");
+        return $this->redirect($this->generateUrl(strtolower($this->className) . '_list'));
+    }
+
+    public function createAction(Request $request){
+        $className = $this->entityBundle."\\Entity\\".$this->className;
+        $createNewClass = new $className();
+        $formType = $this->entityBundle."\\Form\\".$this->className.'Type';
+        $formOptions = $this->getCreateFormOptions();
+        $form = $this->createForm($formType, $createNewClass, $formOptions);
+        $prePostParameters = $this->prePostParametersCreate();
+        if ($request->getMethod() === 'POST') {
+            $em = $this->get('doctrine')->getManager();
+            $formData = $request->get(strtolower($this->className).'_type');
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                return $this->postValidCreate($request, $createNewClass);
+            }
+        }
+        if (!$this->get('templating')->exists($this->entityBundle.':Create:'.strtolower($this->className).'.html.twig'))
+            return $this->render($this->entityBundle.':Layout:dashboard_form.html.twig',  array_merge (array(
+                'form' => $form->createView(),
+                'className' => $this->className,
+                'title' => $this->get('translator')->trans('Add New '.$this->className, array(), $this->translationDomain),
+                'translationDomain' => $this->translationDomain
+            ), $prePostParameters));
+        else
+            return $this->render($this->entityBundle.':Create:'.strtolower($this->className).'.html.twig', array_merge (array(
+                'form' => $form->createView(),
+                'className' => $this->className,
+                'title' => $this->get('translator')->trans('Add New '.$this->className, array(), $this->translationDomain),
+                'translationDomain' => $this->translationDomain
+            ), $prePostParameters));
     }
 
     /**

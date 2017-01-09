@@ -192,6 +192,10 @@
         {% endfor %}
             });
     </script>
+    <script>
+        var availableMessage = '{% trans %}valid{% endtrans %}';
+        var unAvailableMessage = '{% trans %}not valid{% endtrans %}';
+    </script>
 {% endblock %}
 </body>
 </html>

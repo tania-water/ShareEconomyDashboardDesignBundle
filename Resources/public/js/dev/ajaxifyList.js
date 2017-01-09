@@ -44,7 +44,7 @@ var dataTableDefault = {
             });
             var page = parseInt(table.page(), 10) + parseInt(1, 10);
             var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + table.page.info().length;
-            
+
             if(searchKey.length > 0){
                 url+= '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + JSON.stringify(searchValue)
             }
@@ -363,7 +363,7 @@ $(document).ready(function () {
     $(".dev-btn-search").on('click', function(){
         table.draw();
     });
-    
+
     $('[data-type="listFilter"]').on('change', function(){
         table.draw();
     });
@@ -373,10 +373,15 @@ $(document).ready(function () {
             url: $(this).data("url"),
             type: "POST",
             success: function(data){
+                if(data.allowAdd){
+                    $(".dev-btn-add").removeAttr('data-max');
+                }
+                else{
+                    $(".dev-btn-add").attr('data-max', data.maxRecords);
+                }
                 if ('message' in data && 'status' in data) {
                     showNotificationMsg('', data.message, data.status);
                 }
-
                 table.draw();
             }
         });
@@ -388,7 +393,7 @@ $(document).ready(function () {
                 $(".dev-btn-search").click();
         }
     });
-    
+
     // handling multiple check start
     $('#multipleCheckChanger').on('change', function () {
         if ($(this).is(':checked')) {
@@ -408,7 +413,7 @@ $(document).ready(function () {
             if (multipleCheckerNewState === true && !$(this).is(':checked')) {
                 multipleCheckerNewState = false;
             }
-            
+
             if (multipleCheckActionsButtonsShown === false && $(this).is(':checked')){
                 multipleCheckActionsButtonsShown = true;
             }
@@ -450,6 +455,14 @@ $(document).ready(function () {
         });
     });
     // handling multiple check end
+
+    $(".dev-btn-add").on('click', function(e){
+        e.preventDefault();
+        if($(this).attr('data-max') == undefined){
+            window.location = $(this).attr('data-url');
+        }else
+            showNotificationMsg('', actionsValidationMessages['maximumRecordError'].replace("%limit%", $(this).attr('data-max')), "error");
+    });
 });
 jQuery(document).on('ajaxComplete', function (event, response) {
     if (response) {
