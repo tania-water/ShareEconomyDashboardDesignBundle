@@ -48,6 +48,8 @@ class DashboardController extends Controller
 
     protected  $isPrintable = true;
 
+    private $listOneFieldSearchParam             = "oneFieldSearch";
+    private $listOneFieldSearchInterfaceFQNS     = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\OneInputSearchInterface";
     private $listFilterInterfaceFQNS             = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\ListFilterInterface";
     private $listAutoCompleteFilterInterfaceFQNS = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\ListAutoCompleteFilterInterface";
 
@@ -154,9 +156,11 @@ class DashboardController extends Controller
         }
 
         $templateVars = [
-            'list'        => $list,
-            'action_form' => $this->createActionForm()->createView(),
-            'list_filters' => $this->getListFilters()
+            'list'                    => $list,
+            'action_form'             => $this->createActionForm()->createView(),
+            'list_filters'            => $this->getListFilters(),
+            'oneInputSearch'          => $this->getListOneInputSearch(),
+            'listOneFieldSearchParam' => $this->listOneFieldSearchParam
         ];
 
         if ($this->get('templating')->exists($this->entityBundle . ':List:' . strtolower($this->className) . '.html.twig')) {
@@ -220,7 +224,6 @@ class DashboardController extends Controller
 
         // apply list filters
         $listFilters = $this->getListFilters();
-
         if (count($listFilters)) {
             $filtersNames = [];
             foreach ($listFilters as $listFilter) {
@@ -239,6 +242,20 @@ class DashboardController extends Controller
                 if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName())) {
                     $query = $listFilter->applyFilter($query, $request->query->get($listFilter->getName()));
                 }
+            }
+        }
+
+        // apply one field search
+        $oneInputSearch = $this->getListOneInputSearch();
+        if (null !== $oneInputSearch) {
+            // validate filters
+            if (!in_array($this->listOneFieldSearchInterfaceFQNS, class_implements($oneInputSearch))) {
+                throw new \Exception('One field search class should implements ' . $this->listOneFieldSearchInterfaceFQNS);
+            }
+
+            // apply filter if its parameter exists
+            if ($request->query->has($this->listOneFieldSearchParam) && $request->query->get($this->listOneFieldSearchParam)) {
+                $query = $oneInputSearch->applySearch($query, $request->query->get($this->listOneFieldSearchParam));
             }
         }
 
@@ -417,6 +434,17 @@ class DashboardController extends Controller
 //    }
 
     function setPageTitle(){}
+
+    /**
+     * override this method to apply your one field search
+     * should implement Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\OneInputSearchInterface
+     *
+     * @return null|Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\OneInputSearchInterface
+     */
+    protected function getListOneInputSearch()
+    {
+        return null;
+    }
 
     /**
      * override this method to apply your filters

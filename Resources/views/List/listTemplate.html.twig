@@ -1,3 +1,16 @@
+{% if oneInputSearch %}
+<form class="form-horizontal"> 
+    <div class="col-md-12 searchauto">
+        <div class="form-group has-feedback">
+            <label class="control-label col-lg-2">{{ ("search") | trans }}</label>
+            <div class="col-lg-10">
+                <input class="form-control" data-name="{{ listOneFieldSearchParam }}" data-type="one-field-search" placeholder="" type="text" value="{{ app.request.query.get(listOneFieldSearchParam, '') }}">
+            </div>
+        </div>
+    </div>
+</form>
+{% endif %}
+
 <table class="list-table table table-hover table-striped datatable-column-search-inputs" width="100%">
     <thead>
         {% if list.isSearchable %}

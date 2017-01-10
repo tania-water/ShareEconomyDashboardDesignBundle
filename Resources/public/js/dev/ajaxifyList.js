@@ -66,6 +66,11 @@ var dataTableDefault = {
                     }
                 });
             }
+            
+            // apply one field search
+            if ($('input[data-type="one-field-search"]').length && $('input[data-type="one-field-search"]').val()) {
+                url += "&" + $('input[data-type="one-field-search"]').data('name') + '=' + $('input[data-type="one-field-search"]').val();
+            }
 
             pushNewState(null, null, url);
         } else {
@@ -544,3 +549,24 @@ function handleAjaxResponse(responseJSON) {
             break;
     }
 }
+
+// start handling one field search
+function applyOneFieldSearch() {
+    if (typeof(oneFieldSearchDelayTimer) !== 'undefined') {
+        clearTimeout(oneFieldSearchDelayTimer);
+    }
+    oneFieldSearchDelayTimer = setTimeout(function() {
+        table.draw();
+    }, 250);
+}
+
+$(document).ready(function () {
+    var oneFieldSearchCurrentVal = $('input[data-type="one-field-search"]').val();
+    $('input[data-type="one-field-search"]').keyup(function () {
+        if ($(this).val() !== oneFieldSearchCurrentVal){
+            oneFieldSearchCurrentVal = $(this).val();
+            applyOneFieldSearch();
+        }
+    });
+});
+// end handling one field search
