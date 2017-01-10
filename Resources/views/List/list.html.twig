@@ -80,12 +80,20 @@
                                 {# add list filters if any #}
                                 {% if list_filters is defined and list_filters | length %}
                                     {% for listFilter in list_filters %}
-                                        <select class="Roleselect" data-type="listFilter" data-name="{{ listFilter.name }}">
-                                            <option value="">{{ ("All") | trans }}</option>
-                                            {% for val, label in listFilter.filterList %}
-                                                <option value="{{ val }}"{% if app.request.query.get(listFilter.name) == val %}selected="selected"{% endif %}>{{ label }}</option>
-                                            {% endfor %}
-                                        </select>
+                                        {% if attribute(listFilter, 'getFilterListRoute') is defined %}
+                                            <select class="Roleselect" data-type="listAutoCompleteFilter" data-name="{{ listFilter.name }}" data-url="{{ path(listFilter.getFilterListRoute, {"filterName":listFilter.name}) }}" placeholder="{{ listFilter.placeholder }}">
+                                                {% if app.request.query.has(listFilter.name) %}
+                                                    <option>{{ listFilter.getItemTextById(app.request.query.get(listFilter.name)) }}</option>
+                                                {% endif %}
+                                            </select>
+                                        {% else %}
+                                            <select class="Roleselect" data-type="listFilter" data-name="{{ listFilter.name }}">
+                                                <option value="">{{ ("All") | trans }}</option>
+                                                {% for val, label in listFilter.filterList %}
+                                                    <option value="{{ val }}"{% if app.request.query.get(listFilter.name) == val %}selected="selected"{% endif %}>{{ label }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        {% endif %}
                                     {% endfor %}
                                 {% endif %}
 

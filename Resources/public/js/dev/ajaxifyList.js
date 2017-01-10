@@ -50,9 +50,20 @@ var dataTableDefault = {
             }
 
             // apply filters
-            if ($('[data-type="listFilter"]').length){
-                $('[data-type="listFilter"]').each(function(){
-                    url += "&" + $(this).data('name') + '=' + $(this).val();
+            if ($('[data-type="listFilter"]').length) {
+                $('[data-type="listFilter"]').each(function () {
+                    if ($(this).val()) {
+                        url += "&" + $(this).data('name') + '=' + $(this).val();
+                    }
+                });
+            }
+
+            // apply auto-complete filters
+            if ($('[data-type="listAutoCompleteFilter"]').length) {
+                $('[data-type="listAutoCompleteFilter"]').each(function () {
+                    if ($(this).val()) {
+                        url += "&" + $(this).data('name') + '=' + $(this).val();
+                    }
                 });
             }
 
@@ -364,8 +375,38 @@ $(document).ready(function () {
         table.draw();
     });
 
-    $('[data-type="listFilter"]').on('change', function(){
+   $('[data-type="listFilter"]').on('change', function () {
         table.draw();
+    });
+
+    $('[data-type="listAutoCompleteFilter"]').on("change", function (e) {
+        table.draw();
+    });
+
+    $('[data-type="listAutoCompleteFilter"]').each(function () {
+        var $this = $(this);
+        $this.select2({
+            width: 200,
+            placeholder: $this.attr('placeholder'),
+            ajax: {
+                url: $this.attr('data-url'),
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        searchKey: params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: false
+            },
+            allowClear: true,
+            minimumInputLength: 1
+        });
     });
 
     $(document).on('click', ".dev-delete-btn", function(){
