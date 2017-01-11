@@ -11,8 +11,10 @@
                 {% else %}
                     {% set editUrl = path('edit_'~list.className|lower, {'id': entity.id}) %}
                 {% endif %}
-                <a class="btn btn-default" href="{{ editUrl }}" data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="bottom" ><i class="icon-pencil"></i></a>
-            {% endif %}
+
+                <a class="btn btn-default" href="{{ editUrl }}"><i data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="left" class="icon-pencil"></i></a>
+                {% endif %}
+
                 {% if action == 'delete' %}
                     {% if actionPath %}
                         {% set deleteUrl = path(actionPath , {'id': entity.id}) %}
@@ -23,7 +25,7 @@
                    data-html="true" data-content="
                    <button type='button' class='btn btn-danger btn-block dev-delete-btn' data-url='{{deleteUrl}}'>{{('Yes')|trans}}</button>
                    <button type='button' class='btn btn-danger btn-block'>{{('Cancel')|trans}}</button>
-                   "><i class="icon-trash"></i></a>
+                   "><i class="icon-trash" data-popup="tooltip" title="{{('delete')|trans}}" data-placement="right"></i></a>
                 {% endif %}
 
             {% if action == 'activation' %}
@@ -34,7 +36,7 @@
                    "> <i class="icon-user-check"></i></a>
                 {% endif %}
                 {% if action == 'view' %}
-                <a class="btn btn-defualt" href="{{ path(actionPath , {'id': entity.id}) }}" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom" ><i class="icon-eye"></i></a>
+                <a class="btn btn-defualt" href="{{ path(actionPath , {'id': entity.id}) }}"  ><i class="icon-eye" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom"></i></a>
                 {% endif %}
             {% endfor %}
 

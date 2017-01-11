@@ -271,7 +271,7 @@
             sInfo: " _START_ - _END_ {{('from')|trans}} _TOTAL_ ",
             sZeroRecords: '{{('No Result Data')|trans}}',
             sInfoEmpty: " 0 - 0 {{('from')|trans}} 0 ",
-            paginate: {'first': '{{('first')|trans}}', 'last': '{{('last')|trans}}', 'next': '&larr;', 'previous': '&rarr;'}
+            paginate: {'first': '{{('first')|trans}}', 'last': '{{('last')|trans}}', 'next': '{{ ('paging_next_arrow') | trans | raw }}', 'previous': '{{ ('paging_previous_arrow') | trans | raw }}'}
         }
         for (var i = 0, buttonsLength = buttons.length; i < buttonsLength; i++) {
             new Switchery(buttons[i], {color: toggleButtonColor});

@@ -66,6 +66,11 @@ var dataTableDefault = {
                     }
                 });
             }
+            
+            // apply one field search
+            if ($('input[data-type="one-field-search"]').length && $('input[data-type="one-field-search"]').val()) {
+                url += "&" + $('input[data-type="one-field-search"]').data('name') + '=' + $('input[data-type="one-field-search"]').val();
+            }
 
             pushNewState(null, null, url);
         } else {
@@ -98,12 +103,38 @@ var dataTableDefault = {
     dom: '<"datatable-scroll"t><"datatable-footer"lip>',
     language: listLanguage,
     drawCallback: function () {
-        $('[data-popup="tooltip"]').tooltip({
-            trigger: 'hover'
-        });
-        $('[data-popup="popover"]').popover({
-            delay:{ "hide": 500 }
-        });
+        if (layoutIsLeftDirection === true) {
+            // Popover
+            $('[data-popup="popover"]:not(table [data-popup="popover"])').popover();
+
+            // Popover
+            $('table [data-popup="popover"]').popover({
+                placement: 'left',
+                delay: {"hide": 500}
+            });
+
+            // Tooltip
+            $('[data-popup="tooltip"]:not(table [data-popup="tooltip"])').tooltip({
+                trigger: 'hover'
+            });
+
+            // Tooltip
+            $('table [data-popup="tooltip"]').tooltip({
+                trigger: 'hover',
+                placement: 'left'
+            });
+
+        } else {
+            // Popover
+            $('[data-popup="popover"]').popover();
+
+
+            // Tooltip
+            $('[data-popup="tooltip"]').tooltip({
+                trigger: 'hover'
+            });
+
+        }
         $('.dev-checkbox-all').closest('th').removeClass('sorting_asc').addClass('sorting_disabled')
         if ($('.datatable-column-search-inputs input.dev-checkbox').length == $('.datatable-column-search-inputs input:checked.dev-checkbox').length && $('.datatable-column-search-inputs input:checked.dev-checkbox').length != 0) {
             $('.dev-checkbox-all').prop('checked', true).uniform('refresh');
@@ -544,3 +575,24 @@ function handleAjaxResponse(responseJSON) {
             break;
     }
 }
+
+// start handling one field search
+function applyOneFieldSearch() {
+    if (typeof(oneFieldSearchDelayTimer) !== 'undefined') {
+        clearTimeout(oneFieldSearchDelayTimer);
+    }
+    oneFieldSearchDelayTimer = setTimeout(function() {
+        table.draw();
+    }, 250);
+}
+
+$(document).ready(function () {
+    var oneFieldSearchCurrentVal = $('input[data-type="one-field-search"]').val();
+    $('input[data-type="one-field-search"]').keyup(function () {
+        if ($(this).val() !== oneFieldSearchCurrentVal){
+            oneFieldSearchCurrentVal = $(this).val();
+            applyOneFieldSearch();
+        }
+    });
+});
+// end handling one field search
