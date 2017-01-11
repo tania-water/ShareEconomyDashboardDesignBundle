@@ -17,6 +17,8 @@
 "from": "من"
 "first": "الاول"
 "last": "الاخير"
+paging_next_arrow: "&larr;"
+paging_previous_arrow: "&rarr;"
 "No Result Data": "لا يوجد ما تبحث عنه"
 "Delete One Confirmation": "انت علي وشك حذف %className% هل ترغب في حذفه؟  "
 # home page

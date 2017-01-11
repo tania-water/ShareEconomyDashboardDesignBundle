@@ -6,7 +6,7 @@ a:focus,a:hover{
 }
 
 body{
-   background: url("../images/green/bg-db.png") repeat center top fixed #eee; 
+   background: url("../images/green/bg-db.png") repeat center top fixed #eee !important; 
 }
 .bg-primary {
   background-color: #54D582;
@@ -106,5 +106,5 @@ color: #fff;
 }
 
 .border-left-primary {
-  border-right-color: #54D582;
+  border-color: #54D582;
 }

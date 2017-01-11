@@ -20,36 +20,36 @@ $(function() {
         autoWidth: false,
 //        order: [[1, 'asc']],
         columnDefs: [
-//        {
+//        { 
 //            bSort : false,
 //            orderable: false,
 //            width: '30px',
 //            targets: [0]
 //        },
-//         {
+//         { 
 //            width: '200px',
 //            targets: [1]
 //        },
-//                 {
+//                 { 
 //            width: '200px',
 //            targets: [2]
 //        },
-//
-//                 {
+//        
+//                 { 
 //            width: '200px',
 //            targets: [3]
 //        },
-//
-//                 {
+//        
+//                 { 
 //            width: '200px',
 //            targets: [4]
 //        },
-//
-//                 {
+//                
+//                 { 
 //            width: '200px',
 //            targets: [5]
 //        },
-        {
+         { 
             bSort : false,
             width: '200px',
             targets: [-1]
@@ -62,7 +62,7 @@ $(function() {
             sInfo: " _START_ - _END_ من _TOTAL_ ",
             sZeroRecords: "لا يوجد ما تبحث عنه",
             sInfoEmpty: " 0 - 0 من 0 ",
-            paginate: { 'first': 'الاول', 'last': 'الاخير', 'next': '&larr;', 'previous': '&rarr;' }
+            paginate: { 'first': 'الاول', 'last': 'الاخير', 'next': layoutIsLeftDirection === true ? '&rarr;' : '&larr;', 'previous': layoutIsLeftDirection === true ? '&larr;' : '&rarr;' }
         },
 
   drawCallback: function () {
@@ -89,21 +89,21 @@ $(function() {
 
     // Multiple rows selection
     $('.datatable-selection-multiple').DataTable();
-
+    
     $('.datatable-selection-multiple tbody').on('click', 'tr', function() {
         $(this).toggleClass('success');
     });
 
 
     // Setup - add a text input to each footer cell
-    $('.datatable-column-search-inputs thead tr#filterrow th').not(':last-child').not(':first-child').not('.notSearchable').each( function () {
+    $('.datatable-column-search-inputs thead tr#filterrow th').not(':last-child').not(':first-child').each( function () {
         var title = $('.datatable-column-search-inputs thead th').eq( $(this).index() ).text();
-        $(this).html('<input type="text" class="dev-search-input form-control input-sm" placeholder="'+title+'" />');
+        $(this).html('<input type="text" class="dev-search-input form-control input-sm" placeholder="بحث '+title+'" />');
     } );
-
+ 
     // DataTable
     var table = $('.datatable-column-search-inputs').DataTable();
-
+     
 //    // Apply the filter
 //    $(".datatable-column-search-inputs thead input").on( 'keyup change', function () {
 //        table
@@ -124,18 +124,18 @@ $(function() {
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
                         );
-
+ 
                         column
                             .search( val ? '^'+val+'$' : '', true, false )
                             .draw();
                     });
-
+ 
                 column.data().unique().sort().each( function (d, j) {
                     select.append('<option value="'+d+'">'+d+'</option>')
                 });
             });
         }
-
+        
     });
 
 
@@ -156,5 +156,5 @@ $(function() {
 
     // Enable Select2 select for individual column searching
     $('.filter-select').select2();
-
+    
 });

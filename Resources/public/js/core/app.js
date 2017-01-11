@@ -613,7 +613,31 @@ $(function() {
     // -------------------------
 
 
+// English Channges Start
+// 
+
+ if( layoutIsLeftDirection === true){
     // Popover
+    $('[data-popup="popover"]:not(table [data-popup="popover"])').popover();
+
+    // Popover
+    $('table [data-popup="popover"]').popover({
+        placement: 'left'
+    });
+    
+    // Tooltip
+    $('[data-popup="tooltip"]:not(table [data-popup="tooltip"])').tooltip({
+        trigger: 'hover'
+    });
+
+    // Tooltip
+    $('table [data-popup="tooltip"]').tooltip({
+        trigger: 'hover',
+        placement: 'left'
+    });
+
+ }else{
+        // Popover
     $('[data-popup="popover"]').popover();
 
 
@@ -621,8 +645,11 @@ $(function() {
     $('[data-popup="tooltip"]').tooltip({
                 trigger: 'hover'
     });
-
-
+ 
+ }
+ 
+// English Channges End
+// 
 
 });
 
