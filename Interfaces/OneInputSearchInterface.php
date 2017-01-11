@@ -10,6 +10,8 @@ namespace Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces;
 interface OneInputSearchInterface
 {
 
+    public function getInputPlaceHolder();
+
     /**
      * @param \Doctrine\ORM\QueryBuilder $dql QueryBuilder instance
      * @param string $val search keyword

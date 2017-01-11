@@ -937,3 +937,11 @@ table td.text-right{
 }
 }
 
+.searchauto{
+    background: #30303A;
+    color: #fff;
+    padding-top: 10px;
+}
+.searchauto .has-feedback{
+    margin-bottom: 10px;
+}
