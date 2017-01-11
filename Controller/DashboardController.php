@@ -495,7 +495,7 @@ class DashboardController extends Controller
         if ($this->get('templating')->exists($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig'))
             return $this->render($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig', array_merge ($params, $prePostParameters));
         else if ($this->get('templating')->exists($this->entityBundle . ':Edit:edit.html.twig'))
-            return $this->render($this->entityBundle.':Edit:edit.html.twig', $params);
+            return $this->render($this->entityBundle.':Edit:edit.html.twig', $params, array_merge ($params, $prePostParameters));
         else
             return $this->render('IbtikarShareEconomyDashboardDesignBundle:Edit:edit.html.twig', array_merge ($params, $prePostParameters));
     }
