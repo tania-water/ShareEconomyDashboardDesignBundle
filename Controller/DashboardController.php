@@ -489,13 +489,13 @@ class DashboardController extends Controller
         $params = array(
                 'form' => $form->createView(),
                 'entityId' => $id,
-                'title' => $this->get('translator')->trans($this->className), //stodo translate //stodo revise new code //stodo remove todos
+                'title' => $this->get('translator')->trans($this->className, array(), $this->translationDomain), 
             );
 
         if ($this->get('templating')->exists($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig'))
             return $this->render($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig', array_merge ($params, $prePostParameters));
         else if ($this->get('templating')->exists($this->entityBundle . ':Edit:edit.html.twig'))
-            return $this->render($this->entityBundle.':Edit:edit.html.twig', $params, array_merge ($params, $prePostParameters));
+            return $this->render($this->entityBundle.':Edit:edit.html.twig', array_merge ($params, $prePostParameters));
         else
             return $this->render('IbtikarShareEconomyDashboardDesignBundle:Edit:edit.html.twig', array_merge ($params, $prePostParameters));
     }
@@ -525,4 +525,7 @@ class DashboardController extends Controller
 
     }
 
+    protected function prePostParametersEdit($entity){
+        return array();
+    }
 }
