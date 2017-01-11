@@ -57,6 +57,8 @@ class DashboardController extends Controller
 
     protected $minRecords = 0;
 
+    protected $formName = '';
+
     /**
      * Dashboard home page
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
@@ -147,8 +149,8 @@ class DashboardController extends Controller
     /**
      * @author Moemen Hussein <moemen.hussein@ibtikar.net.sa>
      */
-    public function listAction(Request $request)
-    {
+    public function listAction(Request $request){
+        $this->setListParameters();
         $list = $this->getListParameters($request);
 
         if ($request->isXmlHttpRequest()) {
@@ -185,7 +187,7 @@ class DashboardController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $this->getListQuery();
-        $this->setPageTitle();
+        $this->setPageTitle();//remove
         $limit = $this->pagesLimit;
         if($request->get('limit') && in_array($request->get('limit'), array(10, 20, 50)))
             $limit = $request->get('limit');
@@ -481,4 +483,77 @@ class DashboardController extends Controller
         return new JsonResponse($output);
     }
 
+    /**
+     *
+     * @param Request $request
+     * @param type $id
+     * @return type
+     * @author Sarah Mostafa <sarah.marzouk@ibtikar.net.sa>
+     */
+    public function editAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $className = $this->entityBundle."\\Entity\\".$this->className;
+        $entity = $em->getRepository($this->entityBundle.":".$this->className)->findOneBy(array('id'=>$id));
+        $this->setEditOptions();
+        if(!$this->formName)
+            $this->formName = $this->className;
+
+        $formType = $this->entityBundle."\\Form\\".$this->formName.'Type';
+        if(!$entity){
+            return $this->notExistsEntityAfterEdit();
+        }
+        $options = $this->getEditFormOptions();
+        $form = $this->createForm($formType, $entity, $options);
+        $prePostParameters = $this->prePostParametersEdit($entity);
+        if ($request->getMethod() === 'POST') {
+            $form->handleRequest($request);
+            //var_dump($request->request->get('partner'));die();
+            if ($form->isValid()) {
+                return $this->postValidEdit($request, $entity);
+            }
+            $em->refresh($entity);
+        }
+
+        $params = array(
+                'form' => $form->createView(),
+                'entityId' => $id,
+                'title' => $this->get('translator')->trans($this->className, array(), $this->translationDomain), 
+            );
+
+        if ($this->get('templating')->exists($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig'))
+            return $this->render($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig', array_merge ($params, $prePostParameters));
+        else if ($this->get('templating')->exists($this->entityBundle . ':Edit:edit.html.twig'))
+            return $this->render($this->entityBundle.':Edit:edit.html.twig', array_merge ($params, $prePostParameters));
+        else
+            return $this->render('IbtikarShareEconomyDashboardDesignBundle:Edit:edit.html.twig', array_merge ($params, $prePostParameters));
+    }
+
+    protected function notExistsEntityAfterEdit(){
+        $this->addFlash("error", $this->get('translator')->trans("This action can't be completed"));
+        return $this->redirect($this->generateUrl(strtolower($this->className).'_list'));
+    }
+
+    protected function getEditFormOptions($options = array()){
+        return $options;
+    }
+
+    protected function postValidEdit(Request $request, $entity){
+        $em = $this->get('doctrine')->getManager();
+        $em->persist($entity);
+        $em->flush();
+        $this->addFlash("success", $this->get('translator')->trans("Successfully updated"));
+        return $this->redirect($this->generateUrl(strtolower($this->className).'_list'));
+    }
+
+    protected function setListParameters(){
+
+    }
+
+    protected function setEditOptions(){
+
+    }
+
+    protected function prePostParametersEdit($entity){
+        return array();
+    }
 }
