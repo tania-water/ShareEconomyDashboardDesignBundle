@@ -5,7 +5,7 @@ a:focus,a:hover{
     color:#FF8142;
 }
 body{
-  background:url("../images/orange/bg.png") center bottom repeat-x #FFF8F4;
+  background:url("../images/orange/bg.png") center bottom repeat-x #FFF8F4 !important; 
 }
 .bg-primary {
   background-color: #EE6F2C;
@@ -95,5 +95,5 @@ color: #fff;
 }
 
 .border-left-primary {
-  border-right-color: #EE6F2C;
+  border-color: #EE6F2C;
 }

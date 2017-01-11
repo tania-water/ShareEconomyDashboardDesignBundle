@@ -5,7 +5,7 @@ a:focus,a:hover{
     color:#19C1D1;
 }
 body{
-  background:#F7FFFE;
+  background:#F7FFFE !important; 
 }
 .bg-primary {
   background-color: #53D2BA;
@@ -95,5 +95,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', end
       border-color: #53D2BA;
 }
 .border-left-primary {
-  border-right-color: #53D2BA;
+  border-color: #53D2BA;
 }

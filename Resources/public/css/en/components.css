@@ -20721,12 +20721,11 @@ thead .htCollapseButton:after {
 }
 
 .timeline {
+    height: 100%;
     position: relative;
     height: 100%
 }
-
-.timeline:after,
-.timeline:before {
+.timeline::before, .timeline::after {
         background-color: #ccc;
     border-radius: 50%;
     content: "";
@@ -20738,28 +20737,18 @@ thead .htCollapseButton:after {
     width: 4px;
     z-index: 1
 }
-
-.timeline:after {
+.timeline::after {
+    bottom: 0;
     top: auto;
-    bottom: 0
 }
-
 .timeline-container {
-    position: relative;
-    padding-top: 10px;
     margin-top: -10px;
-    padding-bottom: 1px
+    padding-bottom: 1px;
+    padding-top: 10px;
+    position: relative;
+    z-index: 1;
 }
-
-.timeline-date,
-.timeline-time {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 20px
-}
-
-.timeline-container:after {
+.timeline-container::after {
         background-color: #ccc;
     content: "";
     height: 100%;
@@ -20770,24 +20759,10 @@ thead .htCollapseButton:after {
     width: 2px;
     z-index: -1
 }
-
 .timeline-date,
 .timeline-row {
     position: relative
 }
-
-.timeline-date:after,
-.timeline-date:before,
-.timeline-time:after,
-.timeline-time:before {
-    content: "";
-    left: 50%;
-    margin-left: -2px;
-    height: 4px;
-    width: 4px;
-    border-radius: 50%
-}
-
 .timeline-content {
     margin-bottom: 20px
 }
@@ -20801,9 +20776,9 @@ thead .htCollapseButton:after {
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-
-.timeline-date:after,
-.timeline-date:before {
+.timeline-date:before,
+.timeline-date:after {
+  content: "";
     position: absolute;
     top: 0;
   left: 50%;
@@ -20832,9 +20807,9 @@ thead .htCollapseButton:after {
   position: relative;
   margin-bottom: 20px;
 }
-
-.timeline-time:after,
-.timeline-time:before {
+.timeline-time:before,
+.timeline-time:after {
+  content: "";
     position: absolute;
     top: 0;
   left: 50%;
@@ -20844,17 +20819,13 @@ thead .htCollapseButton:after {
   width: 4px;
   border-radius: 50%;
 }
-
-.panel .timeline-time,
-.timeline-icon {
-    background-color: #fff
-}
-
 .timeline-time:after {
     top: auto;
     bottom: 0
 }
-
+.panel .timeline-time {
+  background-color: #fff;
+}
 .timeline-time span {
     display: block;
     color: #999;
