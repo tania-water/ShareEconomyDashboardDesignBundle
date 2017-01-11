@@ -17,6 +17,8 @@
 "from": "from"
 "first": "first"
 "last": "last"
+paging_next_arrow: "&rarr;"
+paging_previous_arrow: "&larr;"
 "No Result Data": "No Result Data"
 "Delete One Confirmation": "Are you sure you want to delete the %className%?"
 # home page

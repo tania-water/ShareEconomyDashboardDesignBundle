@@ -16,11 +16,12 @@
             <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/apple-touch-icon-152x152.png') }}">
             {% block stylesheets %}
                 <!-- Global stylesheets -->
+                {% set cssSubDir = locale in rtlLocales ? '' : 'en/' %}
                 <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
                 <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/core.css') }}" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/components.css') }}" rel="stylesheet" type="text/css">
+                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'bootstrap.css') }}" rel="stylesheet" type="text/css">
+                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'core.css') }}" rel="stylesheet" type="text/css">
+                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'components.css') }}" rel="stylesheet" type="text/css">
                 <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/colors.css') }}" rel="stylesheet" type="text/css">
                 <!-- /global stylesheets -->
 
@@ -29,7 +30,7 @@
                 <!-- file upload Plugin CSS -->
                 <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.css') }}" rel="stylesheet" type="text/css">
 
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/custom.css') }}" rel="stylesheet" type="text/css">
+                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'custom.css') }}" rel="stylesheet" type="text/css">
                 <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ currentTheme ~ '.css') }}" rel="stylesheet" type="text/css">
             {% endblock %}
         </head>
@@ -169,6 +170,7 @@
         </div>
     </div>
     <!-- Core JS files -->
+    <script>var layoutIsLeftDirection = {{ locale in rtlLocales ? 'false' : 'true' }}</script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/loaders/pace.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/libraries/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/libraries/bootstrap.min.js') }}"></script>
