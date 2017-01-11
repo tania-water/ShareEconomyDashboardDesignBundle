@@ -16,8 +16,8 @@
                 {% endif %}
 
                 {% if action == 'delete' %}
-                    {% if actionPath %}
-                        {% set deleteUrl = path(actionPath , {'id': entity.id}) %}
+                    {% if actionParams %}
+                        {% set deleteUrl = path(actionParams , {'id': entity.id}) %}
                     {% else %}
                         {% set deleteUrl = path('delete_'~list.className|lower, {'entityId': entity.id}) %}
                     {% endif %}
@@ -36,7 +36,7 @@
                    "> <i class="icon-user-check"></i></a>
                 {% endif %}
                 {% if action == 'view' %}
-                <a class="btn btn-defualt" href="{{ path(actionPath , {'id': entity.id}) }}"  ><i class="icon-eye" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom"></i></a>
+                <a class="btn btn-defualt" href="{{ path(actionParams , {'id': entity.id}) }}"  ><i class="icon-eye" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom"></i></a>
                 {% endif %}
             {% endfor %}
 
