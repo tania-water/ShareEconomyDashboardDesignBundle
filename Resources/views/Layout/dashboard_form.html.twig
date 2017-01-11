@@ -76,4 +76,19 @@
     {{ parent() }}
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/forms-layout.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/forms/selects/select2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/date/moment.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/date/bootstrap-datetimepicker.min.js') }}"></script>
+        <script>
+            $(function() {
+                // Select2 selects
+                $('.select').select2();
+            });
+            function getFormatedDate(date) {
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return year + '-' + month + '-' + day;
+            }
+        </script>
 {% endblock %}
