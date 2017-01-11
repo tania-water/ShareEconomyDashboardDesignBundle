@@ -1,14 +1,18 @@
 {% if list.actions | length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
     <td class="text-center" style="white-space: nowrap;">
-        {% for action, actionPath in list.actions %}
+        {% for action, actionParams in list.actions %}
             {% if action == 'edit' %}
-                {% if actionPath %}
-                    {% set editUrl = path(actionPath , {'id': entity.id}) %}
+                {% if actionParams %}
+                    {% if actionParams is not iterable %}
+                        {% set editUrl = path(actionParams , {'id' :entity.id}) %}
+                    {% elseif actionParams.path is defined %}
+                        {% set editUrl = path(actionParams.path , {'type': actionParams.type, 'id': entity.id}) %}
+                    {% endif %}
                 {% else %}
-                    {% set editUrl = path('edit_'~list.className|lower, {'entityId': entity.id}) %}
+                    {% set editUrl = path('edit_'~list.className|lower, {'id': entity.id}) %}
                 {% endif %}
                 <a class="btn btn-default" href="{{ editUrl }}" data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="bottom" ><i class="icon-pencil"></i></a>
-                {% endif %}
+            {% endif %}
                 {% if action == 'delete' %}
                     {% if actionPath %}
                         {% set deleteUrl = path(actionPath , {'id': entity.id}) %}
