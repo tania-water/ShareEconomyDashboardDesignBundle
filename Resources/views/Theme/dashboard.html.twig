@@ -48,10 +48,12 @@
             <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;">
                 <img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg') }}" alt="{{ attr['data-image-alt']|default('Profile image'|trans) }}">
             </div>
-            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 200px; line-height: 20px;">
-                <img src="{{ asset(attr['data-image-url']|default('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg')) }}" alt="{{ attr['data-image-alt']|default('Profile image'|trans) }}">
+            <div class="fileupload-preview fileupload-exists thumbnail {{id}}_preview" style="max-width: 200px; max-height: 200px; line-height: 20px;">
+                {% if attr['data-image-url'] is defined and attr['data-image-url']!='' %}
+                <img src="{{ asset(attr['data-image-url']) }}" alt="{{ attr['data-image-alt']|default('Profile image'|trans) }}">
+                {% endif %}
             </div>
-            <div class="uploadCoverImg">
+            <div class="uploadCoverImg {{id}}_selector">
                 <span class="btn btn-default btn-file btn-primary" style=" cursor: pointer;">
                     <span class="fileupload-new" onfocus="myFunction(this)" style="cursor: pointer">{% trans %}Choose picture{% endtrans %}</span>
                     <span class="fileupload-exists">{% trans %}Change{% endtrans %}</span>

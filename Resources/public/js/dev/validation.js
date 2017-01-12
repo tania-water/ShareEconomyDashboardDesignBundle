@@ -61,6 +61,21 @@ $.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= (param * 1024 * 1024));
 }, $.validator.format('file must be less than {0} mb'));
 
+$.validator.addMethod('phone', function (value, element) {
+
+    var regEx = /^[+-]?\d+$/;
+    return regEx.test(value);
+});
+
+$.validator.addMethod('imageRequired', function (value, element) {
+    return $('.'+element.id+'_preview').find('img').length;
+});
+
+$.validator.addMethod('letters', function (value, element) {
+    var unicodeWord = "^[a-zA-Z\u0600-\u06ff\-]{0,}$";
+    return value.match(unicodeWord);
+});
+
 $.validator.addMethod('dimensions', function (value, element, param) {
 
     var width = $(element).attr('data-image-width');
