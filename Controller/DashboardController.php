@@ -544,6 +544,7 @@ class DashboardController extends Controller
     }
 
     protected function getEditFormOptions($options = array()){
+        $options = array('translation_domain'=>$this->translationDomain);
         return $options;
     }
 
