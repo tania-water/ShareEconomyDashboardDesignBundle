@@ -26,7 +26,7 @@
                 <div class="heading-elemnts">
                     <div class="heading-btn-group">
                         {% if list.globalActions.add is defined %}
-                            <button class="btn btn-link btn-float has-text dev-btn-add" {% if list.globalActions.add.max is defined and list.globalActions.add.max <= list.totalNumber %}data-max="{{ list.globalActions.add.max }}"{% endif %} data-url="{{path('create_'~list.className|lower)}}"><i class="icon-add"></i><span>{{('Add')|trans}} {{list.className|lower|trans({}, list.translationDomain)}}</span></button>
+                            <button class="btn btn-link btn-float has-text dev-btn-add" {% if list.globalActions.add.max is defined and list.globalActions.add.max <= list.totalNumber %}data-max="{{ list.globalActions.add.max }}"{% endif %} data-url="{{path(list.preFix~'create_'~list.className|lower)}}"><i class="icon-add"></i><span>{{('Add')|trans}} {{list.className|lower|trans({}, list.translationDomain)}}</span></button>
                         {% endif %}
 {#                        <a class="btn btn-link btn-float has-text activeLink" href="Role-view.php"><i class="icon-table2"></i> <span>مشاهدة الادوار</span></a>#}
                     </div>

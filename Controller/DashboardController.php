@@ -13,6 +13,7 @@ class DashboardController extends Controller
 {
 
     protected $className = '';
+    protected $preFix = '';
 
     protected $entityBundle = '';
 
@@ -104,7 +105,7 @@ class DashboardController extends Controller
     }
 
     protected function prePostParametersCreate(){
-        return array('closeRedirection'=>$this->generateUrl(strtolower($this->className) . '_list'));
+        return array('closeRedirection'=>$this->generateUrl(strtolower($this->preFix .$this->className) . '_list'));
     }
 
     protected function postValidCreate(Request $request, $entity){
@@ -112,7 +113,7 @@ class DashboardController extends Controller
         $em->persist($entity);
         $em->flush();
         $this->getFlashBag("success", "Successfully created");
-        return $this->redirect($this->generateUrl(strtolower($this->className) . '_list'));
+        return $this->redirect($this->generateUrl(strtolower($this->preFix .$this->className) . '_list'));
     }
 
     public function createAction(Request $request){
@@ -320,6 +321,7 @@ class DashboardController extends Controller
 //                $query->addOrderBy('l.'.$key,$val);
         return array(
             'className' => $this->className,
+            'preFix' => $this->preFix,
             'totalNumber' => $totalNumber,
             'pagination'  => $pagination,
             'columns'   => $this->listColumns,
@@ -517,7 +519,7 @@ class DashboardController extends Controller
         $params = array(
                 'form' => $form->createView(),
                 'entityId' => $id,
-                'title' => $this->get('translator')->trans($this->className, array(), $this->translationDomain), 
+                'title' => $this->get('translator')->trans($this->className, array(), $this->translationDomain),
             );
 
         if ($this->get('templating')->exists($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig'))
@@ -530,7 +532,7 @@ class DashboardController extends Controller
 
     protected function notExistsEntityAfterEdit(){
         $this->addFlash("error", $this->get('translator')->trans("This action can't be completed"));
-        return $this->redirect($this->generateUrl(strtolower($this->className).'_list'));
+        return $this->redirect($this->generateUrl(strtolower($this->preFix . $this->className).'_list'));
     }
 
     protected function getEditFormOptions($options = array()){
@@ -542,7 +544,7 @@ class DashboardController extends Controller
         $em->persist($entity);
         $em->flush();
         $this->addFlash("success", $this->get('translator')->trans("Successfully updated"));
-        return $this->redirect($this->generateUrl(strtolower($this->className).'_list'));
+        return $this->redirect($this->generateUrl(strtolower($this->preFix . $this->className).'_list'));
     }
 
     protected function setListParameters(){
