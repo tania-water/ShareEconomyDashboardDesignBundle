@@ -28,17 +28,27 @@
                    "><i class="icon-trash" data-popup="tooltip" title="{{('delete')|trans}}" data-placement="right"></i></a>
                 {% endif %}
 
-            {% if action == 'activation' %}
-                <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="  هل ترغب في ايقاف الموظف  " data-html="true"
-                   data-html="true" data-content="
-                   <button type='button' class='btn btn-danger'>نعم</button>
-                   <button type='button' class='btn btn-defualt'>الغاء</button>
-                   "> <i class="icon-user-check"></i></a>
+                {% if action == 'activation' %}
+                    {% if entity.getEnabled() %}
+                        {% set activate = 'false' %}
+                    {% else %}
+                        {% set activate = 'true' %}
+                    {% endif %}
+                    {% if actionParams %}
+                        {% set activationUrl = path(actionParams , {'id': entity.id, 'activate': activate}) %}
+                    {% else %}
+                        {% set activationUrl = path('activation_'~list.className|lower, {'entityId': entity.id, 'activate': activate }) %}
+                    {% endif %}
+                    <a tabindex="0" {% if app.session.get('_locale') == 'en' %}data-placement="left"{% endif %} class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="{% if activate == 'false' %}{{('Deactivate One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}{% else %}{{('Activate One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}{% endif %}" data-html="true"
+                       data-html="true" data-content="
+                       <button type='button' class='btn btn-danger btn-block dev-activation-btn' data-url='{{activationUrl}}'>{{('Yes')|trans}}</button>
+                       <button type='button' class='btn btn-danger btn-block'>{{('Cancel')|trans}}</button>
+                       "><i class="{% if activate == 'false' %}icon-user-block{% else %}icon-user-check{% endif %}" data-popup="tooltip" title="{% if activate == 'false' %}{{('Deactivate')|trans}}{% else %}{{('Activate')|trans}}{% endif %}" data-placement="right"></i></a>
                 {% endif %}
                 {% if action == 'view' %}
                 <a class="btn btn-defualt" href="{{ path(actionParams , {'id': entity.id}) }}"  ><i class="icon-eye" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom"></i></a>
                 {% endif %}
-            {% endfor %}
+        {% endfor %}
 
         {% if list.additionalActionsTemplate is defined and list.additionalActionsTemplate %}
             {{ include(list.additionalActionsTemplate, {'entity':entity}) }}
