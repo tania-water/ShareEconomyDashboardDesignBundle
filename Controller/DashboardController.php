@@ -503,7 +503,14 @@ class DashboardController extends Controller
             return $this->notExistsEntityAfterEdit();
         }
         $options = $this->getEditFormOptions();
+
+        $locale = $request->getLocale();
+        $request->setLocale('en'); //for the date not to be translated
+
         $form = $this->createForm($formType, $entity, $options);
+
+        $request->setLocale($locale);
+        
         $prePostParameters = $this->prePostParametersEdit($entity);
         if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
@@ -517,7 +524,7 @@ class DashboardController extends Controller
         $params = array(
                 'form' => $form->createView(),
                 'entityId' => $id,
-                'title' => $this->get('translator')->trans($this->className, array(), $this->translationDomain), 
+                'title' => $this->get('translator')->trans($this->className, array(), $this->translationDomain),
             );
 
         if ($this->get('templating')->exists($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig'))
