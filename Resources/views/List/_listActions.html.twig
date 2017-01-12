@@ -9,7 +9,7 @@
                         {% set editUrl = path(actionParams.path , {'type': actionParams.type, 'id': entity.id}) %}
                     {% endif %}
                 {% else %}
-                    {% set editUrl = path('edit_'~list.className|lower, {'id': entity.id}) %}
+                    {% set editUrl = path(list.preFix~'edit_'~list.className|lower, {'id': entity.id}) %}
                 {% endif %}
 
                 <a class="btn btn-default" href="{{ editUrl }}"><i data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="left" class="icon-pencil"></i></a>
@@ -19,7 +19,7 @@
                     {% if actionParams %}
                         {% set deleteUrl = path(actionParams , {'id': entity.id}) %}
                     {% else %}
-                        {% set deleteUrl = path('delete_'~list.className|lower, {'entityId': entity.id}) %}
+                        {% set deleteUrl = path(list.preFix~'delete_'~list.className|lower, {'entityId': entity.id}) %}
                     {% endif %}
                 <a tabindex="0" {% if app.session.get('_locale') == 'en' %}data-placement="left"{% endif %} class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="{{('Delete One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}" data-html="true"
                    data-html="true" data-content="
