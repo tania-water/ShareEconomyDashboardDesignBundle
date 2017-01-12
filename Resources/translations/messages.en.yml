@@ -29,6 +29,7 @@ paging_previous_arrow: "&larr;"
 "Cancel": Cancel
 "Done Successfully": "Done Successfully"
 "Failed Operation": "Failed Operation"
+"This field already exists.": "This field already exists."
 
 # Menu
 "Main menu": "Main menu"

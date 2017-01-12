@@ -24,7 +24,6 @@
     </div>
 {%- endblock form_row -%}
 
-
 {%- block form_start -%}
     {% set attr = attr|merge({'novalidate': '','autocomplete':"off", 'class': (attr.class|default('form-horizontal'))}) %}
     {{- parent() -}}
@@ -97,7 +96,7 @@
                 <div class="col-md-12">
         {%- endif -%}
         {%- for error in errors -%}
-            {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger no-border"><button data-dismiss="alert" class="close" type="button"><span>×</span><span class="sr-only">{% trans %}Close{% endtrans %}</span></button>{% endif %}{{ error.message }}{% if form.parent %}</span>{% else %}</div>{% endif %}
+            {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger no-border"><button data-dismiss="alert" class="close" type="button"><span>×</span><span class="sr-only">{% trans %}Close{% endtrans %}</span></button>{% endif %}{{ error.message|trans }}{% if form.parent %}</span>{% else %}</div>{% endif %}
         {%- endfor -%}
         {%- if not form.parent -%}
                 </div>
