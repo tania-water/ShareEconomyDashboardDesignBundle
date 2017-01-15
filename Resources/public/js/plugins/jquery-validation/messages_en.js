@@ -39,6 +39,7 @@
         phone: 'Phone number format should be like: +9665xxxxxxxxxx',
         imageRequired : 'Photo is required',
         letters : 'Please enter letters only',
+        imageDimensions : 'Image dimensions must be greater than {0}*{0}',
     });
 
 }));

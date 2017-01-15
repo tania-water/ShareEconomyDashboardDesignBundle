@@ -3,11 +3,7 @@
         {% for action, actionParams in list.actions %}
             {% if action == 'edit' %}
                 {% if actionParams %}
-                    {% if actionParams is not iterable %}
-                        {% set editUrl = path(actionParams , {'id' :entity.id}) %}
-                    {% elseif actionParams.path is defined %}
-                        {% set editUrl = path(actionParams.path , {'type': actionParams.type, 'id': entity.id}) %}
-                    {% endif %}
+                    {% set editUrl = path(actionParams , {'id' :entity.id}) %}
                 {% else %}
                     {% set editUrl = path(list.preFix~'edit_'~list.className|lower, {'id': entity.id}) %}
                 {% endif %}

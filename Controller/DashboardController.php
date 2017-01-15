@@ -511,23 +511,23 @@ class DashboardController extends Controller
 
         $form = $this->createForm($formType, $entity, $options);
 
-        $request->setLocale($locale);
-
         $prePostParameters = $this->prePostParametersEdit($entity);
         if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
-            //var_dump($request->request->get('partner'));die();
+            $request->setLocale($locale);
             if ($form->isValid()) {
                 return $this->postValidEdit($request, $entity);
             }
             $em->refresh($entity);
         }
 
+        $request->setLocale($locale);
+
         $params = array(
                 'form' => $form->createView(),
                 'entityId' => $id,
                 'title' => $this->get('translator')->trans('Edit '.$this->className, array(), $this->translationDomain),
-
+                'translationDomain' => $this->translationDomain
             );
 
         if ($this->get('templating')->exists($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig'))
