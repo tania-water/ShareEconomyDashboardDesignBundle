@@ -99,6 +99,23 @@ class DashboardController extends Controller
         return $this->deleteFailedOperation();
     }
 
+    public function entityActivation($entity, $activate){
+        $em = $this->getDoctrine()->getManager();
+        $activation = $activate =='true'?true:false;
+        $entity->setEnabled($activation);
+        $em->persist($entity);
+        $em->flush();
+        return new JsonResponse(array('status' => 'success', 'message' => $this->get('translator')->trans('Done Successfully')));
+    }
+
+    public function activationAction($entityId, $activate){
+        $entity = $this->getEntityPerId($entityId);
+        if($entity){
+            return $this->entityActivation($entity, $activate);
+        }
+        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Failed Operation')));
+    }
+
     protected function getCreateFormOptions(){
         $options = array('translation_domain'=>$this->translationDomain);
         return $options;
@@ -527,7 +544,6 @@ class DashboardController extends Controller
                 'form' => $form->createView(),
                 'entityId' => $id,
                 'title' => $this->get('translator')->trans('Edit '.$this->className, array(), $this->translationDomain),
-                'translationDomain' => $this->translationDomain
             );
 
         if ($this->get('templating')->exists($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig'))
@@ -544,6 +560,7 @@ class DashboardController extends Controller
     }
 
     protected function getEditFormOptions($options = array()){
+        $options = array('translation_domain'=>$this->translationDomain);
         return $options;
     }
 

@@ -21,6 +21,8 @@ paging_next_arrow: "&larr;"
 paging_previous_arrow: "&rarr;"
 "No Result Data": "لا يوجد ما تبحث عنه"
 "Delete One Confirmation": "انت علي وشك حذف %className% هل ترغب في حذفه؟  "
+"Activate One Confirmation": "انت علي وشك تفعيل %className% هل ترغب في حذفه؟  "
+"Deactivate One Confirmation": "انت علي وشك إيقاف %className% هل ترغب في حذفه؟  "
 # home page
 "Welcome": "أهلا بك يا"
 'Save': 'حفظ'
