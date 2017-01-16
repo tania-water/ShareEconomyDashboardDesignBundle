@@ -97,3 +97,9 @@ color: #fff;
 .border-left-primary {
   border-color: #EE6F2C;
 }
+
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary.focus[disabled], .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+  background-color: #EE6F2C;
+  border-color: #EE6F2C;
+}

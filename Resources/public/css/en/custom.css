@@ -233,10 +233,10 @@ textarea{
     transform:scale(1.11);
     -webkit-transform:scale(1.11);
     transform-origin:0 0;
-    -webkit-transform-origin:top right;
-    -moz-transform-origin:top right;
-    -o-transform-origin:top right;
-    -ms-transform-origin:top right;
+    -webkit-transform-origin:top left;
+    -moz-transform-origin:top left;
+    -o-transform-origin:top left;
+    -ms-transform-origin:top left;
 }
 .topSettings{
     background:#30303A; 
@@ -309,6 +309,7 @@ left: 50px !important;
 .phoneNumber .intl-tel-input .country-list .flag-box,.phoneNumber .intl-tel-input .country-list .country-name {
     margin-left: 0px;
     margin-right: 6px;
+    display: inline-block;
 }
 .dataTable tbody > tr:first-child > th, .dataTable tbody > tr:first-child > td {
     border-top: 0 none;
@@ -490,7 +491,7 @@ input.cropit-image-zoom-input {
 .userProfileData{
     position: relative;
     min-height: 300px;
-    padding-right: 310px;
+    padding-left: 310px;
 }
 
 .userProfileData .thumbnail{
@@ -750,7 +751,7 @@ input[type="range"]::-ms-thumb {
   z-index: 11;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   overflow: hidden;
 }
 .social-links{
@@ -946,4 +947,24 @@ table td.text-right{
 }
 .searchauto .has-feedback{
     margin-bottom: 10px;
+}
+
+.imageRow .media-left,.imageRow .media-right,.imageRow .media-body{
+    vertical-align: top;
+}
+.imageRow .media-left img{
+    width: 100px;
+    height: 100px;
+}
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 480px) {
+    .imageRow .media-body{
+   display: block;
+    margin-top: 10px;
+    max-width: 100%;
+    }
+}
+
+.historyHeader li{
+    font-size: 15px;
 }
