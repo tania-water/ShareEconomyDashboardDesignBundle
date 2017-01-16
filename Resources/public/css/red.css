@@ -117,3 +117,9 @@ color: #fff;
 .border-left-primary {
   border-color: #D6494C;
 }
+
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary.focus[disabled], .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+  background-color: #D6494C;
+  border-color: #D6494C;
+}
