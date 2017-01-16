@@ -29,6 +29,7 @@
 //        rangelength: $.validator.format("عدد الحروف يجب أن يكون بين {0} و {1}"),
 //        range: $.validator.format("رجاء إدخال عدد قيمته بين {0} و {1}"),
 //        min: $.validator.format("عذراً, اقل قيمة ممكنه هي  {0}"),
+        minval: $.validator.format("Value must be greater than 0"),
 //        max: $.validator.format("عذرا,ً اكبر قيمة ممكنه  هي {0}"),
 //        mincheck: $.validator.format('رجاء إختيار عدد أكبر من أو يساوي {0}'),
         password: 'The Password must be at least 8 characters and numbers length',

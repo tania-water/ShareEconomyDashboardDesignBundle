@@ -87,6 +87,10 @@ $.validator.addMethod('letters', function (value, element) {
     return value.match(unicodeWord);
 });
 
+$.validator.addMethod('minval', function (value, element) {
+    return value>0;
+}, 'value must be greater than 0');
+
 $.validator.addMethod('dimensions', function (value, element, param) {
 
     var width = $(element).attr('data-image-width');
