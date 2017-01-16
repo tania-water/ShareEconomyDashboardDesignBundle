@@ -21,6 +21,8 @@ paging_next_arrow: "&rarr;"
 paging_previous_arrow: "&larr;"
 "No Result Data": "No Result Data"
 "Delete One Confirmation": "Are you sure you want to delete the %className%?"
+"Activate One Confirmation": "Are you sure you want to activate the %className%?"
+"Deactivate One Confirmation": "Are you sure you want to deactivate the %className%?"
 # home page
 "Welcome": "Welcome"
 'Actions': 'Actions'
@@ -29,6 +31,7 @@ paging_previous_arrow: "&larr;"
 "Cancel": Cancel
 "Done Successfully": "Done Successfully"
 "Failed Operation": "Failed Operation"
+"This field already exists.": "This field already exists."
 
 # Menu
 "Main menu": "Main menu"
@@ -40,3 +43,4 @@ paging_previous_arrow: "&larr;"
 "Approve": "Approve"
 "Reject": "Reject"
 "Add": 'Add'
+"Print": 'Print'

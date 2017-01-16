@@ -66,7 +66,7 @@ var dataTableDefault = {
                     }
                 });
             }
-            
+
             // apply one field search
             if ($('input[data-type="one-field-search"]').length && $('input[data-type="one-field-search"]').val()) {
                 url += "&" + $('input[data-type="one-field-search"]').data('name') + '=' + $('input[data-type="one-field-search"]').val();
@@ -451,6 +451,19 @@ $(document).ready(function () {
                 else{
                     $(".dev-btn-add").attr('data-max', data.maxRecords);
                 }
+                if ('message' in data && 'status' in data) {
+                    showNotificationMsg('', data.message, data.status);
+                }
+                table.draw();
+            }
+        });
+    });
+
+    $(document).on('click', ".dev-activation-btn", function(){
+        $.ajax({
+            url: $(this).data("url"),
+            type: "POST",
+            success: function(data){
                 if ('message' in data && 'status' in data) {
                     showNotificationMsg('', data.message, data.status);
                 }

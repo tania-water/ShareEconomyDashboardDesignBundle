@@ -13,10 +13,13 @@ class DashboardController extends Controller
 {
 
     protected $className = '';
+    protected $preFix = '';
 
     protected $entityBundle = '';
 
     protected $listColumns = array();
+
+    protected $listSearchColumns = array();
 
     protected $listActions = array();
 
@@ -59,6 +62,28 @@ class DashboardController extends Controller
 
     protected $formName = '';
 
+
+
+    public function __construct() {
+        foreach ($this->listColumns as $column){
+            if(count($column)>1){
+                if(isset($column[1]['entity'])){
+                    if(isset($column[1]['sort'])){
+                        $this->listSearchColumns[]= $column[1]['sort'];
+                    }
+                    else{
+                        $this->listSearchColumns[]= $column[1]['entity'].'.'.$column[0];
+                    }
+                }
+                else{
+                    $this->listSearchColumns[]= $column[0];
+                }
+            }
+            else{
+                $this->listSearchColumns[]= $column[0];
+            }
+        }
+    }
     /**
      * Dashboard home page
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
@@ -98,13 +123,30 @@ class DashboardController extends Controller
         return $this->deleteFailedOperation();
     }
 
+    public function entityActivation($entity, $activate){
+        $em = $this->getDoctrine()->getManager();
+        $activation = $activate =='true'?true:false;
+        $entity->setEnabled($activation);
+        $em->persist($entity);
+        $em->flush();
+        return new JsonResponse(array('status' => 'success', 'message' => $this->get('translator')->trans('Done Successfully')));
+    }
+
+    public function activationAction($entityId, $activate){
+        $entity = $this->getEntityPerId($entityId);
+        if($entity){
+            return $this->entityActivation($entity, $activate);
+        }
+        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Failed Operation')));
+    }
+
     protected function getCreateFormOptions(){
         $options = array('translation_domain'=>$this->translationDomain);
         return $options;
     }
 
     protected function prePostParametersCreate(){
-        return array('closeRedirection'=>$this->generateUrl(strtolower($this->className) . '_list'));
+        return array('closeRedirection'=>$this->generateUrl(strtolower($this->preFix .$this->className) . '_list'));
     }
 
     protected function postValidCreate(Request $request, $entity){
@@ -112,7 +154,7 @@ class DashboardController extends Controller
         $em->persist($entity);
         $em->flush();
         $this->getFlashBag("success", "Successfully created");
-        return $this->redirect($this->generateUrl(strtolower($this->className) . '_list'));
+        return $this->redirect($this->generateUrl(strtolower($this->preFix .$this->className) . '_list'));
     }
 
     public function createAction(Request $request){
@@ -215,13 +257,20 @@ class DashboardController extends Controller
             $andX = new Andx();
             $searchKey = json_decode($request->get('searchKey'));
             $searchValue = json_decode($request->get('searchValue'));
-            for($i=0; $i<count($searchKey); $i++){
-                if (strpos($searchKey[$i], "."))
-                    $andX->add($searchKey[$i]." like '%".$searchValue[$i]."%'");
-                else
-                    $andX->add("e.".$searchKey[$i]." like '%".$searchValue[$i]."%'");
+            if(count($searchKey) == count($searchValue)){
+                for($i=0; $i<count($searchKey); $i++){
+                    if(in_array($searchKey[$i], $this->listSearchColumns)){
+                        if (strpos($searchKey[$i], ".")){
+                            $andX->add($searchKey[$i]." like '%".$searchValue[$i]."%'");
+                        }
+                        else{
+                            $andX->add("e.".$searchKey[$i]." like '%".$searchValue[$i]."%'");
+                        }
+                    }
+                }
+                if($andX->count()>0)
+                    $query = $query->andWhere($query->expr()->andX($andX));
             }
-            $query = $query->andWhere($query->expr()->andX($andX));
         }
 
         // apply list filters
@@ -320,6 +369,7 @@ class DashboardController extends Controller
 //                $query->addOrderBy('l.'.$key,$val);
         return array(
             'className' => $this->className,
+            'preFix' => $this->preFix,
             'totalNumber' => $totalNumber,
             'pagination'  => $pagination,
             'columns'   => $this->listColumns,
@@ -503,21 +553,28 @@ class DashboardController extends Controller
             return $this->notExistsEntityAfterEdit();
         }
         $options = $this->getEditFormOptions();
+
+        $locale = $request->getLocale();
+        $request->setLocale('en'); //for the date not to be translated
+
         $form = $this->createForm($formType, $entity, $options);
+
         $prePostParameters = $this->prePostParametersEdit($entity);
         if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
-            //var_dump($request->request->get('partner'));die();
+            $request->setLocale($locale);
             if ($form->isValid()) {
                 return $this->postValidEdit($request, $entity);
             }
             $em->refresh($entity);
         }
 
+        $request->setLocale($locale);
+
         $params = array(
                 'form' => $form->createView(),
                 'entityId' => $id,
-                'title' => $this->get('translator')->trans($this->className, array(), $this->translationDomain), 
+                'title' => $this->get('translator')->trans('Edit '.$this->className, array(), $this->translationDomain),
             );
 
         if ($this->get('templating')->exists($this->entityBundle.':Edit:'.strtolower($this->className).'.html.twig'))
@@ -530,10 +587,11 @@ class DashboardController extends Controller
 
     protected function notExistsEntityAfterEdit(){
         $this->addFlash("error", $this->get('translator')->trans("This action can't be completed"));
-        return $this->redirect($this->generateUrl(strtolower($this->className).'_list'));
+        return $this->redirect($this->generateUrl(strtolower($this->preFix . $this->className).'_list'));
     }
 
     protected function getEditFormOptions($options = array()){
+        $options = array('translation_domain'=>$this->translationDomain);
         return $options;
     }
 
@@ -542,7 +600,7 @@ class DashboardController extends Controller
         $em->persist($entity);
         $em->flush();
         $this->addFlash("success", $this->get('translator')->trans("Successfully updated"));
-        return $this->redirect($this->generateUrl(strtolower($this->className).'_list'));
+        return $this->redirect($this->generateUrl(strtolower($this->preFix . $this->className).'_list'));
     }
 
     protected function setListParameters(){
