@@ -311,7 +311,7 @@ a.badge,
 }
 
 .sidebar-category:last-child{
-     margin-bottom:80px; 
+     margin-bottom:80px;
 }
 .navigation {
   margin: 0;
@@ -1603,7 +1603,7 @@ body[class*=navbar-bottom] .footer:not(.navbar) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
+
 }
 .pace .pace-progress {
   background: #4FC3F7;
@@ -8018,7 +8018,7 @@ body > .ui-pnotify {
 .ui-pnotify.stack-bottom-left {
   left: 0px;
   bottom: auto;
- 
+
 }
 .ui-pnotify.stack-bottom-right,
 .ui-pnotify.stack-bottom-left {
@@ -16854,7 +16854,7 @@ thead .htCollapseButton:after {
   content: '';
   font-family: 'icomoon';
   position: absolute;
-  top: 50%;
+  top: 30px;
   right: 5px;
   font-size: 12px;
   margin-top: -6px;
@@ -17794,7 +17794,7 @@ thead .htCollapseButton:after {
 *
 *  # Responsive extension
 *
-*  Optimise the table's layout for different screen sizes through the dynamic 
+*  Optimise the table's layout for different screen sizes through the dynamic
 *  insertion and removal of columns from the table
 *
 *  Version: 1.0

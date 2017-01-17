@@ -52,6 +52,10 @@ body {
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover{
     color: #555;
 }
+.navbar-nav > .dropdown-user img {
+  height: 30px;
+  width: 30px;
+}
 .panel-flat > .panel-heading + .panel-body {
     padding-top: 20px;
 }
@@ -96,7 +100,7 @@ textarea{
 .table tr td .btn{
     margin: 2px;
 }
-.btn-defualt{
+.btn-default{
     background:#eee;
     color:#333;
 }
@@ -138,7 +142,7 @@ textarea{
     text-align:center;
 }
 .loginLogo img{
-    margin:0 auto;  
+    margin:0 auto;
 }
 .login-container .page-container .login-form{
     width:460px;
@@ -150,7 +154,7 @@ textarea{
     color:#333;
 }
 .whiteText{
-    color:#fff;   
+    color:#fff;
 }
 
 .text-nowrap > thead > tr > th {
@@ -178,7 +182,7 @@ textarea{
     padding: 2px;
 }
 .filterHeader.panel-default{
-    margin-bottom:0px;   
+    margin-bottom:0px;
     border-right-color:#444;
     border-left-color:#444;
 }
@@ -201,12 +205,12 @@ textarea{
     background:#30303A;
     padding:5px;
     z-index:99;
-    margin:0px;  
+    margin:0px;
     position:fixed;
     bottom:0px;
     width:100%;
     right:0px;
-    left:0px; 
+    left:0px;
     text-align:center;
 }
 
@@ -219,7 +223,7 @@ textarea{
     color: #fff;
     padding: 10px;
     font-size:14px;
-    text-align: center;   
+    text-align: center;
     background: #999;
     border-radius: 50%;
 
@@ -239,7 +243,7 @@ textarea{
     -ms-transform-origin:top left;
 }
 .topSettings{
-    background:#30303A; 
+    background:#30303A;
     margin-bottom:0px !important;
     color:#53D2BA;
     border-radius:3px 3px 0px 0px;
@@ -294,7 +298,7 @@ left: 50px !important;
 .phoneNumber .intl-tel-input.allow-dropdown input,.phoneNumber .intl-tel-input.allow-dropdown input[type="text"],.phoneNumber .intl-tel-input.allow-dropdown input[type="tel"] {
     margin-left: 0;
     padding-left: 52px;
-    padding-right 6px;
+    padding-right: 6px;
     text-align: left;
     direction: ltr;
 }
@@ -361,7 +365,7 @@ left: 50px !important;
     display: inline-table
 }
 .bootstrap-datetimepicker-widget .month{
-    float: right;
+    float: left;
 }
 .selectAllRow{
     background: red;
@@ -482,7 +486,7 @@ input.cropit-image-zoom-input {
     position: absolute;
     top: -2px;
     left: 0px;
-    color: #ccc; 
+    color: #ccc;
 }
 .rotation-btns span:hover{
     cursor: pointer;
@@ -544,7 +548,7 @@ input.cropit-image-zoom-input {
     overflow: hidden;
 }
 .moreNotifications i{
-    font-size:24px; 
+    font-size:24px;
     line-height: 50px;
 }
 table tr td .thumbnail{
@@ -594,7 +598,7 @@ input[type="range"]::-webkit-slider-thumb {
   height:8px;
   border: none;
   border-radius: 12px;
-  background: #999; 
+  background: #999;
 
 }
 input[type="range"]::-moz-range-thumb {
@@ -602,7 +606,7 @@ input[type="range"]::-moz-range-thumb {
   height:8px;
   border: none;
   border-radius: 12px;
-  background: #999; 
+  background: #999;
 }
 
 input[type="range"]::-ms-thumb {
@@ -610,7 +614,7 @@ input[type="range"]::-ms-thumb {
   height:8px;
   border-radius: 12px;
   border: 0;
-  background: #999; 
+  background: #999;
 }
 
 .googleResults{
@@ -644,7 +648,7 @@ input[type="range"]::-ms-thumb {
     color: #fff;
     padding: 10px;
     font-size:14px;
-    text-align: center;   
+    text-align: center;
     background: #999;
     border-radius: 50%;
 
@@ -713,7 +717,7 @@ input[type="range"]::-ms-thumb {
     content: "";
 }
 .GoogleImages .thumb img{
-   height: 200px; 
+   height: 200px;
 }
 /* rating ------------------------- */
 
@@ -758,18 +762,39 @@ input[type="range"]::-ms-thumb {
     list-style: none;
     margin: 0px;
     padding: 0px 20px;
-    
+
 }
 
 .socialPath{
     margin:0px 0px 20px;
+    direction: rtl;
 }
+
 .socialPath input{
-    text-align: right;
+    text-align: left;
 }
-.socialPath button{
-    direction: ltr;
+
+
+ul.social-links .socialPath button.btn{
+      border-radius: 3px !important;
+    direction: ltr ;
+     border: 1px solid #ddd !important;
+        border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
 }
+ul.social-links .socialPath input.form-control{
+      border-radius: 3px !important;
+     border: 1px solid #ddd !important;
+        border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+
+.socialPath .input-group-btn:last-child > .btn,.socialPath .input-group-btn:last-child > .btn-group {
+  margin-right: -1px;
+    margin-left: 0px;
+}
+
 .socialPath button:hover{
     cursor: default;
 }
@@ -861,7 +886,7 @@ table td.text-right{
     .nav .seenNotification{
         background: #31313A;
     }
-    
+
 
 }
 /* Extra Small Devices, Phones */
@@ -888,7 +913,7 @@ table td.text-right{
 
 
 @media print
-{    
+{
          .no-print, .no-print *, .navbar-inverse,.actions, .actions *,.sidebar, .sidebar *,.content-group,.content-group *,
          ul.navbar-nav,ul.icons-list,#DataTables_Table_0_length,#DataTables_Table_0_previous,#DataTables_Table_0_next
     {
@@ -900,7 +925,7 @@ table td.text-right{
     .dataTable thead .sorting::before, .dataTable thead .sorting::after, .dataTable thead .sorting_asc::after, .dataTable thead .sorting_desc::after, .dataTable thead .sorting_asc_disabled::after, .dataTable thead .sorting_desc_disabled::after{
        display: none !important;
             -webkit-transition: none !important;
-    transition: none !important; 
+    transition: none !important;
     }
     .dataTable thead .sorting, .dataTable thead .sorting_asc, .dataTable thead .sorting_desc, .dataTable thead .sorting_asc_disabled, .dataTable thead .sorting_desc_disabled {
   padding-left:10px;
@@ -967,4 +992,29 @@ table td.text-right{
 
 .historyHeader li{
     font-size: 15px;
+}
+.c3 svg{
+    margin: 0 auto;
+}
+.table > caption + thead > tr:first-child > td, .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table > thead:first-child > tr:first-child > th {
+  min-width: 150px;
+}
+
+.popover-content .btn{
+    margin-right: 5px;
+}
+.popover-content .btn-block{
+    margin-right: 0px;
+}
+
+.actions .checkbox,.actions .checkbox-inline,.actions .radio,.actions .radio-inline {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-top: 8px;
+}
+.actions .radio .choice,.actions .radio-inline .choice {
+  top: 9px;
+}
+.datatable-scroll{
+    min-height: 400px;
 }
