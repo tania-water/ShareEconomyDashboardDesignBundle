@@ -101,6 +101,14 @@ $(function() {
         $(this).html('<input type="text" class="dev-search-input form-control input-sm" placeholder="'+title+'" />');
     } );
 
+    // Setup - add a text input to each footer cell
+    $('.datatable-column-search-inputs thead tr#filterrow th.datePickerSearch').not(':last-child').not(':first-child').each(function () {
+        var title = $('.datatable-column-search-inputs thead th').eq($(this).index()).text();
+        $(this).html('<input type="text" class="dev-search-input form-control input-sm datapickerSearch" placeholder="' + title + '" />');
+        $('input.datapickerSearch').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
 
     // DataTable
     var table = $('.datatable-column-search-inputs').DataTable();
