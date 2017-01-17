@@ -32,9 +32,9 @@
                     {% else %}
                         {%set searchCol = column[0] %}
                     {% endif %}
-                    <th data-name="{{searchCol}}">{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
+                    <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}" data-name="{{searchCol}}">{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
                 {% else %}
-                    <th class="notSearchable"></th>
+                    <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%} notSearchable"></th>
                 {% endif %}
             {% endfor %}
             <th class='text-right'>
