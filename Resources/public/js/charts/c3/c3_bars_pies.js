@@ -65,7 +65,7 @@ $(function () {
         data: {
             columns: [
                 ['data1', 30],
-                ['data2', 120],
+                ['data2', 120]
             ],
             type : 'donut'
         },
