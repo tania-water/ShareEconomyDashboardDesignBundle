@@ -21,7 +21,7 @@
                     {% else %}
                         {% set deleteUrl = path('delete_'~list.className|lower, {'entityId': entity.id}) %}
                     {% endif %}
-                <a tabindex="0" {% if app.session.get('_locale') == 'en' %}data-placement="left"{% endif %} class="dev-td-btn btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="{{('Delete One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}" data-html="true"
+                <a tabindex="0" {% if app.session.get('_locale') == 'en' %}data-placement="left"{% endif %} class="dev-td-btn btn btn-default" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="{{('Delete One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}" data-html="true"
                    data-html="true" data-content="
                    <button type='button' class='btn btn-danger btn-block dev-delete-btn' data-url='{{deleteUrl}}'>{{('Yes')|trans}}</button>
                    <button type='button' class='btn btn-danger btn-block'>{{('Cancel')|trans}}</button>
@@ -29,14 +29,14 @@
                 {% endif %}
 
             {% if action == 'activation' %}
-                <a tabindex="0" class="btn btn-defualt" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="  هل ترغب في ايقاف الموظف  " data-html="true"
+                <a tabindex="0" class="btn btn-default" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="  هل ترغب في ايقاف الموظف  " data-html="true"
                    data-html="true" data-content="
                    <button type='button' class='btn btn-danger'>نعم</button>
-                   <button type='button' class='btn btn-defualt'>الغاء</button>
+                   <button type='button' class='btn btn-default'>الغاء</button>
                    "> <i class="icon-user-check"></i></a>
                 {% endif %}
                 {% if action == 'view' %}
-                <a class="btn btn-defualt" href="{{ path(actionParams , {'id': entity.id}) }}"  ><i class="icon-eye" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom"></i></a>
+                <a class="btn btn-default" href="{{ path(actionParams , {'id': entity.id}) }}"  ><i class="icon-eye" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom"></i></a>
                 {% endif %}
             {% endfor %}
 
