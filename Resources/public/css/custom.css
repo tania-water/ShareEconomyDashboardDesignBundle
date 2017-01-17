@@ -52,6 +52,10 @@ body {
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover{
     color: #555;
 }
+.navbar-nav > .dropdown-user img {
+  height: 30px;
+  width: 30px;
+}
 .panel-flat > .panel-heading + .panel-body {
     padding-top: 20px;
 }
@@ -96,7 +100,7 @@ textarea{
 .table tr td .btn{
     margin: 2px;
 }
-.btn-defualt{
+.btn-default{
     background:#eee;
     color:#333;
 }
@@ -971,4 +975,18 @@ table td.text-right{
 
 .historyHeader li{
     font-size: 15px;
+}
+
+.c3 svg{
+    margin: 0 auto;
+}
+.table > caption + thead > tr:first-child > td, .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table > thead:first-child > tr:first-child > th {
+  min-width: 150px;
+}
+
+.popover-content .btn{
+    margin-left: 5px;
+}
+.popover-content .btn-block{
+    margin-left: 0px;
 }
