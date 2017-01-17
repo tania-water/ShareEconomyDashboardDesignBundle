@@ -29,6 +29,7 @@
         rangelength: $.validator.format("عدد الحروف يجب أن يكون بين {0} و {1}"),
         range: $.validator.format("رجاء إدخال عدد قيمته بين {0} و {1}"),
         min: $.validator.format("عذراً, اقل قيمة ممكنه هي  {0}"),
+        minval: $.validator.format("القيمة يجب ان تكون اكبر من 0"),
         max: $.validator.format("عذرا,ً اكبر قيمة ممكنه  هي {0}"),
         mincheck: $.validator.format('رجاء إختيار عدد أكبر من أو يساوي {0}'),
         password: 'يجب ان تكون كلمة المرور مكونه من 8 خانات وتحتوي على ارقام وحروف',
@@ -39,6 +40,7 @@
         phone: 'رقم الهاتف يجب أن يكون +9665xxxxxxxxxx',
         imageRequired : 'الرجاء إدخال صورة',
         letters : 'رجاء ادخال حروف',
+        imageDimensions: 'يجب الا تقل ابعاد الصورة عن {0}*{0}',
     });
 
 }));

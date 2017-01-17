@@ -71,10 +71,25 @@ $.validator.addMethod('imageRequired', function (value, element) {
     return $('.'+element.id+'_preview').find('img').length;
 });
 
+$.validator.addMethod('imageDimensions', function (value, element, param) {
+
+    var width = $(element).attr('data-image-width');
+    var height = $(element).attr('data-image-height');
+    if (width && height) {
+        return this.optional(element) || (width >= param && height >= param)
+    } else {
+        return true;
+    }
+}, 'image dimensions must be greater than {0}*{0}');
+
 $.validator.addMethod('letters', function (value, element) {
     var unicodeWord = "^[a-zA-Z\u0600-\u06ff\-]{0,}$";
     return value.match(unicodeWord);
 });
+
+$.validator.addMethod('minval', function (value, element) {
+    return value>0;
+}, 'value must be greater than 0');
 
 $.validator.addMethod('dimensions', function (value, element, param) {
 

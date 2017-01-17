@@ -99,6 +99,10 @@
                                         <div class="media-left media-middle">
                                             <a href="#"><img src="{{ asset(attribute(entity, column[1].image)) }}" class="img-circle img-lg" alt=""></a>
                                         </div>
+                                    {% else %}
+                                        <div class="media-left media-middle">
+                                            <a href="#"><img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg') }}" class="img-circle img-lg" alt=""></a>
+                                        </div>
                                     {% endif %}
                                 {% endif %}
                             {% else %}

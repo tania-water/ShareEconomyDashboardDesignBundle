@@ -5,7 +5,7 @@ a:focus,a:hover{
     color:#19C1D1;
 }
 body{
-  background:#F7FFFE !important; 
+  background:#F7FFFE; 
 }
 .bg-primary {
   background-color: #53D2BA;
@@ -95,5 +95,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', end
       border-color: #53D2BA;
 }
 .border-left-primary {
+  border-color: #53D2BA;
+}
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary.focus[disabled], .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+  background-color: #53D2BA;
   border-color: #53D2BA;
 }
