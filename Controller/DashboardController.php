@@ -153,7 +153,7 @@ class DashboardController extends Controller
         $em = $this->get('doctrine')->getManager();
         $em->persist($entity);
         $em->flush();
-        $this->getFlashBag("success", "Successfully created");
+        $this->getFlashBag("success", $this->get('translator')->trans('Done Successfully'));
         return $this->redirect($this->generateUrl(strtolower($this->preFix .$this->className) . '_list'));
     }
 
