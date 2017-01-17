@@ -7,6 +7,17 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        input[type="date"]:hover::-webkit-calendar-picker-indicator {
+            display:none;
+        }
+        input[type="date"]:hover:after {
+            display:none;
+        }
+        input[type="date"]::-webkit-inner-spin-button {
+            display:none;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
