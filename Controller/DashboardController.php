@@ -257,6 +257,7 @@ class DashboardController extends Controller
             $andX = new Andx();
             $searchKey = json_decode($request->get('searchKey'));
             $searchValue = json_decode($request->get('searchValue'));
+
             if(count($searchKey) == count($searchValue)){
                 for($i=0; $i<count($searchKey); $i++){
                     if(in_array($searchKey[$i], $this->listSearchColumns)){
