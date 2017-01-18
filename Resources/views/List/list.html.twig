@@ -51,7 +51,7 @@
                             <div class="actions">
 
                                 {% if list.isPrintable %}
-                                    <a href="javascript:window.print()" class="btn btn-default btn-sm" data-popup="tooltip" title="" data-placement="bottom" data-original-title="{{('Print')|trans}}"><i class=" icon-printer2"></i> <span class="hidden-sm"></span></a>
+                                    <a href="javascript:window.print()" class="btn btn-default btn-sm" data-popup="tooltip" title="" data-placement="bottom" data-original-title="{{ "Print"|trans() }}"><i class=" icon-printer2"></i> <span class="hidden-sm"></span></a>
                                 {% endif %}
 
                                 {% if list.bulkActions | length > 0 %}
