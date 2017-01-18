@@ -325,7 +325,7 @@ a.label {
 }
 
 .sidebar-category:last-child{
-     margin-bottom:80px; 
+     margin-bottom:80px;
 }
 .navigation {
     margin: 0;
@@ -8811,7 +8811,7 @@ body>.ui-pnotify-modal-overlay {
     .ui-pnotify-mobile-able.ui-pnotify.stack-bottom-right {
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: auto;
         top: auto
     }
     .ui-pnotify-mobile-able.ui-pnotify.stack-bottom-left .ui-pnotify-shadow,
@@ -16748,8 +16748,8 @@ a.plupload_disabled:hover {
 
 .fancybox-close {
       position: fixed;
-    right: 0;
-    top: 0;
+    right: 20px;
+    top: 10px;
     padding: 15px;
     z-index: 8061;
   cursor: pointer;
@@ -18549,7 +18549,7 @@ thead .htCollapseButton:after {
     content: '';
     font-family: icomoon;
     position: absolute;
-    top: 50%;
+    top:30px;
   left: 5px;
     font-size: 12px;
     margin-top: -6px;
@@ -19583,7 +19583,7 @@ thead .htCollapseButton:after {
 *
 *  # Responsive extension
 *
-*  Optimise the table's layout for different screen sizes through the dynamic 
+*  Optimise the table's layout for different screen sizes through the dynamic
 *  insertion and removal of columns from the table
 *
 *  Version: 1.0
@@ -21241,7 +21241,7 @@ thead .htCollapseButton:after {
  *
  * ---------------------------------------------------------------------------- */
 .error-title {
-    color: #fff;
+    color: #30303a;
     font-size: 200px;
     line-height: 1;
     margin-top: 20px;
@@ -21280,7 +21280,7 @@ thead .htCollapseButton:after {
     line-height: 1;
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 20px;
     margin-top: -8px
 }
 
@@ -21482,7 +21482,9 @@ thead .htCollapseButton:after {
 .heading-elements.visible-elements>.btn-group {
     margin-bottom: 20px;
 }
-
+  .heading-elements .heading-text:not(.label):not(.badge) {
+    display: block;
+  }
 .heading-elements.visible-elements .heading-text:not(.label):not(.badge) {
     display: block
 }
@@ -21511,7 +21513,7 @@ thead .htCollapseButton:after {
 }
 }
 @media (min-width: 769px) {
-    
+
   .heading-elements .heading-text,
   .heading-elements .heading-btn,
   .heading-elements .ui-slider,
@@ -21710,7 +21712,6 @@ thead .htCollapseButton:after {
     right: 0;
     left: 0;
     padding: 20px;
-    padding-bottom: 0;
         border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     z-index: 997;

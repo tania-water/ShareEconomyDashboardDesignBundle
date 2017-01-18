@@ -19,6 +19,8 @@ class DashboardController extends Controller
 
     protected $listColumns = array();
 
+    protected $listSearchColumns = array();
+
     protected $listActions = array();
 
     /**
@@ -60,6 +62,28 @@ class DashboardController extends Controller
 
     protected $formName = '';
 
+
+
+    public function __construct() {
+        foreach ($this->listColumns as $column){
+            if(count($column)>1){
+                if(isset($column[1]['entity'])){
+                    if(isset($column[1]['sort'])){
+                        $this->listSearchColumns[]= $column[1]['sort'];
+                    }
+                    else{
+                        $this->listSearchColumns[]= $column[1]['entity'].'.'.$column[0];
+                    }
+                }
+                else{
+                    $this->listSearchColumns[]= $column[0];
+                }
+            }
+            else{
+                $this->listSearchColumns[]= $column[0];
+            }
+        }
+    }
     /**
      * Dashboard home page
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
@@ -129,7 +153,7 @@ class DashboardController extends Controller
         $em = $this->get('doctrine')->getManager();
         $em->persist($entity);
         $em->flush();
-        $this->getFlashBag("success", "Successfully created");
+        $this->getFlashBag("success", $this->get('translator')->trans('Done Successfully'));
         return $this->redirect($this->generateUrl(strtolower($this->preFix .$this->className) . '_list'));
     }
 
@@ -233,13 +257,20 @@ class DashboardController extends Controller
             $andX = new Andx();
             $searchKey = json_decode($request->get('searchKey'));
             $searchValue = json_decode($request->get('searchValue'));
-            for($i=0; $i<count($searchKey); $i++){
-                if (strpos($searchKey[$i], "."))
-                    $andX->add($searchKey[$i]." like '%".$searchValue[$i]."%'");
-                else
-                    $andX->add("e.".$searchKey[$i]." like '%".$searchValue[$i]."%'");
+            if(count($searchKey) == count($searchValue)){
+                for($i=0; $i<count($searchKey); $i++){
+                    if(in_array($searchKey[$i], $this->listSearchColumns)){
+                        if (strpos($searchKey[$i], ".")){
+                            $andX->add($searchKey[$i]." like '%".$searchValue[$i]."%'");
+                        }
+                        else{
+                            $andX->add("e.".$searchKey[$i]." like '%".$searchValue[$i]."%'");
+                        }
+                    }
+                }
+                if($andX->count()>0)
+                    $query = $query->andWhere($query->expr()->andX($andX));
             }
-            $query = $query->andWhere($query->expr()->andX($andX));
         }
 
         // apply list filters

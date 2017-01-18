@@ -65,7 +65,7 @@ $(function() {
     // -------------------------
 
     // Add control button toggler to page and panel headers if have heading elements
-    $('.panel-heading, .page-header-content, .panel-body, .panel-footer').has('> .heading-elements').append('<a class="heading-elements-toggle"><i class="icon-more"></i></a>');
+    $('.panel-heading, .page-header-content, .panel-body:first-child, .panel-footer').has('> .heading-elements').append('<a class="heading-elements-toggle"><i class="icon-more"></i></a>');
 
 
     // Toggle visible state of heading elements

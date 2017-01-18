@@ -21,8 +21,8 @@ paging_next_arrow: "&larr;"
 paging_previous_arrow: "&rarr;"
 "No Result Data": "لا يوجد ما تبحث عنه"
 "Delete One Confirmation": "انت علي وشك حذف %className% هل ترغب في حذفه؟  "
-"Activate One Confirmation": "انت علي وشك تفعيل %className% هل ترغب في حذفه؟  "
-"Deactivate One Confirmation": "انت علي وشك إيقاف %className% هل ترغب في حذفه؟  "
+"Activate One Confirmation": "انت علي وشك تفعيل %className% هل ترغب في تفعيله؟  "
+"Deactivate One Confirmation": "انت علي وشك إيقاف %className% هل ترغب في إيقافه؟  "
 # home page
 "Welcome": "أهلا بك يا"
 'Save': 'حفظ'
@@ -30,7 +30,7 @@ paging_previous_arrow: "&rarr;"
 "Yes" : نعم
 "Cancel": إلغاء
 'Actions': 'العمليات'
-"Done Successfully": "تمت العملية بنجاح؟"
+"Done Successfully": "تمت العملية بنجاح"
 "Failed Operation": "لم تتم العملية بنجاح"
 "This field already exists.": "هذه القيمة موجودة مسبقا."
 
@@ -44,5 +44,5 @@ paging_previous_arrow: "&rarr;"
 "Approve": "موافق"
 "Reject": "رفض"
 "Add": 'إضافة'
-"Print": 'طباعة'
 "Search": 'بحث'
+"Print": 'إطبع'
