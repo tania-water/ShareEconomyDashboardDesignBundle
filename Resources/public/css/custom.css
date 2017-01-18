@@ -1006,3 +1006,8 @@ table td.text-right{
 .datePickerSearch{
     min-width: 300px !important;
 }
+
+.phoneNumberLtr{
+    text-align: right;
+    direction: ltr;
+}

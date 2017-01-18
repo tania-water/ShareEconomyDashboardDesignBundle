@@ -84,7 +84,7 @@
                     {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', {'entity': entity}) }}
 
                     {% for column in list.columns %}
-                        <td>
+                        <td {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
                             {% if column[1].method is defined %}
                                 {% set value = attribute(entity, column[1].method) %}
                             {% else %}
