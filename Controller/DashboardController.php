@@ -112,7 +112,7 @@ class DashboardController extends Controller
     }
 
     protected function deleteFailedOperation(){
-        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Failed Operation'), 'allowAdd'=>true));
+        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Already Deleted'), 'allowAdd'=>true));
     }
 
     public function deleteAction($entityId){

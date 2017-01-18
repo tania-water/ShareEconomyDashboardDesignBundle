@@ -32,6 +32,7 @@ paging_previous_arrow: "&rarr;"
 'Actions': 'العمليات'
 "Done Successfully": "تمت العملية بنجاح"
 "Failed Operation": "لم تتم العملية بنجاح"
+"Already Deleted": "لقد تم حذفه مسبقا."
 "This field already exists.": "هذه القيمة موجودة مسبقا."
 
 # Menu
