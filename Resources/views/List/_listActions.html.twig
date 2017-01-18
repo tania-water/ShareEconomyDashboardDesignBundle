@@ -19,8 +19,8 @@
                     {% endif %}
                 <a tabindex="0" {% if app.session.get('_locale') == 'en' %}data-placement="left"{% endif %} class="dev-td-btn btn btn-default" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="{{('Delete One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}" data-html="true"
                    data-html="true" data-content="
-                   <button type='button' class='btn btn-danger btn-block dev-delete-btn' data-url='{{deleteUrl}}'>{{('Yes')|trans}}</button>
-                   <button type='button' class='btn btn-danger btn-block'>{{('Cancel')|trans}}</button>
+                   <button type='button' class='btn btn-danger dev-delete-btn' data-url='{{deleteUrl}}'>{{('Yes')|trans}}</button>
+                   <button type='button' class='btn btn-default'>{{('Cancel')|trans}}</button>
                    "><i class="icon-trash" data-popup="tooltip" title="{{('Delete')|trans}}" data-placement="right"></i></a>
                 {% endif %}
 
@@ -37,8 +37,8 @@
                     {% endif %}
                     <a tabindex="0" {% if app.session.get('_locale') == 'en' %}data-placement="left"{% endif %} class="dev-td-btn btn btn-default" role="button" data-toggle="popover"  data-popup="popover" data-trigger="focus" title="{% if activate == 'false' %}{{('Deactivate One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}{% else %}{{('Activate One Confirmation')|trans({'%className%': list.className|lower|trans({}, list.translationDomain)})}}{% endif %}" data-html="true"
                        data-html="true" data-content="
-                       <button type='button' class='btn btn-danger btn-block dev-activation-btn' data-url='{{activationUrl}}'>{{('Yes')|trans}}</button>
-                       <button type='button' class='btn btn-danger btn-block'>{{('Cancel')|trans}}</button>
+                       <button type='button' class='btn btn-danger dev-activation-btn' data-url='{{activationUrl}}'>{{('Yes')|trans}}</button>
+                       <button type='button' class='btn btn-default'>{{('Cancel')|trans}}</button>
                        "><i class="{% if activate == 'false' %}icon-user-block{% else %}icon-user-check{% endif %}" data-popup="tooltip" title="{% if activate == 'false' %}{{('Deactivate')|trans}}{% else %}{{('Activate')|trans}}{% endif %}" data-placement="right"></i></a>
                 {% endif %}
                 {% if action == 'view' %}

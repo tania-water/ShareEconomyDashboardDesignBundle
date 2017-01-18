@@ -490,7 +490,7 @@ $(document).ready(function () {
         }
     });
 
-    $("input[data-type='multipleCheckBox']").on('change', function () {
+    $("body").delegate("input[data-type='multipleCheckBox']", 'change', function () {
         multipleCheckerNewState = true;
         multipleCheckActionsButtonsShown = false;
 
@@ -548,7 +548,29 @@ $(document).ready(function () {
         }else
             showNotificationMsg('', actionsValidationMessages['maximumRecordError'].replace("%limit%", $(this).attr('data-max')), "error");
     });
+
+    $('body').delegate('a[data-type="action-button"]', 'click', function (e) {
+        e.preventDefault();
+
+        var URL = $(this).data("url");
+
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            data: $('form#action_form').serialize(),
+            success: function (data) {
+                if ('message' in data && 'status' in data) {
+                    showNotificationMsg('', data.message, data.status);
+                }
+                
+                table.draw();
+            }
+        });
+
+        return false;
+    });
 });
+
 jQuery(document).on('ajaxComplete', function (event, response) {
     if (response) {
         if (response.status === 0 && detectIE()) {
