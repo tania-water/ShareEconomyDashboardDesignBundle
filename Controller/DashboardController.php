@@ -112,7 +112,7 @@ class DashboardController extends Controller
     }
 
     protected function deleteFailedOperation(){
-        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Failed Operation'), 'allowAdd'=>true));
+        return new JsonResponse(array('status' => 'error', 'message' => $this->get('translator')->trans('Already Deleted'), 'allowAdd'=>true));
     }
 
     public function deleteAction($entityId){
@@ -153,7 +153,7 @@ class DashboardController extends Controller
         $em = $this->get('doctrine')->getManager();
         $em->persist($entity);
         $em->flush();
-        $this->getFlashBag("success", "Successfully created");
+        $this->getFlashBag("success", $this->get('translator')->trans('Done Successfully'));
         return $this->redirect($this->generateUrl(strtolower($this->preFix .$this->className) . '_list'));
     }
 
@@ -257,6 +257,7 @@ class DashboardController extends Controller
             $andX = new Andx();
             $searchKey = json_decode($request->get('searchKey'));
             $searchValue = json_decode($request->get('searchValue'));
+
             if(count($searchKey) == count($searchValue)){
                 for($i=0; $i<count($searchKey); $i++){
                     if(in_array($searchKey[$i], $this->listSearchColumns)){
@@ -423,7 +424,7 @@ class DashboardController extends Controller
                     } elseif (strlen($fieldData) > 50) {
                         $oneEntity[$value[0]] = mb_substr($fieldData, 0, 49);
                     } else {
-                        $oneEntity[$value[0]] = $fieldData;
+                        $oneEntity[$value[0]] = $this->get('translator')->trans($fieldData, array(), $this->translationDomain);
                     }
                 }
             }

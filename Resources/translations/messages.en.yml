@@ -31,6 +31,7 @@ paging_previous_arrow: "&larr;"
 "Cancel": Cancel
 "Done Successfully": "Done Successfully"
 "Failed Operation": "Failed Operation"
+"Already Deleted": "Already Deleted"
 "This field already exists.": "This field already exists."
 
 # Menu
@@ -44,3 +45,4 @@ paging_previous_arrow: "&larr;"
 "Reject": "Reject"
 "Add": 'Add'
 "Print": 'Print'
+"Search": 'Search'

@@ -155,9 +155,9 @@ $(function() {
             right: 'month,agendaWeek,agendaDay'
         },
         defaultDate: '2014-11-12',
-        editable: layoutIsLeftDirection === true ? false : true,
-        isRTL: layoutIsLeftDirection === true ? false : true,
-        lang: layoutIsLeftDirection === true ? 'en' : 'ar',
+        editable: true,
+        isRTL: true,
+        lang: 'ar',
         events: events
     });
     

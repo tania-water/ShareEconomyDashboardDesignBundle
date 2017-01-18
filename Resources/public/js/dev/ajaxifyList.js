@@ -46,7 +46,7 @@ var dataTableDefault = {
             var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + table.page.info().length;
 
             if(searchKey.length > 0){
-                url+= '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + JSON.stringify(searchValue)
+                url+= '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + encodeURIComponent(JSON.stringify(searchValue))
             }
 
             // apply filters

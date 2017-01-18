@@ -142,7 +142,7 @@ textarea{
     text-align:center;
 }
 .loginLogo img{
-    margin:0 auto;  
+    margin:0 auto;
 }
 .login-container .page-container .login-form{
     width:460px;
@@ -154,7 +154,7 @@ textarea{
     color:#333;
 }
 .whiteText{
-    color:#fff;   
+    color:#fff;
 }
 
 .text-nowrap > thead > tr > th {
@@ -182,7 +182,7 @@ textarea{
     padding: 2px;
 }
 .filterHeader.panel-default{
-    margin-bottom:0px;   
+    margin-bottom:0px;
     border-right-color:#444;
     border-left-color:#444;
 }
@@ -205,12 +205,12 @@ textarea{
     background:#30303A;
     padding:5px;
     z-index:99;
-    margin:0px;  
+    margin:0px;
     position:fixed;
     bottom:0px;
     width:100%;
     right:0px;
-    left:0px; 
+    left:0px;
     text-align:center;
 }
 
@@ -223,7 +223,7 @@ textarea{
     color: #fff;
     padding: 10px;
     font-size:14px;
-    text-align: center;   
+    text-align: center;
     background: #999;
     border-radius: 50%;
 
@@ -243,7 +243,7 @@ textarea{
     -ms-transform-origin:top right;
 }
 .topSettings{
-    background:#30303A; 
+    background:#30303A;
     margin-bottom:0px !important;
     color:#53D2BA;
     border-radius:3px 3px 0px 0px;
@@ -486,7 +486,7 @@ input.cropit-image-zoom-input {
     position: absolute;
     top: -2px;
     right: 0px;
-    color: #ccc; 
+    color: #ccc;
 }
 .rotation-btns span:hover{
     cursor: pointer;
@@ -548,7 +548,7 @@ input.cropit-image-zoom-input {
     overflow: hidden;
 }
 .moreNotifications i{
-    font-size:24px; 
+    font-size:24px;
     line-height: 50px;
 }
 table tr td .thumbnail{
@@ -598,7 +598,7 @@ input[type="range"]::-webkit-slider-thumb {
   height:8px;
   border: none;
   border-radius: 12px;
-  background: #999; 
+  background: #999;
 
 }
 input[type="range"]::-moz-range-thumb {
@@ -606,7 +606,7 @@ input[type="range"]::-moz-range-thumb {
   height:8px;
   border: none;
   border-radius: 12px;
-  background: #999; 
+  background: #999;
 }
 
 input[type="range"]::-ms-thumb {
@@ -614,7 +614,7 @@ input[type="range"]::-ms-thumb {
   height:8px;
   border-radius: 12px;
   border: 0;
-  background: #999; 
+  background: #999;
 }
 
 .googleResults{
@@ -648,7 +648,7 @@ input[type="range"]::-ms-thumb {
     color: #fff;
     padding: 10px;
     font-size:14px;
-    text-align: center;   
+    text-align: center;
     background: #999;
     border-radius: 50%;
 
@@ -717,7 +717,7 @@ input[type="range"]::-ms-thumb {
     content: "";
 }
 .GoogleImages .thumb img{
-   height: 200px; 
+   height: 200px;
 }
 /* rating ------------------------- */
 
@@ -763,7 +763,7 @@ input[type="range"]::-ms-thumb {
     list-style: none;
     margin: 0px;
     padding: 0px 20px;
-    
+
 }
 
 .socialPath{
@@ -848,7 +848,7 @@ table td.text-right{
         white-space: nowrap;
     }
 
-    
+
 }
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
@@ -868,7 +868,7 @@ table td.text-right{
     .nav .seenNotification{
         background: #31313A;
     }
-    
+
 
 }
 /* Extra Small Devices, Phones */
@@ -895,7 +895,7 @@ table td.text-right{
 
 
 @media print
-{    
+{
          .no-print, .no-print *, .navbar-inverse,.actions, .actions *,.sidebar, .sidebar *,.content-group,.content-group *,
          ul.navbar-nav,ul.icons-list,#DataTables_Table_0_length,#DataTables_Table_0_previous,#DataTables_Table_0_next
     {
@@ -907,7 +907,7 @@ table td.text-right{
     .dataTable thead .sorting::before, .dataTable thead .sorting::after, .dataTable thead .sorting_asc::after, .dataTable thead .sorting_desc::after, .dataTable thead .sorting_asc_disabled::after, .dataTable thead .sorting_desc_disabled::after{
        display: none !important;
             -webkit-transition: none !important;
-    transition: none !important; 
+    transition: none !important;
     }
     .dataTable thead .sorting, .dataTable thead .sorting_asc, .dataTable thead .sorting_desc, .dataTable thead .sorting_asc_disabled, .dataTable thead .sorting_desc_disabled {
   padding-right:10px;
@@ -989,4 +989,25 @@ table td.text-right{
 }
 .popover-content .btn-block{
     margin-left: 0px;
+}
+
+.actions .checkbox,.actions .checkbox-inline,.actions .radio,.actions .radio-inline {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-top: 8px;
+}
+.actions .radio .choice,.actions .radio-inline .choice {
+  top: 9px;
+}
+
+.datatable-scroll{
+    min-height: 400px;
+}
+.datePickerSearch{
+    min-width: 300px !important;
+}
+
+.phoneNumberLtr{
+    text-align: right;
+    direction: ltr;
 }

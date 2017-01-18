@@ -32,13 +32,13 @@
                     {% else %}
                         {%set searchCol = column[0] %}
                     {% endif %}
-                    <th data-name="{{searchCol}}">{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
+                    <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}" data-name="{{searchCol}}">{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
                 {% else %}
-                    <th class="notSearchable"></th>
+                    <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%} notSearchable"></th>
                 {% endif %}
             {% endfor %}
             <th class='text-right'>
-                <button class="dev-btn-search btn btn-default"><i class="icon-search4"></i></button>
+                <button data-popup="tooltip" data-placement="bottom" data-original-title="{{('Search')|trans}}" class="dev-btn-search btn btn-defualt"><i class="icon-search4"></i></button>
             </th>
         </tr>
         {% endif %}
@@ -84,7 +84,7 @@
                     {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', {'entity': entity}) }}
 
                     {% for column in list.columns %}
-                        <td>
+                        <td {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
                             {% if column[1].method is defined %}
                                 {% set value = attribute(entity, column[1].method) %}
                             {% else %}
@@ -109,7 +109,7 @@
                                 {% if value|length > 50 %}
                                     {{ value|slice(0, 50) }}
                                 {% else %}
-                                    {{ value }}
+                                    {{ value|trans({}, list.translationDomain) }}
                                 {% endif %}
                             {% endif %}
                         </td>

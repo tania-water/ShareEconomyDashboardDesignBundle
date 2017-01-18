@@ -30,8 +30,9 @@ paging_previous_arrow: "&rarr;"
 "Yes" : نعم
 "Cancel": إلغاء
 'Actions': 'العمليات'
-"Done Successfully": "تمت العملية بنجاح؟"
+"Done Successfully": "تمت العملية بنجاح"
 "Failed Operation": "لم تتم العملية بنجاح"
+"Already Deleted": "لقد تم حذفه مسبقا."
 "This field already exists.": "هذه القيمة موجودة مسبقا."
 
 # Menu
@@ -44,4 +45,5 @@ paging_previous_arrow: "&rarr;"
 "Approve": "موافق"
 "Reject": "رفض"
 "Add": 'إضافة'
+"Search": 'بحث'
 "Print": 'إطبع'
