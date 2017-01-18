@@ -424,7 +424,7 @@ class DashboardController extends Controller
                     } elseif (strlen($fieldData) > 50) {
                         $oneEntity[$value[0]] = mb_substr($fieldData, 0, 49);
                     } else {
-                        $oneEntity[$value[0]] = $fieldData;
+                        $oneEntity[$value[0]] = $this->get('translator')->trans($fieldData, array(), $this->translationDomain);
                     }
                 }
             }

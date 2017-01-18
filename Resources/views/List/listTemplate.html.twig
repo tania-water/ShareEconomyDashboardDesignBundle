@@ -109,7 +109,7 @@
                                 {% if value|length > 50 %}
                                     {{ value|slice(0, 50) }}
                                 {% else %}
-                                    {{ value }}
+                                    {{ value|trans({}, list.translationDomain) }}
                                 {% endif %}
                             {% endif %}
                         </td>
