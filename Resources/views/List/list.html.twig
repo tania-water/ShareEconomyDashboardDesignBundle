@@ -33,7 +33,7 @@
                         <!-- view roles -->
                         <div class="panel panel-flat">
                             {% block listHeader    %}
-                                <div class="panel-heading">
+                                <div class="panel-heading no-print">
                                     <h5 class="panel-title">{% if list.pageTitle %} {{ list.pageTitle|trans({}, list.translationDomain) }} {% else %} {{ list.className|trans({}, list.translationDomain) }} {% endif %}</h5>
                                     <div class="heading-elements">
                                         {#<span class="label bg-number heading-text">28 دور</span>
@@ -48,8 +48,8 @@
                                     </div>
                                 </div>
                             {% endblock listHeader %}
+                            {% block listTabs %}{% endblock %}
                             <div class="actions">
-
                                 {% if list.isPrintable %}
                                     <a href="javascript:window.print()" class="btn btn-default btn-sm" data-popup="tooltip" title="" data-placement="bottom" data-original-title="{{ "Print"|trans() }}"><i class=" icon-printer2"></i> <span class="hidden-sm"></span></a>
                                 {% endif %}
@@ -57,7 +57,7 @@
                                 {% if list.bulkActions | length > 0 %}
                                     {% for key, route in list.bulkActions %}
                                         {% if key == 'delete' %}
-                                            <a data-type='multipleCheckActionButton' style="display: none" tabindex="0" class="btn btn-default btn-sm" role="button" data-toggle="popover"  data-placement="bottom"  data-popup="popover" data-trigger="focus" title="انت على وشك حذف (@عنوان)، هل تريد إتمام الحذف؟"
+                                            <a data-type='multipleCheckActionButton' style="display: none" tabindex="0" class="btn btn-default btn-sm" role="button" data-toggle="popover"  data-placement="bottom"  data-popup="popover" data-trigger="focus" title="Your are about to delete bulk of items, are you sure?"
                                                data-html="true" data-content="
                                                <button type='button' class='btn btn-danger' data-type='multipleCheckAcceptAction' data-url='{{ path(route) }}'>{{ ('Yes') | trans }}</button>
                                                <button type='button' class='btn btn-defualt'>{{ ('Cancel') | trans }}</button>
@@ -207,7 +207,6 @@
                                     </div>
                                 </div>#}
                             </div>
-                        {% block listTabs %}{% endblock %}
                         {% include 'IbtikarShareEconomyDashboardDesignBundle:List:listTemplate.html.twig' %}
                     </div>
                     <!-- /scrollable datatable -->
