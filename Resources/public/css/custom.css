@@ -792,7 +792,7 @@ input[type="range"]::-ms-thumb {
   white-space: nowrap;
 }
 .fileupload .thumbnail{
-    min-width: 200px;
+    min-width: 150px;
 }
 table td.text-right{
     white-space: nowrap;
@@ -1006,8 +1006,16 @@ table td.text-right{
 .datePickerSearch{
     min-width: 300px !important;
 }
-
 .phoneNumberLtr{
     text-align: right;
     direction: ltr;
+}
+.table tr th .form-group{
+    margin-bottom: 0px;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th{
+    padding: 20px;
+}
+.table .checkbox .checker, .table .checkbox-inline .checker{
+    top: -9px;
 }
