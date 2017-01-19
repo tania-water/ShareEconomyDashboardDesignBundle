@@ -49,7 +49,7 @@ class DashboardController extends Controller
 
     protected  $isSearchable = true;
 
-    protected  $isPrintable = true;
+    protected  $isPrintable = false;
 
     private $listOneFieldSearchParam             = "oneFieldSearch";
     private $listOneFieldSearchInterfaceFQNS     = "Ibtikar\ShareEconomyDashboardDesignBundle\Interfaces\OneInputSearchInterface";
