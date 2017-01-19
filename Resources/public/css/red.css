@@ -5,7 +5,7 @@ a:focus,a:hover{
     color:#0EA448;
 }
 body{
-  background:url("../images/red/bg-db.png") center top repeat #eee !important; 
+  background:url("../images/red/bg-db.png") center top repeat #eee !important;
 }
 .bg-primary {
   background-color: #D6494C;
@@ -65,7 +65,7 @@ color: #fff;
 }
 
 .panel-flat > .panel-heading{
- border-top: 2px solid #D6494C;   
+ border-top: 2px solid #D6494C;
 }
 
 .wizard > .actions > ul > li > a{
@@ -123,3 +123,7 @@ color: #fff;
   background-color: #D6494C;
   border-color: #D6494C;
 }
+
+.datatable-scroll-lg, .datatable-scroll, .datatable-scroll-sm{
+     min-height: 0.01% !important ;
+ }
