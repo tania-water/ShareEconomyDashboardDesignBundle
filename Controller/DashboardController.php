@@ -418,7 +418,8 @@ class DashboardController extends Controller
                     $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
                 }
                 else if (isset($value[1]['type']) && $value[1]['type'] == 'image'){
-                    $getWebPath = $entity->$value[1]['image']() != '' && $entity->$value[1]['image']() != null ?$entity->$value[1]['image']():"bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg";
+                    $getfn = $value[1]['image'];
+                    $getWebPath = $entity->$getfn()?$entity->$getfn():"bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg";
                     $oneEntity[$value[0]] = '<div class="media-left media-middle">
                                             <a href="#"><img src="/'.$getWebPath.'" class="img-circle img-lg" alt=""></a>
                                         </div>';
