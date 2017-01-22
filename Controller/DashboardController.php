@@ -424,6 +424,9 @@ class DashboardController extends Controller
                                             <a href="#"><img src="/'.$getWebPath.'" class="img-circle img-lg" alt=""></a>
                                         </div>';
                 }
+                else if (isset($value[1]['class']) && $value[1]['class'] == 'phoneNumberLtr'){
+                    $oneEntity[$value[0]] = '<div class="phoneNumberLtr">'.$entity->$getfunction().'</div>';
+                }
                 else {
                     $fieldData = $entity->$getfunction();
 
