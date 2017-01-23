@@ -132,8 +132,10 @@
                     {% else %}
                         {% if value|length > 50 %}
                             {{ value|slice(0, 50) }}
-                        {% else %}
+                        {% elseif column[1].selectSearch is defined %}
                             {{ value|trans({}, list.translationDomain) }}
+                        {% else %}
+                            {{ value }}
                         {% endif %}
                     {% endif %}
                 </td>

@@ -438,8 +438,11 @@ class DashboardController extends Controller
                         $oneEntity[$value[0]] = $fieldData->__toString();
                     } elseif (strlen($fieldData) > 50) {
                         $oneEntity[$value[0]] = mb_substr($fieldData, 0, 49);
-                    } else {
+                    } elseif (isset($value[1]['selectSearch'])) {
                         $oneEntity[$value[0]] = $this->get('translator')->trans($fieldData, array(), $this->translationDomain);
+                    }
+                    else{
+                        $oneEntity[$value[0]] = $fieldData;
                     }
                 }
             }
