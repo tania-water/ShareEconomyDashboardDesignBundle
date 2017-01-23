@@ -1,131 +1,151 @@
 {% if oneInputSearch %}
-<form class="form-horizontal no-print">
-    <div class="col-md-12 searchauto">
-        <div class="form-group has-feedback">
-            <label class="control-label col-lg-2">{{ ("Search") | trans }}</label>
-            <div class="col-lg-10">
-                <input class="form-control" data-name="{{ listOneFieldSearchParam }}" data-type="one-field-search" placeholder="{{ oneInputSearch.inputPlaceHolder }}" type="text" value="{{ app.request.query.get(listOneFieldSearchParam, '') }}">
+    <form class="form-horizontal no-print">
+        <div class="col-md-12 searchauto">
+            <div class="form-group has-feedback">
+                <label class="control-label col-lg-2">{{ ("Search") | trans }}</label>
+                <div class="col-lg-10">
+                    <input class="form-control" data-name="{{ listOneFieldSearchParam }}" data-type="one-field-search" placeholder="{{ oneInputSearch.inputPlaceHolder }}" type="text" value="{{ app.request.query.get(listOneFieldSearchParam, '') }}">
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 {% endif %}
 
 <table class="list-table table table-hover table-striped datatable-column-search-inputs" width="100%">
     <thead>
         {% if list.isSearchable %}
-        <tr id="filterrow" class="no-print">
-            <th>{% trans %}Search in Fields{% endtrans %}</th>
-            {% for column in list.columns %}
+            <tr id="filterrow" class="no-print">
+                <th>{% trans %}Search in Fields{% endtrans %}</th>
+                    {% for column in list.columns %}
 
-                {% if column[1].isSearchable is not defined %}
-                    {% if column[1].name is defined %}
-                        {%set colName = column[1].name %}
-                    {% else %}
-                        {%set colName = column[0] %}
-                    {% endif %}
+                    {% if column[1].isSearchable is not defined %}
+                        {% if column[1].name is defined %}
+                            {%set colName = column[1].name %}
+                        {% else %}
+                            {%set colName = column[0] %}
+                        {% endif %}
 
-                    {% if column[1].sort is defined %}
-                        {%set searchCol = column[1].sort %}
-                    {% elseif column[1].entity is defined %}
-                        {%set searchCol = column[1].entity~'.'~column[0] %}
+                        {% if column[1].sort is defined %}
+                            {%set searchCol = column[1].sort %}
+                        {% elseif column[1].entity is defined %}
+                            {%set searchCol = column[1].entity~'.'~column[0] %}
+                        {% else %}
+                            {%set searchCol = column[0] %}
+                        {% endif %}
+                        <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}{% if column[1].selectSearch is defined %}selectSearch{% endif%}" data-name="{{searchCol}}">{% if column[1].selectSearch is not defined %}{{ colName|humanize|title|trans({}, list.translationDomain) }}{% endif%}
+                            {% if column[1].selectSearch is defined %}
+                                <select class="dev-search-input filter-select">
+                                    <option value="">{{('All')|trans()}}</option>
+                                    {%for search,key in column[1].selectOptions %}
+                                        <option value="{{key}}">{{search|trans({}, list.translationDomain)}}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endif%}
+                        </th>
                     {% else %}
-                        {%set searchCol = column[0] %}
-                    {% endif %}
-                    <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}" data-name="{{searchCol}}">{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
-                {% else %}
-                    <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%} notSearchable"></th>
-                {% endif %}
-            {% endfor %}
-            <th class='text-right'>
-                <button data-popup="tooltip" data-placement="bottom" data-original-title="{{('Search')|trans}}" class="dev-btn-search btn btn-default"><i class="icon-search4"></i></button>
+                        <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}{% if column[1].selectSearch is defined %}selectSearch{% endif%} notSearchable">
+                            {% if column[1].selectSearch is defined %}
+                    <option value="">{{('All')|trans()}}</option>
+                    <select class="dev-search-input filter-select" data-placeholder="Filter">
+                        {%for key,search in column[1].selectOptions %}
+                            <option value="{{key}}">{{search|trans({}, list.translationDomain)}}</option>
+                        {% endfor %}
+                    </select>
+                {% endif%}
             </th>
-        </tr>
         {% endif %}
-        <tr>
-            {% if list.bulkActions|length > 0 %}
-                <th data-name='bulk' class="dev-checkbox-all text-center">
-                    <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" class="styled" id="multipleCheckChanger">
-                        </label>
-                    </div>
-                </th>
-            {% elseif list.isSearchable %}
-                <th></th>
+    {% endfor %}
+    <th class='text-right'>
+        <button data-popup="tooltip" data-placement="bottom" data-original-title="{{('Search')|trans}}" class="dev-btn-search btn btn-default"><i class="icon-search4"></i></button>
+    </th>
+</tr>
+{% endif %}
+<tr>
+    {% if list.bulkActions|length > 0 %}
+        <th data-name='bulk' class="dev-checkbox-all text-center">
+            <div class="form-group">
+                <label class="checkbox-inline">
+                    <input type="checkbox" class="styled" id="multipleCheckChanger">
+                </label>
+            </div>
+        </th>
+    {% elseif list.isSearchable %}
+        <th></th>
+        {% endif %}
+        {% for column in list.columns %}
+            {% if column[1].name is defined %}
+                {%set colName = column[1].name %}
+            {% else %}
+                {%set colName = column[0] %}
             {% endif %}
+
+        {% if column[1].isSortable is defined and not column[1].isSortable %}
+            {%set isSortable = 'sorting_disabled' %}
+        {% else %}
+            {%set isSortable = 'sorting' %}
+        {% endif %}
+
+        {% if column[1].sort is defined %}
+            {%set sortCol = column[1].sort %}
+        {% elseif column[1].entity is defined %}
+            {%set sortCol = column[1].entity~'.'~column[0] %}
+        {% else %}
+            {%set sortCol = column[0] %}
+        {% endif %}
+
+        <th class="{{isSortable}}" data-name='{{sortCol}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
+        {% endfor %}
+        {% if list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
+        <th data-name='actions' class="text-center">{{ ('Actions')|trans}}</th>
+        {% elseif list.isSearchable %}
+        <th></th>
+        {% endif %}
+</tr>
+</thead>
+<tbody>
+    {% for entity in list.pagination %}
+        <tr>
+            {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', {'entity': entity}) }}
+
             {% for column in list.columns %}
-                {% if column[1].name is defined %}
-                    {%set colName = column[1].name %}
-                {% else %}
-                    {%set colName = column[0] %}
-                {% endif %}
+                <td {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
+                    {% if column[1].method is defined %}
+                        {% set value = attribute(entity, column[1].method) %}
+                    {% else %}
+                        {% set value = attribute(entity, column[0]) %}
+                    {% endif %}
 
-                {% if column[1].isSortable is defined and not column[1].isSortable %}
-                    {%set isSortable = 'sorting_disabled' %}
-                {% else %}
-                    {%set isSortable = 'sorting' %}
-                {% endif %}
-
-                {% if column[1].sort is defined %}
-                    {%set sortCol = column[1].sort %}
-                {% elseif column[1].entity is defined %}
-                    {%set sortCol = column[1].entity~'.'~column[0] %}
-                {% else %}
-                    {%set sortCol = column[0] %}
-                {% endif %}
-
-                    <th class="{{isSortable}}" data-name='{{sortCol}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
+                    {% if column[1].type is defined and column[1].type != 'text' %}
+                        {% if column[1].type == 'date' %}
+                            {{ value|date(list.defaultDateFormat) }}
+                        {% elseif column[1].type == 'image' %}
+                            {% if attribute(entity, column[1].image) != '' and attribute(entity, column[1].image) is not null %}
+                                <div class="media-left media-middle">
+                                    <a href="#"><img src="{{ asset(attribute(entity, column[1].image)) }}" class="img-circle img-lg" alt=""></a>
+                                </div>
+                            {% else %}
+                                <div class="media-left media-middle">
+                                    <a href="#"><img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg') }}" class="img-circle img-lg" alt=""></a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if value|length > 50 %}
+                            {{ value|slice(0, 50) }}
+                        {% elseif column[1].selectSearch is defined %}
+                            {{ value|trans({}, list.translationDomain) }}
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    {% endif %}
+                </td>
             {% endfor %}
             {% if list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
-                <th data-name='actions' class="text-center">{{ ('Actions')|trans}}</th>
+                {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listActions.html.twig', {'entity': entity}) }}
             {% elseif list.isSearchable %}
-                <th></th>
+                <td></td>
             {% endif %}
         </tr>
-    </thead>
-    <tbody>
-            {% for entity in list.pagination %}
-                <tr>
-                    {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', {'entity': entity}) }}
-
-                    {% for column in list.columns %}
-                        <td {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
-                            {% if column[1].method is defined %}
-                                {% set value = attribute(entity, column[1].method) %}
-                            {% else %}
-                                {% set value = attribute(entity, column[0]) %}
-                            {% endif %}
-
-                            {% if column[1].type is defined and column[1].type != 'text' %}
-                                {% if column[1].type == 'date' %}
-                                    {{ value|date(list.defaultDateFormat) }}
-                                {% elseif column[1].type == 'image' %}
-                                    {% if attribute(entity, column[1].image) != '' and attribute(entity, column[1].image) is not null %}
-                                        <div class="media-left media-middle">
-                                            <a href="#"><img src="{{ asset(attribute(entity, column[1].image)) }}" class="img-circle img-lg" alt=""></a>
-                                        </div>
-                                    {% else %}
-                                        <div class="media-left media-middle">
-                                            <a href="#"><img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg') }}" class="img-circle img-lg" alt=""></a>
-                                        </div>
-                                    {% endif %}
-                                {% endif %}
-                            {% else %}
-                                {% if value|length > 50 %}
-                                    {{ value|slice(0, 50) }}
-                                {% else %}
-                                    {{ value|trans({}, list.translationDomain) }}
-                                {% endif %}
-                            {% endif %}
-                        </td>
-                    {% endfor %}
-                    {% if list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
-                        {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listActions.html.twig', {'entity': entity}) }}
-                    {% elseif list.isSearchable %}
-                        <td></td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-    </tbody>
+    {% endfor %}
+</tbody>
 </table>
