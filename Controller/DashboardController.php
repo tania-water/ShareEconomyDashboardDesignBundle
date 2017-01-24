@@ -64,26 +64,30 @@ class DashboardController extends Controller
 
 
 
-    public function __construct() {
-        foreach ($this->listColumns as $column){
-            if(count($column)>1){
-                if(isset($column[1]['entity'])){
-                    if(isset($column[1]['sort'])){
-                        $this->listSearchColumns[]= $column[1]['sort'];
+    public function __construct()
+    {
+        foreach ($this->listColumns as $key => $column) {
+            if (count($column) > 1) {
+                if (isset($column[1]['entity'])) {
+                    if (isset($column[1]['sort'])) {
+                        $this->listSearchColumns[] = $column[1]['sort'];
+                    } else {
+                        $this->listSearchColumns[] = $column[1]['entity'] . '.' . $column[0];
                     }
-                    else{
-                        $this->listSearchColumns[]= $column[1]['entity'].'.'.$column[0];
-                    }
+                } else if (isset($column[1]['selectOptionsList'])) {
+                    $className = $this->entityBundle . "\\Entity\\" . $this->className;
+                    $staticFuction = $column[1]['selectOptionsList'];
+                    $this->listColumns[$key][1]['selectOptions'] = call_user_func(array($className, $column[1]['selectOptionsList']));
+                    $this->listSearchColumns[] = $column[0];
+                } else {
+                    $this->listSearchColumns[] = $column[0];
                 }
-                else{
-                    $this->listSearchColumns[]= $column[0];
-                }
-            }
-            else{
-                $this->listSearchColumns[]= $column[0];
+            } else {
+                $this->listSearchColumns[] = $column[0];
             }
         }
     }
+
     /**
      * Dashboard home page
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
@@ -416,15 +420,29 @@ class DashboardController extends Controller
 
                 if ($entity->$getfunction() instanceof \DateTime) {
                     $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
-                } else {
+                }
+                else if (isset($value[1]['type']) && $value[1]['type'] == 'image'){
+                    $getfn = $value[1]['image'];
+                    $getWebPath = $entity->$getfn()?$entity->$getfn():"bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg";
+                    $oneEntity[$value[0]] = '<div class="media-left media-middle">
+                                            <a href="#"><img src="/'.$getWebPath.'" class="img-circle img-lg" alt=""></a>
+                                        </div>';
+                }
+                else if (isset($value[1]['class']) && $value[1]['class'] == 'phoneNumberLtr'){
+                    $oneEntity[$value[0]] = '<div class="phoneNumberLtr">'.$entity->$getfunction().'</div>';
+                }
+                else {
                     $fieldData = $entity->$getfunction();
 
                     if (is_object($fieldData)) {
                         $oneEntity[$value[0]] = $fieldData->__toString();
                     } elseif (strlen($fieldData) > 50) {
                         $oneEntity[$value[0]] = mb_substr($fieldData, 0, 49);
-                    } else {
+                    } elseif (isset($value[1]['selectSearch'])) {
                         $oneEntity[$value[0]] = $this->get('translator')->trans($fieldData, array(), $this->translationDomain);
+                    }
+                    else{
+                        $oneEntity[$value[0]] = $fieldData;
                     }
                 }
             }

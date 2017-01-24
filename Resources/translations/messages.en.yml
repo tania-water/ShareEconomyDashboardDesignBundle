@@ -23,6 +23,7 @@ paging_previous_arrow: "&larr;"
 "Delete One Confirmation": "Are you sure you want to delete the %className%?"
 "Activate One Confirmation": "Are you sure you want to activate the %className%?"
 "Deactivate One Confirmation": "Are you sure you want to deactivate the %className%?"
+'It is recommended to use Chrome or Firefox.': 'It is recommended to use Chrome or Firefox.'
 # home page
 "Welcome": "Welcome"
 'Actions': 'Actions'
@@ -46,3 +47,4 @@ paging_previous_arrow: "&larr;"
 "Add": 'Add'
 "Print": 'Print'
 "Search": 'Search'
+"All": 'All'

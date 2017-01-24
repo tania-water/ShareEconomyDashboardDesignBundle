@@ -96,18 +96,29 @@ $(function() {
 
 
     // Setup - add a text input to each footer cell
-    $('.datatable-column-search-inputs thead tr#filterrow th').not(':last-child').not(':first-child').not('.datePickerSearch').not('.notSearchable').each( function () {
+    $('.datatable-column-search-inputs thead tr#filterrow th').not(':last-child').not(':first-child').not('.selectSearch').not('.datePickerSearch').not('.notSearchable').each( function () {
         var title = $('.datatable-column-search-inputs thead th').eq( $(this).index() ).text();
         $(this).html('<input type="text" class="dev-search-input form-control input-sm" placeholder="'+title+'" />');
     } );
 
     // Setup - add a text input to each footer cell
-    $('.datatable-column-search-inputs thead tr#filterrow th.datePickerSearch').not(':last-child').not(':first-child').each(function () {
+    $('.datatable-column-search-inputs thead tr#filterrow th.datePickerSearch').not(':last-child').not('.selectSearch').not(':first-child').each(function () {
         var title = $('.datatable-column-search-inputs thead th').eq($(this).index()).text();
         $(this).html('<input type="text" class="dev-search-input form-control input-sm datapickerSearch" placeholder="' + title + '" />');
         $('input.datapickerSearch').datetimepicker({
             format: 'YYYY-MM-DD'
         });
+    });
+
+    // Setup - add a text input to each footer cell
+    $('.datatable-column-search-inputs thead tr#filterrow th.selectSearch').not('.datePickerSearch').not(':last-child').not(':first-child').each(function () {
+        // Enable Select2 select for the length option
+        $('select.selectSearch').select2({
+            width: 'auto',
+            allowClear: true,
+            placeholder: "Select an attribute"
+        });
+
     });
 
     // DataTable

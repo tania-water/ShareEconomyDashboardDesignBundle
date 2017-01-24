@@ -23,6 +23,7 @@ paging_previous_arrow: "&rarr;"
 "Delete One Confirmation": "انت علي وشك حذف %className% هل ترغب في حذفه؟  "
 "Activate One Confirmation": "انت علي وشك تفعيل %className% هل ترغب في تفعيله؟  "
 "Deactivate One Confirmation": "انت علي وشك إيقاف %className% هل ترغب في إيقافه؟  "
+'It is recommended to use Chrome or Firefox.': "من الأفضل استخدام Chrome أو Firefox"
 # home page
 "Welcome": "أهلا بك يا"
 'Save': 'حفظ'
@@ -47,3 +48,4 @@ paging_previous_arrow: "&rarr;"
 "Add": 'إضافة'
 "Search": 'بحث'
 "Print": 'إطبع'
+"All": 'الكل'
