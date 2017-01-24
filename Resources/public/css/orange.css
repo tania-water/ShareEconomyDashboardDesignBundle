@@ -5,7 +5,7 @@ a:focus,a:hover{
     color:#FF8142;
 }
 body{
-  background:url("../images/orange/bg.png") center bottom repeat-x #FFF8F4 !important; 
+  background:url("../images/orange/bg.png") center bottom repeat-x #FFF8F4 !important;
 }
 .bg-primary {
   background-color: #EE6F2C;
@@ -65,7 +65,7 @@ color: #fff;
 }
 
 .panel-flat > .panel-heading{
- border-top: 2px solid #EE6F2C;   
+ border-top: 2px solid #EE6F2C;
 }
 
 .wizard > .actions > ul > li > a{
@@ -102,4 +102,12 @@ color: #fff;
 .btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary.focus[disabled], .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
   background-color: #EE6F2C;
   border-color: #EE6F2C;
+}
+
+
+.datepicker table tr td.active, .datepicker table tr td span.active, .datepicker table tr td.active.disabled, .datepicker table tr td span.active.disabled, .datepicker table tr td.active:hover, .datepicker table tr td span.active:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td span.active.disabled:hover{
+    background:#EE6F2C ;
+}
+.datatable-scroll{
+    min-height: 400px;
 }

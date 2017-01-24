@@ -1000,9 +1000,7 @@ table td.text-right{
   top: 9px;
 }
 
-.datatable-scroll{
-    min-height: 400px;
-}
+
 .datePickerSearch{
     min-width: 300px !important;
 }
