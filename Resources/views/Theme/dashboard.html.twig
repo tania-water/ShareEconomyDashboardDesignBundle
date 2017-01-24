@@ -61,6 +61,10 @@
 
     {# displaying the widget #}
     {{- parent() -}}
+    
+    {% if description | length %}
+        <span id="helpBlock" class="help-block">{{ description }}</span>
+    {% endif %}
 
     {# adding profile file upload input style #}
     {%- if type is defined and type == 'file' and attr['data-image-type'] is defined and attr['data-image-type'] == 'profile' -%}
