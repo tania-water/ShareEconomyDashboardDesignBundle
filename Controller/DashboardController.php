@@ -633,4 +633,24 @@ class DashboardController extends Controller
     protected function prePostParametersEdit($entity){
         return array();
     }
+
+    /**
+     *
+     * @return type
+     */
+    public function getNavBarAdditionalLinks()
+    {
+        $return = '';
+        $kernelBundles = $this->getParameter('kernel.bundles');
+
+        if (count($kernelBundles)){
+            foreach($kernelBundles as $bundleName => $bundlePath){
+                if ($this->get('templating')->exists($bundleName . ':navBarLinks.html.twig')){
+                    $return .= $this->renderView($bundleName . ':navBarLinks.html.twig');
+                }
+            }
+        }
+
+        return $return;
+    }
 }
