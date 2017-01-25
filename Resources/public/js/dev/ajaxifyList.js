@@ -464,7 +464,9 @@ $(document).ready(function () {
     $('#multipleCheckChanger').on('change', function () {
         if ($(this).is(':checked')) {
             $("input[data-type='multipleCheckBox']").prop('checked', true).uniform('refresh');
-            $("a[data-type='multipleCheckActionButton']").show();
+            if ($("input[data-type='multipleCheckBox']").length) {
+                $("a[data-type='multipleCheckActionButton']").show();
+            }
         } else {
             $("input[data-type='multipleCheckBox']").prop('checked', false).uniform('refresh');
             $("a[data-type='multipleCheckActionButton']").hide();
@@ -515,6 +517,9 @@ $(document).ready(function () {
                 if ('message' in data && 'status' in data) {
                     showNotificationMsg('', data.message, data.status);
                 }
+
+                $("#multipleCheckChanger").prop('checked', false).uniform('refresh');
+                $("#multipleCheckChanger").trigger('change');
 
                 table.draw();
             }
