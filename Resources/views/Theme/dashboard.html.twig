@@ -61,8 +61,8 @@
 
     {# displaying the widget #}
     {{- parent() -}}
-    
-    {% if description | length %}
+
+    {% if description is defined and  description | length %}
         <span id="helpBlock" class="help-block">{{ description }}</span>
     {% endif %}
 

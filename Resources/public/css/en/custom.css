@@ -1015,9 +1015,7 @@ table td.text-right{
 .actions .radio .choice,.actions .radio-inline .choice {
   top: 9px;
 }
-.datatable-scroll{
-    min-height: 400px;
-}
+
 .datePickerSearch{
     min-width: 300px !important;
 }

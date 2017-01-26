@@ -3274,7 +3274,7 @@ li + .dropdown-header.highlight,
     margin-left: 0;
 }
 .navbar-header .navbar-nav {
-    float: right;
+    float: left;
     margin-right: 5px;
 }
 

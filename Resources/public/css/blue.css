@@ -102,3 +102,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abf9d', end
   background-color: #53D2BA;
   border-color: #53D2BA;
 }
+
+.datepicker table tr td.active, .datepicker table tr td span.active, .datepicker table tr td.active.disabled, .datepicker table tr td span.active.disabled, .datepicker table tr td.active:hover, .datepicker table tr td span.active:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td span.active.disabled:hover{
+    background:#53D2BA ;
+}

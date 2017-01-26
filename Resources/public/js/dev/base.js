@@ -1,15 +1,3 @@
-$.ajaxSetup({
-    type: "POST",
-    cache: false,
-    processData: true,
-    beforeSend: function () {
-        blockPage();
-    },
-    complete: function (xhr, status) {
-        unblockPage();
-    }
-});
-
 function blockPage() {
     $('div.panel-flat').block({
         message: '<i class="icon-spinner2 spinner"></i>',

@@ -113,3 +113,7 @@ color: #fff;
   background-color: #54D582;
   border-color: #54D582;
 }
+
+.datepicker table tr td.active, .datepicker table tr td span.active, .datepicker table tr td.active.disabled, .datepicker table tr td span.active.disabled, .datepicker table tr td.active:hover, .datepicker table tr td span.active:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td span.active.disabled:hover{
+    background:#54D582 ;
+}
