@@ -440,7 +440,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click', ".dev-activation-btn", function(){
+    $(document).on('click', ".dev-general-ajax-request-btn", function(){
         $.ajax({
             url: $(this).data("url"),
             type: "POST",
@@ -548,7 +548,7 @@ $(document).ready(function () {
                 if ('message' in data && 'status' in data) {
                     showNotificationMsg('', data.message, data.status);
                 }
-                
+
                 table.draw();
             }
         });

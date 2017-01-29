@@ -102,7 +102,7 @@ class DashboardController extends Controller
         $this->get('session')->getFlashBag()->add($status, $message);
     }
 
-    private function getEntityPerId($entityId){
+    protected function getEntityPerId($entityId){
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository($this->entityBundle.":".$this->className)->findOneBy(array('id'=>$entityId));
         return $entity;
