@@ -129,6 +129,8 @@
                                 </div>
                             {% endif %}
                         {% endif %}
+                    {% elseif column[1].ishtml is defined and column[1].ishtml %}
+                        {{ value|raw }}
                     {% else %}
                         {% if value|length > 50 %}
                             {{ value|slice(0, 50) }}

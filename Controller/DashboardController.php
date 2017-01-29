@@ -431,6 +431,10 @@ class DashboardController extends Controller
                 else if (isset($value[1]['class']) && $value[1]['class'] == 'phoneNumberLtr'){
                     $oneEntity[$value[0]] = '<div class="phoneNumberLtr">'.$entity->$getfunction().'</div>';
                 }
+                else if (isset($value[1]['ishtml']) && $value[1]['ishtml']){
+                    $fieldData = $entity->$getfunction();
+                    $oneEntity[$value[0]] = $fieldData;
+                }
                 else {
                     $fieldData = $entity->$getfunction();
 
