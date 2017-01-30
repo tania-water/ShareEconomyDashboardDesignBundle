@@ -118,6 +118,12 @@
                     {% if column[1].type is defined and column[1].type != 'text' %}
                         {% if column[1].type == 'date' %}
                             {{ value|date(list.defaultDateFormat) }}
+                        {% elseif column[1].type == 'bool' %}
+                            {% if attribute(entity, column[0]) %}
+                                {{'true'|trans}}
+                            {% else %}
+                                {{'false'|trans}}
+                            {% endif %}
                         {% elseif column[1].type == 'image' %}
                             {% if attribute(entity, column[1].image) != '' and attribute(entity, column[1].image) is not null %}
                                 <div class="media-left media-middle">

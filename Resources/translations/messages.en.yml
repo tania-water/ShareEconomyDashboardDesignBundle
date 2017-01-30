@@ -17,6 +17,8 @@
 "from": "from"
 "first": "first"
 "last": "last"
+'true': 'true'
+'false': 'false'
 paging_next_arrow: "&rarr;"
 paging_previous_arrow: "&larr;"
 "No Result Data": "No Result Data"

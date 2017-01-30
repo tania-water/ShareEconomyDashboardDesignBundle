@@ -17,6 +17,8 @@
 "from": "من"
 "first": "الاول"
 "last": "الاخير"
+'true': 'نعم'
+'false': 'لا'
 paging_next_arrow: "&larr;"
 paging_previous_arrow: "&rarr;"
 "No Result Data": "لا يوجد ما تبحث عنه"
