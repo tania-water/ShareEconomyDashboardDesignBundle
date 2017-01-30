@@ -26,6 +26,7 @@ paging_previous_arrow: "&larr;"
 "Activate One Confirmation": "Are you sure you want to activate the %className%?"
 "Deactivate One Confirmation": "Are you sure you want to deactivate the %className%?"
 'It is recommended to use Chrome or Firefox.': 'It is recommended to use Chrome or Firefox.'
+'You Are No Longer Allowed To Do This Action': 'You Are No Longer Allowed To Do This Action'
 # home page
 "Welcome": "Welcome"
 'Actions': 'Actions'
