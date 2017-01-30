@@ -36,7 +36,7 @@
                             {% if column[1].selectSearch is defined %}
                                 <select class="dev-search-input filter-select">
                                     <option value="">{{('All')|trans()}}</option>
-                                    {%for search,key in column[1].selectOptions %}
+                                    {%for key,search in column[1].selectOptions %}
                                         <option value="{{key}}">{{search|trans({}, list.translationDomain)}}</option>
                                     {% endfor %}
                                 </select>
