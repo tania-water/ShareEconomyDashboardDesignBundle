@@ -33,6 +33,13 @@
                 stack: {"dir1": "down", "dir2": layoutIsLeftDirection === true ? "left" : "right" , "firstpos1": 0, "firstpos2": 0}
             });
         }
+        $.ajaxSetup({
+            error : function(jqXHR, textStatus, errorThrown) {
+                if (jqXHR.status == 403) {
+                    showNotificationMsg('', {{('You Are No Longer Allowed To Do This Action')|trans}}, 'error');
+                }
+            }
+        });
     </script>
 {#        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/pages/layout_sidebar_sticky_custom.js') }}"></script>#}
 {% endblock %}
