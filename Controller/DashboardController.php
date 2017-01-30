@@ -421,6 +421,9 @@ class DashboardController extends Controller
                 if ($entity->$getfunction() instanceof \DateTime) {
                     $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
                 }
+                else if(isset($value[1]['type']) && $value[1]['type'] == 'bool'){
+                    $oneEntity[$value[0]] = $entity->$getfunction()?$this->get('translator')->trans('true'):$this->get('translator')->trans('false');
+                }
                 else if (isset($value[1]['type']) && $value[1]['type'] == 'image'){
                     $getfn = $value[1]['image'];
                     $getWebPath = $entity->$getfn()?$entity->$getfn():"bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg";
