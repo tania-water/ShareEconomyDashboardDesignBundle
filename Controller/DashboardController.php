@@ -23,7 +23,6 @@ class DashboardController extends Controller
 
     protected $listActions = array();
 
-    protected $formType = '';
     /**
      * path to the template which contains the additional actions.
      * the row entity will passed to the template as "entity".
@@ -146,7 +145,7 @@ class DashboardController extends Controller
     public function createAction(Request $request){
         $className = $this->entityBundle."\\Entity\\".$this->className;
         $createNewClass = new $className();
-        $formType = $this->formType? $this->formType: $this->entityBundle."\\Form\\".$this->className.'Type';
+        $formType = $this->entityBundle."\\Form\\".$this->className.'Type';
         $formOptions = $this->getCreateFormOptions();
         $form = $this->createForm($formType, $createNewClass, $formOptions);
         $prePostParameters = $this->prePostParametersCreate();
@@ -556,7 +555,6 @@ class DashboardController extends Controller
      */
     public function editAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
-        $className = $this->entityBundle."\\Entity\\".$this->className;
         $entity = $em->getRepository($this->entityBundle.":".$this->className)->findOneBy(array('id'=>$id));
         $this->setEditOptions();
         if(!$this->formName)
@@ -611,7 +609,6 @@ class DashboardController extends Controller
 
     protected function postValidEdit(Request $request, $entity){
         $em = $this->get('doctrine')->getManager();
-        $em->persist($entity);
         $em->flush();
         $this->addFlash("success", $this->get('translator')->trans("Successfully updated"));
         return $this->redirect($this->generateUrl(strtolower($this->preFix . $this->className).'_list'));

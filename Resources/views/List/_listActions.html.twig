@@ -31,7 +31,7 @@
                         {% set activate = 'true' %}
                     {% endif %}
                     {% if actionParams %}
-                        {% set activationUrl = path(actionParams , {'id': entity.id, 'activate': activate}) %}
+                        {% set activationUrl = path(actionParams , {'entityId': entity.id, 'activate': activate}) %}
                     {% else %}
                         {% set activationUrl = path('activation_'~list.className|lower, {'entityId': entity.id, 'activate': activate }) %}
                     {% endif %}

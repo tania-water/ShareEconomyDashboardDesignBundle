@@ -36,7 +36,7 @@
         $.ajaxSetup({
             error : function(jqXHR, textStatus, errorThrown) {
                 if (jqXHR.status == 403) {
-                    showNotificationMsg('', {{('You Are No Longer Allowed To Do This Action')|trans}}, 'error');
+                    showNotificationMsg('', '{{('You Are No Longer Allowed To Do This Action')|trans}}', 'error');
                 }
             }
         });
