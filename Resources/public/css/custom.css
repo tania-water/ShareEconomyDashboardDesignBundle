@@ -409,7 +409,7 @@ hr{
 
 /*Fileupload -------------------------------------- */
 .cropit-preview {
-    background:url("assets/images/cover.jpg") center center no-repeat;
+    background:url("../images/cover.jpg") center center no-repeat;
     /*background-size: cover;*/
     border: 1px solid #ccc;
     border-radius: 3px;
