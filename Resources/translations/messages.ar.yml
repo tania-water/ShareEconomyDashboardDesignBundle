@@ -17,6 +17,8 @@
 "from": "من"
 "first": "الاول"
 "last": "الاخير"
+'true': 'نعم'
+'false': 'لا'
 paging_next_arrow: "&larr;"
 paging_previous_arrow: "&rarr;"
 "No Result Data": "لا يوجد ما تبحث عنه"
@@ -24,6 +26,7 @@ paging_previous_arrow: "&rarr;"
 "Activate One Confirmation": "انت علي وشك تفعيل %className% هل ترغب في تفعيله؟  "
 "Deactivate One Confirmation": "انت علي وشك إيقاف %className% هل ترغب في إيقافه؟  "
 'It is recommended to use Chrome or Firefox.': "من الأفضل استخدام Chrome أو Firefox"
+'You Are No Longer Allowed To Do This Action': 'لم تعد لديك صلاحية للقيام بهذه العملية'
 # home page
 "Welcome": "أهلا بك يا"
 'Save': 'حفظ'
