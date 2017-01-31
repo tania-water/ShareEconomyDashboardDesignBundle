@@ -23,6 +23,7 @@ class DashboardController extends Controller
 
     protected $listActions = array();
 
+    protected $formType = '';
     /**
      * path to the template which contains the additional actions.
      * the row entity will passed to the template as "entity".
@@ -66,26 +67,7 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        foreach ($this->listColumns as $key => $column) {
-            if (count($column) > 1) {
-                if (isset($column[1]['entity'])) {
-                    if (isset($column[1]['sort'])) {
-                        $this->listSearchColumns[] = $column[1]['sort'];
-                    } else {
-                        $this->listSearchColumns[] = $column[1]['entity'] . '.' . $column[0];
-                    }
-                } else if (isset($column[1]['selectOptionsList'])) {
-                    $className = $this->entityBundle . "\\Entity\\" . $this->className;
-                    $staticFuction = $column[1]['selectOptionsList'];
-                    $this->listColumns[$key][1]['selectOptions'] = call_user_func(array($className, $column[1]['selectOptionsList']));
-                    $this->listSearchColumns[] = $column[0];
-                } else {
-                    $this->listSearchColumns[] = $column[0];
-                }
-            } else {
-                $this->listSearchColumns[] = $column[0];
-            }
-        }
+
     }
 
     /**
@@ -102,7 +84,7 @@ class DashboardController extends Controller
         $this->get('session')->getFlashBag()->add($status, $message);
     }
 
-    private function getEntityPerId($entityId){
+    protected function getEntityPerId($entityId){
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository($this->entityBundle.":".$this->className)->findOneBy(array('id'=>$entityId));
         return $entity;
@@ -164,7 +146,7 @@ class DashboardController extends Controller
     public function createAction(Request $request){
         $className = $this->entityBundle."\\Entity\\".$this->className;
         $createNewClass = new $className();
-        $formType = $this->entityBundle."\\Form\\".$this->className.'Type';
+        $formType = $this->formType? $this->formType: $this->entityBundle."\\Form\\".$this->className.'Type';
         $formOptions = $this->getCreateFormOptions();
         $form = $this->createForm($formType, $createNewClass, $formOptions);
         $prePostParameters = $this->prePostParametersCreate();
@@ -176,20 +158,26 @@ class DashboardController extends Controller
                 return $this->postValidCreate($request, $createNewClass);
             }
         }
+        $title = $this->getPageTitle()? $this->getPageTitle():$title = $this->get('translator')->trans('Add New '.$this->className, array(), $this->translationDomain);;
+
         if (!$this->get('templating')->exists($this->entityBundle.':Create:'.strtolower($this->className).'.html.twig'))
             return $this->render($this->entityBundle.':Layout:dashboard_form.html.twig',  array_merge (array(
                 'form' => $form->createView(),
                 'className' => $this->className,
-                'title' => $this->get('translator')->trans('Add New '.$this->className, array(), $this->translationDomain),
+                'title' => $title,
                 'translationDomain' => $this->translationDomain
             ), $prePostParameters));
         else
             return $this->render($this->entityBundle.':Create:'.strtolower($this->className).'.html.twig', array_merge (array(
                 'form' => $form->createView(),
                 'className' => $this->className,
-                'title' => $this->get('translator')->trans('Add New '.$this->className, array(), $this->translationDomain),
+                'title' => $title,
                 'translationDomain' => $this->translationDomain
             ), $prePostParameters));
+    }
+
+    protected function getPageTitle()
+    {
     }
 
     /**
@@ -421,6 +409,9 @@ class DashboardController extends Controller
                 if ($entity->$getfunction() instanceof \DateTime) {
                     $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
                 }
+                else if(isset($value[1]['type']) && $value[1]['type'] == 'bool'){
+                    $oneEntity[$value[0]] = $entity->$getfunction()?$this->get('translator')->trans('true'):$this->get('translator')->trans('false');
+                }
                 else if (isset($value[1]['type']) && $value[1]['type'] == 'image'){
                     $getfn = $value[1]['image'];
                     $getWebPath = $entity->$getfn()?$entity->$getfn():"bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg";
@@ -430,6 +421,10 @@ class DashboardController extends Controller
                 }
                 else if (isset($value[1]['class']) && $value[1]['class'] == 'phoneNumberLtr'){
                     $oneEntity[$value[0]] = '<div class="phoneNumberLtr">'.$entity->$getfunction().'</div>';
+                }
+                else if (isset($value[1]['ishtml']) && $value[1]['ishtml']){
+                    $fieldData = $entity->$getfunction();
+                    $oneEntity[$value[0]] = $fieldData;
                 }
                 else {
                     $fieldData = $entity->$getfunction();
@@ -623,7 +618,26 @@ class DashboardController extends Controller
     }
 
     protected function setListParameters(){
-
+        foreach ($this->listColumns as $key => $column) {
+            if (count($column) > 1) {
+                if (isset($column[1]['entity'])) {
+                    if (isset($column[1]['sort'])) {
+                        $this->listSearchColumns[] = $column[1]['sort'];
+                    } else {
+                        $this->listSearchColumns[] = $column[1]['entity'] . '.' . $column[0];
+                    }
+                } else if (isset($column[1]['selectOptionsList'])) {
+                    $className = $this->entityBundle . "\\Entity\\" . $this->className;
+                    $staticFuction = $column[1]['selectOptionsList'];
+                    $this->listColumns[$key][1]['selectOptions'] = call_user_func(array($className, $column[1]['selectOptionsList']));
+                    $this->listSearchColumns[] = $column[0];
+                } else {
+                    $this->listSearchColumns[] = $column[0];
+                }
+            } else {
+                $this->listSearchColumns[] = $column[0];
+            }
+        }
     }
 
     protected function setEditOptions(){

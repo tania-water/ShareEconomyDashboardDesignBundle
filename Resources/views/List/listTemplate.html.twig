@@ -36,7 +36,7 @@
                             {% if column[1].selectSearch is defined %}
                                 <select class="dev-search-input filter-select">
                                     <option value="">{{('All')|trans()}}</option>
-                                    {%for search,key in column[1].selectOptions %}
+                                    {%for key,search in column[1].selectOptions %}
                                         <option value="{{key}}">{{search|trans({}, list.translationDomain)}}</option>
                                     {% endfor %}
                                 </select>
@@ -118,6 +118,12 @@
                     {% if column[1].type is defined and column[1].type != 'text' %}
                         {% if column[1].type == 'date' %}
                             {{ value|date(list.defaultDateFormat) }}
+                        {% elseif column[1].type == 'bool' %}
+                            {% if attribute(entity, column[0]) %}
+                                {{'true'|trans}}
+                            {% else %}
+                                {{'false'|trans}}
+                            {% endif %}
                         {% elseif column[1].type == 'image' %}
                             {% if attribute(entity, column[1].image) != '' and attribute(entity, column[1].image) is not null %}
                                 <div class="media-left media-middle">
@@ -129,6 +135,8 @@
                                 </div>
                             {% endif %}
                         {% endif %}
+                    {% elseif column[1].ishtml is defined and column[1].ishtml %}
+                        {{ value|raw }}
                     {% else %}
                         {% if value|length > 50 %}
                             {{ value|slice(0, 50) }}
