@@ -23,6 +23,7 @@ class DashboardController extends Controller
 
     protected $listActions = array();
 
+    protected $formType = '';
     /**
      * path to the template which contains the additional actions.
      * the row entity will passed to the template as "entity".
@@ -145,7 +146,7 @@ class DashboardController extends Controller
     public function createAction(Request $request){
         $className = $this->entityBundle."\\Entity\\".$this->className;
         $createNewClass = new $className();
-        $formType = $this->entityBundle."\\Form\\".$this->className.'Type';
+        $formType = $this->formType? $this->formType: $this->entityBundle."\\Form\\".$this->className.'Type';
         $formOptions = $this->getCreateFormOptions();
         $form = $this->createForm($formType, $createNewClass, $formOptions);
         $prePostParameters = $this->prePostParametersCreate();
@@ -157,20 +158,26 @@ class DashboardController extends Controller
                 return $this->postValidCreate($request, $createNewClass);
             }
         }
+        $title = $this->getPageTitle()? $this->getPageTitle():$title = $this->get('translator')->trans('Add New '.$this->className, array(), $this->translationDomain);;
+
         if (!$this->get('templating')->exists($this->entityBundle.':Create:'.strtolower($this->className).'.html.twig'))
             return $this->render($this->entityBundle.':Layout:dashboard_form.html.twig',  array_merge (array(
                 'form' => $form->createView(),
                 'className' => $this->className,
-                'title' => $this->get('translator')->trans('Add New '.$this->className, array(), $this->translationDomain),
+                'title' => $title,
                 'translationDomain' => $this->translationDomain
             ), $prePostParameters));
         else
             return $this->render($this->entityBundle.':Create:'.strtolower($this->className).'.html.twig', array_merge (array(
                 'form' => $form->createView(),
                 'className' => $this->className,
-                'title' => $this->get('translator')->trans('Add New '.$this->className, array(), $this->translationDomain),
+                'title' => $title,
                 'translationDomain' => $this->translationDomain
             ), $prePostParameters));
+    }
+
+    protected function getPageTitle()
+    {
     }
 
     /**
