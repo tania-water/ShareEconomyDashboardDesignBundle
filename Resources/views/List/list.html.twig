@@ -18,7 +18,7 @@
                     <div class="heading-btn-group">
                         {% block globalActions %}
                             {% if list.globalActions.add is defined %}
-                                <button class="btn btn-link btn-float has-text dev-btn-add" {% if list.globalActions.add.max is defined and list.globalActions.add.max <= list.totalNumber %}data-max="{{ list.globalActions.add.max }}"{% endif %} data-url="{% if list.globalActions.add %}{{path(list.globalActions.add)}}{%else %}{{path(list.preFix~'create_'~list.className|lower)}}{% endif %}"><i class="icon-add"></i><span>{{('Add')|trans}} {{list.className|lower|trans({}, list.translationDomain)}}</span></button>
+                                <button class="btn btn-link btn-float has-text dev-btn-add" {% if list.globalActions.add.max is defined and list.globalActions.add.max <= list.totalNumber %}data-max="{{ list.globalActions.add.max }}"{% endif %} data-url="{% if list.globalActions.add.path is defined %}{{path(list.globalActions.add.path)}}{%else %}{{path(list.preFix~'create_'~list.className|lower)}}{% endif %}"><i class="icon-add"></i><span>{{('Add')|trans}} {{list.className|lower|trans({}, list.translationDomain)}}</span></button>
                             {% endif %}
                         {% endblock %}
                     </div>
