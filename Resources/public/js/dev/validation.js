@@ -63,7 +63,7 @@ $.validator.addMethod('filesize', function (value, element, param) {
 
 $.validator.addMethod('phone', function (value, element) {
 
-    var regEx = /^[+-]?\d+$/;
+    var regEx = /^[+]?\d+$/;
     return regEx.test(value);
 });
 
