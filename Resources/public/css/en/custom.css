@@ -817,9 +817,7 @@ ul.social-links .socialPath input.form-control{
 table td.text-right{
     white-space: nowrap;
 }
-.table > thead > tr > th:last-child{
-    text-align: center !important;
-}
+
 .dataTable thead .sorting_asc, .dataTable thead .sorting_desc, .dataTable thead th {
   white-space: nowrap;
 }
@@ -1028,3 +1026,22 @@ table td.text-right{
 .table .checkbox .checker, .table .checkbox-inline .checker{
     top: -9px;
 }
+
+
+/* numbers dashboard ------------------------------------------------------------------------  */
+ul.db-numbers{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+
+}
+ul.db-numbers .btn{
+       font-size: 20px;
+}
+
+ul.db-numbers span{
+    font-size: 30px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
