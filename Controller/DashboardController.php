@@ -282,7 +282,7 @@ class DashboardController extends Controller
                 }
 
                 // apply filter if its parameter exists
-                if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName())) {
+                if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName()) !== null) {
                     $query = $listFilter->applyFilter($query, $request->query->get($listFilter->getName()));
                 }
             }
@@ -297,7 +297,7 @@ class DashboardController extends Controller
             }
 
             // apply filter if its parameter exists
-            if ($request->query->has($this->listOneFieldSearchParam) && $request->query->get($this->listOneFieldSearchParam)) {
+            if ($request->query->has($this->listOneFieldSearchParam) && $request->query->get($this->listOneFieldSearchParam) !== null) {
                 $query = $oneInputSearch->applySearch($query, $request->query->get($this->listOneFieldSearchParam));
             }
         }
