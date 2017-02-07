@@ -1,5 +1,5 @@
 function blockPage() {
-    $('div.panel-flat').block({
+    $('div.dev-panel-flat').block({
         message: '<i class="icon-spinner2 spinner"></i>',
         overlayCSS: {
             backgroundColor: '#fff',
@@ -16,5 +16,5 @@ function blockPage() {
 }
 
 function unblockPage() {
-    $('div.panel-flat').unblock();
+    $('div.dev-panel-flat').unblock();
 }
