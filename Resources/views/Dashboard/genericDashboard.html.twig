@@ -35,10 +35,10 @@
         }
         $.ajaxSetup({
             beforeSend: function () {
-                blockPage();
+{#                blockPage();#}
             },
             complete: function (xhr, status) {
-                unblockPage();
+{#                unblockPage();#}
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 if (jqXHR.status == 403) {
