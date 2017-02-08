@@ -328,7 +328,7 @@ class DashboardController extends Controller
             }
             $datatableColumnsIndex++;
         }
-        if(count($this->listActions) || $this->isSearchable){
+        if(count($this->listActions) || $this->listAdditionalActionsTemplate || $this->isSearchable){
             $datatableColumns[$datatableColumnsIndex] = array('data'=>'actions', 'orderable'=>false);
             $columnArray[]='actions';
             $datatableColumnsIndex++;
