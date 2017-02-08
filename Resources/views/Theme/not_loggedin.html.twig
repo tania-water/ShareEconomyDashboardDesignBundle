@@ -58,6 +58,6 @@
             {% set label = name|humanize %}
         {%- endif -%}
     {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}<i class="{{ attr['icon']|default('icon-circle-left2') }} position-right"></i>
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}<i class="{% if app.session.get('_locale') == 'ar' %}icon-circle-left2{%else%}icon-circle-right2{%endif%} position-right"></i>
     </button>
 {%- endblock %}
