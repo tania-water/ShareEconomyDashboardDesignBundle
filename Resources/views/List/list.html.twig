@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- view roles -->
-                        <div class="panel panel-flat dev-panel-flat">
+                        <div class="panel panel-flat">
                             {% block listHeader    %}
                                 <div class="panel-heading no-print">
                                     <h5 class="panel-title">{% if list.pageTitle %} {{ list.pageTitle|trans({}, list.translationDomain) }} {% else %} {{ list.className|trans({}, list.translationDomain) }} {% endif %}</h5>
@@ -81,7 +81,7 @@
                                             <select class="Roleselect" data-type="listFilter" data-name="{{ listFilter.name }}">
                                                 <option value="">{{ ("All") | trans }}</option>
                                                 {% for val, label in listFilter.filterList %}
-                                                    <option value="{{ val }}"{% if app.request.query.get(listFilter.name) == val %}selected="selected"{% endif %}>{{ label }}</option>
+                                                    <option value="{{ val }}"{% if app.request.query.has(listFilter.name) and app.request.query.get(listFilter.name) == val %}selected="selected"{% endif %}>{{ label }}</option>
                                                 {% endfor %}
                                             </select>
                                         {% endif %}

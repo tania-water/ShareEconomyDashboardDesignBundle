@@ -1032,3 +1032,23 @@ ul.db-numbers span{
     display: inline-block;
     margin-left: 5px;
 }
+
+ul.summaryList{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+ul.summaryList > li{
+    display: inline-block;
+    min-width: 40px;
+    min-height: 40px;
+    margin-left: 5px;
+    float: right;
+}
+
+ul.summaryList li button:hover{
+    cursor: pointer !important;
+}
+ul.summaryList > li.calendarInput{
+    min-width: 320px;
+}

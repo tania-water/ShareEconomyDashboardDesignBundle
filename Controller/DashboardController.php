@@ -62,6 +62,7 @@ class DashboardController extends Controller
 
     protected $formName = '';
 
+    protected $listAdditionalVars = [];
 
 
     public function __construct()
@@ -190,13 +191,13 @@ class DashboardController extends Controller
             return $this->getListJsonData($request, $list);
         }
 
-        $templateVars = [
+        $templateVars = array_merge([
             'list'                    => $list,
             'action_form'             => $this->createActionForm()->createView(),
             'list_filters'            => $this->getListFilters(),
             'oneInputSearch'          => $this->getListOneInputSearch(),
             'listOneFieldSearchParam' => $this->listOneFieldSearchParam
-        ];
+        ], $this->listAdditionalVars);
 
         if ($this->get('templating')->exists($this->entityBundle . ':List:' . strtolower($this->className) . '.html.twig')) {
             return $this->render($this->entityBundle . ':List:' . strtolower($this->className) . '.html.twig', $templateVars);
@@ -283,7 +284,7 @@ class DashboardController extends Controller
                 }
 
                 // apply filter if its parameter exists
-                if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName())) {
+                if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName()) !== null) {
                     $query = $listFilter->applyFilter($query, $request->query->get($listFilter->getName()));
                 }
             }
@@ -298,7 +299,7 @@ class DashboardController extends Controller
             }
 
             // apply filter if its parameter exists
-            if ($request->query->has($this->listOneFieldSearchParam) && $request->query->get($this->listOneFieldSearchParam)) {
+            if ($request->query->has($this->listOneFieldSearchParam) && $request->query->get($this->listOneFieldSearchParam) !== null) {
                 $query = $oneInputSearch->applySearch($query, $request->query->get($this->listOneFieldSearchParam));
             }
         }
@@ -329,7 +330,7 @@ class DashboardController extends Controller
             }
             $datatableColumnsIndex++;
         }
-        if(count($this->listActions) || $this->isSearchable){
+        if(count($this->listActions) || $this->listAdditionalActionsTemplate || $this->isSearchable){
             $datatableColumns[$datatableColumnsIndex] = array('data'=>'actions', 'orderable'=>false);
             $columnArray[]='actions';
             $datatableColumnsIndex++;
