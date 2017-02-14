@@ -259,7 +259,9 @@ class DashboardController extends Controller
                         else{
                             $andX->add("e.".$searchKey[$i]." like :searchValue");
                         }
-                        $query->setParameter(':searchValue', $searchValue[$i]);
+
+                        $query->setParameter(':searchValue', '%'.$searchValue[$i].'%');
+
                     }
                 }
                 if($andX->count()>0)
