@@ -254,7 +254,7 @@ class DashboardController extends Controller
                 for($i=0; $i<count($searchKey); $i++){
                     if(in_array($searchKey[$i], $this->listSearchColumns)){
                         if (strpos($searchKey[$i], ".")){
-                            $andX->add($searchKey[$i]." like :searchValue");
+                            $andX->add($searchKey[$i]." like :searchValue".$i);
                         }
                         else{
                             $andX->add("e.".$searchKey[$i]." like :searchValue".$i);
