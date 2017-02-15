@@ -257,10 +257,10 @@ class DashboardController extends Controller
                             $andX->add($searchKey[$i]." like :searchValue");
                         }
                         else{
-                            $andX->add("e.".$searchKey[$i]." like :searchValue");
+                            $andX->add("e.".$searchKey[$i]." like :searchValue".$i);
                         }
 
-                        $query->setParameter(':searchValue', '%'.$searchValue[$i].'%');
+                        $query->setParameter(':searchValue'.$i, '%'.$searchValue[$i].'%');
 
                     }
                 }
