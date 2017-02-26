@@ -549,6 +549,10 @@ $(document).ready(function () {
                     showNotificationMsg('', data.message, data.status);
                 }
 
+                if ('callback' in data) {
+                    eval(data.callback);
+                }
+
                 table.draw();
             }
         });
