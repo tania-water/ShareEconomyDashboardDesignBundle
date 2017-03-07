@@ -32,7 +32,7 @@
         minval: $.validator.format("Value must be greater than 0"),
 //        max: $.validator.format("عذرا,ً اكبر قيمة ممكنه  هي {0}"),
 //        mincheck: $.validator.format('رجاء إختيار عدد أكبر من أو يساوي {0}'),
-        password: 'The Password must be at least 8 characters and numbers length',
+        password: 'The Password must be at least 6 characters and numbers length',
 //        passwordMax: 'يجب ان تكون كلمة المرور مكونه من 4096 خانه على الأكثر وتحتوي على ارقام وحروف',
 //        unique: "غير متاح",
 //        filesize: $.validator.format('يجب الا يزيد حجم الصوره عن {0} ميجا'),
