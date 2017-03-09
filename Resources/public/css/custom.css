@@ -1052,3 +1052,9 @@ ul.summaryList li button:hover{
 ul.summaryList > li.calendarInput{
     min-width: 320px;
 }
+.bootstrap-datetimepicker-widget.dropdown-menu{
+    min-width: 270px;
+}
+.label{
+    font-size: 12px;
+}
