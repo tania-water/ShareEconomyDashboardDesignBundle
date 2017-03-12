@@ -23,6 +23,11 @@ $.validator.addMethod('mobile', function (value, element) {
 //    }
 //    return isValidNumber(phoneText, countryElement.val());
 }, 'phone must be in the right format');
+
+    $.validator.addMethod('youtube', function (value, element) {
+        return value.match(/^(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?(?=.*v=((\w|-){11}))(?:\S+)?$/);
+    },"invalid youtube url");
+
 $.validator.addMethod('email', function(value, element) {
 //    return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
     $(element).attr('data-remove-color', 'false');
