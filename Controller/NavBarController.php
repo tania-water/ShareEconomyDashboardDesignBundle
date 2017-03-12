@@ -13,13 +13,17 @@ class NavBarController extends Controller
      */
     public function getNavBarAdditionalLinksAction()
     {
-        $return        = '';
-        $kernelBundles = $this->getParameter('kernel.bundles');
+        $return = '';
 
-        if (count($kernelBundles)) {
-            foreach ($kernelBundles as $bundleName => $bundlePath) {
-                if ($this->get('templating')->exists($bundleName . '::navBarLinks.html.twig')) {//echo $bundleName . '<br>';
-                    $return .= $this->renderView($bundleName . '::navBarLinks.html.twig');
+        if ($this->container->hasParameter('ibtikar_share_economy_dashboard_design.navBarMenuBundles')) {
+            $navBarMenuBundles = $this->getParameter('ibtikar_share_economy_dashboard_design.navBarMenuBundles');
+            $kernelBundles          = $this->getParameter('kernel.bundles');
+
+            if (count($navBarMenuBundles)) {
+                foreach ($navBarMenuBundles as $bundleName) {
+                    if (isset($kernelBundles[$bundleName]) && $this->get('templating')->exists($bundleName . '::navBarLinks.html.twig')) {
+                        $return .= $this->renderView($bundleName . '::navBarLinks.html.twig');
+                    }
                 }
             }
         }

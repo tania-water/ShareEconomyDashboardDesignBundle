@@ -23,7 +23,6 @@ class DashboardController extends Controller
 
     protected $listActions = array();
 
-    protected $formType = '';
     /**
      * path to the template which contains the additional actions.
      * the row entity will passed to the template as "entity".
@@ -63,6 +62,7 @@ class DashboardController extends Controller
 
     protected $formName = '';
 
+    protected $listAdditionalVars = [];
 
 
     public function __construct()
@@ -146,7 +146,7 @@ class DashboardController extends Controller
     public function createAction(Request $request){
         $className = $this->entityBundle."\\Entity\\".$this->className;
         $createNewClass = new $className();
-        $formType = $this->formType? $this->formType: $this->entityBundle."\\Form\\".$this->className.'Type';
+        $formType = $this->entityBundle."\\Form\\".$this->className.'Type';
         $formOptions = $this->getCreateFormOptions();
         $form = $this->createForm($formType, $createNewClass, $formOptions);
         $prePostParameters = $this->prePostParametersCreate();
@@ -191,13 +191,13 @@ class DashboardController extends Controller
             return $this->getListJsonData($request, $list);
         }
 
-        $templateVars = [
+        $templateVars = array_merge([
             'list'                    => $list,
             'action_form'             => $this->createActionForm()->createView(),
             'list_filters'            => $this->getListFilters(),
             'oneInputSearch'          => $this->getListOneInputSearch(),
             'listOneFieldSearchParam' => $this->listOneFieldSearchParam
-        ];
+        ], $this->listAdditionalVars);
 
         if ($this->get('templating')->exists($this->entityBundle . ':List:' . strtolower($this->className) . '.html.twig')) {
             return $this->render($this->entityBundle . ':List:' . strtolower($this->className) . '.html.twig', $templateVars);
@@ -254,11 +254,14 @@ class DashboardController extends Controller
                 for($i=0; $i<count($searchKey); $i++){
                     if(in_array($searchKey[$i], $this->listSearchColumns)){
                         if (strpos($searchKey[$i], ".")){
-                            $andX->add($searchKey[$i]." like '%".$searchValue[$i]."%'");
+                            $andX->add($searchKey[$i]." like :searchValue".$i);
                         }
                         else{
-                            $andX->add("e.".$searchKey[$i]." like '%".$searchValue[$i]."%'");
+                            $andX->add("e.".$searchKey[$i]." like :searchValue".$i);
                         }
+
+                        $query->setParameter(':searchValue'.$i, '%'.$searchValue[$i].'%');
+
                     }
                 }
                 if($andX->count()>0)
@@ -283,7 +286,7 @@ class DashboardController extends Controller
                 }
 
                 // apply filter if its parameter exists
-                if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName())) {
+                if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName()) !== null) {
                     $query = $listFilter->applyFilter($query, $request->query->get($listFilter->getName()));
                 }
             }
@@ -298,7 +301,7 @@ class DashboardController extends Controller
             }
 
             // apply filter if its parameter exists
-            if ($request->query->has($this->listOneFieldSearchParam) && $request->query->get($this->listOneFieldSearchParam)) {
+            if ($request->query->has($this->listOneFieldSearchParam) && $request->query->get($this->listOneFieldSearchParam) !== null) {
                 $query = $oneInputSearch->applySearch($query, $request->query->get($this->listOneFieldSearchParam));
             }
         }
@@ -329,7 +332,7 @@ class DashboardController extends Controller
             }
             $datatableColumnsIndex++;
         }
-        if(count($this->listActions) || $this->isSearchable){
+        if(count($this->listActions) || $this->listAdditionalActionsTemplate || $this->isSearchable){
             $datatableColumns[$datatableColumnsIndex] = array('data'=>'actions', 'orderable'=>false);
             $columnArray[]='actions';
             $datatableColumnsIndex++;
@@ -556,7 +559,6 @@ class DashboardController extends Controller
      */
     public function editAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
-        $className = $this->entityBundle."\\Entity\\".$this->className;
         $entity = $em->getRepository($this->entityBundle.":".$this->className)->findOneBy(array('id'=>$id));
         $this->setEditOptions();
         if(!$this->formName)
@@ -611,7 +613,6 @@ class DashboardController extends Controller
 
     protected function postValidEdit(Request $request, $entity){
         $em = $this->get('doctrine')->getManager();
-        $em->persist($entity);
         $em->flush();
         $this->addFlash("success", $this->get('translator')->trans("Successfully updated"));
         return $this->redirect($this->generateUrl(strtolower($this->preFix . $this->className).'_list'));

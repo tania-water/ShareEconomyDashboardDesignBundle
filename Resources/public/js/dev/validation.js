@@ -23,6 +23,11 @@ $.validator.addMethod('mobile', function (value, element) {
 //    }
 //    return isValidNumber(phoneText, countryElement.val());
 }, 'phone must be in the right format');
+
+    $.validator.addMethod('youtube', function (value, element) {
+        return value.match(/^(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?(?=.*v=((\w|-){11}))(?:\S+)?$/);
+    },"invalid youtube url");
+
 $.validator.addMethod('email', function(value, element) {
 //    return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
     $(element).attr('data-remove-color', 'false');
@@ -63,7 +68,7 @@ $.validator.addMethod('filesize', function (value, element, param) {
 
 $.validator.addMethod('phone', function (value, element) {
 
-    var regEx = /^[+-]?\d+$/;
+    var regEx = /^[+]?\d+$/;
     return regEx.test(value);
 });
 
@@ -105,7 +110,7 @@ $.validator.addMethod('dimensions', function (value, element, param) {
 
 
 $.validator.addMethod('password', function (value, element) {
-    return this.optional(element) || (/\D+/.test(value) && /\d+/.test(value) && value.length > 7) || $(element).attr('data-remove-password-validation') === 'true';
+    return this.optional(element) || (/\D+/.test(value) && /\d+/.test(value) && value.length >= 6) || $(element).attr('data-remove-password-validation') === 'true';
 }, 'The Password must be at least {{ limit }} characters and numbers length');
 
 $.validator.addMethod('passwordMax', function (value, element) {

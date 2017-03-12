@@ -6,7 +6,7 @@ a:focus,a:hover{
 }
 
 body{
-   background: url("../images/green/bg-db.png") repeat center top fixed #eee !important; 
+   background: url("../images/green/bg-db.png") repeat center top fixed #eee !important;
 }
 .bg-primary {
   background-color: #54D582;
@@ -34,7 +34,7 @@ body{
 
 .bg-slate-800 {
 min-height:100%;
-  background: url("../images/green/bg.png") no-repeat center center fixed #52e988; 
+  background: url("../images/green/bg.png") no-repeat center center fixed #52e988;
     -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -42,7 +42,7 @@ min-height:100%;
 color: #fff;
 }
 .login-container .panel{
- background: rgba(255,255,255,0.85);   
+ background: rgba(255,255,255,0.85);
 }
 .btn-primary{
     background:#54D582;
@@ -72,7 +72,7 @@ color: #fff;
 }
 
 .panel-flat > .panel-heading{
- border-top: 2px solid #54D582;   
+ border-top: 2px solid #54D582;
 }
 
 .wizard > .actions > ul > li > a{
@@ -116,4 +116,9 @@ color: #fff;
 
 .datepicker table tr td.active, .datepicker table tr td span.active, .datepicker table tr td.active.disabled, .datepicker table tr td span.active.disabled, .datepicker table tr td.active:hover, .datepicker table tr td span.active:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td span.active.disabled:hover{
     background:#54D582 ;
+}
+
+.bg-green{
+    background: #54D582;
+    color: #fff;
 }

@@ -8,7 +8,7 @@
                     {% set editUrl = path(list.preFix~'edit_'~list.className|lower, {'id': entity.id}) %}
                 {% endif %}
 
-                <a class="btn btn-default" href="{{ editUrl }}"><i data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="right" class="icon-pencil"></i></a>
+                <a class="dev-td-btn btn btn-default" href="{{ editUrl }}"><i data-popup="tooltip" title="{{ ('Edit')|trans}}" data-placement="right" class="icon-pencil"></i></a>
                 {% endif %}
 
                 {% if action == 'delete' %}
@@ -31,7 +31,7 @@
                         {% set activate = 'true' %}
                     {% endif %}
                     {% if actionParams %}
-                        {% set activationUrl = path(actionParams , {'id': entity.id, 'activate': activate}) %}
+                        {% set activationUrl = path(actionParams , {'entityId': entity.id, 'activate': activate}) %}
                     {% else %}
                         {% set activationUrl = path('activation_'~list.className|lower, {'entityId': entity.id, 'activate': activate }) %}
                     {% endif %}

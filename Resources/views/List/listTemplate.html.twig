@@ -148,11 +148,11 @@
                     {% endif %}
                 </td>
             {% endfor %}
-            {% if list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
+{#            {% if list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}#}
                 {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listActions.html.twig', {'entity': entity}) }}
-            {% elseif list.isSearchable %}
-                <td></td>
-            {% endif %}
+{#            {% elseif list.isSearchable %}#}
+{#                <td></td>#}
+{#            {% endif %}#}
         </tr>
     {% endfor %}
 </tbody>
