@@ -66,22 +66,24 @@
                                     {% endfor %}
                                 </li>
                             {% endif %}
+                            {% if app.user %}
+                                <li class="dropdown dropdown-user">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">
 
-                            <li class="dropdown dropdown-user">
-                                <a class="dropdown-toggle" data-toggle="dropdown">
-                                    {% if app.user.image %}
-                                        <img src="{{ asset(app.user.getWebPath()) }}" alt="{{ app.user }}">
-                                    {% endif %}
-                                    <span>{{ app.user }}</span>
-                                    <i class="caret"></i>
-                                </a>
+                                        {% if app.user.image %}
+                                            <img src="{{ asset(app.user.getWebPath()) }}" alt="{{ app.user }}">
+                                        {% endif %}
+                                        <span>{{ app.user }}</span>
+                                        <i class="caret"></i>
+                                    </a>
 
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="{{ path('ibtikar_share_economy_ums_edit_my_account') }}"><i class="icon-user-plus"></i>{% trans %}Profile{% endtrans %}</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="{{ path('ibtikar_share_economy_ums_logout') }}"><i class="icon-switch2"></i>{% trans %}Logout{% endtrans %}</a></li>
-                                </ul>
-                            </li>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="{{ path('ibtikar_share_economy_ums_edit_my_account') }}"><i class="icon-user-plus"></i>{% trans %}Profile{% endtrans %}</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="{{ path('ibtikar_share_economy_ums_logout') }}"><i class="icon-switch2"></i>{% trans %}Logout{% endtrans %}</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
