@@ -4,7 +4,7 @@
             <div class="form-group has-feedback">
                 <label class="control-label col-lg-2">{{ ("Search") | trans }}</label>
                 <div class="col-lg-10">
-                    <input class="form-control" data-name="{{ listOneFieldSearchParam }}" data-type="one-field-search" placeholder="{{ oneInputSearch.inputPlaceHolder }}" type="text" value="{{ app.request.query.get(listOneFieldSearchParam, '') }}">
+                    <input class="form-control" data-name="{{ listOneFieldSearchParam }}" data-type="one-field-search" placeholder="{{ oneInputSearch.inputPlaceHolder|trans({}, list.translationDomain) }}" type="text" value="{{ app.request.query.get(listOneFieldSearchParam, '') }}">
                 </div>
             </div>
         </div>
