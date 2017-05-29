@@ -325,7 +325,7 @@ a.label {
 }
 
 .sidebar-category:last-child{
-     margin-bottom:80px; 
+     margin-bottom:80px;
 }
 .navigation {
     margin: 0;
@@ -19583,7 +19583,7 @@ thead .htCollapseButton:after {
 *
 *  # Responsive extension
 *
-*  Optimise the table's layout for different screen sizes through the dynamic 
+*  Optimise the table's layout for different screen sizes through the dynamic
 *  insertion and removal of columns from the table
 *
 *  Version: 1.0
@@ -21513,7 +21513,7 @@ thead .htCollapseButton:after {
 }
 }
 @media (min-width: 769px) {
-    
+
   .heading-elements .heading-text,
   .heading-elements .heading-btn,
   .heading-elements .ui-slider,
@@ -21637,7 +21637,7 @@ thead .htCollapseButton:after {
 }
 .heading-elements:not(.visible-elements) .heading-text {
     display: inline-block;
-    margin-top: 8px
+    margin-top: 6px
 }
 }
 @media (min-width:769px) {

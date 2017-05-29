@@ -3266,15 +3266,15 @@ li + .dropdown-header.highlight,
     top: 0;
     width: 100%;
 }
-.navbar-header {
+/*.navbar-header {
     min-width: 260px;
-}
+}*/
 
 .navbar-collapse>.navbar-header {
     margin-left: 0;
 }
 .navbar-header .navbar-nav {
-    float: left;
+    float: right;
     margin-right: 5px;
 }
 

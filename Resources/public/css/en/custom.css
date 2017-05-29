@@ -70,6 +70,7 @@ body {
     padding:5px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
+        clear: both;
 }
 .actions a,.actions button.btn-default,.actions .select2,.actions select{
     margin: 2px;
@@ -1063,4 +1064,48 @@ ul.summaryList li button:hover{
 }
 ul.summaryList > li.calendarInput{
     min-width: 320px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu{
+    min-width: 270px;
+}
+
+.label{
+    font-size: 12px;
+}
+
+.resultsNumber{
+    font-size:24px;
+    margin-right: 10px;
+    min-width: 70px;
+}
+
+.resultBox{
+    border: 1px solid #eee;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 10px;
+}
+.resultBox h4{
+   padding: 10px;
+   margin-bottom: 40px;
+}
+.resultBox hr{
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.resultsCharts .chart-container{
+       border-radius: 5px;
+    border:1px solid #eee;
+    margin-bottom: 20px;
+}
+.questionNumber{
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
 }
