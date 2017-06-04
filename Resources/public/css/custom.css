@@ -70,6 +70,7 @@ body {
     padding:5px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
+    clear: both;
 }
 .actions a,.actions button.btn-default,.actions .select2,.actions select{
     margin: 2px;
@@ -1095,5 +1096,24 @@ ul.summaryList > li.calendarInput{
     line-height: 40px;
     display: inline-block;
     text-align: center;
+    margin-left: 10px;
+}
+.label.totalHours{
+    color: #333;
+    position: relative;
+    top: -10px;
+}
+.label.totalHours span{
+    font-size: 24px;
+}
+.totalHoursDay{
+      color: #333;
+}
+#datetimepicker1{
+    float: right;
+    max-width: 180px;
+    position: relative;
+    top: -10px;
+    margin-right: 10px;
     margin-left: 10px;
 }
