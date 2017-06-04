@@ -2484,7 +2484,7 @@ li + .dropdown-header.highlight,
   .nav-tabs.nav-tabs-highlight > li.active > a:focus {
     border-top-color: #2196F3;
   }
-  
+
 }
 @media (min-width: 769px) {
   .nav-tabs.nav-tabs-top > li {
@@ -3176,9 +3176,9 @@ li + .dropdown-header.highlight,
   top: 0;
   width: 100%;
 }
-.navbar-header {
+/*.navbar-header {
     min-width: 260px;
-}
+}*/
 .navbar-collapse > .navbar-header {
   margin-right: 0;
 }

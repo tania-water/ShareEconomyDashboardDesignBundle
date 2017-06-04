@@ -1,0 +1,114 @@
+a{
+    color:#E5077D;
+}
+a:focus,a:hover{
+    color:#19C1D1;
+}
+body{
+  background:#F7FFFE;
+}
+.bg-primary {
+  background-color: #E5077D;
+  border-color: #E5077D;
+  color: #fff;
+}
+.bg-number {
+  background: #00598F;
+}
+.activeLink{
+    color: #E5077D;
+}
+
+.nav-tabs.nav-tabs-highlight > li.active > a, .nav-tabs.nav-tabs-highlight > li.active > a:hover, .nav-tabs.nav-tabs-highlight > li.active > a:focus {
+    border-top-color: #E5077D;
+}
+.text-primary {
+    color: #E5077D;
+}
+.text-primary, .text-primary:hover, .text-primary:focus {
+    color: #E5077D !important;
+}
+.btn-link:hover, .btn-link:focus {
+    color: #E5077D;
+}
+
+.bg-slate-800 {
+    min-height:100%;
+background: #1abf9d; /* Old browsers */
+background: -moz-linear-gradient(top, #00598F 0%, #1baaba 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #00598F 0%,#1baaba 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #00598F 0%,#1baaba 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00598F', endColorstr='#1baaba',GradientType=0 ); /* IE6-9  */
+        color: #fff;
+}
+
+.btn-primary{
+    background:#E5077D;
+    border-color:#E5077D;
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+    background:#F70D93;
+    border-color:#F70D93;
+}
+.btn-primary:active:hover, .btn-primary.active:hover, .open > .dropdown-toggle.btn-primary:hover, .btn-primary:active:focus, .btn-primary.active:focus, .open > .dropdown-toggle.btn-primary:focus, .btn-primary.focus:active, .btn-primary.active.focus, .open > .dropdown-toggle.btn-primary.focus{
+        background:#F70D93;
+    border-color:#F70D93;
+}
+.badge-primary{
+       background:#E5077D;
+       border-color: #E5077D;;
+}
+.table > thead > tr > th {
+    border-bottom: 2px solid #E5077D;
+}
+.pace .pace-progress{
+    background:#E5077D;
+}
+
+.dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover, .dataTables_paginate .paginate_button.current:focus{
+    background-color: #E5077D;
+}
+
+.panel-flat > .panel-heading{
+ border-top: 2px solid #E5077D;
+}
+
+.wizard > .actions > ul > li > a{
+    background: #E5077D;
+}
+.wizard > .steps > ul > li.done .number {
+    background-color: #E5077D;
+    border-color: #E5077D;
+}
+.wizard > .steps > ul > li.current .number {
+    border-color: #E5077D;
+    color: #E5077D;
+}
+.wizard > .steps > ul > li:last-child::after{
+        background-color: #E5077D;
+}
+.wizard > .steps > ul > li::before, .wizard > .steps > ul > li::after {
+    background-color: #E5077D;
+}
+.tokenfield .token:hover:not([class*="bg-"]), .tokenfield .token:focus:not([class*="bg-"]) {
+  background-color: #E5077D;
+}
+.fc-event{
+      background-color: #E5077D;
+      border-color: #E5077D;
+}
+.border-left-primary {
+  border-color: #E5077D;
+}
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary.focus[disabled], .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+  background-color: #E5077D;
+  border-color: #E5077D;
+}
+
+.datepicker table tr td.active, .datepicker table tr td span.active, .datepicker table tr td.active.disabled, .datepicker table tr td span.active.disabled, .datepicker table tr td.active:hover, .datepicker table tr td span.active:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td span.active.disabled:hover{
+    background:#E5077D ;
+}
+.navbar-inverse,.searchauto,.actionButtons,.LibraryFilter li.filterActive{
+    background-color: #00598F;
+}

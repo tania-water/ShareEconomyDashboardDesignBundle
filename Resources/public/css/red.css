@@ -93,10 +93,18 @@ color: #fff;
   height:100px;
   padding: 0 20px;
   position: absolute;
-  right: 0;
   top: 0;
   z-index: 2;
+  right:0px
 }
+
+
+@media only screen and (min-width : 768px) {
+.navbar {
+  padding-right: 120px;
+}
+}
+
 .navbar-brand > img{
     height: 100px;
 }
@@ -107,11 +115,6 @@ color: #fff;
 .fc-event{
       background-color:#D6494C;
       border-color:#D6494C;
-}
-@media only screen and (min-width : 768px) {
-.navbar {
-  padding-right: 120px;
-}
 }
 
 .border-left-primary {
@@ -126,4 +129,13 @@ color: #fff;
 
 .datepicker table tr td.active, .datepicker table tr td span.active, .datepicker table tr td.active.disabled, .datepicker table tr td span.active.disabled, .datepicker table tr td.active:hover, .datepicker table tr td span.active:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td span.active.disabled:hover{
     background:#D6494C ;
+}
+
+
+
+@media (max-width: 769px) {
+
+    .navbar-inverse .navbar-collapse{
+        padding-top: 40px;
+    }
 }

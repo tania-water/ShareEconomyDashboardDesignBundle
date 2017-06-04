@@ -52,10 +52,9 @@ $(function() {
     $('.datatable-row-full').DataTable({
         
         rowReorder: {
-            selector: 'tr'
+           selector: 'td.reorderTd'
         },
-
-//        responsive: true,
+        //responsive: true,
         columnDefs: [
 
             { 

@@ -58,7 +58,8 @@ $(function() {
         language: {
             search: '<span>بحث:</span> _INPUT_',
             lengthMenu: '<span>اظهار:</span> _MENU_',
-            paginate: { 'first': 'First', 'last': 'Last', 'next': '&larr;', 'previous': '&rarr;' }
+            paginate: { 'first': 'الاول', 'last': 'الاخير', 'next': layoutIsLeftDirection === true ? '&rarr;' : '&larr;', 'previous': layoutIsLeftDirection === true ? '&larr;' : '&rarr;' }
+     
         },
         drawCallback: function () {
             $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');

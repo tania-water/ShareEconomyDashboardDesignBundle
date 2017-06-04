@@ -337,7 +337,7 @@ $(function() {
         });
         notice.get().click(function() {
             notice.remove();
-        });  
+        });
     });
 
     // Form
@@ -724,15 +724,16 @@ $(function() {
                 title: 'Now look here',
                 text: 'There\'s something you need to know, and I won\'t go away until you come to grips with it.',
                 addclass: 'bg-danger stack-top-right',
-                hide: false,
+                hide:false,
                 buttons: {
-                    closer: false,
+                    closer_hover: false,
                     sticker: false
                 },
-                stack: stack_top_left
+                stack:stack_bottom_right
             });
         }
     });
+
 
 
     // Callbacks
@@ -925,7 +926,7 @@ $(function() {
     // Define directions
     var stack_top_left = {"dir1": "down", "dir2": "right", "push": "top"};
     var stack_bottom_left = {"dir1": "right", "dir2": "up", "push": "top"};
-    var stack_bottom_right = {"dir1": "down", "dir2": "right", "firstpos1": 0, "firstpos2": 0};
+    var stack_bottom_right = {"dir1": "down", "dir2": layoutIsLeftDirection === true ? "left" : "right" , "firstpos1": 0, "firstpos2": 0};
     var stack_custom_left = {"dir1": "left", "dir2": "down"};
     var stack_custom_right = {"dir1": "right", "dir2": "up", "push": "top"};
     var stack_custom_top = {"dir1": "down", "dir2": "right", "push": "top", "spacing1": 1};
@@ -1001,6 +1002,8 @@ $(function() {
         }
         new PNotify(opts);
     }
+
+
 
     // Bottom right
     function show_stack_bottom_right(type) {
@@ -1189,7 +1192,7 @@ $(function() {
     $('#pnotify-stack-bottom-left1').on('click', function () {
         show_stack_bottom_left('error');
     });
-    
+
     // Bottom right
     $('#pnotify-stack-bottom-right').on('click', function () {
         show_stack_bottom_right('danger');
@@ -1209,10 +1212,10 @@ $(function() {
     $('#pnotify-stack-custom-top').on('click', function () {
         show_stack_custom_top('success');
     });
-    
+
     // Custom bottom
     $('#pnotify-stack-custom-bottom').on('click', function () {
         show_stack_custom_bottom('info');
     });
-    
+
 });
