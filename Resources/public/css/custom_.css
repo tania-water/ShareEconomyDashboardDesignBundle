@@ -1,7 +1,7 @@
 @font-face {
     font-family: Greta;
-    src: url('../../fonts/Greta_Arabic_Regular.eot');
-    src: url('../../fonts/Greta_Arabic_Regular.eot?#iefix') format('embedded-opentype'), url('../../fonts/Greta_Arabic_Regular.woff') format('woff'), url('../../fonts/Greta_Arabic_Regular.otf') format("opentype");
+    src: url('../fonts/Greta_Arabic_Regular.eot');
+    src: url('../fonts/Greta_Arabic_Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/Greta_Arabic_Regular.woff') format('woff'), url('../fonts/Greta_Arabic_Regular.otf') format("opentype");
 }
 
 
@@ -45,7 +45,7 @@ body {
     padding-top: 10px;
 }
 .navbar-nav > li > a > .label, .navbar-nav > li > a > .badge {
-    right: 5px;
+    left: 5px;
     position: absolute;
     top: 5px;
 }
@@ -70,7 +70,6 @@ body {
     padding:5px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
-        clear: both;
 }
 .actions a,.actions button.btn-default,.actions .select2,.actions select{
     margin: 2px;
@@ -117,7 +116,7 @@ textarea{
     white-space: normal;
 }
 .tab-content .table-responsive .radio-inline,.tab-content .table-responsive .checkbox-inline{
-    padding-left:18px;
+    padding-right:18px;
 }
 .table.datatable-row-full  > thead > tr > th, .table.datatable-row-full > tbody > tr > th, .table.datatable-row-full > tfoot > tr > th, .table.datatable-row-full > thead > tr > td, .table.datatable-row-full > tbody > tr > td,.table.datatable-row-full > tfoot > tr > td{
     padding-left:4px;
@@ -219,7 +218,7 @@ textarea{
     margin: 5px;
 }
 .table .icon-move,.dragula-handle{
-    margin-right:5px;
+    margin-left:5px;
 
     color: #fff;
     padding: 10px;
@@ -238,10 +237,10 @@ textarea{
     transform:scale(1.11);
     -webkit-transform:scale(1.11);
     transform-origin:0 0;
-    -webkit-transform-origin:top left;
-    -moz-transform-origin:top left;
-    -o-transform-origin:top left;
-    -ms-transform-origin:top left;
+    -webkit-transform-origin:top right;
+    -moz-transform-origin:top right;
+    -o-transform-origin:top right;
+    -ms-transform-origin:top right;
 }
 .topSettings{
     background:#30303A;
@@ -255,8 +254,8 @@ textarea{
 }
 
 .modal-body .gu-mirror{
-right: auto !important;
-left: 50px !important;
+left: auto !important;
+right: 50px !important;
 }
 
 .modal-title .badge{
@@ -271,8 +270,8 @@ left: 50px !important;
     vertical-align: middle;
 }
 .checkbox-switchery .switchery{
-    right: 0px;
-    left: auto;
+    left: 0px;
+    right: auto;
 }
 .dropdown-menu-sortable li{
     padding: 0px 10px;
@@ -293,27 +292,27 @@ left: 50px !important;
     width: 100%;
 }
 .phoneNumber .intl-tel-input .country-list{
-    text-align: left;
+    text-align: right;
 }
 
 .phoneNumber .intl-tel-input.allow-dropdown input,.phoneNumber .intl-tel-input.allow-dropdown input[type="text"],.phoneNumber .intl-tel-input.allow-dropdown input[type="tel"] {
-    margin-left: 0;
-    padding-left: 52px;
-    padding-right 6px;
-    text-align: left;
+    margin-right: 0;
+    padding-right: 52px;
+    padding-left: 6px;
+    text-align: right;
     direction: ltr;
 }
 
 .phoneNumber .intl-tel-input .selected-flag .iti-arrow{
-    left: auto;
-    right: 6px;
+    right: auto;
+    left: 6px;
 }
 .phoneNumber .intl-tel-input .selected-flag {
-    padding: 0 0px 0 8px;
+    padding: 0 8px 0 0px;
 }
 .phoneNumber .intl-tel-input .country-list .flag-box,.phoneNumber .intl-tel-input .country-list .country-name {
-    margin-left: 0px;
-    margin-right: 6px;
+    margin-right: 0px;
+    margin-left: 6px;
     display: inline-block;
 }
 .dataTable tbody > tr:first-child > th, .dataTable tbody > tr:first-child > td {
@@ -332,11 +331,11 @@ left: 50px !important;
 }
 .dataTables_length {
     display: inline-block;
-    float: left !important;
+    float: right !important;
     margin: -5px 20px 20px;
 }
 .dataTables_info {
-    float: left !important;
+    float: right !important;
     display: inline;
 }
 .advanced-search{
@@ -374,10 +373,10 @@ left: 50px !important;
 }
 
 .iti-mobile .intl-tel-input .country-list .country {
-    text-align: left;
+    text-align: right;
 }
 .intl-tel-input .country-list .country .dial-code {
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .fileupload{
@@ -387,14 +386,14 @@ left: 50px !important;
 .uploadCoverImg{
     position: absolute;
     top: 5px;
-    left: 0px;
+    right: 0px;
 
 }
 .uploadCoverImg .btn{
     margin:0px 5px;
 }
 .uploadCoverImg .btn-group > .btn:first-child {
-    margin-left: 5px;
+    margin-right: 5px;
 }
 .fileupload .thumbnail.coverImg > img{
     max-width: 100%;
@@ -429,7 +428,7 @@ hr{
     margin-top: 10px;
 }
 .cropit-preview-image,.cropit-preview-background{
-    float: right;
+    float: left;
 }
 /* Hide file input */
 input.cropit-image-input {
@@ -479,14 +478,14 @@ input.cropit-image-zoom-input {
     font-size: 24px;
     position: absolute;
     top: -6px;
-    right: -8px;
+    left: -8px;
     color: #ccc;
 
 }
 .smallIcon{
     position: absolute;
     top: -2px;
-    left: 0px;
+    right: 0px;
     color: #ccc;
 }
 .rotation-btns span:hover{
@@ -496,13 +495,13 @@ input.cropit-image-zoom-input {
 .userProfileData{
     position: relative;
     min-height: 300px;
-    padding-left: 310px;
+    padding-right: 310px;
 }
 
 .userProfileData .thumbnail{
     position: absolute;
     top: 0px;
-    left: 0px;
+    right: 0px;
     width: 300px;
     display: inline-block;
 }
@@ -523,7 +522,7 @@ input.cropit-image-zoom-input {
     padding-top: 20px;
 }
 .pac-item{
-    text-align: left !important;
+    text-align: right !important;
     color: #54D582;
 }
 
@@ -670,7 +669,7 @@ input[type="range"]::-ms-thumb {
     background: #fff;
     color: #333;
     padding:5px 10px;
-    margin-right: 5px;
+    margin-left: 5px;
     border:1px solid #eee;
 }
 .LibraryFilter li.filterActive{
@@ -692,8 +691,8 @@ input[type="range"]::-ms-thumb {
     height: 20px;
 }
 .has-feedback-left .custom-combobox .form-control-feedback {
-  right: auto;
-  left: 0px;
+  left: auto;
+  right: 0px;
 }
 .actions .uploader:hover .action,.actions .uploader:focus .action {
   box-shadow: none;
@@ -756,8 +755,9 @@ input[type="range"]::-ms-thumb {
   z-index: 11;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   overflow: hidden;
+  direction: rtl;
 }
 .social-links{
     list-style: none;
@@ -768,34 +768,13 @@ input[type="range"]::-ms-thumb {
 
 .socialPath{
     margin:0px 0px 20px;
-    direction: rtl;
 }
-
 .socialPath input{
     text-align: left;
 }
-
-
-ul.social-links .socialPath button.btn{
-      border-radius: 3px !important;
-    direction: ltr ;
-     border: 1px solid #ddd !important;
-        border-bottom-right-radius: 0 !important;
-    border-top-right-radius: 0 !important;
+.socialPath button{
+    direction: ltr;
 }
-ul.social-links .socialPath input.form-control{
-      border-radius: 3px !important;
-     border: 1px solid #ddd !important;
-        border-bottom-left-radius: 0 !important;
-    border-top-left-radius: 0 !important;
-}
-
-
-.socialPath .input-group-btn:last-child > .btn,.socialPath .input-group-btn:last-child > .btn-group {
-  margin-right: -1px;
-    margin-left: 0px;
-}
-
 .socialPath button:hover{
     cursor: default;
 }
@@ -804,7 +783,7 @@ ul.social-links .socialPath input.form-control{
 }
 
 .fc-event{
-    text-align:left;
+    text-align:right;
 }
 .advanced-map {
     padding:15px;
@@ -842,7 +821,7 @@ table td.text-right{
     color: #FD9B60;
 }
 .c3-tooltip td > span{
-    margin-left: 6px;
+    margin-right: 6px;
 }
 /* responsive style ----------------------------------------------------------------- */
 /* Large Devices, Wide Screens */
@@ -858,7 +837,7 @@ table td.text-right{
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
     .userProfileData{
-        padding-left: 0px;
+        padding-right: 0px;
     }
     .userProfileData .thumbnail{
         position: static;
@@ -866,6 +845,8 @@ table td.text-right{
     .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td{
         white-space: nowrap;
     }
+
+
 }
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
@@ -927,7 +908,7 @@ table td.text-right{
     transition: none !important;
     }
     .dataTable thead .sorting, .dataTable thead .sorting_asc, .dataTable thead .sorting_desc, .dataTable thead .sorting_asc_disabled, .dataTable thead .sorting_desc_disabled {
-  padding-left:10px;
+  padding-right:10px;
 }
 
 .datatable-scroll th, .datatable-scroll td {
@@ -957,7 +938,7 @@ table td.text-right{
     display: inline-block;
 }
 .heading-elements{
-    right:10px;
+    left:10px;
 }
 .page-container {
   min-height: 100px !important;
@@ -976,6 +957,7 @@ table td.text-right{
 .imageRow .media-left,.imageRow .media-right,.imageRow .media-body{
     vertical-align: top;
 }
+
 .imageRow .media-left img{
     width: 100px;
     height: 100px;
@@ -992,6 +974,7 @@ table td.text-right{
 .historyHeader li{
     font-size: 15px;
 }
+
 .c3 svg{
     margin: 0 auto;
 }
@@ -1000,10 +983,10 @@ table td.text-right{
 }
 
 .popover-content .btn{
-    margin-right: 5px;
+    margin-left: 5px;
 }
 .popover-content .btn-block{
-    margin-right: 0px;
+    margin-left: 0px;
 }
 
 .actions .checkbox,.actions .checkbox-inline,.actions .radio,.actions .radio-inline {
@@ -1015,8 +998,13 @@ table td.text-right{
   top: 9px;
 }
 
+
 .datePickerSearch{
     min-width: 300px !important;
+}
+.phoneNumberLtr{
+    text-align: right;
+    direction: ltr;
 }
 .table tr th .form-group{
     margin-bottom: 0px;
@@ -1027,7 +1015,6 @@ table td.text-right{
 .table .checkbox .checker, .table .checkbox-inline .checker{
     top: -9px;
 }
-
 
 /* numbers dashboard ------------------------------------------------------------------------  */
 ul.db-numbers{
@@ -1043,7 +1030,7 @@ ul.db-numbers .btn{
 ul.db-numbers span{
     font-size: 30px;
     display: inline-block;
-    margin-right: 5px;
+    margin-left: 5px;
 }
 
 ul.summaryList{
@@ -1067,6 +1054,7 @@ ul.summaryList > li.calendarInput{
 }
 .bootstrap-datetimepicker-widget.dropdown-menu{
     min-width: 270px;
+
 }
 
 .label{
@@ -1075,7 +1063,7 @@ ul.summaryList > li.calendarInput{
 
 .resultsNumber{
     font-size:24px;
-    margin-right: 10px;
+    margin-left: 10px;
     min-width: 70px;
 }
 
@@ -1097,7 +1085,7 @@ ul.summaryList > li.calendarInput{
 .resultsCharts .chart-container{
        border-radius: 5px;
     border:1px solid #eee;
-    margin-bottom: 20px;
+        margin-bottom: 20px;
 }
 .questionNumber{
     width: 40px;
@@ -1107,25 +1095,5 @@ ul.summaryList > li.calendarInput{
     line-height: 40px;
     display: inline-block;
     text-align: center;
-    margin-right: 10px;
-}
-
-.label.totalHours{
-    color: #333;
-    position: relative;
-    top: -10px;
-}
-.label.totalHours span{
-    font-size: 24px;
-}
-.totalHoursDay{
-      color: #333;
-}
-#datetimepicker1{
-    float: left;
-    max-width: 180px;
-    position: relative;
-    top: -10px;
-    margin-right: 10px;
     margin-left: 10px;
 }

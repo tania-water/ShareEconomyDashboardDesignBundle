@@ -19493,13 +19493,13 @@ thead .htCollapseButton:after {
   .heading-elements .heading-thumbnails,
   .heading-elements > .btn-group {
     float: right;
-    margin-right: 15px;
+    margin-right: 20px;
   }
   .heading-elements .heading-text {
     display: inline-block;
   }
   .heading-elements .heading-text + .heading-text {
-    margin-right: 15px;
+    margin-right: 20px;
   }
   .heading-elements .selectbox-fixed + .selectboxit-container,
   .heading-elements .selectbox-fixed + .selectboxit-options,
