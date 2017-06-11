@@ -58,9 +58,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00598F', end
        background:#E5077D;
        border-color: #E5077D;;
 }
-.table > thead > tr > th {
-    border-bottom: 2px solid #E5077D;
-}
+
 .pace .pace-progress{
     background:#E5077D;
 }
@@ -111,4 +109,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00598F', end
 }
 .navbar-inverse,.searchauto,.actionButtons,.LibraryFilter li.filterActive{
     background-color: #00598F;
+}
+
+.sidebar .sidebar-content{
+    background: #06466b;
+}
+.navigation > li.active > a, .navigation > li.active > a:hover, .navigation > li.active > a:focus{
+    background: #E5077D;
 }

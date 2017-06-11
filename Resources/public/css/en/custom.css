@@ -1129,3 +1129,9 @@ ul.summaryList > li.calendarInput{
     margin-right: 10px;
     margin-left: 10px;
 }
+
+@media (min-width: 769px) {
+ .sidebar-fixed-expanded  .fixednav.content-wrapper {
+    padding-right:0px;
+  }
+}
