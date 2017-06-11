@@ -32,13 +32,81 @@
 
                 <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'custom.css') }}" rel="stylesheet" type="text/css">
                 <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ currentTheme ~ '.css') }}" rel="stylesheet" type="text/css">
+
+                {% if enableLargeSidebar %}
+                <style>
+                    .page-container{
+                        padding: 0px;
+                    }
+                    @media (min-width: 769px){
+                        .navbar-top {
+                            padding-top: 60px;
+                        }
+                    }
+                    @media (min-width: 769px){
+                        .sidebar {
+                            width: 260px;
+                            padding-left: 0px;
+                        }
+                    }
+                    .sidebar-content{
+                        border-radius: 0px;
+                    }
+
+                    .content {
+                        padding: 0 20px 60px 20px;
+                    }
+
+                    @media (min-width: 769px) {
+                        .sidebar-fixed .sidebar-content {
+                            position: fixed;
+                            width: 260px;
+                            max-height: 100%;
+                            overflow: auto;
+                            top: 60px;
+                            bottom: 48px;
+                            margin-bottom: -48px;
+                        }
+                        .sidebar-xs .sidebar-fixed.sidebar-main .sidebar-content {
+                            width: 56px;
+                        }
+                        .sidebar-fixed.sidebar-default .sidebar-content {
+                            width: 259px;
+                        }
+                        .sidebar-fixed-expanded .sidebar-fixed.sidebar-main {
+                            position: fixed;
+                            display: block;
+                            height: 100%;
+                            z-index: 1001;
+                        }
+                        .sidebar-fixed-expanded .sidebar-fixed.sidebar-main .sidebar-content {
+                            position: fixed;
+                        }
+                        .sidebar-xs .sidebar-fixed-expanded .sidebar-fixed.sidebar-main {
+                            width: 260px;
+                        }
+
+                    }
+
+                    .navbar-header {
+                        min-width: 250px;
+                    }
+                    @media (min-width: 769px){
+                        .sidebar-xs .sidebar-main {
+                            width: 56px;
+                        }
+                    }
+
+                </style>
+                {% endif %}
+
             {% endblock %}
         </head>
 
-        <body>
+        <body{% if enableLargeSidebar %} class="navbar-top"{% endif %}>
             {% block header %}
                 <!-- Main navbar -->
-                <div class="navbar navbar-inverse">
+                <div class="navbar navbar-inverse{% if enableLargeSidebar %} navbar-fixed-top{% endif %}">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{{ path('ibtikar_share_economy_dashboard_design_dashboard_home') }}"><img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/logo-1.png') }}" alt=""></a>
 
@@ -49,6 +117,12 @@
                     </div>
 
                     <div class="navbar-collapse collapse" id="navbar-mobile">
+                        {% if enableLargeSidebar %}
+                        <ul class="nav navbar-nav">
+                            <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+                        </ul>
+                        {% endif %}
+
                         {% block headerNotification %}
                         {% endblock headerNotification %}
 
@@ -90,6 +164,7 @@
             {% endblock %}
             <!-- /main navbar -->
             {% block navbar %}
+                {% if not enableLargeSidebar %}
                 <!-- Second navbar -->
                 <div class="navbar navbar-default" id="navbar-second">
                     <ul class="nav navbar-nav no-border visible-xs-block">
@@ -105,6 +180,7 @@
                         </ul>
                     </div>
                 </div>
+                {% endif %}
                 <!-- /second navbar -->
             {% endblock%}
 
@@ -143,6 +219,9 @@
     <!-- alerts messages -->
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/notifications/pnotify.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/pages/components_notifications_pnotify.js') }}"></script>
+    {% if enableLargeSidebar %}
+    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/pages/layout_fixed_custom.js') }}"></script>
+    {% endif %}
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/jquery.easing.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/dev/base.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/app.js') }}"></script>

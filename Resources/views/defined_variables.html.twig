@@ -8,6 +8,7 @@
 {% set defaultLocale = dashboardDefaultLocale is defined ? dashboardDefaultLocale : 'ar' %}
 {% set locale = app.request.locale and app.request.locale in supportedLocales ? app.request.locale : defaultLocale %}
 {% set projectName = projectName is defined ? projectName : 'logo' %}
+{% set enableLargeSidebar = enableLargeSidebar is defined ? enableLargeSidebar : false %}
 
 {# pages content #}
 {% block page %}{% endblock %}

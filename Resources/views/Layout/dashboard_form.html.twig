@@ -10,7 +10,12 @@
 {% endblock %}
 
 {% block body %}
-                <div class="content-wrapper">
+        <!-- Main content -->
+        <div class="content-wrapper{% if enableLargeSidebar %} fixednav{% endif %}">
+
+                {% if enableLargeSidebar %}
+                <div class="content">
+                {% endif %}
                     {% if breadcrumb is defined and breadcrumb|length > 0 %}
                     <!-- Basic button -->
                     <div class="content-group">
@@ -60,7 +65,10 @@
                             </div>
                         </div>
                     </div>
+                {% if enableLargeSidebar %}
                 </div>
+                {% endif %}
+        </div>
 {% endblock %}
 
 {% block form_buttons %}

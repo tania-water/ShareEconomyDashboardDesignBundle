@@ -11,7 +11,11 @@
 
 {% block body %}
     <!-- Main content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper{% if enableLargeSidebar %} fixednav{% endif %}">
+
+        {% if enableLargeSidebar %}
+        <div class="content">
+        {% endif %}
             <!-- Basic button -->
             <div class="content-group">
                 <div class="heading-elemnts">
@@ -216,8 +220,11 @@
         </div><!-- col-lg-9 tabs -->
     </div>
     <!-- /dashboard content -->
+    {% if enableLargeSidebar %}
 </div>
+    {% endif %}
 <!-- /main content -->
+</div>
 
 {{ form(action_form, {'attr':{'class':'hidden', 'id':'action_form'} }) }}
 {% endblock %}
