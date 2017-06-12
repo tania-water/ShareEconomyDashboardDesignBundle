@@ -38,6 +38,7 @@
 //        filesize: $.validator.format('يجب الا يزيد حجم الصوره عن {0} ميجا'),
 //        dimensions: 'يجب الا تقل ابعاد الصورة عن 200*200',
         phone: 'Phone number is not valid',
+        decimal: 'Please enter a correct number, format xxxx.xx',
         imageRequired : 'Photo is required',
         letters : 'Please enter letters only',
         imageDimensions : 'Image dimensions must be greater than {0}*{0}',
