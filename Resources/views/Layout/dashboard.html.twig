@@ -174,9 +174,13 @@
                     <div class="navbar-collapse collapse" id="navbar-second-toggle">
                         <ul class="nav navbar-nav">
                             <li><a href="{{ path('ibtikar_share_economy_dashboard_design_dashboard_home') }}"><i class="icon-display4 position-left"></i>{% trans %}Dashboard{% endtrans %}</a></li>
+                {% endif %}
                             {% block nav_bar_menu %}
+                                {% if not enableLargeSidebar %}
                                 {{ render(controller('IbtikarShareEconomyDashboardDesignBundle:NavBar:getNavBarAdditionalLinks')) }}
+                                {% endif %}
                             {% endblock %}
+                {% if not enableLargeSidebar %}
                         </ul>
                     </div>
                 </div>
