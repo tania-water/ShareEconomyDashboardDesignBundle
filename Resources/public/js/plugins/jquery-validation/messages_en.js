@@ -39,6 +39,7 @@
 //        dimensions: 'يجب الا تقل ابعاد الصورة عن 200*200',
         phone: 'Phone number is not valid',
         decimal: 'Please enter a correct number, format xxxx.xx',
+        alphaNum: 'This value should contain letters or numbers',
         imageRequired : 'Photo is required',
         letters : 'Please enter letters only',
         imageDimensions : 'Image dimensions must be greater than {0}*{0}',

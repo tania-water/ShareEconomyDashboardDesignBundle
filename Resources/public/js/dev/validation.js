@@ -46,6 +46,18 @@ $.validator.addMethod('email', function(value, element) {
     return false;
 }, $.validator.format('Please enter a valid email address.'));
 
+$.validator.addMethod('alphaNum', function (value, element) {
+    var unicodeWord = "^[a-zA-Z0-9\u0600-\u06ff\-]{0,}$";
+    var match = value.match(unicodeWord);
+    if (match == null) {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}, $.validator.format('This value only allows letters or numbers'));
+
 $.validator.addMethod('decimal', function(value, element) {
     return this.optional(element) || /^[0-9,]+(\.\d{0,2})?$/.test(value);
 }, "Please enter a correct number, format xxxx.xx");
