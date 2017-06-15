@@ -326,6 +326,12 @@
             $(this).css('cursor','pointer');
         });
 
+        $("body").on("hover","[data-clickable]",
+            function () {
+                $(this).css('cursor','pointer');
+            }
+        );
+
     </script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/dev/ajaxifyList.js') }}"></script>
     <script>
