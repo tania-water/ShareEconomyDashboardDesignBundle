@@ -179,3 +179,73 @@
 
 {% endspaceless %}
 {% endblock phone_widget %}
+
+{% block polygon_widget %}
+    {% spaceless %}
+        {% if google_api_key is defined %}
+        <div id="{{ id }}_map" style="height: 500px;"></div>
+        <input {{ block('widget_attributes') }} type="hidden" value="{{ value }}" />
+        <script>
+            var map_{{ id }};
+            function init{{ id }}Map() {
+                var map_{{ id }} = new google.maps.Map(document.getElementById('{{ id }}_map'), {
+                    center: {lat: 23.9373976, lng: 46.3789852},
+                    zoom: 9
+                });
+                var drawingManager = new google.maps.drawing.DrawingManager({
+                    drawingMode: {{ value ? 'null' : 'google.maps.drawing.OverlayType.POLYGON' }},
+                    drawingControl: {{ value ? 'false' : 'true' }},
+                    drawingControlOptions: {
+                        position: google.maps.ControlPosition.TOP_CENTER,
+                        drawingModes: ['polygon']
+                    }
+                });
+                drawingManager.setMap(map_{{ id }});
+                function updatePolygonData(polygon) {
+                    var vertices = polygon.getPath();
+                    var polygonCoordinations = [];
+                    for (var i = 0; i < vertices.getLength(); i++) {
+                        var xy = vertices.getAt(i);
+                        polygonCoordinations.push({lat: xy.lat(), lng: xy.lng()});
+                    }
+                    document.getElementById('{{ id }}').value = JSON.stringify(polygonCoordinations);
+                }
+                function attachListenersToPolygon(polygon) {
+                    google.maps.event.addListener(polygon, 'dragend', function () {
+                        updatePolygonData(polygon);
+                    });
+                    google.maps.event.addListener(polygon.getPath(), 'set_at', function () {
+                        updatePolygonData(polygon);
+                    });
+                    google.maps.event.addListener(polygon.getPath(), 'remove_at', function () {
+                        updatePolygonData(polygon);
+                    });
+                    google.maps.event.addListener(polygon.getPath(), 'insert_at', function () {
+                        updatePolygonData(polygon);
+                    });
+                }
+                {% if value %}
+                var mapPolygon = new google.maps.Polygon({
+                    paths: JSON.parse('{{ value|raw }}'),
+                    editable: true,
+                    draggable: true,
+                    geodesic: true
+                });
+                mapPolygon.setMap(map_{{ id }});
+                attachListenersToPolygon(mapPolygon);
+                {% else %}
+                google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
+                    drawingManager.setOptions({drawingMode: null, drawingControl: false});
+                    polygon.setOptions({editable: true, draggable: true, geodesic: true});
+                    attachListenersToPolygon(polygon);
+                    updatePolygonData(polygon);
+                });
+                {% endif %}
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=drawing&callback=init{{ id }}Map" async defer></script>
+        {% else %}
+            <div>Please define google_api_key in twig global variables</div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

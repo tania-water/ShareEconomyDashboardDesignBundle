@@ -84,7 +84,11 @@
     {{ parent() }}
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/forms-layout.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/forms/selects/select2.min.js') }}"></script>
+        {% if app.session.get('_locale') == 'en' %}
+            <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/forms/selects/select2.min.js') }}"></script>
+        {% else %}
+            <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/forms/selects/select2_ar.min.js') }}"></script>
+        {% endif %}
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/date/moment.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/date/bootstrap-datetimepicker.min.js') }}"></script>
         <script>
