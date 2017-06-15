@@ -316,21 +316,10 @@
             }
         });
 
-        $('body').delegate('[data-clickable] td:not(.dev-list-actions a)', 'click', function (ev) {
-            window.document.location = $(this).parent().attr("data-clickable");
+        $(document).on('mouseenter','[data-clickable]',function(e){
+          $(this).css('cursor','pointer');
         });
 
-//        $('body').delegate('[data-clickable] td', 'hover', function (ev) {
-        $('[data-clickable]').hover(function () {
-
-            $(this).css('cursor','pointer');
-        });
-
-        $("body").on("hover","[data-clickable]",
-            function () {
-                $(this).css('cursor','pointer');
-            }
-        );
 
     </script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/dev/ajaxifyList.js') }}"></script>
