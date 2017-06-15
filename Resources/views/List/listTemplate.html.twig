@@ -104,7 +104,7 @@
 </thead>
 <tbody>
     {% for entity in list.pagination %}
-        <tr>
+        <tr {% if list.isClickableRow %}data-clickable="{{ path(list.className|lower~'_details', {id:entity.id}) }}"{% endif %}>
             {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', {'entity': entity}) }}
 
             {% for column in list.columns %}

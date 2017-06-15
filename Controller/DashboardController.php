@@ -23,6 +23,8 @@ class DashboardController extends Controller
 
     protected $listActions = array();
 
+    protected $isClickableRow = false;
+
     /**
      * path to the template which contains the additional actions.
      * the row entity will passed to the template as "entity".
@@ -337,6 +339,9 @@ class DashboardController extends Controller
             $columnArray[]='actions';
             $datatableColumnsIndex++;
         }
+        if($this->isClickableRow){
+            $columnArray[] = 'isClickableRow';
+        }
         $paginationSort = null;
         if($sort)
             $paginationSort = json_encode(array($sortIndex, $sortOrder));
@@ -382,6 +387,7 @@ class DashboardController extends Controller
             'pagesOffset' => $offset,
             'defaultDateFormat' => $this->defaultDateFormat,
             'isSearchable' => $this->isSearchable,
+            'isClickableRow' => $this->isClickableRow,
             'sort' => $paginationSort
         );
     }
@@ -404,6 +410,11 @@ class DashboardController extends Controller
 
                 if ($value == 'actions') {
                     $oneEntity['actions'] = $this->renderView('IbtikarShareEconomyDashboardDesignBundle:List:_listActions.html.twig', $templateVars);
+                    continue;
+                }
+
+                if ($value == 'isClickableRow') {
+                    $oneEntity['isClickableRow'] = $this->generateUrl(strtolower($this->className).'_details', array('id' => $entity->getId()));
                     continue;
                 }
 
@@ -667,5 +678,30 @@ class DashboardController extends Controller
         }
 
         return $return;
+    }
+
+    public function detailsAction(Request $request, $id)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $entity = $em->getRepository($this->entityBundle.":".$this->className)->findOneBy(array('id'=>$id));
+        if(!$entity){
+            return $this->notExistsEntityAfterEdit();
+        }
+
+        if ($this->get('templating')->exists($this->entityBundle.':Details:'.strtolower($this->className).'.html.twig'))
+            $template = $this->entityBundle.':Details:'.strtolower($this->className).'.html.twig';
+        else if ($this->get('templating')->exists($this->entityBundle.':Details:details.html.twig'))
+            $template = $this->entityBundle.':Details:details.html.twig';
+        else
+            $template = 'IbtikarShareEconomyDashboardDesignBundle:Details:details.html.twig';
+
+        return $this->render($template, array(
+            'translationDomain' => $this->translationDomain,
+            'title' => $this->get('translator')->trans(strtolower($this->className).'_details', array(), $this->translationDomain),
+            'className' => $this->className,
+            'detailsPageData' => $this->detailsPageData,
+            'entity' => $entity
+            )
+        );
     }
 }

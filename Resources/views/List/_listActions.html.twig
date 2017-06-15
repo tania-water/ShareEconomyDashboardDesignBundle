@@ -1,5 +1,5 @@
 {% if list.actions | length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
-    <td class="text-center" style="white-space: nowrap;">
+    <td class="text-center dev-list-actions" style="white-space: nowrap;">
         {% for action, actionParams in list.actions %}
             {% if action == 'edit' %}
                 {% if actionParams %}

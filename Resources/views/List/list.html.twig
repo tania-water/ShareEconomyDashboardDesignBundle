@@ -312,6 +312,14 @@
             }
         });
 
+        $('[data-clickable] td:not(.dev-list-actions a)').click(function () {
+            window.document.location = $(this).parent().attr("data-clickable");
+        });
+
+        $('[data-clickable]').hover(function () {
+            $(this).css('cursor','pointer');
+        });
+
     </script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/dev/ajaxifyList.js') }}"></script>
     <script>

@@ -2,6 +2,7 @@ var table;
 var callBack = false;
 var checkbox = false;
 var dataTableDefault = {
+
     "sPaginationType": "full_numbers",
     "bLengthChange": true,
     "iDisplayLength": limit,
@@ -102,6 +103,11 @@ var dataTableDefault = {
     columns: columns,
     dom: '<"datatable-scroll"t><"datatable-footer"lip>',
     language: listLanguage,
+    'createdRow': function( row, data, dataIndex ) {
+        if(data['isClickableRow'] != undefined){
+            $(row).attr('data-clickable', data['isClickableRow']);
+        }
+    },
     drawCallback: function () {
         if (layoutIsLeftDirection === true) {
             // Popover
