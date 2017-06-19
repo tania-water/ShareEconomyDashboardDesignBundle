@@ -1,6 +1,7 @@
 var table;
 var callBack = false;
 var checkbox = false;
+var currentPageNum;
 var dataTableDefault = {
 
     "sPaginationType": "full_numbers",
@@ -43,6 +44,12 @@ var dataTableDefault = {
                     searchValue.push($(this).val());
                 }
             });
+
+            if(currentPageNum)
+            {
+                table.page(currentPageNum);
+                currentPageNum = "";
+            }
             var page = parseInt(table.page(), 10) + parseInt(1, 10);
             var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + table.page.info().length;
 
@@ -454,6 +461,7 @@ $(document).ready(function () {
                 if ('message' in data && 'status' in data) {
                     showNotificationMsg('', data.message, data.status);
                 }
+                currentPageNum = table.page();
                 table.draw();
             }
         });
