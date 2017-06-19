@@ -188,7 +188,7 @@
         <script>
             var map_{{ id }};
             function init{{ id }}Map() {
-                var map_{{ id }} = new google.maps.Map(document.getElementById('{{ id }}_map'), {
+                map_{{ id }} = new google.maps.Map(document.getElementById('{{ id }}_map'), {
                     center: {lat: 23.9373976, lng: 46.3789852},
                     zoom: 9
                 });
@@ -225,14 +225,20 @@
                     });
                 }
                 {% if value %}
+                var polygonPath = JSON.parse('{{ value|raw }}');
                 var mapPolygon = new google.maps.Polygon({
-                    paths: JSON.parse('{{ value|raw }}'),
+                    paths: polygonPath,
                     editable: true,
                     draggable: true,
                     geodesic: true
                 });
                 mapPolygon.setMap(map_{{ id }});
                 attachListenersToPolygon(mapPolygon);
+                var polygonBounds = new google.maps.LatLngBounds();
+                for (var i = 0; i < polygonPath.length; i++) {
+                    polygonBounds.extend(new google.maps.LatLng(polygonPath[i]['lat'], polygonPath[i]['lng']));
+                }
+                map_{{ id }}.setCenter(polygonBounds.getCenter());
                 {% else %}
                 google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
                     drawingManager.setOptions({drawingMode: null, drawingControl: false});
