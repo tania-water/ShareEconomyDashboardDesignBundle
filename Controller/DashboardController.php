@@ -657,7 +657,7 @@ class DashboardController extends Controller
     }
 
     protected function prePostParametersEdit($entity){
-        return array();
+        return array('closeRedirection'=>$this->generateUrl(strtolower($this->preFix .$this->className) . '_list'));
     }
 
     /**
