@@ -263,7 +263,7 @@
         <div class="tabbable hide">
             <ul class="nav nav-tabs nav-tabs-highlight">
                 {% for modulesGroupData in modulesGroupsData %}
-                <li{% if loop.first %} class="active"{% endif %}><a href="#tab-{{ loop.index }}" data-toggle="tab"><span class="badge badge-primary position-left">{{ modulesGroupData.permissionsCount }}</span> {{ modulesGroupData.name|trans({}, 'role') }}</a></li>
+                <li{% if loop.first %} class="active"{% endif %}><a href="#tab-{{ loop.index }}" data-toggle="tab">{% if showModulesGroupsPermissionsCount %}<span class="badge badge-primary position-left">{{ modulesGroupData.permissionsCount }}</span> {% endif %}{{ modulesGroupData.name|trans({}, 'role') }}</a></li>
                 {% endfor %}
             </ul>
 

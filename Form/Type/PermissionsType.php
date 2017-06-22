@@ -26,6 +26,7 @@ class PermissionsType extends AbstractType
     {
         parent::configureOptions($resolver);
         $resolver->setRequired(array('modulesGroupsData'));
+        $resolver->setDefault('showModulesGroupsPermissionsCount', true);
     }
 
     /**
@@ -36,5 +37,6 @@ class PermissionsType extends AbstractType
         parent::buildView($view, $form, $options);
         $parentData = $form->getParent()->getData()->getPermissions();
         $view->vars['modulesGroupsData'] = $options['modulesGroupsData'];
+        $view->vars['showModulesGroupsPermissionsCount'] = $options['showModulesGroupsPermissionsCount'];
     }
 }
