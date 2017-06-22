@@ -255,3 +255,85 @@
         {% endif %}
     {% endspaceless %}
 {% endblock %}
+
+{% block permissions_widget %}
+    {% spaceless %}
+        <script src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/rolegrid.js') }}"></script>
+        {% if modulesGroupsData|length > 0 %}
+        <div class="tabbable hide">
+            <ul class="nav nav-tabs nav-tabs-highlight">
+                {% for modulesGroupData in modulesGroupsData %}
+                <li{% if loop.first %} class="active"{% endif %}><a href="#tab-{{ loop.index }}" data-toggle="tab"><span class="badge badge-primary position-left">{{ modulesGroupData.permissionsCount }}</span> {{ modulesGroupData.name|trans }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <div class="tab-content">
+                {% for modulesGroupData in modulesGroupsData %}
+                <div class="tab-pane{% if loop.first %} active{% endif %}" id="tab-{{ loop.index }}">
+                    <div class="table-responsive">
+                        <table class="table text-nowrap" style="border:1px solid #ddd">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
+                                    <th style="width: 200px;">{% trans from 'role' %}Name{% endtrans %}</th>
+                                    {% for permissionName in modulesGroupData.permissionsNames %}
+                                    <th style="width:50px" class="text-center">{{ permissionName|lower|trans({}, 'role') }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class="active border-double">
+                                    <td class="text-center">
+                                        <div class="form-group">
+                                            <label class="checkbox-inline">
+                                                <input id="group-{{ loop.index }}" type="checkbox" class="styled dev-module-group-input"{% if modulesGroupData.permissionsCount == modulesGroupData.selectedPermissionsCount %} checked="checked"{% endif %} />
+                                            </label>
+                                        </div>
+                                    </td>
+
+                                    <td colspan="{{ 1 + modulesGroupData.permissionsNames|length }}">
+                                        <span class="pull-left"><label for="group-{{ loop.index }}">{% trans from 'role' %}Select All{% endtrans %}</label></span>
+                                        <span class="badge badge-primary pull-right dev-module-group-selected-inputs-count">{{ modulesGroupData.selectedPermissionsCount }}</span>
+                                    </td>
+                                </tr>
+
+                                {% for moduleData in modulesGroupData.modulesData %}
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-group">
+                                            <label class="checkbox-inline">
+                                                <input id="{{ moduleData.name }}" type="checkbox" class="styled selectAllRow dev-module-input"{% if moduleData.permissionsCount == moduleData.selectedPermissionsCount %} checked="checked"{% endif %} />
+                                            </label>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="media-body">
+                                            <label for="{{ moduleData.name }}" class="display-inline-block text-default letter-icon-title">{{ moduleData.name|lower|trans({}, 'role')|replace({'-': ' '}) }}</label>
+                                        </div>
+                                    </td>
+
+                                    {% for permissionName in modulesGroupData.permissionsNames %}
+                                    <td class="text-center">
+                                        {% if moduleData['permissionsData'][permissionName] is defined %}
+                                        <div class="form-group">
+                                            <label class="checkbox-inline">
+                                                <input name="{{ full_name }}[]"{% if moduleData['permissionsData'][permissionName].selected %} checked="checked"{% endif %} value="{{ moduleData['permissionsData'][permissionName].permission }}" class="styled dev-permission-input" data-msg-mincheck="{{ 'You must have at least 1 Permission'|trans({}, 'role') }}" data-rule-mincheck="1" data-error-after-selector=".dev-page-main-form .tabbable" type="checkbox" />
+                                            </label>
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

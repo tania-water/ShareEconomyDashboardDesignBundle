@@ -66,10 +66,87 @@ class DashboardController extends Controller
 
     protected $listAdditionalVars = [];
 
+    protected $modulesGroups = array(
+    );
+    protected $internalPermissions = array(
+        'ROLE_ADMIN', 'ROLE_STAFF'
+    );
 
     public function __construct()
     {
 
+    }
+
+    /**
+     * Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
+     * @param array $selectedPermissions
+     * @return array
+     */
+    protected function getSystemModulesGroupsData(array $selectedPermissions = array())
+    {
+        $notFoundModules = array();
+        $modulesGroupsData = array();
+        foreach ($this->modulesGroups as $moduleGroupName => $modules) {
+            $modulesGroupsData[$moduleGroupName] = array(
+                'selectedPermissionsCount' => 0,
+                'permissionsCount' => 0,
+                'name' => $moduleGroupName,
+                'permissionsNames' => array(),
+                'modulesData' => array(),
+            );
+            foreach ($modules as $module) {
+                $modulesGroupsData[$moduleGroupName]['modulesData'][$module] = array(
+                    'selectedPermissionsCount' => 0,
+                    'permissionsCount' => 0,
+                    'name' => $module,
+                    'permissionsData' => array(),
+                );
+            }
+        }
+        if (!$this->container->hasParameter('permissions')) {
+            throw new \Exception('Please define permissions parameter');
+        }
+        $systemPermissions = $this->container->getParameter('permissions');
+        foreach ($this->internalPermissions as $permission) {
+            unset($systemPermissions[$permission]);
+        }
+        foreach ($systemPermissions as $permission => $subPermissions) {
+            // 0 => ROLE, 1 => module name, 2 => permission
+            $permissionNameParts = explode('_', $permission);
+            $moduleName = $permissionNameParts[1];
+            $permissionName = $permissionNameParts[2];
+            $permissionModuleGroupName = 'not found';
+            foreach ($this->modulesGroups as $moduleGroupName => $modules) {
+                if (in_array($moduleName, $modules)) {
+                    $permissionModuleGroupName = $moduleGroupName;
+                    break;
+                }
+            }
+            if ($permissionModuleGroupName !== 'not found') {
+                $modulesGroupsData[$moduleGroupName]['permissionsCount'] ++;
+                $modulesGroupsData[$moduleGroupName]['permissionsNames'][$permissionName] = $permissionName;
+                $modulesGroupsData[$moduleGroupName]['modulesData'][$moduleName]['permissionsCount'] ++;
+                $selectedPermission = in_array($permission, $selectedPermissions);
+                if ($selectedPermission) {
+                    $modulesGroupsData[$moduleGroupName]['selectedPermissionsCount'] ++;
+                    $modulesGroupsData[$moduleGroupName]['modulesData'][$moduleName]['selectedPermissionsCount'] ++;
+                }
+                $modulesGroupsData[$moduleGroupName]['modulesData'][$moduleName]['permissionsData'][$permissionName] = array(
+                    'selected' => $selectedPermission,
+                    'permission' => $permission,
+                );
+            } else {
+                if (!isset($notFoundModules[$moduleName])) {
+                    $notFoundModules[$moduleName] = array();
+                }
+                $notFoundModules[$moduleName] [] = $permission;
+            }
+        }
+//        echo "<pre style=\"border: 1px solid #000; overflow: auto; margin: 0.5em;\">";
+//        var_dump($notFoundModules);
+//        echo "</pre>\n";
+//        exit;
+        return $modulesGroupsData;
     }
 
     /**
