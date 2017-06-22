@@ -13,14 +13,14 @@ function initializeGrid() {
                 var $this = $(this);
                 $this.parents('tbody').find('.dev-permission-input, .dev-module-input').prop('checked', $this.is(':checked'));
                 correctGridModuleGroupSelectdPermissionsCount($this);
-                $('.dev-page-main-form').valid();
+                $('.dev-js-validation').valid();
             });
             $('body').on('change', '.dev-module-input', function () {
                 var $this = $(this);
                 $this.parents('tr').find('.dev-permission-input').prop('checked', $this.is(':checked'));
                 correctGroupModuleInputValue($this);
                 correctGridModuleGroupSelectdPermissionsCount($this);
-                $('.dev-page-main-form').valid();
+                $('.dev-js-validation').valid();
             });
             $('body').on('change', '.dev-permission-input', function () {
                 var $this = $(this);

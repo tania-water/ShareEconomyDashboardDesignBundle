@@ -258,9 +258,9 @@
 
 {% block permissions_widget %}
     {% spaceless %}
-        <script src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/rolegrid.js') }}"></script>
+        <script src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/dev/rolegrid.js') }}"></script>
         {% if modulesGroupsData|length > 0 %}
-        <div class="tabbable hide">
+        <div class="tabbable hide" id="{{ id }}">
             <ul class="nav nav-tabs nav-tabs-highlight">
                 {% for modulesGroupData in modulesGroupsData %}
                 <li{% if loop.first %} class="active"{% endif %}><a href="#tab-{{ loop.index }}" data-toggle="tab">{% if showModulesGroupsPermissionsCount %}<span class="badge badge-primary position-left">{{ modulesGroupData.permissionsCount }}</span> {% endif %}{{ modulesGroupData.name|trans({}, 'role') }}</a></li>
@@ -285,7 +285,7 @@
                             <tbody>
                                 <tr class="active border-double">
                                     <td class="text-center">
-                                        <div class="form-group">
+                                        <div style="margin-bottom: 35px;">
                                             <label class="checkbox-inline">
                                                 <input id="group-{{ loop.index }}" type="checkbox" class="styled dev-module-group-input"{% if modulesGroupData.permissionsCount == modulesGroupData.selectedPermissionsCount %} checked="checked"{% endif %} />
                                             </label>
@@ -301,7 +301,7 @@
                                 {% for moduleData in modulesGroupData.modulesData %}
                                 <tr>
                                     <td class="text-center">
-                                        <div class="form-group">
+                                        <div style="margin-bottom: 35px;">
                                             <label class="checkbox-inline">
                                                 <input id="{{ moduleData.name }}" type="checkbox" class="styled selectAllRow dev-module-input"{% if moduleData.permissionsCount == moduleData.selectedPermissionsCount %} checked="checked"{% endif %} />
                                             </label>
@@ -317,9 +317,9 @@
                                     {% for permissionName in modulesGroupData.permissionsNames %}
                                     <td class="text-center">
                                         {% if moduleData['permissionsData'][permissionName] is defined %}
-                                        <div class="form-group">
+                                        <div style="margin-bottom: 35px;">
                                             <label class="checkbox-inline">
-                                                <input name="{{ full_name }}[]"{% if moduleData['permissionsData'][permissionName].selected %} checked="checked"{% endif %} value="{{ moduleData['permissionsData'][permissionName].permission }}" class="styled dev-permission-input" data-msg-mincheck="{{ 'You must have at least 1 Permission'|trans({}, 'role') }}" data-rule-mincheck="1" data-error-after-selector=".dev-page-main-form .tabbable" type="checkbox" />
+                                                <input name="{{ full_name }}[]"{% if moduleData['permissionsData'][permissionName].selected %} checked="checked"{% endif %} value="{{ moduleData['permissionsData'][permissionName].permission }}" class="styled dev-permission-input" data-msg-mincheck="{{ 'You must have at least 1 Permission'|trans({}, 'validators') }}" data-rule-mincheck="1" data-error-after-selector="#{{ id }}" type="checkbox" />
                                             </label>
                                         </div>
                                         {% endif %}
