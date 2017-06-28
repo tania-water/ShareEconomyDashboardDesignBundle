@@ -42,7 +42,7 @@
                        "><i class="{% if activate == 'false' %}icon-user-block{% else %}icon-user-check{% endif %}" data-popup="tooltip" title="{% if activate == 'false' %}{{('Deactivate')|trans}}{% else %}{{('Activate')|trans}}{% endif %}" data-placement="right"></i></a>
                 {% endif %}
                 {% if action == 'view' %}
-                <a class="btn btn-default" href="{{ path(actionParams , {'id': entity.id}) }}"  ><i class="icon-eye" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="bottom"></i></a>
+                <a class="btn btn-default" href="{{ path(actionParams , {'id': entity.id}) }}"  ><i class="icon-eye" data-popup="tooltip" title="{{ ('View')|trans}}" data-placement="top"></i></a>
                 {% endif %}
         {% endfor %}
 
