@@ -24,6 +24,7 @@ class DashboardController extends Controller
     protected $listActions = array();
 
     protected $isClickableRow = false;
+    protected $clickableRowRouteName = null;
 
     /**
      * path to the template which contains the additional actions.
@@ -465,6 +466,7 @@ class DashboardController extends Controller
             'defaultDateFormat' => $this->defaultDateFormat,
             'isSearchable' => $this->isSearchable,
             'isClickableRow' => $this->isClickableRow,
+            'clickableRowRouteName' => $this->clickableRowRouteName,
             'sort' => $paginationSort
         );
     }
