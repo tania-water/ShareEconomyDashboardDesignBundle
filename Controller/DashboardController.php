@@ -493,7 +493,7 @@ class DashboardController extends Controller
                 }
 
                 if ($value == 'isClickableRow') {
-                    $oneEntity['isClickableRow'] = $this->generateUrl(strtolower($this->className).'_details', array('id' => $entity->getId()));
+                    $oneEntity['isClickableRow'] = $this->clickableRowRouteName ? $this->generateUrl($this->clickableRowRouteName, array('id' => $entity->getId())) : $this->generateUrl(strtolower($this->className).'_details', array('id' => $entity->getId()));
                     continue;
                 }
 
