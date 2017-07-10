@@ -115,6 +115,10 @@
                         {% set value = attribute(entity, column[0]) %}
                     {% endif %}
 
+                    {% if column[1].translate is defined and column[1].translate %}
+                        {% set value = value|trans({}, list.translationDomain) %}
+                    {% endif %}
+
                     {% if column[1].type is defined and column[1].type != 'text' %}
                         {% if column[1].type == 'date' %}
                             {{ value|date(list.defaultDateFormat) }}

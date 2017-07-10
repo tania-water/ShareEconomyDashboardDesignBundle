@@ -533,6 +533,10 @@ class DashboardController extends Controller
                         $oneEntity[$value[0]] = $fieldData;
                     }
                 }
+
+                if(isset($value[1]['translate']) && $value[1]['translate'])
+                      $oneEntity[$value[0]] = $this->get('translator')->trans($oneEntity[$value[0]], array(), $this->translationDomain);
+
             }
 
             $entityObjects[] = $oneEntity;
