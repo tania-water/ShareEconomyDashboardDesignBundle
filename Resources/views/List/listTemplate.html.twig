@@ -32,7 +32,7 @@
                         {% else %}
                             {%set searchCol = column[0] %}
                         {% endif %}
-                        <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}{% if column[1].selectSearch is defined %}selectSearch{% endif%}" data-name="{{searchCol}}">{% if column[1].selectSearch is not defined %}{{ colName|humanize|title|trans({}, list.translationDomain) }}{% endif%}
+                        <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}{% if column[1].selectSearch is defined %}selectSearch{% endif%} {% if column[1].removeDatatableSearch is defined %}notSearchable{% endif %}" data-name="{{searchCol}}">{% if column[1].selectSearch is not defined %}{{ colName|humanize|title|trans({}, list.translationDomain) }}{% endif%}
                             {% if column[1].selectSearch is defined %}
                                 <select class="dev-search-input filter-select">
                                     <option value="">{{('All')|trans()}}</option>

@@ -326,24 +326,13 @@ class DashboardController extends Controller
             $query = $query->addOrderBy('e.'.$sort, $sortOrder);
 
         if($request->get('searchKey')){
-            $andX = new Andx();
+           
             $searchKey = json_decode($request->get('searchKey'));
             $searchValue = json_decode($request->get('searchValue'));
-
+ 
             if(count($searchKey) == count($searchValue)){
-                for($i=0; $i<count($searchKey); $i++){
-                    if(in_array($searchKey[$i], $this->listSearchColumns)){
-                        if (strpos($searchKey[$i], ".")){
-                            $andX->add($searchKey[$i]." like :searchValue".$i);
-                        }
-                        else{
-                            $andX->add("e.".$searchKey[$i]." like :searchValue".$i);
-                        }
-
-                        $query->setParameter(':searchValue'.$i, '%'.$searchValue[$i].'%');
-
-                    }
-                }
+                $andX = new Andx();
+                $this->appendSearchtoQuery($query,$andX,$searchKey,$searchValue);
                 if($andX->count()>0)
                     $query = $query->andWhere($query->expr()->andX($andX));
             }
@@ -469,6 +458,20 @@ class DashboardController extends Controller
             'clickableRowRouteName' => $this->clickableRowRouteName,
             'sort' => $paginationSort
         );
+    }
+
+    public function appendSearchtoQuery($query, $andX, $searchKey, $searchValue) {
+        for ($i = 0; $i < count($searchKey); $i++) {
+            if (in_array($searchKey[$i], $this->listSearchColumns)) {
+                if (strpos($searchKey[$i], ".")) {
+                    $andX->add($searchKey[$i] . " like :searchValue" . $i);
+                } else {
+                    $andX->add("e." . $searchKey[$i] . " like :searchValue" . $i);
+                }
+
+                $query->setParameter(':searchValue' . $i, '%' . $searchValue[$i] . '%');
+            }
+        }
     }
 
     public function getListJsonData($request, $renderingParams)
