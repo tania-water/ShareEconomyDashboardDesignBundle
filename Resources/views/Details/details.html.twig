@@ -33,36 +33,73 @@
                                     </div>
 
                                     <div class="panel-body">
-
                                         {% for property in detailsPageData %}
-                                            {% if property[1].name is defined %}
-                                                {%set propertyName = property[1].name %}
-                                            {% else %}
-                                                {%set propertyName = property[0] %}
-                                            {% endif %}
-
-                                            {% if property[1].method is defined %}
-                                                {% set value = attribute(entity, property[1].method) %}
-                                            {% else %}
-                                                {% set value = attribute(entity, property[0]) %}
-                                            {% endif %}
-
-                                            <div class="form-group">
-                                                <label class="control-label col-lg-2">{{ propertyName|humanize|title|trans({}, translationDomain) }}</label>
-                                                <div class="col-lg-10 {% if property[1].class is defined %}{{ property[1].class }}{% endif %}">
-                                                    {% if property[1].type is defined %}
-                                                        {% if property[1].type == 'image' %}
-                                                            <img width="200" height="200" src="{{ asset(attribute(entity, property[1].image)) }}" class="img-responsive" alt="" />
-                                                        {% elseif property[1].type == 'rating' %}
-                                                            <div class="rating">
-                                                                <div data-rating="{{ value }}"></div>
-                                                            </div>
-                                                        {% endif %}
+                                            {% if property[1].entities is defined %}
+                                                {% if property[1].name is defined %}
+                                                    {%set propertyName = property[1].name %}
+                                                {% else %}
+                                                    {%set propertyName = property[0] %}
+                                                {% endif %}
+                                                {% for innerEntity in attribute(entity,property[1].entities) %}
+                                                    {% if property[1].method is defined %}
+                                                        {% set value = attribute(innerEntity, property[1].method) %}
                                                     {% else %}
-                                                        <h5>{{ value }}</h5>
+                                                        {% set value = attribute(innerEntity, property[0]) %}
                                                     {% endif %}
+                                                    <div class="form-group">
+                                                        <label class="control-label col-lg-2">{{ propertyName|humanize|title|trans({}, translationDomain) }}</label>
+                                                        <div class="col-lg-10 {% if property[1].class is defined %}{{ property[1].class }}{% endif %}">
+                                                            {% if property[1].type is defined %}
+                                                                {% if property[1].type == 'image' %}
+                                                                    <img width="200" height="200" src="{{ asset(attribute(entity, property[1].image)) }}" class="img-responsive" alt="" />
+                                                                {% elseif property[1].type == 'rating' %}
+                                                                    <div class="rating">
+                                                                        <div data-rating="{{ value }}"></div>
+                                                                    </div>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <h5>{{ value }}</h5>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                                {% if property[1].name is defined %}
+                                                    {%set propertyName = property[1].name %}
+                                                {% else %}
+                                                    {%set propertyName = property[0] %}
+                                                {% endif %}
+                                                {% if property[1].entity is defined %}
+                                                    {% if property[1].method is defined %}
+                                                        {% set value = attribute(attribute(entity,property[1].entity), property[1].method) %}
+                                                    {% else %}
+                                                        {% set value = attribute(attribute(entity,property[1].entity), property[0]) %}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% if property[1].method is defined %}
+                                                        {% set value = attribute(entity, property[1].method) %}
+                                                    {% else %}
+                                                        {% set value = attribute(entity, property[0]) %}
+                                                    {% endif %}
+                                                {% endif %}
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">{{ propertyName|humanize|title|trans({}, translationDomain) }}</label>
+                                                    <div class="col-lg-10 {% if property[1].class is defined %}{{ property[1].class }}{% endif %}">
+                                                        {% if property[1].type is defined %}
+                                                            {% if property[1].type == 'image' %}
+                                                                <img width="200" height="200" src="{{ asset(attribute(entity, property[1].image)) }}" class="img-responsive" alt="" />
+                                                            {% elseif property[1].type == 'rating' %}
+                                                                <div class="rating">
+                                                                    <div data-rating="{{ value }}"></div>
+                                                                </div>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <h5>{{ value }}</h5>
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            {% endif %}
 
                                         {% endfor %}
 
