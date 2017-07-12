@@ -306,7 +306,7 @@ class DashboardController extends Controller
             $autocompleteField = $request->get('autocompleteField');
             $autocompleteValue = $request->get('autocompleteValue');
 
-            $query->where('e.' . $autocompleteField . ' like :autocompleteValue')
+            $query->andWhere('e.' . $autocompleteField . ' like :autocompleteValue')
                     ->setParameter('autocompleteValue', '%' . $autocompleteValue . '%')
                     ->setMaxResults(5);
             $query = $query->addOrderBy('e.'.$autocompleteField, 'ASC');
