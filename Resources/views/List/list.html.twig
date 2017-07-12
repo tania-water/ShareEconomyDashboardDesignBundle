@@ -254,6 +254,7 @@
     <!-- Drag and drop files -->
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/ui/dragula.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/pages/extension_dnd.js') }}"></script>
+    <script src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/autocomplete/bootstrap3-typeahead.min.js') }}"></script>
     <script>
         var actionsValidationMessages= {
             maximumRecordError: '{{('Maximum number of records achieved')|trans({}, list.translationDomain)}}'
@@ -323,6 +324,29 @@
         $(document).on('mouseenter','[data-clickable]',function(e){
           $(this).css('cursor','pointer');
         });
+        $(document).ready(function(){
+         $("th.dev-autocompelete .dev-search-input").each(function (index,value) {
+             $(value).typeahead({
+                items: 5,
+                minLength: "{{ list.autocompeleteMinNoOfCharacter}}",
+                source: function (typeahead, process) {
+                 return $.ajax({
+                        url: ajaxData,
+                        data: {
+                            autocompleteField: this.$element.closest('th').attr('data-name'),
+                            autocompleteValue: typeahead,
+                        },
+                        success: function (json) {
+                            return  process(json);
+                        }
+                    });
+
+                }
+
+            })
+         })
+    })
+
 
 
     </script>

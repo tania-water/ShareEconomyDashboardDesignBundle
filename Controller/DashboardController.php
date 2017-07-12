@@ -301,6 +301,24 @@ class DashboardController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $this->getListQuery();
+
+        if ($request->get('autocompleteField') && $request->isXmlHttpRequest()) {
+            $autocompleteField = $request->get('autocompleteField');
+            $autocompleteValue = $request->get('autocompleteValue');
+
+            $query->where('e.' . $autocompleteField . ' like :autocompleteValue')
+                    ->setParameter('autocompleteValue', '%' . $autocompleteValue . '%')
+                    ->setMaxResults(5);
+            $result = $query->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+
+            $autocompleteresult = array();
+            $methodName = 'get' . ucfirst($autocompleteField);
+            foreach ($result as $row) {
+                $autocompleteresult[] = $row[$autocompleteField];
+            }
+            
+            return array('autocompelete'=>$autocompleteresult);
+        }
         $this->setPageTitle();//remove
         $limit = $this->pagesLimit;
         if($request->get('limit') && in_array($request->get('limit'), array(10, 20, 50)))
@@ -387,7 +405,7 @@ class DashboardController extends Controller
             $columnArray[]='checkBox';
             $datatableColumnsIndex++;
         }
-        foreach($this->listColumns as $column){
+        foreach($this->listColumns as &$column){
             $datatableColumns[$datatableColumnsIndex] = array('data'=>$column[0]);
             if(count($column)>1){
                 $datatableColumns[$datatableColumnsIndex]['orderable'] = array_key_exists('isSortable', $column[1])?$column[1]['isSortable']:true;
@@ -395,6 +413,7 @@ class DashboardController extends Controller
             else{
                 $datatableColumns[$datatableColumnsIndex]['orderable'] = true;
             }
+            $column[1]['autocompelete'] = isset($column[1]['autocompelete']) ? $column[1]['autocompelete'] : $this->getParameter('ibtikar_share_economy_dashboard_design.dashboard_list_autocompelete');
             $columnArray[] = $column;
             if ((isset($column[1]['sort']) && $column[1]['sort'] == $sort) || (isset($column[1]['entity']) && $column[1]['entity'].'.'.$column[0] == $sort) || $sort == $column[0]) {
                 $sortIndex = $datatableColumnsIndex;
@@ -441,6 +460,7 @@ class DashboardController extends Controller
             'totalNumber' => $totalNumber,
             'pagination'  => $pagination,
             'columns'   => $this->listColumns,
+            'autocompeleteMinNoOfCharacter'   => $this->getParameter('ibtikar_share_economy_dashboard_design.dashboard_list_autocompeleteMinNoOfCharacter'),
             'datatableColumns'   => json_encode($datatableColumns),
             'columnArray'   => $columnArray,
             'actions'   => $this->listActions,
@@ -476,6 +496,10 @@ class DashboardController extends Controller
 
     public function getListJsonData($request, $renderingParams)
     {
+     
+        if (array_key_exists('autocompelete', $renderingParams)) {
+            return new JsonResponse($renderingParams['autocompelete']);
+        }
         $entityObjects = array();
 
         foreach ($renderingParams['pagination'] as $entity) {

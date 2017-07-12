@@ -21,11 +21,17 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('ibtikar_share_economy_dashboard_design');
 
         $rootNode
-            ->children()
+                ->children()
                 ->arrayNode('navBarMenuBundles')
-                    ->prototype('scalar')->end()
+                ->prototype('scalar')->end()
                 ->end()
-            ->end()
+                ->scalarNode('dashboard_list_autocompelete')
+                ->defaultFalse()
+                ->end()
+                ->scalarNode('dashboard_list_autocompeleteMinNoOfCharacter')
+                ->defaultValue(2)
+                ->end()
+                ->end()
         ;
 
         return $treeBuilder;
