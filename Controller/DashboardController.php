@@ -309,6 +309,7 @@ class DashboardController extends Controller
             $query->where('e.' . $autocompleteField . ' like :autocompleteValue')
                     ->setParameter('autocompleteValue', '%' . $autocompleteValue . '%')
                     ->setMaxResults(5);
+            $query = $query->addOrderBy('e.'.$autocompleteField, 'ASC');
             $result = $query->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
             $autocompleteresult = array();
@@ -316,7 +317,7 @@ class DashboardController extends Controller
             foreach ($result as $row) {
                 $autocompleteresult[] = $row[$autocompleteField];
             }
-            
+
             return array('autocompelete'=>$autocompleteresult);
         }
         $this->setPageTitle();//remove
@@ -344,10 +345,10 @@ class DashboardController extends Controller
             $query = $query->addOrderBy('e.'.$sort, $sortOrder);
 
         if($request->get('searchKey')){
-           
+
             $searchKey = json_decode($request->get('searchKey'));
             $searchValue = json_decode($request->get('searchValue'));
- 
+
             if(count($searchKey) == count($searchValue)){
                 $andX = new Andx();
                 $this->appendSearchtoQuery($query,$andX,$searchKey,$searchValue);
@@ -496,7 +497,7 @@ class DashboardController extends Controller
 
     public function getListJsonData($request, $renderingParams)
     {
-     
+
         if (array_key_exists('autocompelete', $renderingParams)) {
             return new JsonResponse($renderingParams['autocompelete']);
         }
