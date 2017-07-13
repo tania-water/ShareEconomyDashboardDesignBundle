@@ -317,7 +317,7 @@
             }
         });
 
-     $('body').delegate('[data-clickable] td:not(.dev-list-actions a)', 'click', function (ev) {
+     $('body').delegate('[data-clickable] td:not(.dev-list-actions)', 'click', function (ev) {
             window.document.location = $(this).parent().attr("data-clickable");
         });
 
