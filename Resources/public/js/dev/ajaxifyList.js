@@ -96,6 +96,7 @@ var dataTableDefault = {
                 fnCallback(json)
                 $('input[type=checkbox]').closest('td').addClass('text-center');
                 $('.dev-td-btn').closest('td').addClass('text-center');
+                $('.dev-td-btn').closest('td').addClass('dev-list-actions');
                 $('.dev-td-btn').closest('td').css('white-space', 'nowrap');
                 setTimeout(function () {
                     $('input').uniform();
