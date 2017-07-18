@@ -22,7 +22,7 @@
 paging_next_arrow: "&rarr;"
 paging_previous_arrow: "&larr;"
 "No Result Data": "No Result Data"
-"Delete One Confirmation": "Are you sure you want to delete the %className%?"
+"Delete One Confirmation": "Are you sure you want to delete the selected %className%?"
 "Activate One Confirmation": "Are you sure you want to activate the %className%?"
 "Deactivate One Confirmation": "Are you sure you want to deactivate the %className%?"
 'It is recommended to use Chrome or Firefox.': 'It is recommended to use Chrome or Firefox.'
