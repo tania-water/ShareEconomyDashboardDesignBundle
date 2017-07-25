@@ -306,18 +306,34 @@ class DashboardController extends Controller
             $autocompleteField = $request->get('autocompleteField');
             $autocompleteValue = $request->get('autocompleteValue');
 
-            $query->andWhere('e.' . $autocompleteField . ' like :autocompleteValue')
-                    ->setParameter('autocompleteValue', '%' . $autocompleteValue . '%')
-                    ->setMaxResults(5);
-            $query = $query->addOrderBy('e.'.$autocompleteField, 'ASC');
-            $result = $query->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+            if(strpos($autocompleteField, '.') === false){
+                $query->andWhere('e.' . $autocompleteField . ' like :autocompleteValue')
+                        ->setParameter('autocompleteValue', '%' . $autocompleteValue . '%')
+                        ->setMaxResults(5);
+                $query = $query->addOrderBy('e.'.$autocompleteField, 'ASC');
+                $result = $query->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
-            $autocompleteresult = array();
-            $methodName = 'get' . ucfirst($autocompleteField);
-            foreach ($result as $row) {
-                $autocompleteresult[] = (string)$row[$autocompleteField];
+                $autocompleteresult = array();
+                $methodName = 'get' . ucfirst($autocompleteField);
+                foreach ($result as $row) {
+                    $autocompleteresult[] = (string)$row[$autocompleteField];
+                }
             }
-
+            else{
+                $entityFieldArray = explode('.', $autocompleteField);
+                $query->innerJoin('e.'.$entityFieldArray[0], 'u')
+                        ->select('e','u.'.$entityFieldArray[1])
+                        ->andWhere('u.' . $entityFieldArray[1] . ' like :autocompleteValue')
+                        ->setParameter('autocompleteValue', '%' . $autocompleteValue . '%')
+                        ->setMaxResults(5);
+                $query = $query->addOrderBy('u.'.$entityFieldArray[1], 'ASC');
+                $result = $query->getQuery()->getResult();
+                $autocompleteresult = array();
+                $methodName = 'get' . ucfirst($entityFieldArray[1]);
+                foreach ($result as $row) {
+                    $autocompleteresult[] = (string)$row[$entityFieldArray[1]];
+                }
+            }
             return array('autocompelete'=>$autocompleteresult);
         }
         $this->setPageTitle();//remove
