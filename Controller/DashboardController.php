@@ -315,7 +315,7 @@ class DashboardController extends Controller
             $autocompleteresult = array();
             $methodName = 'get' . ucfirst($autocompleteField);
             foreach ($result as $row) {
-                $autocompleteresult[] = $row[$autocompleteField];
+                $autocompleteresult[] = (string)$row[$autocompleteField];
             }
 
             return array('autocompelete'=>$autocompleteresult);
