@@ -93,6 +93,16 @@
                                                                 <div class="rating">
                                                                     <div data-rating="{{ value }}"></div>
                                                                 </div>
+                                                            {% elseif property[1].type == 'date' %}
+                                                                {% set value = value|date(defaultDateFormat) %}
+                                                                <h5>{{ value }}</h5>
+                                                            {% elseif property[1].type == 'bool' %}
+                                                                {% if attribute(entity, column[0]) %}
+                                                                    {% set value = 'true'|trans %}
+                                                                {% else %}
+                                                                    {% set value = 'false'|trans %}
+                                                                {% endif %}
+                                                                <h5>{{ value }}</h5>
                                                             {% endif %}
                                                         {% else %}
                                                             <h5>{{ value }}</h5>

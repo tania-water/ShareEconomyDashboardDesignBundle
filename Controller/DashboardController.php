@@ -827,6 +827,7 @@ class DashboardController extends Controller
             'title' => $this->get('translator')->trans(strtolower($this->className).'_details', array(), $this->translationDomain),
             'className' => $this->className,
             'detailsPageData' => $this->detailsPageData,
+            'defaultDateFormat' => $this->defaultDateFormat,
             'entity' => $entity
             )
         );
