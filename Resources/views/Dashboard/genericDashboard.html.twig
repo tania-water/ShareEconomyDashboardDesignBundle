@@ -5,6 +5,26 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
+        function showConfirmationPopup (title, contentText, onConfirmFunction, onCancelFunction) {
+            var notice = new PNotify({
+                title: title,
+                text: contentText,
+                icon: 'glyphicon glyphicon-question-sign',
+                hide: false,
+                confirm: {
+                    confirm: true,
+                    buttons: [
+                        {text: "{% trans %}Ok{% endtrans %}", click: function(notice, value){ notice.remove(); notice.get().trigger("pnotify.confirm", [notice, value]); if ('function' === typeof onConfirmFunction) {onConfirmFunction();}}},
+                        {text: "{% trans %}Cancel{% endtrans %}", click: function(notice){ notice.remove(); notice.get().trigger("pnotify.cancel", notice); if ('function' === typeof onCancelFunction) {onCancelFunction();} }}]
+                },
+                buttons: {
+                    closer: false,
+                    sticker: false
+                },
+                stack: {"dir1": "down", "dir2": layoutIsLeftDirection === true ? "left" : "right", "firstpos1": 0, "firstpos2": 0}
+            });
+            return notice;
+        }
         function showNotificationMsg(title, text, type) {
             var notificationIcons = {
                 success: {
