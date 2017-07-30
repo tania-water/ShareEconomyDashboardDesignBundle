@@ -1,249 +1,97 @@
-{% extends "IbtikarShareEconomyDashboardDesignBundle::defined_variables.html.twig" %}
+{% extends "IbtikarShareEconomyDashboardDesignBundle:Layout:base.html.twig" %}
 
-{% block page %}
-    <!DOCTYPE html>
-    <html lang="{{ locale }}" dir="{{ locale in rtlLocales ? 'rtl' : 'ltr' }}">
-        <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>{% block title %}{% trans %}Welcome to your dashboard{% endtrans %}{% endblock %}</title>
-            <!-- Favicons AND TOUCH ICONS   -->
-            <link rel="icon" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/favicon.ico') }}">
-            <link rel="apple-touch-icon" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/apple-touch-icon.png') }}">
-            <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/apple-touch-icon-76x76.png') }}">
-            <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/apple-touch-icon-120x120.png') }}">
-            <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/apple-touch-icon-152x152.png') }}">
-            {% block stylesheets %}
-                <!-- Global stylesheets -->
-                {% set cssSubDir = locale in rtlLocales ? '' : 'en/' %}
-                <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'bootstrap.css') }}" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'core.css') }}" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'components.css') }}" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/colors.css') }}" rel="stylesheet" type="text/css">
-                <!-- /global stylesheets -->
+{% block pageContent %}
+    {% block header %}
+        <!-- Main navbar -->
+        <div class="navbar navbar-inverse{% if enableLargeSidebar %} navbar-fixed-top{% endif %}">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path('ibtikar_share_economy_dashboard_design_dashboard_home') }}"><img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/logo-1.png') }}" alt=""></a>
 
-                <!-- Date and Time Plugin Css-->
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
-                <!-- file upload Plugin CSS -->
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.css') }}" rel="stylesheet" type="text/css">
+                <ul class="nav navbar-nav visible-xs-block">
+                    <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                            {#                            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>#}
+                </ul>
+            </div>
 
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ cssSubDir ~ 'custom.css') }}" rel="stylesheet" type="text/css">
-                <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/css/' ~ currentTheme ~ '.css') }}" rel="stylesheet" type="text/css">
-
+            <div class="navbar-collapse collapse" id="navbar-mobile">
                 {% if enableLargeSidebar %}
-                <style>
-                    .page-container{
-                        padding: 0px;
-                    }
-                    @media (min-width: 769px){
-                        .navbar-top {
-                            padding-top: 60px;
-                        }
-                    }
-                    @media (min-width: 769px){
-                        .sidebar {
-                            width: 260px;
-                            padding-left: 0px;
-                        }
-                    }
-                    .sidebar-content{
-                        border-radius: 0px;
-                    }
-
-                    .content {
-                        padding: 0 20px 60px 20px;
-                    }
-
-                    @media (min-width: 769px) {
-                        .sidebar-fixed .sidebar-content {
-                            position: fixed;
-                            width: 260px;
-                            max-height: 100%;
-                            overflow: auto;
-                            top: 60px;
-                            bottom: 48px;
-                            margin-bottom: -48px;
-                        }
-                        .sidebar-xs .sidebar-fixed.sidebar-main .sidebar-content {
-                            width: 56px;
-                        }
-                        .sidebar-fixed.sidebar-default .sidebar-content {
-                            width: 259px;
-                        }
-                        .sidebar-fixed-expanded .sidebar-fixed.sidebar-main {
-                            position: fixed;
-                            display: block;
-                            height: 100%;
-                            z-index: 1001;
-                        }
-                        .sidebar-fixed-expanded .sidebar-fixed.sidebar-main .sidebar-content {
-                            position: fixed;
-                        }
-                        .sidebar-xs .sidebar-fixed-expanded .sidebar-fixed.sidebar-main {
-                            width: 260px;
-                        }
-
-                    }
-
-                    .navbar-header {
-                        min-width: 250px;
-                    }
-                    @media (min-width: 769px){
-                        .sidebar-xs .sidebar-main {
-                            width: 56px;
-                        }
-                    }
-
-                </style>
-                {% endif %}
-
-            {% endblock %}
-        </head>
-
-        <body{% if enableLargeSidebar %} class="navbar-top"{% endif %}>
-            {% block header %}
-                <!-- Main navbar -->
-                <div class="navbar navbar-inverse{% if enableLargeSidebar %} navbar-fixed-top{% endif %}">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="{{ path('ibtikar_share_economy_dashboard_design_dashboard_home') }}"><img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/' ~ currentTheme ~ '/logo-1.png') }}" alt=""></a>
-
-                        <ul class="nav navbar-nav visible-xs-block">
-                            <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
-{#                            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>#}
-                        </ul>
-                    </div>
-
-                    <div class="navbar-collapse collapse" id="navbar-mobile">
-                        {% if enableLargeSidebar %}
-                        <ul class="nav navbar-nav">
-                            <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
-                        </ul>
-                        {% endif %}
-
-                        {% block headerNotification %}
-                        {% endblock headerNotification %}
-
-                        <ul class="nav navbar-nav navbar-right">
-                            {% if supportedLocales|length > 1 %}
-                                <li class="language-switch">
-                                    {% for supportedLocale in supportedLocales if locale != supportedLocale %}
-                                        {% set localeLanguage = supportedLocale == 'en' ? 'English' : supportedLocale == 'ar' ? 'عربي' : '' %}
-                                        {% set localeFlag = supportedLocale == 'en' ? 'gb' : supportedLocale == 'ar' ? 'sa' : '' %}
-
-                                        <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all())|merge({'_locale': supportedLocale})) }}">
-                                            <img alt="{{ localeLanguage }}" class="position-left" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/flags/' ~ localeFlag ~ '.png') }}">
-                                            {{ localeLanguage }}
-                                        </a>
-                                    {% endfor %}
-                                </li>
-                            {% endif %}
-                            {% if app.user %}
-                                <li class="dropdown dropdown-user">
-                                    <a class="dropdown-toggle" data-toggle="dropdown">
-
-                                        {% if app.user.image %}
-                                            <img src="{{ asset(app.user.getWebPath()) }}" alt="{{ app.user }}">
-                                        {% endif %}
-                                        <span>{{ app.user }}</span>
-                                        <i class="caret"></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="{{ path('ibtikar_share_economy_ums_edit_my_account') }}"><i class="icon-user-plus"></i>{% trans %}Profile{% endtrans %}</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="{{ path('ibtikar_share_economy_ums_logout') }}"><i class="icon-switch2"></i>{% trans %}Logout{% endtrans %}</a></li>
-                                    </ul>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </div>
-            {% endblock %}
-            <!-- /main navbar -->
-            {% block navbar %}
-                {% if not enableLargeSidebar %}
-                <!-- Second navbar -->
-                <div class="navbar navbar-default" id="navbar-second">
-                    <ul class="nav navbar-nav no-border visible-xs-block">
-                        <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
+                    <ul class="nav navbar-nav">
+                        <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
                     </ul>
-
-                    <div class="navbar-collapse collapse" id="navbar-second-toggle">
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{ path('ibtikar_share_economy_dashboard_design_dashboard_home') }}"><i class="icon-display4 position-left"></i>{% trans %}Dashboard{% endtrans %}</a></li>
                 {% endif %}
-                            {% block nav_bar_menu %}
-                                {% if not enableLargeSidebar %}
-                                {{ render(controller('IbtikarShareEconomyDashboardDesignBundle:NavBar:getNavBarAdditionalLinks')) }}
+
+                {% block headerNotification %}
+                {% endblock headerNotification %}
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if supportedLocales|length > 1 %}
+                        <li class="language-switch">
+                            {% for supportedLocale in supportedLocales if locale != supportedLocale %}
+                                {% set localeLanguage = supportedLocale == 'en' ? 'English' : supportedLocale == 'ar' ? 'عربي' : '' %}
+                                {% set localeFlag = supportedLocale == 'en' ? 'gb' : supportedLocale == 'ar' ? 'sa' : '' %}
+
+                                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all())|merge({'_locale': supportedLocale})) }}">
+                                    <img alt="{{ localeLanguage }}" class="position-left" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/flags/' ~ localeFlag ~ '.png') }}">
+                                    {{ localeLanguage }}
+                                </a>
+                            {% endfor %}
+                        </li>
+                    {% endif %}
+                    {% if app.user %}
+                        <li class="dropdown dropdown-user">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+
+                                {% if app.user.image %}
+                                    <img src="{{ asset(app.user.getWebPath()) }}" alt="{{ app.user }}">
                                 {% endif %}
-                            {% endblock %}
-                {% if not enableLargeSidebar %}
-                        </ul>
-                    </div>
-                </div>
-                {% endif %}
-                <!-- /second navbar -->
-            {% endblock%}
+                                <span>{{ app.user }}</span>
+                                <i class="caret"></i>
+                            </a>
 
-            <!-- Page container -->
-            <div class="page-container dev-panel-flat">
-                <!-- Page content -->
-                <div class="page-content">
-                {% block side_menu %}{% endblock %}
-            {% block body %}{% endblock %}
-        {% block form_buttons %}{% endblock %}
-    </div>
-    <!-- /page content -->
-</div>
-<!-- /page container -->
-
-{% block javascripts %}
-    <div id="modal_theme_primary" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="{{ path('ibtikar_share_economy_ums_edit_my_account') }}"><i class="icon-user-plus"></i>{% trans %}Profile{% endtrans %}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ path('ibtikar_share_economy_ums_logout') }}"><i class="icon-switch2"></i>{% trans %}Logout{% endtrans %}</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
+    {% endblock %}
+    <!-- /main navbar -->
+    {% block navbar %}
+        {% if not enableLargeSidebar %}
+            <!-- Second navbar -->
+            <div class="navbar navbar-default" id="navbar-second">
+                <ul class="nav navbar-nav no-border visible-xs-block">
+                    <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
+                </ul>
+
+                <div class="navbar-collapse collapse" id="navbar-second-toggle">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ path('ibtikar_share_economy_dashboard_design_dashboard_home') }}"><i class="icon-display4 position-left"></i>{% trans %}Dashboard{% endtrans %}</a></li>
+                        {% endif %}
+                        {% block nav_bar_menu %}
+                            {% if not enableLargeSidebar %}
+                                {{ render(controller('IbtikarShareEconomyDashboardDesignBundle:NavBar:getNavBarAdditionalLinks')) }}
+                            {% endif %}
+                        {% endblock %}
+                        {% if not enableLargeSidebar %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        <!-- /second navbar -->
+    {% endblock%}
+
+    <!-- Page container -->
+    <div class="page-container dev-panel-flat">
+        <!-- Page content -->
+        <div class="page-content">
+            {% block side_menu %}{% endblock %}
+            {% block body %}{% endblock %}
+            {% block form_buttons %}{% endblock %}
+        </div>
     </div>
-    <!-- Core JS files -->
-    <script>var layoutIsLeftDirection = {{ locale in rtlLocales ? 'false' : 'true' }}</script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/loaders/pace.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/libraries/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/libraries/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/loaders/blockui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/ui/nicescroll.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/ui/drilldown.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/date/moment.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/date/bootstrap-datetimepicker.min.js') }}"></script>
-    <!-- /core JS files -->
-
-    <!-- alerts messages -->
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/notifications/pnotify.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/pages/components_notifications_pnotify.js') }}"></script>
-    {% if enableLargeSidebar %}
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/pages/layout_fixed_custom.js') }}"></script>
-    {% endif %}
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/jquery.easing.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/dev/base.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/core/app.js') }}"></script>
-
-    <script>
-        $(document).ready(function () {
-        {% for type, flashes in app.session.flashbag.all %}
-            {% for flash in flashes %}
-                    showNotificationMsg('', '{{ flash }}', '{{ type }}');
-            {% endfor %}
-        {% endfor %}
-            });
-    </script>
-    <script>
-        var availableMessage = '{% trans %}valid{% endtrans %}';
-        var unAvailableMessage = '{% trans %}not valid{% endtrans %}';
-    </script>
-{% endblock %}
-</body>
-</html>
 {% endblock %}

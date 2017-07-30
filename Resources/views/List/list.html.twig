@@ -1,5 +1,4 @@
-{% extends "IbtikarShareEconomyDashboardDesignBundle:Dashboard:genericDashboard.html.twig" %}
-
+{% extends app.request.get('iframe') == 'true' ? 'IbtikarShareEconomyDashboardDesignBundle:Layout:iframe.html.twig' : 'IbtikarShareEconomyDashboardDesignBundle:Dashboard:genericDashboard.html.twig' %}
 
 {% block title %}
     {% if list.pageTitle %}
@@ -16,6 +15,7 @@
         {% if enableLargeSidebar %}
         <div class="content">
         {% endif %}
+            {% if app.request.get('iframe') != 'true' %}
             <!-- Basic button -->
             <div class="content-group">
                 <div class="heading-elemnts">
@@ -28,7 +28,8 @@
                     </div>
                 </div>
             </div>
-        <!-- /basic button -->
+            <!-- /basic button -->
+            {% endif %}
 
         <!-- Dashboard content -->
         <div class="row">
@@ -55,6 +56,7 @@
                             {% endblock listHeader %}
                             {% block listTabs %}{% endblock %}
                             <div class="actions">
+                                {% if app.request.get('iframe') != 'true' %}
                                 {% if list.isPrintable %}
                                     <a href="javascript:window.print()" class="btn btn-default btn-sm" data-popup="tooltip" title="" data-placement="bottom" data-original-title="{{ "Print"|trans() }}"><i class=" icon-printer2"></i> <span class="hidden-sm"></span></a>
                                 {% endif %}
@@ -70,6 +72,7 @@
                                             </a>
                                         {% endif %}
                                     {% endfor %}
+                                {% endif %}
                                 {% endif %}
 
                                 {# add list filters if any #}

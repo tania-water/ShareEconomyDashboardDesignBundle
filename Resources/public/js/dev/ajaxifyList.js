@@ -53,6 +53,10 @@ var dataTableDefault = {
             var page = parseInt(table.page(), 10) + parseInt(1, 10);
             var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + table.page.info().length;
 
+            if (window.location.search.indexOf('iframe=true') > -1) {
+                url += '&iframe=true';
+            }
+
             if(searchKey.length > 0){
                 url+= '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + encodeURIComponent(JSON.stringify(searchValue))
             }

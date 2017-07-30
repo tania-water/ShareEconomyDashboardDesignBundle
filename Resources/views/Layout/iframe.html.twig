@@ -1,0 +1,17 @@
+{% extends "IbtikarShareEconomyDashboardDesignBundle:Layout:base.html.twig" %}
+
+{% block pageContent %}
+    <!-- Page container -->
+    <div class="page-container dev-panel-flat">
+        <!-- Page content -->
+        <div class="page-content">
+            {% block body %}{% endblock %}
+            {% block form_buttons %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/iframe-resizer/iframeResizer.contentWindow.min.js') }}"></script>
+    {{ parent() }}
+{% endblock %}
