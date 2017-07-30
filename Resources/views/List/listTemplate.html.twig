@@ -34,19 +34,26 @@
                         {% endif %}
                         <th class="{% if column[1].autocompelete %}dev-autocompelete{% endif %} {% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}{% if column[1].selectSearch is defined %}selectSearch{% endif%} {% if column[1].removeDatatableSearch is defined %}notSearchable{% endif %}" data-name="{{searchCol}}">{% if column[1].selectSearch is not defined %}{{ colName|humanize|title|trans({}, list.translationDomain) }}{% endif%}
                             {% if column[1].selectSearch is defined %}
-                                <select class="dev-search-input filter-select">
-                                    <option value="">{{('All')|trans()}}</option>
+                                <select class="dev-search-input dev-select-search-input filter-select">
+                                    <option value=" ">{{('All')|trans()}}</option>
                                     {%for key,search in column[1].selectOptions %}
                                         <option value="{{key}}">{{search|trans({}, list.translationDomain)}}</option>
                                     {% endfor %}
-                                </select>
+                               </select>
                             {% endif%}
                         </th>
                     {% else %}
-                        <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}{% if column[1].selectSearch is defined %}selectSearch{% endif%} notSearchable">
+                        {% if column[1].sort is defined %}
+                            {%set searchCol = column[1].sort %}
+                        {% elseif column[1].entity is defined %}
+                            {%set searchCol = column[1].entity~'.'~column[0] %}
+                        {% else %}
+                            {%set searchCol = column[0] %}
+                        {% endif %}
+                        <th class="{% if column[1].datePickerSearch is defined %}datePickerSearch{% endif%}{% if column[1].selectSearch is defined %}selectSearch{% endif%} notSearchable" data-name="{{searchCol}}">
                             {% if column[1].selectSearch is defined %}
-                    <option value="">{{('All')|trans()}}</option>
-                    <select class="dev-search-input filter-select" data-placeholder="Filter">
+                    <select class="dev-search-input dev-select-search-input filter-select" data-placeholder="Filter">
+                        <option value=" ">{{('All')|trans()}}</option>
                         {%for key,search in column[1].selectOptions %}
                             <option value="{{key}}">{{search|trans({}, list.translationDomain)}}</option>
                         {% endfor %}

@@ -39,7 +39,7 @@ var dataTableDefault = {
             var searchKey = [];
             var searchValue = [];
             $(".dev-search-input").each(function(){
-                if($(this).val() != ''){
+                if($(this).val() != '' && $(this).val() != ' '){
                     searchKey.push($(this).closest('th').data('name'));
                     searchValue.push($(this).val());
                 }
@@ -477,6 +477,9 @@ $(document).ready(function () {
             if($(this).val() != '')
                 $(".dev-btn-search").click();
         }
+    });
+    $(".dev-select-search-input").on('change', function(e){
+        $(".dev-btn-search").click();
     });
 
     // handling multiple check start
