@@ -33,6 +33,7 @@ paging_previous_arrow: "&larr;"
 'Save': 'Save'
 "Yes" : Yes
 "Cancel": Cancel
+"Ok": Ok
 "Done Successfully": "Done Successfully"
 "Failed Operation": "Failed Operation"
 "Already Deleted": "Already Deleted"
