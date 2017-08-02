@@ -41,7 +41,7 @@
                 }
             };
             type = (typeof type == "undefined" ? "success" : type);
-            new PNotify({
+            var notice = new PNotify({
                 title: title,
                 text: text,
                 icon: notificationIcons[type]['icon'],
@@ -52,6 +52,7 @@
                 },
                 stack: {"dir1": "down", "dir2": layoutIsLeftDirection === true ? "left" : "right", "firstpos1": 0, "firstpos2": 0}
             });
+            return notice;
         }
         $.ajaxSetup({
             beforeSend: function () {
