@@ -120,6 +120,9 @@ var dataTableDefault = {
         if(data['isClickableRow'] != undefined){
             $(row).attr('data-clickable', data['isClickableRow']);
         }
+        if (typeof data['id'] !== 'undefined') {
+            $(row).attr('data-id', data['id']);
+        }
     },
     drawCallback: function () {
         if (layoutIsLeftDirection === true) {

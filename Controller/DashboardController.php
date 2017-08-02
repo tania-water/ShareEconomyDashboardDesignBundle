@@ -523,6 +523,9 @@ class DashboardController extends Controller
             $templateVars = ['entity' => $entity, 'list' => $renderingParams];
 
             foreach ($renderingParams['columnArray'] as $value) {
+                if(method_exists($entity, 'getId')) {
+                    $oneEntity['id'] = $entity->getId();
+                }
                 if ($value == 'checkBox') {
                     $oneEntity['checkBox'] = '';
                     if (count($this->listBulkActions)) {
