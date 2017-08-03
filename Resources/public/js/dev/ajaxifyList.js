@@ -125,6 +125,13 @@ var dataTableDefault = {
         if (typeof data['id'] !== 'undefined') {
             $(row).attr('data-id', data['id']);
         }
+        if (typeof data['rowData'] === 'object') {
+            for (var property in data['rowData']) {
+                if (data['rowData'].hasOwnProperty(property)) {
+                    $(row).attr(property, data['rowData'][property]);
+                }
+            }
+        }
     },
     drawCallback: function () {
         if (layoutIsLeftDirection === true) {

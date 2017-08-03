@@ -475,6 +475,7 @@ class DashboardController extends Controller
             'className' => $this->className,
             'preFix' => $this->preFix,
             'totalNumber' => $totalNumber,
+            'listRowDataParameters' => $this->getListRowDataParameters(),
             'pagination'  => $pagination,
             'columns'   => $this->listColumns,
             'autocompeleteMinNoOfCharacter'   => $this->getParameter('ibtikar_share_economy_dashboard_design.dashboard_list_autocompeleteMinNoOfCharacter'),
@@ -511,6 +512,14 @@ class DashboardController extends Controller
         }
     }
 
+    /**
+     * Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
+     * @return array
+     */
+    public function getListRowDataParameters() {
+        return array();
+    }
+
     public function getListJsonData($request, $renderingParams)
     {
 
@@ -525,6 +534,12 @@ class DashboardController extends Controller
             foreach ($renderingParams['columnArray'] as $value) {
                 if(method_exists($entity, 'getId')) {
                     $oneEntity['id'] = $entity->getId();
+                }
+                $oneEntity['rowData'] = array();
+                foreach ($this->getListRowDataParameters() as $parameter => $getter) {
+                    if (method_exists($entity, $getter)) {
+                        $oneEntity['rowData']['data-' . $parameter] = $entity->$getter();
+                    }
                 }
                 if ($value == 'checkBox') {
                     $oneEntity['checkBox'] = '';
