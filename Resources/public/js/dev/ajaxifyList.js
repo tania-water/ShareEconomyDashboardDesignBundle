@@ -104,7 +104,9 @@ var dataTableDefault = {
                 $('.dev-td-btn').closest('td').css('white-space', 'nowrap');
                 setTimeout(function () {
                     $('input').uniform();
-                    window.parent.$('body').trigger('iframeUpdated', window.frameElement.id);
+                    if (window.frameElement) {
+                        window.parent.$('body').trigger('iframeUpdated', window.frameElement.id);
+                    }
                     unblockPage();
                 }, 200)
 //                        } else {
