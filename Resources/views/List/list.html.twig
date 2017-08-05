@@ -41,6 +41,7 @@
                             {% block listHeader    %}
                                 <div class="panel-heading no-print">
                                     <h5 class="panel-title">{% if list.pageTitle %} {{ list.pageTitle|trans({}, list.translationDomain) }} {% else %} {{ list.className|trans({}, list.translationDomain) }} {% endif %}</h5>
+                                    {% if app.request.get('iframe') != 'true' %}
                                     <div class="heading-elements">
                                         {#<span class="label bg-number heading-text">28 دور</span>
                                         <span class="label bg-number heading-text">12338 فعال</span>
@@ -52,6 +53,7 @@
                                             <li><a data-action="reload"></a></li>
                                         </ul>#}
                                     </div>
+                                    {% endif %}
                                 </div>
                             {% endblock listHeader %}
                             {% block listTabs %}{% endblock %}
