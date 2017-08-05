@@ -13,6 +13,7 @@ class DashboardController extends Controller
 {
 
     protected $className = '';
+    protected $fullClassName = '';
     protected $preFix = '';
 
     protected $entityBundle = '';
@@ -784,9 +785,8 @@ class DashboardController extends Controller
                         $this->listSearchColumns[] = $column[1]['entity'] . '.' . $column[0];
                     }
                 } else if (isset($column[1]['selectOptionsList'])) {
-                    $className = $this->entityBundle . "\\Entity\\" . $this->className;
                     $staticFuction = $column[1]['selectOptionsList'];
-                    $this->listColumns[$key][1]['selectOptions'] = call_user_func(array($className, $column[1]['selectOptionsList']));
+                    $this->listColumns[$key][1]['selectOptions'] = call_user_func(array($this->fullClassName, $column[1]['selectOptionsList']));
                     $this->listSearchColumns[] = $column[0];
                 } else {
                     $this->listSearchColumns[] = $column[0];
