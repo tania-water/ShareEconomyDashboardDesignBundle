@@ -2,6 +2,7 @@ var table;
 var callBack = false;
 var checkbox = false;
 var currentPageNum;
+var urlParameters = [];
 var dataTableDefault = {
 
     "sPaginationType": "full_numbers",
@@ -55,6 +56,9 @@ var dataTableDefault = {
 
             if (window.location.search.indexOf('iframe=true') > -1) {
                 url += '&iframe=true';
+            }
+            for (var i = 0; i < urlParameters.length; i++) {
+                url += '&' + urlParameters[i]['key'] + '=' + urlParameters[i]['value'];
             }
 
             if(searchKey.length > 0){
@@ -647,6 +651,14 @@ function applyOneFieldSearch() {
 }
 
 $(document).ready(function () {
+    $('body').on('urlParametersUpdated', function (e, parameters) {
+        if (typeof parameters === 'object') {
+            urlParameters = parameters;
+        } else {
+            urlParameters = [];
+        }
+        table.ajax.url(table.ajax.url()).load();
+    });
     var oneFieldSearchCurrentVal = $('input[data-type="one-field-search"]').val();
     $('input[data-type="one-field-search"]').keyup(function () {
         if ($(this).val() !== oneFieldSearchCurrentVal){
