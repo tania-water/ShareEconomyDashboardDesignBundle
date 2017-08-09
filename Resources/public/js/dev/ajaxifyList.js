@@ -2,6 +2,7 @@ var table;
 var callBack = false;
 var checkbox = false;
 var currentPageNum;
+var urlParameters = [];
 var dataTableDefault = {
 
     "sPaginationType": "full_numbers",
@@ -56,6 +57,9 @@ var dataTableDefault = {
             if (window.location.search.indexOf('iframe=true') > -1) {
                 url += '&iframe=true';
             }
+            for (var i = 0; i < urlParameters.length; i++) {
+                url += '&' + urlParameters[i]['key'] + '=' + urlParameters[i]['value'];
+            }
 
             if(searchKey.length > 0){
                 url+= '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + encodeURIComponent(JSON.stringify(searchValue))
@@ -104,7 +108,9 @@ var dataTableDefault = {
                 $('.dev-td-btn').closest('td').css('white-space', 'nowrap');
                 setTimeout(function () {
                     $('input').uniform();
-                    window.parent.$('body').trigger('iframeUpdated', window.frameElement.id);
+                    if (window.frameElement) {
+                        window.parent.$('body').trigger('iframeUpdated', window.frameElement.id);
+                    }
                     unblockPage();
                 }, 200)
 //                        } else {
@@ -122,6 +128,13 @@ var dataTableDefault = {
         }
         if (typeof data['id'] !== 'undefined') {
             $(row).attr('data-id', data['id']);
+        }
+        if (typeof data['rowData'] === 'object') {
+            for (var property in data['rowData']) {
+                if (data['rowData'].hasOwnProperty(property)) {
+                    $(row).attr(property, data['rowData'][property]);
+                }
+            }
         }
     },
     drawCallback: function () {
@@ -638,6 +651,14 @@ function applyOneFieldSearch() {
 }
 
 $(document).ready(function () {
+    $('body').on('urlParametersUpdated', function (e, parameters) {
+        if (typeof parameters === 'object') {
+            urlParameters = parameters;
+        } else {
+            urlParameters = [];
+        }
+        table.ajax.url(table.ajax.url()).load();
+    });
     var oneFieldSearchCurrentVal = $('input[data-type="one-field-search"]').val();
     $('input[data-type="one-field-search"]').keyup(function () {
         if ($(this).val() !== oneFieldSearchCurrentVal){

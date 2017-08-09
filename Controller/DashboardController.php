@@ -13,6 +13,7 @@ class DashboardController extends Controller
 {
 
     protected $className = '';
+    protected $fullClassName = '';
     protected $preFix = '';
 
     protected $entityBundle = '';
@@ -475,6 +476,7 @@ class DashboardController extends Controller
             'className' => $this->className,
             'preFix' => $this->preFix,
             'totalNumber' => $totalNumber,
+            'listRowDataParameters' => $this->getListRowDataParameters(),
             'pagination'  => $pagination,
             'columns'   => $this->listColumns,
             'autocompeleteMinNoOfCharacter'   => $this->getParameter('ibtikar_share_economy_dashboard_design.dashboard_list_autocompeleteMinNoOfCharacter'),
@@ -511,6 +513,14 @@ class DashboardController extends Controller
         }
     }
 
+    /**
+     * Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
+     * @return array
+     */
+    public function getListRowDataParameters() {
+        return array();
+    }
+
     public function getListJsonData($request, $renderingParams)
     {
 
@@ -525,6 +535,12 @@ class DashboardController extends Controller
             foreach ($renderingParams['columnArray'] as $value) {
                 if(method_exists($entity, 'getId')) {
                     $oneEntity['id'] = $entity->getId();
+                }
+                $oneEntity['rowData'] = array();
+                foreach ($this->getListRowDataParameters() as $parameter => $getter) {
+                    if (method_exists($entity, $getter)) {
+                        $oneEntity['rowData']['data-' . $parameter] = $entity->$getter();
+                    }
                 }
                 if ($value == 'checkBox') {
                     $oneEntity['checkBox'] = '';
@@ -769,9 +785,8 @@ class DashboardController extends Controller
                         $this->listSearchColumns[] = $column[1]['entity'] . '.' . $column[0];
                     }
                 } else if (isset($column[1]['selectOptionsList'])) {
-                    $className = $this->entityBundle . "\\Entity\\" . $this->className;
                     $staticFuction = $column[1]['selectOptionsList'];
-                    $this->listColumns[$key][1]['selectOptions'] = call_user_func(array($className, $column[1]['selectOptionsList']));
+                    $this->listColumns[$key][1]['selectOptions'] = call_user_func(array($this->fullClassName, $column[1]['selectOptionsList']));
                     $this->listSearchColumns[] = $column[0];
                 } else {
                     $this->listSearchColumns[] = $column[0];

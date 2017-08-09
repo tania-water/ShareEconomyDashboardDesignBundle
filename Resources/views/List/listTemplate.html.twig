@@ -111,7 +111,7 @@
 </thead>
 <tbody>
     {% for entity in list.pagination %}
-        <tr{% if entity.id is defined %} data-id="{{ entity.id }}"{% endif %}{% if list.isClickableRow %} data-clickable="{{ path(list.clickableRowRouteName ? list.clickableRowRouteName : list.className|lower~'_details', {id:entity.id}) }}"{% endif %}>
+        <tr{% for listRowDataParameter, parameterGetter in list.listRowDataParameters %} data-{{ listRowDataParameter }}="{{ attribute(entity, parameterGetter)|escape('html_attr') }}"{% endfor %}{% if entity.id is defined %} data-id="{{ entity.id }}"{% endif %}{% if list.isClickableRow %} data-clickable="{{ path(list.clickableRowRouteName ? list.clickableRowRouteName : list.className|lower~'_details', {id:entity.id}) }}"{% endif %}>
             {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', {'entity': entity}) }}
 
             {% for column in list.columns %}
