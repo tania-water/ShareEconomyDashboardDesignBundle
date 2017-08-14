@@ -1,0 +1,124 @@
+a{
+    color:#54D582;
+}
+a:focus,a:hover{
+    color:#52e988;
+}
+
+body{
+   background: url("../images/green/bg-db.png") repeat center top fixed #eee !important;
+}
+.bg-primary {
+  background-color: #54D582;
+  border-color: #54D582;
+  color: #fff;
+}
+.bg-number {
+  background: #54D582;
+}
+.activeLink {
+  color: #54D582;
+}
+.btn-link:hover, .btn-link:focus {
+    color:  #54D582;
+}
+.nav-tabs.nav-tabs-highlight > li.active > a, .nav-tabs.nav-tabs-highlight > li.active > a:hover, .nav-tabs.nav-tabs-highlight > li.active > a:focus {
+    border-top-color: #54D582;
+}
+.text-primary {
+    color: #54D582;
+}
+.text-primary, .text-primary:hover, .text-primary:focus {
+    color: #54D582 !important;
+}
+
+.bg-slate-800 {
+min-height:100%;
+  background: url("../images/green/bg.png") no-repeat center center fixed #52e988;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+color: #fff;
+}
+.login-container .panel{
+ background: rgba(255,255,255,0.85);
+}
+.btn-primary{
+    background:#54D582;
+    border-color:#54D582;
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+    background:#52e988;
+    border-color:#52e988;
+}
+.btn-primary:active:hover, .btn-primary.active:hover, .open > .dropdown-toggle.btn-primary:hover, .btn-primary:active:focus, .btn-primary.active:focus, .open > .dropdown-toggle.btn-primary:focus, .btn-primary.focus:active, .btn-primary.active.focus, .open > .dropdown-toggle.btn-primary.focus{
+        background:#52e988;
+    border-color:#52e988;
+}
+.badge-primary{
+       background:#54D582;
+       border-color: #54D582;;
+}
+.table > thead > tr > th {
+    border-bottom: 2px solid #54D582;
+}
+.pace .pace-progress{
+    background:#54D582;
+}
+
+.dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover, .dataTables_paginate .paginate_button.current:focus{
+    background-color: #54D582;
+}
+
+.panel-flat > .panel-heading{
+ border-top: 2px solid #54D582;
+}
+
+.wizard > .actions > ul > li > a{
+    background: #54D582;
+}
+.wizard > .steps > ul > li.done .number {
+    background-color: #54D582;
+    border-color: #54D582;
+}
+.wizard > .steps > ul > li.current .number {
+    border-color: #54D582;
+    color: #54D582;
+}
+.wizard > .steps > ul > li:last-child::after{
+        background-color: #54D582;
+}
+.wizard > .steps > ul > li::before, .wizard > .steps > ul > li::after {
+    background-color: #54D582;
+}
+
+.form-horizontal .control-label{
+    color:#54D582
+}
+.tokenfield .token:hover:not([class*="bg-"]), .tokenfield .token:focus:not([class*="bg-"]) {
+  background-color: #54D582;
+}
+
+.fc-event{
+      background-color:#54D582;
+      border-color:#54D582;
+}
+
+.border-left-primary {
+  border-color: #54D582;
+}
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary.focus[disabled], .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+  background-color: #54D582;
+  border-color: #54D582;
+}
+
+.datepicker table tr td.active, .datepicker table tr td span.active, .datepicker table tr td.active.disabled, .datepicker table tr td span.active.disabled, .datepicker table tr td.active:hover, .datepicker table tr td span.active:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td span.active.disabled:hover{
+    background:#54D582 ;
+}
+
+.bg-green{
+    background: #54D582;
+    color: #fff;
+}
