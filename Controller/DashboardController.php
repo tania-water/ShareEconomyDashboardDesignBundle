@@ -529,7 +529,13 @@ class DashboardController extends Controller
         }
         $entityObjects = array();
 
-        foreach ($renderingParams['pagination'] as $entity) {
+        foreach ($renderingParams['pagination'] as $result) {
+
+            if(is_array($entity))
+                $entity= $result[0];
+            else
+                $entity = $result;
+
             $templateVars = ['entity' => $entity, 'list' => $renderingParams];
 
             foreach ($renderingParams['columnArray'] as $value) {
@@ -562,7 +568,11 @@ class DashboardController extends Controller
 
                 $getfunction = isset($value[1]['method']) ? $value[1]['method'] : "get" . ucfirst($value[0]);
 
-                if ($entity->$getfunction() instanceof \DateTime) {
+                if (isset($value[1]['index'])){
+                    $index = $value[1]['index'];
+                    $oneEntity[$value[0]] = $result->$index;
+                }
+                else if ($entity->$getfunction() instanceof \DateTime) {
                     $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
                 }
                 else if(isset($value[1]['type']) && $value[1]['type'] == 'bool'){
