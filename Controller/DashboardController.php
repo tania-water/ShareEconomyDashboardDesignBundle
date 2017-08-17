@@ -531,7 +531,7 @@ class DashboardController extends Controller
 
         foreach ($renderingParams['pagination'] as $result) {
 
-            if(is_array($entity))
+            if(is_array($result))
                 $entity= $result[0];
             else
                 $entity = $result;
@@ -570,7 +570,7 @@ class DashboardController extends Controller
 
                 if (isset($value[1]['index'])){
                     $index = $value[1]['index'];
-                    $oneEntity[$value[0]] = $result->$index;
+                    $oneEntity[$value[0]] = $result[$index];
                 }
                 else if ($entity->$getfunction() instanceof \DateTime) {
                     $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
