@@ -181,6 +181,12 @@ var dataTableDefault = {
 };
 
 function intializeTable() {
+    if(totalNumber <= 10){
+        dataTableDefault.bPaginate = false;
+    }
+    else{
+        dataTableDefault.bPaginate = true;
+    }
     if (sort) {
         table = $('.datatable-column-search-inputs').DataTable($.extend({}, dataTableDefault, {"deferLoading": totalNumber, "order": sort}));
     } else {
@@ -191,6 +197,12 @@ function intializeTable() {
 function reIntaializeTable(data) {
     table.clear();
     table.destroy();
+    if(totalNumber <= 10){
+        dataTableDefault.bPaginate = false;
+    }
+    else{
+        dataTableDefault.bPaginate = true;
+    }
     dataTableDefault.columns = data.columns;
     columns = data.columns;
     dataTableDefault.iDisplayStart = table.page.info().start;

@@ -145,11 +145,11 @@
                         {% elseif column[1].type == 'image' %}
                             {% if attribute(entity, column[1].image) != '' and attribute(entity, column[1].image) is not null %}
                                 <div class="media-left media-middle">
-                                    <a href="#"><img src="{{ asset(attribute(entity, column[1].image)) }}" class="img-circle img-lg" alt=""></a>
+                                    <img src="{{ asset(attribute(entity, column[1].image)) }}" class="img-circle img-lg" alt="">
                                 </div>
                             {% else %}
                                 <div class="media-left media-middle">
-                                    <a href="#"><img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg') }}" class="img-circle img-lg" alt=""></a>
+                                    <img src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/images/profile.jpg') }}" class="img-circle img-lg" alt="">
                                 </div>
                             {% endif %}
                         {% endif %}
