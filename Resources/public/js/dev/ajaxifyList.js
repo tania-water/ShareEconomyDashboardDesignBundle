@@ -431,15 +431,7 @@ $(document).ready(function () {
     });
 
     $(".dev-btn-search").on('click', function(){
-        var val = [];
-        $(".dev-search-input").each(function(){
-            if($(this).val() != '' && $(this).val() != ' '){
-                val.push($(this).val());
-            }
-        });
-        if(val.length > 0){
-            table.draw();
-        }
+        table.draw();
     });
 
    $('[data-type="listFilter"]').on('change', function () {
