@@ -309,6 +309,7 @@ class DashboardController extends Controller
 
             if(strpos($autocompleteField, '.') === false){
                 $query->andWhere('e.' . $autocompleteField . ' like :autocompleteValue')
+                        ->select('e.' . $autocompleteField)
                         ->distinct()
                         ->setParameter('autocompleteValue', '%' . $autocompleteValue . '%')
                         ->setMaxResults(5);
@@ -324,7 +325,7 @@ class DashboardController extends Controller
             else{
                 $entityFieldArray = explode('.', $autocompleteField);
                 $query->innerJoin('e.'.$entityFieldArray[0], 'u')
-                        ->select('e','u.'.$entityFieldArray[1])
+                        ->select('u.'.$entityFieldArray[1])
                         ->andWhere('u.' . $entityFieldArray[1] . ' like :autocompleteValue')
                         ->distinct()
                         ->setParameter('autocompleteValue', '%' . $autocompleteValue . '%')
