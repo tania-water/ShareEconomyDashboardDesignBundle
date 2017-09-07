@@ -43,6 +43,7 @@
         imageRequired : 'Photo is required',
         letters : 'Please enter letters only',
         imageDimensions : 'Image dimensions must be greater than {0}*{0}',
+        accept: 'Please enter a value with a valid mimetype.'
     });
 
 }));
