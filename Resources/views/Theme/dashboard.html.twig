@@ -193,14 +193,20 @@
                     zoom: 9
                 });
                 var drawingManager = new google.maps.drawing.DrawingManager({
-                    drawingMode: {{ value ? 'null' : 'google.maps.drawing.OverlayType.POLYGON' }},
-                    drawingControl: {{ value ? 'false' : 'true' }},
+                    drawingMode: google.maps.drawing.OverlayType.POLYGON,
+                    drawingControl: true,
                     drawingControlOptions: {
                         position: google.maps.ControlPosition.TOP_CENTER,
                         drawingModes: ['polygon']
                     }
                 });
-                drawingManager.setMap(map_{{ id }});
+                google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
+                    polygon.setOptions({editable: true, draggable: true, geodesic: true});
+                    addDeleteControlToMap(polygon);
+                    drawingManager.setMap(null);
+                    attachListenersToPolygon(polygon);
+                    updatePolygonData(polygon);
+                });
                 function updatePolygonData(polygon) {
                     var vertices = polygon.getPath();
                     var polygonCoordinations = [];
@@ -224,6 +230,40 @@
                         updatePolygonData(polygon);
                     });
                 }
+                function addDeleteControlToMap(polygon) {
+                    // Create a div to hold the control.
+                    var controlDiv = document.createElement('div');
+
+                    // Set CSS for the control border
+                    var controlUI = document.createElement('div');
+                    controlUI.style.backgroundColor = '#fff';
+                    controlUI.style.border = '2px solid #fff';
+                    controlUI.style.cursor = 'pointer';
+                    controlUI.style.marginBottom = '22px';
+                    controlUI.style.textAlign = 'center';
+                    controlUI.title = 'Delete the polygon';
+                    controlDiv.appendChild(controlUI);
+
+                    // Set CSS for the control interior
+                    var controlText = document.createElement('div');
+                    controlText.style.color = 'rgb(25,25,25)';
+                    controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+                    controlText.style.fontSize = '16px';
+                    controlText.style.lineHeight = '38px';
+                    controlText.style.paddingLeft = '5px';
+                    controlText.style.paddingRight = '5px';
+                    controlText.innerHTML = 'Delete';
+                    controlUI.appendChild(controlText);
+
+                    map_{{ id }}.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
+
+                    controlDiv.addEventListener('click', function() {
+                        polygon.setMap(null);
+                        map_{{ id }}.controls[google.maps.ControlPosition.BOTTOM_CENTER].pop(controlDiv);
+                        drawingManager.setMap(map_{{ id }});
+                        document.getElementById('{{ id }}').value = '';
+                    });
+                }
                 {% if value %}
                 var polygonPath = JSON.parse('{{ value|raw }}');
                 var mapPolygon = new google.maps.Polygon({
@@ -233,6 +273,7 @@
                     geodesic: true
                 });
                 mapPolygon.setMap(map_{{ id }});
+                addDeleteControlToMap(mapPolygon);
                 attachListenersToPolygon(mapPolygon);
                 var polygonBounds = new google.maps.LatLngBounds();
                 for (var i = 0; i < polygonPath.length; i++) {
@@ -240,12 +281,7 @@
                 }
                 map_{{ id }}.setCenter(polygonBounds.getCenter());
                 {% else %}
-                google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
-                    drawingManager.setOptions({drawingMode: null, drawingControl: false});
-                    polygon.setOptions({editable: true, draggable: true, geodesic: true});
-                    attachListenersToPolygon(polygon);
-                    updatePolygonData(polygon);
-                });
+                drawingManager.setMap(map_{{ id }});
                 {% endif %}
             }
         </script>
