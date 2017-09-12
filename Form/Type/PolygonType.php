@@ -9,10 +9,15 @@ use Symfony\Component\Form\AbstractType;
 class PolygonType extends AbstractType
 {
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-        ));
+                'polygons' => array()
+            ))
+            ->setAllowedTypes('polygons', 'array');
     }
 
     /**
@@ -23,4 +28,12 @@ class PolygonType extends AbstractType
         return TextType::class;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(\Symfony\Component\Form\FormView $view, \Symfony\Component\Form\FormInterface $form, array $options)
+    {
+        $view->vars['polygons'] = json_encode($options['polygons']);
+        parent::buildView($view, $form, $options);
+    }
 }

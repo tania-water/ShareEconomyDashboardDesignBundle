@@ -264,6 +264,25 @@
                         document.getElementById('{{ id }}').value = '';
                     });
                 }
+                function getRandomColor() {
+                    var letters = '0123456789ABCDEF';
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                      color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
+                var polygons = {{ polygons|raw }};
+                for (var areaId in polygons) {
+                    if (polygons.hasOwnProperty(areaId)) {
+                        var polygonColor = getRandomColor();
+                        new google.maps.Polygon({
+                            paths: JSON.parse(polygons[areaId]),
+                            fillColor: polygonColor,
+                            strokeColor: polygonColor
+                        }).setMap(map_{{ id }});
+                    }
+                }
                 {% if value %}
                 var polygonPath = JSON.parse('{{ value|raw }}');
                 var mapPolygon = new google.maps.Polygon({
