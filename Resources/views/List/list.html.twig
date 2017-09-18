@@ -75,6 +75,11 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
+
+                                {% if list.isExportToExcelEnabled %}
+                                <a class="btn btn-default btn-sm" data-popup="tooltip" title="{{ ('Export to excel file') | trans }}" data-placement="top" ><i class="icon-file-excel"></i> <span class="hidden-sm"></span></a>
+                                {% endif %}
+
                                 {% endif %}
 
                                 {# add list filters if any #}
@@ -108,7 +113,6 @@
                                        "> <i class="icon-trash"></i> <span class="hidden-sm position-right">مسح الادوار</span></a>
 
                                     <button type="button" class="btn btn-default btn-sm" data-popup="tooltip" title=" خانات خانات خانات خانات خانات خانات خانات الجدول" data-placement="bottom" data-toggle="modal" data-target="#modal_theme_primary" ><i class="icon-table2 "></i> <span class="hidden-sm"> </span></button>
-                                    <a class="btn btn-default btn-sm"   data-popup="tooltip" title="تصدير" data-placement="bottom" ><i class="icon-database-export"></i> <span class="hidden-sm"></span></a>
                                     <a class="btn btn-default btn-sm"  data-popup="tooltip" title="عرض السجلات المحذوفة " data-placement="bottom" ><i class="icon-eye-blocked"></i> <span class="hidden-sm"></span></a>
 
 

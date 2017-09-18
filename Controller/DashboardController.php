@@ -3,6 +3,7 @@
 namespace Ibtikar\ShareEconomyDashboardDesignBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -77,6 +78,43 @@ class DashboardController extends Controller
     public function __construct()
     {
 
+    }
+
+    /**
+     *
+     * @param EntityManager $em
+     */
+    public function refreshDatabaseConnection($em)
+    {
+        if (false === $em->getConnection()->ping()) {
+            $em->getConnection()->close();
+            $em->getConnection()->connect();
+        }
+    }
+
+    public function exportAction() {
+        $response = new StreamedResponse();
+        $fileName = 'abc';
+        $response->headers->add(array(
+            'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
+            'Content-Disposition' => "attachment; filename=$fileName.xls"
+        ));
+        $em = $this->getDoctrine()->getManager();
+        $response->setCallback(function () use ($em) {
+            echo '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+            echo '<x:Name>Sheet 1</x:Name>';
+            echo '<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"></head><body><table>';
+            ob_flush();
+            flush();
+
+            echo  '<tr><td>First Name</td><td>Last Name</td><td>Age</td></tr>';
+            echo '<tr><td>jjjj</td><td>' . htmlentities('الاسم', null, 'UTF-8') . '</td><td>50</td></tr>';
+
+            echo '</table></body></html>';
+            ob_flush();
+            flush();
+        });
+        return $response;
     }
 
     /**
@@ -496,6 +534,7 @@ class DashboardController extends Controller
             'pagesOffset' => $offset,
             'defaultDateFormat' => $this->defaultDateFormat,
             'isSearchable' => $this->isSearchable,
+            'isExportToExcelEnabled' => false,
             'isClickableRow' => $this->isClickableRow,
             'clickableRowRouteName' => $this->clickableRowRouteName,
             'sort' => $paginationSort
