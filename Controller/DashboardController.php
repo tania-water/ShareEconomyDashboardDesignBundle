@@ -84,7 +84,7 @@ class DashboardController extends Controller
      *
      * @param EntityManager $em
      */
-    public function refreshDatabaseConnection($em)
+    public static function refreshDatabaseConnection($em)
     {
         if (false === $em->getConnection()->ping()) {
             $em->getConnection()->close();
@@ -92,7 +92,13 @@ class DashboardController extends Controller
         }
     }
 
-    public function exportAction() {
+    /**
+     * Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
+     * @param Request $request
+     * @return StreamedResponse
+     * @throws \Exception
+     */
+    public function exportAction(Request $request) {
         $response = new StreamedResponse();
         $fileName = 'abc';
         $response->headers->add(array(
@@ -100,16 +106,103 @@ class DashboardController extends Controller
             'Content-Disposition' => "attachment; filename=$fileName.xls"
         ));
         $em = $this->getDoctrine()->getManager();
-        $response->setCallback(function () use ($em) {
+        $query = $this->getListQuery();
+        $sort = null;
+        if ($request->get('sort')) {
+            $sort = $request->get('sort');
+            $sortOrder = $request->get('columnDir');
+        } else if (count($this->defaultSort)) {
+            $sort = $this->defaultSort['column'];
+            $sortOrder = $this->defaultSort['sort'];
+        }
+        if (strpos($sort, "."))
+            $query = $query->addOrderBy($sort, $sortOrder);
+        else
+            $query = $query->addOrderBy('e.' . $sort, $sortOrder);
+        if ($request->get('searchKey')) {
+            $searchKey = json_decode($request->get('searchKey'));
+            $searchValue = json_decode($request->get('searchValue'));
+            if (count($searchKey) == count($searchValue)) {
+                $andX = new Andx();
+                $this->appendSearchtoQuery($query, $andX, $searchKey, $searchValue);
+                if ($andX->count() > 0)
+                    $query = $query->andWhere($query->expr()->andX($andX));
+            }
+        }
+        // apply list filters
+        $listFilters = $this->getListFilters();
+        if (count($listFilters)) {
+            $filtersNames = [];
+            foreach ($listFilters as $listFilter) {
+                // validate filters
+                if (!in_array($this->listFilterInterfaceFQNS, class_implements($listFilter)) && !in_array($this->listAutoCompleteFilterInterfaceFQNS, class_implements($listFilter))) {
+                    throw new \Exception('List filter class should implements ' . $this->listFilterInterfaceFQNS . ' or ' . $this->listAutoCompleteFilterInterfaceFQNS);
+                }
+                if (array_search($listFilter->getName(), $filtersNames) === false) {
+                    $filtersNames[] = $listFilter->getName();
+                } else {
+                    throw new \Exception('Filter named "' . $listFilter->getName() . '" has been found many times. filters names should be unique.');
+                }
+                // apply filter if its parameter exists
+                if ($request->query->has($listFilter->getName()) && $request->query->get($listFilter->getName()) !== null) {
+                    $query = $listFilter->applyFilter($query, $request->query->get($listFilter->getName()));
+                }
+            }
+        }
+        // apply one field search
+        $oneInputSearch = $this->getListOneInputSearch();
+        if (null !== $oneInputSearch) {
+            // validate filters
+            if (!in_array($this->listOneFieldSearchInterfaceFQNS, class_implements($oneInputSearch))) {
+                throw new \Exception('One field search class should implements ' . $this->listOneFieldSearchInterfaceFQNS);
+            }
+
+            // apply filter if its parameter exists
+            if ($request->query->has($this->listOneFieldSearchParam) && $request->query->get($this->listOneFieldSearchParam) !== null) {
+                $query = $oneInputSearch->applySearch($query, $request->query->get($this->listOneFieldSearchParam));
+            }
+        }
+        $response->setCallback(function () use ($em, $query) {
+            // File header
             echo '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
             echo '<x:Name>Sheet 1</x:Name>';
             echo '<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"></head><body><table>';
             ob_flush();
             flush();
-
-            echo  '<tr><td>First Name</td><td>Last Name</td><td>Age</td></tr>';
-            echo '<tr><td>jjjj</td><td>' . htmlentities('الاسم', null, 'UTF-8') . '</td><td>50</td></tr>';
-
+            // File columns headers
+            echo '<tr>';
+            foreach ($this->listColumns as $columnData) {
+                $columnName = $columnData[0];
+                if (isset($columnData[1]) && isset($columnData[1]['name'])) {
+                    $columnName = $columnData[1]['name'];
+                }
+                // TODO => colName|humanize|title|trans({}, list.translationDomain)
+                echo '<td>' . htmlentities($columnName, null, 'UTF-8') . '</td>';
+            }
+            echo '</tr>';
+            $iterationItemsCount = 50;
+            $page = 1;
+            do {
+                $query = $query->setFirstResult(($page - 1) * $iterationItemsCount)
+                    ->setMaxResults($iterationItemsCount);
+                static::refreshDatabaseConnection($em);
+                $results = $query->getQuery()->execute();
+                foreach ($results as $result) {
+                    echo '<tr>';
+                    foreach ($this->listColumns as $columnData) {
+                        $dataGetter = 'get' . ucfirst($columnData[0]);
+                        if (isset($columnData[1])) {
+                            if (isset($columnData[1]['method'])) {
+                                $dataGetter = $columnData[1]['method'];
+                            }
+                        }
+                        echo '<td>' . htmlentities(call_user_func(array($result, $dataGetter)), null, 'UTF-8') . '</td>';
+                    }
+                    echo '</tr>';
+                }
+                $page++;
+            } while ($iterationItemsCount === count($results));
+            // File end
             echo '</table></body></html>';
             ob_flush();
             flush();
