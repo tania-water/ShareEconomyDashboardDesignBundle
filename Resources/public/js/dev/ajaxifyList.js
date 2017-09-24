@@ -52,17 +52,21 @@ var dataTableDefault = {
                 currentPageNum = "";
             }
             var page = parseInt(table.page(), 10) + parseInt(1, 10);
+            var exportUrl = $('a.dev-export-list-excel').attr('data-url');
             var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + table.page.info().length;
+            exportUrl += '?sort=' + columnName + '&columnDir=' + columndir;
 
             if (window.location.search.indexOf('iframe=true') > -1) {
                 url += '&iframe=true';
             }
             for (var i = 0; i < urlParameters.length; i++) {
                 url += '&' + urlParameters[i]['key'] + '=' + urlParameters[i]['value'];
+                exportUrl += '&' + urlParameters[i]['key'] + '=' + urlParameters[i]['value'];
             }
 
             if(searchKey.length > 0){
-                url+= '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + encodeURIComponent(JSON.stringify(searchValue))
+                url+= '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + encodeURIComponent(JSON.stringify(searchValue));
+                exportUrl += '&searchKey=' + JSON.stringify(searchKey) + '&searchValue=' + encodeURIComponent(JSON.stringify(searchValue));
             }
 
             // apply filters
@@ -70,6 +74,7 @@ var dataTableDefault = {
                 $('[data-type="listFilter"]').each(function () {
                     if ($(this).val()) {
                         url += "&" + $(this).data('name') + '=' + $(this).val();
+                        exportUrl += "&" + $(this).data('name') + '=' + $(this).val();
                     }
                 });
             }
@@ -79,6 +84,7 @@ var dataTableDefault = {
                 $('[data-type="listAutoCompleteFilter"]').each(function () {
                     if ($(this).val()) {
                         url += "&" + $(this).data('name') + '=' + $(this).val();
+                        exportUrl += "&" + $(this).data('name') + '=' + $(this).val();
                     }
                 });
             }
@@ -86,8 +92,10 @@ var dataTableDefault = {
             // apply one field search
             if ($('input[data-type="one-field-search"]').length && $('input[data-type="one-field-search"]').val()) {
                 url += "&" + $('input[data-type="one-field-search"]').data('name') + '=' + $('input[data-type="one-field-search"]').val();
+                exportUrl += "&" + $('input[data-type="one-field-search"]').data('name') + '=' + $('input[data-type="one-field-search"]').val();
             }
 
+            $('a.dev-export-list-excel').attr('href', exportUrl);
             pushNewState(null, null, url);
         } else {
             url = window.location.href;

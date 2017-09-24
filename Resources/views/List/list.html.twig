@@ -77,7 +77,7 @@
                                 {% endif %}
 
                                 {% if list.isExportToExcelEnabled %}
-                                <a class="btn btn-default btn-sm" data-popup="tooltip" title="{{ ('Export to excel file') | trans }}" data-placement="top" ><i class="icon-file-excel"></i> <span class="hidden-sm"></span></a>
+                                <a class="btn btn-default btn-sm dev-export-list-excel" href="{{ path(list.exportToExcelRoute, app.request.query.all()) }}" data-url="{{ path(list.exportToExcelRoute) }}" data-popup="tooltip" title="{{ ('Export to excel file') | trans }}" data-placement="top" ><i class="icon-file-excel"></i> <span class="hidden-sm"></span></a>
                                 {% endif %}
 
                                 {% endif %}

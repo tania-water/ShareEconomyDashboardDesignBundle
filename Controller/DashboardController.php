@@ -16,6 +16,8 @@ class DashboardController extends Controller
     protected $className = '';
     protected $fullClassName = '';
     protected $preFix = '';
+    protected $isExportToExcelEnabled = false;
+    protected $exportToExcelRoute = '';
 
     protected $entityBundle = '';
 
@@ -629,6 +631,8 @@ class DashboardController extends Controller
             'isSearchable' => $this->isSearchable,
             'isExportToExcelEnabled' => false,
             'isClickableRow' => $this->isClickableRow,
+            'isExportToExcelEnabled' => $this->isExportToExcelEnabled,
+            'exportToExcelRoute' => $this->exportToExcelRoute,
             'clickableRowRouteName' => $this->clickableRowRouteName,
             'sort' => $paginationSort
         );
