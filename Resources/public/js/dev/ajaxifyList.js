@@ -620,6 +620,24 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * @author Gehad Mohamed <gehad.mohamed@ibtikar.net.sa>
+ * @returns {Boolean}
+ */
+function detectIE() {
+    var ua = window.navigator.userAgent;
+    // IE 10 or older
+    var msie = ua.indexOf('MSIE ');
+    // IE 11 (or newer)
+    var trident = ua.indexOf('Trident/');
+
+    if (trident > 0 || msie > 0) {
+        return true;
+    }
+    // other browser
+    return false;
+}
+
 jQuery(document).on('ajaxComplete', function (event, response) {
     if (response) {
         if (response.status === 0 && detectIE()) {
