@@ -101,8 +101,9 @@ class DashboardController extends Controller
      * @throws \Exception
      */
     public function exportAction(Request $request) {
+        $this->setListParameters();
         $response = new StreamedResponse();
-        $fileName = 'abc';
+        $fileName = $request->get('fileName', 'list');
         $response->headers->add(array(
             'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
             'Content-Disposition' => "attachment; filename=$fileName.xls"
