@@ -165,7 +165,9 @@ class DashboardController extends Controller
                 $query = $oneInputSearch->applySearch($query, $request->query->get($this->listOneFieldSearchParam));
             }
         }
-        $response->setCallback(function () use ($em, $query) {
+        $twig = $this->get('twig');
+        $translator = $this->get('translator');
+        $response->setCallback(function () use ($em, $query, $twig, $translator) {
             // File header
             echo '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
             echo '<x:Name>Sheet 1</x:Name>';
@@ -179,8 +181,8 @@ class DashboardController extends Controller
                 if (isset($columnData[1]) && isset($columnData[1]['name'])) {
                     $columnName = $columnData[1]['name'];
                 }
-                // TODO => colName|humanize|title|trans({}, list.translationDomain)
-                echo '<td>' . htmlentities($columnName, null, 'UTF-8') . '</td>';
+                $value = $twig->createTemplate('{{ value|humanize|title|trans({}, translationDomain) }}')->render(array('value' => $columnName, 'translationDomain' => $this->translationDomain));
+                echo '<td>' . htmlentities($value, null, 'UTF-8') . '</td>';
             }
             echo '</tr>';
             $iterationItemsCount = 50;
@@ -193,13 +195,21 @@ class DashboardController extends Controller
                 foreach ($results as $result) {
                     echo '<tr>';
                     foreach ($this->listColumns as $columnData) {
+                        $translateData = false;
                         $dataGetter = 'get' . ucfirst($columnData[0]);
                         if (isset($columnData[1])) {
                             if (isset($columnData[1]['method'])) {
                                 $dataGetter = $columnData[1]['method'];
                             }
+                            if (isset($columnData[1]['selectSearch'])) {
+                                $translateData = true;
+                            }
                         }
-                        echo '<td>' . htmlentities(call_user_func(array($result, $dataGetter)), null, 'UTF-8') . '</td>';
+                        $value = call_user_func(array($result, $dataGetter));
+                        if ($translateData) {
+                            $value = $translator->trans($value, array(), $this->translationDomain);
+                        }
+                        echo '<td>' . htmlentities($value, null, 'UTF-8') . '</td>';
                     }
                     echo '</tr>';
                 }
