@@ -3,6 +3,7 @@ var callBack = false;
 var checkbox = false;
 var currentPageNum;
 var urlParameters = [];
+var exportFileName = 'export';
 var dataTableDefault = {
 
     "sPaginationType": "full_numbers",
@@ -54,7 +55,7 @@ var dataTableDefault = {
             var page = parseInt(table.page(), 10) + parseInt(1, 10);
             var exportUrl = $('a.dev-export-list-excel').attr('data-url');
             var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + table.page.info().length;
-            exportUrl += '?sort=' + columnName + '&columnDir=' + columndir;
+            exportUrl += '?fileName=' + encodeURIComponent(exportFileName) + '&sort=' + columnName + '&columnDir=' + columndir;
 
             if (window.location.search.indexOf('iframe=true') > -1) {
                 url += '&iframe=true';
