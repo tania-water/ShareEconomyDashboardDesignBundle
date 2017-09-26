@@ -196,16 +196,23 @@ class DashboardController extends Controller
                     echo '<tr>';
                     foreach ($this->listColumns as $columnData) {
                         $translateData = false;
+                        $valueType = 'string';
                         $dataGetter = 'get' . ucfirst($columnData[0]);
                         if (isset($columnData[1])) {
                             if (isset($columnData[1]['method'])) {
                                 $dataGetter = $columnData[1]['method'];
+                            }
+                            if (isset($columnData[1]['type'])) {
+                                $valueType = $columnData[1]['type'];
                             }
                             if (isset($columnData[1]['selectSearch'])) {
                                 $translateData = true;
                             }
                         }
                         $value = call_user_func(array($result, $dataGetter));
+                        if ($valueType === 'date') {
+                            $value = $value->format($this->defaultDateFormat);
+                        }
                         if ($translateData) {
                             $value = $translator->trans($value, array(), $this->translationDomain);
                         }
