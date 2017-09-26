@@ -54,7 +54,7 @@ var dataTableDefault = {
             }
             var page = parseInt(table.page(), 10) + parseInt(1, 10);
             var exportUrl = $('a.dev-export-list-excel').attr('data-url');
-            var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + table.page.info().length;
+            var url = ajaxData + '?page=' + page + '&sort=' + columnName + '&columnDir=' + columndir + '&limit=' + (table.page.info().length > 0 ? table.page.info().length : limit);
             exportUrl += '?fileName=' + encodeURIComponent(exportFileName) + '&sort=' + columnName + '&columnDir=' + columndir;
 
             if (window.location.search.indexOf('iframe=true') > -1) {
@@ -685,7 +685,7 @@ function applyOneFieldSearch() {
         clearTimeout(oneFieldSearchDelayTimer);
     }
     oneFieldSearchDelayTimer = setTimeout(function() {
-        table.draw();
+        table.ajax.url(table.ajax.url()).load();
     }, 250);
 }
 
