@@ -121,3 +121,7 @@ background-size: cover;
     color: #fff;
     background-color: #E5077D;
 }
+
+.navbar-fixed-top, .navbar-fixed-bottom{
+    z-index: 99999;
+}
