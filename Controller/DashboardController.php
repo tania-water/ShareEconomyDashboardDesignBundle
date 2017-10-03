@@ -213,6 +213,9 @@ class DashboardController extends Controller
                         if ($valueType === 'date') {
                             $value = $value->format($this->defaultDateFormat);
                         }
+                        if ($valueType === 'numeric') {
+                            $value = '"'.$value.'"';
+                        }
                         if ($translateData) {
                             $value = $translator->trans($value, array(), $this->translationDomain);
                         }
