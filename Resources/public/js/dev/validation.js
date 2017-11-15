@@ -455,6 +455,12 @@ function initFormValidation(form_selector) {
                     validateElement(element);
                 }
             },
+            invalidHandler: function(form, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    validator.errorList[0].element.focus();
+                }
+            },
     //        invalidHandler: function(e, validator) {
     //            //validator.errorList contains an array of objects, where each object has properties "element" and "message".  element is the actual HTML Input.
     //            for (var i = 0; i < validator.errorList.length; i++) {
