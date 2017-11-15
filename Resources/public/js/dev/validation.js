@@ -125,7 +125,7 @@ $.validator.addMethod('dimensions', function (value, element, param) {
 
 
 
-$.validator.addMethod('password', function (value, element) {
+$.validator.addMethod('passwordMin', function (value, element) {
     return this.optional(element) || (/\D+/.test(value) && /\d+/.test(value) && value.length >= 6) || $(element).attr('data-remove-password-validation') === 'true';
 }, 'The Password must be at least {{ limit }} characters and numbers length');
 
