@@ -221,7 +221,9 @@
                                     </div>
                                 </div>#}
                             </div>
-                        {% include 'IbtikarShareEconomyDashboardDesignBundle:List:listTemplate.html.twig' %}
+                            {% block listTemplate %}
+                                {% include 'IbtikarShareEconomyDashboardDesignBundle:List:listTemplate.html.twig' %}
+                            {% endblock %}
                     </div>
                     <!-- /scrollable datatable -->
                 </div>
