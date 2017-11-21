@@ -76,7 +76,7 @@
                 </label>
             </div>
         </th>
-    {% elseif list.isSearchable %}
+        {% elseif list.isSearchable %}
         <th></th>
         {% endif %}
         {% for column in list.columns %}
@@ -86,19 +86,19 @@
                 {%set colName = column[0] %}
             {% endif %}
 
-        {% if column[1].isSortable is defined and not column[1].isSortable %}
-            {%set isSortable = 'sorting_disabled' %}
-        {% else %}
-            {%set isSortable = 'sorting' %}
-        {% endif %}
+            {% if column[1].isSortable is defined and not column[1].isSortable %}
+                {%set isSortable = 'sorting_disabled' %}
+            {% else %}
+                {%set isSortable = 'sorting' %}
+            {% endif %}
 
-        {% if column[1].sort is defined %}
-            {%set sortCol = column[1].sort %}
-        {% elseif column[1].entity is defined %}
-            {%set sortCol = column[1].entity~'.'~column[0] %}
-        {% else %}
-            {%set sortCol = column[0] %}
-        {% endif %}
+            {% if column[1].sort is defined %}
+                {%set sortCol = column[1].sort %}
+            {% elseif column[1].entity is defined %}
+                {%set sortCol = column[1].entity~'.'~column[0] %}
+            {% else %}
+                {%set sortCol = column[0] %}
+            {% endif %}
 
         <th class="{{isSortable}}" data-name='{{sortCol}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
         {% endfor %}
@@ -120,7 +120,12 @@
             {{ include('IbtikarShareEconomyDashboardDesignBundle:List:_listCheckBox.html.twig', {'entity': entity}) }}
 
             {% for column in list.columns %}
-                <td {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
+                {% if column[1].isClickableField is defined %}
+                    {% if column[1].searchKey is defined %}
+                        {% set clickUrl = url('item_list')~'?searchKey=["'~column[1].searchKey~'"]&searchValue=["'~attribute(entity, column[1].searchValue)~'"]' %}
+                    {% endif %}
+                {% endif %}
+                <td {% if column[1].isClickableField is defined %}data-clickablefield="{{ clickUrl }}"{% endif %} {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
                     {% if column[1].index is defined %}
                         {% set value = attribute(result, column[1].index) %}
                     {% elseif column[1].method is defined %}

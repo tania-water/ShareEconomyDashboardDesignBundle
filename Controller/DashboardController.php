@@ -581,6 +581,9 @@ class DashboardController extends Controller
             $datatableColumnsIndex++;
         }
         foreach($this->listColumns as &$column){
+            if(isset($column[1]['permission']) && (!$this->get('security.authorization_checker')->isGranted($column[1]['permission']) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')))
+                unset($column[1]['isClickableField']);
+            
             $datatableColumns[$datatableColumnsIndex] = array('data'=>$column[0]);
             if(count($column)>1){
                 $datatableColumns[$datatableColumnsIndex]['orderable'] = array_key_exists('isSortable', $column[1])?$column[1]['isSortable']:true;
@@ -751,6 +754,13 @@ class DashboardController extends Controller
                 else if (isset($value[1]['ishtml']) && $value[1]['ishtml']){
                     $fieldData = $entity->$getfunction();
                     $oneEntity[$value[0]] = $fieldData;
+                }
+                else if(isset($value[1]['isClickableField']) && $value[1]['isClickableField']){
+
+                    $getSearchValue = $value[1]['searchValue'];
+                    $clickUrl = $this->generateUrl($value[1]['routeName']).'?searchKey=["'.$value[1]['searchKey'].'"]&searchValue=["'.$entity->$getSearchValue().'"]';
+
+                    $oneEntity[$value[0]] = '<div data-clickablefield='.$clickUrl.'>'.$entity->$getfunction().'</div>';
                 }
                 else {
                     $fieldData = $entity->$getfunction();
