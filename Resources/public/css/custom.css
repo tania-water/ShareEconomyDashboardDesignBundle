@@ -1132,3 +1132,12 @@ ul.summaryList > li.calendarInput{
     padding-right: 56px !important;
   }
 }
+
+.clickable-field{
+    color: #26a69a;
+}
+
+.clickable-field:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=100);
+}
