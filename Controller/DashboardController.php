@@ -525,7 +525,7 @@ class DashboardController extends Controller
 
             if(count($searchKey) == count($searchValue)){
                 $andX = new Andx();
-                $this->appendSearchtoQuery($query,$andX,$searchKey,$searchValue);
+                $this->appendSearchtoQuery($query,$andX,$searchKey,$searchValue, $request->get('isExactSearch', false));
                 if($andX->count()>0)
                     $query = $query->andWhere($query->expr()->andX($andX));
             }
@@ -583,7 +583,7 @@ class DashboardController extends Controller
         foreach($this->listColumns as &$column){
             if(isset($column[1]['permission']) && (!$this->get('security.authorization_checker')->isGranted($column[1]['permission']) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')))
                 unset($column[1]['isClickableField']);
-            
+
             $datatableColumns[$datatableColumnsIndex] = array('data'=>$column[0]);
             if(count($column)>1){
                 $datatableColumns[$datatableColumnsIndex]['orderable'] = array_key_exists('isSortable', $column[1])?$column[1]['isSortable']:true;
@@ -662,16 +662,25 @@ class DashboardController extends Controller
         );
     }
 
-    public function appendSearchtoQuery($query, $andX, $searchKey, $searchValue) {
+    public function appendSearchtoQuery($query, $andX, $searchKey, $searchValue, $isExactSearch = false) {
         for ($i = 0; $i < count($searchKey); $i++) {
             if (in_array($searchKey[$i], $this->listSearchColumns)) {
                 if (strpos($searchKey[$i], ".")) {
-                    $andX->add($searchKey[$i] . " like :searchValue" . $i);
+                    if($isExactSearch)
+                        $andX->add($searchKey[$i] . " = :searchValue" . $i);
+                    else
+                        $andX->add($searchKey[$i] . " like :searchValue" . $i);
                 } else {
-                    $andX->add("e." . $searchKey[$i] . " like :searchValue" . $i);
+                    if($isExactSearch)
+                        $andX->add("e." . $searchKey[$i] . " = :searchValue" . $i);
+                    else
+                        $andX->add("e." . $searchKey[$i] . " like :searchValue" . $i);
                 }
 
-                $query->setParameter(':searchValue' . $i, '%' . $searchValue[$i] . '%');
+                if($isExactSearch)
+                    $query->setParameter(':searchValue' . $i, $searchValue[$i]);
+                else
+                    $query->setParameter(':searchValue' . $i, '%' . $searchValue[$i] . '%');
             }
         }
     }
