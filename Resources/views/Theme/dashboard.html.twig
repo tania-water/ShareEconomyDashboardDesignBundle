@@ -241,7 +241,7 @@
                     controlUI.style.cursor = 'pointer';
                     controlUI.style.marginBottom = '22px';
                     controlUI.style.textAlign = 'center';
-                    controlUI.title = 'Delete the polygon';
+                    controlUI.title = '{{'Delete the polygon'|trans({}, translation_domain)}}';
                     controlDiv.appendChild(controlUI);
 
                     // Set CSS for the control interior
@@ -252,7 +252,7 @@
                     controlText.style.lineHeight = '38px';
                     controlText.style.paddingLeft = '5px';
                     controlText.style.paddingRight = '5px';
-                    controlText.innerHTML = 'Delete';
+                    controlText.innerHTML = '{{'Delete'|trans({}, translation_domain)}}';
                     controlUI.appendChild(controlText);
 
                     map_{{ id }}.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
