@@ -6,7 +6,7 @@
 {% set fsupportedLocales = frontendLocales is defined ? frontendLocales : ['ar'] %}
 {% set rtlLocales = rtlLocales is defined ? rtlLocales : ['ar'] %}
 {% set defaultLocale = dashboardDefaultLocale is defined ? dashboardDefaultLocale : 'ar' %}
-{% set locale = app.request.locale and app.request.locale in supportedLocales ? app.request.locale : defaultLocale %}
+{% set locale = app.request and app.request.locale and app.request.locale in supportedLocales ? app.request.locale : defaultLocale %}
 {% set projectName = projectName is defined ? projectName : 'logo' %}
 {% set enableLargeSidebar = enableLargeSidebar is defined ? enableLargeSidebar : false %}
 

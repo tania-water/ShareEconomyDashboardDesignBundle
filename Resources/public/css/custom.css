@@ -695,15 +695,6 @@ input[type="range"]::-ms-thumb {
   left: auto;
   right: 0px;
 }
-
-.has-error .form-control {
-    border-color: #d84315 !important;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-}
-.select2-selection--multiple{
-    padding: 0px;
-}
-
 .actions .uploader:hover .action,.actions .uploader:focus .action {
   box-shadow: none;
 }
@@ -803,7 +794,6 @@ input[type="range"]::-ms-thumb {
 }
 .fileupload .thumbnail{
     min-width: 150px;
-    min-height: 100px;
 }
 table td.text-right{
     white-space: nowrap;
@@ -1131,13 +1121,4 @@ ul.summaryList > li.calendarInput{
  .sidebar-fixed-expanded  .fixednav.content-wrapper {
     padding-right: 56px !important;
   }
-}
-
-.clickable-field{
-    color: #26a69a;
-}
-
-.clickable-field:hover {
-    opacity: 0.8;
-    filter: alpha(opacity=100);
 }
