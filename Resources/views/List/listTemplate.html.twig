@@ -141,6 +141,8 @@
                     {% if column[1].type is defined and column[1].type != 'text' %}
                         {% if column[1].type == 'date' %}
                             {{ value|date(list.defaultDateFormat) }}
+                        {% elseif column[1].type == 'datetime' %}
+                            {{ value|date(list.defaultDateFormat ~ ' ' ~ list.defaultTimeFormat) }}
                         {% elseif column[1].type == 'bool' %}
                             {% if attribute(entity, column[0]) %}
                                 {{'true'|trans}}
