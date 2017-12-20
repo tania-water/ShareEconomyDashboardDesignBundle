@@ -53,6 +53,7 @@ class DashboardController extends Controller
     protected $pagesOffset = 0;
 
     protected  $defaultDateFormat = 'd/m/Y';
+    protected  $defaultTimeFormat = 'H:i';
 
     protected  $isSearchable = true;
 
@@ -212,6 +213,9 @@ class DashboardController extends Controller
                         $value = call_user_func(array($result, $dataGetter));
                         if ($valueType === 'date') {
                             $value = $value->format($this->defaultDateFormat);
+                        }
+                        if ($valueType === 'datetime') {
+                            $value = $value->format($this->defaultDateFormat . ' ' . $this->defaultTimeFormat);
                         }
                         if ($valueType === 'numeric') {
                             $value = '"'.$value.'"';
@@ -652,6 +656,7 @@ class DashboardController extends Controller
             'pagesLimit' => $limit,
             'pagesOffset' => $offset,
             'defaultDateFormat' => $this->defaultDateFormat,
+            'defaultTimeFormat' => $this->defaultTimeFormat,
             'isSearchable' => $this->isSearchable,
             'isExportToExcelEnabled' => false,
             'isClickableRow' => $this->isClickableRow,
@@ -745,7 +750,11 @@ class DashboardController extends Controller
                     $oneEntity[$value[0]] = $result[$index];
                 }
                 else if ($entity->$getfunction() instanceof \DateTime) {
+                    if (isset($value[1]['type']) && $value[1]['type'] == 'datetime'){
+                        $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat . ' ' . $this->defaultTimeFormat) : null;
+                    } else {
                     $oneEntity[$value[0]] = $entity->$getfunction() ? $entity->$getfunction()->format($this->defaultDateFormat) : null;
+                    }
                 }
                 else if(isset($value[1]['type']) && $value[1]['type'] == 'bool'){
                     $oneEntity[$value[0]] = $entity->$getfunction()?$this->get('translator')->trans('true'):$this->get('translator')->trans('false');
