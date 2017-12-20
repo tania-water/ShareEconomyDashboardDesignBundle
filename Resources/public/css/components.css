@@ -2768,6 +2768,7 @@ label.checkbox-switch.checkbox-inline {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  padding: 0px;
 }
 .picker,
 .select2-results__option,
