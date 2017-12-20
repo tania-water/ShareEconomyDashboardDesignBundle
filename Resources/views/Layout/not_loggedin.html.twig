@@ -2,7 +2,7 @@
 
 {% block page %}
     <!DOCTYPE html>
-    <html lang="{{ locale }}" dir="{{ locale in rtlLocales ? 'rtl' : 'ltr' }}">
+    <html lang="{{ app.request.get('_locale') }}" dir="{{ app.request.get('_locale') in rtlLocales ? 'rtl' : 'ltr' }}">
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
