@@ -774,10 +774,22 @@ class DashboardController extends Controller
                     $oneEntity[$value[0]] = $fieldData;
                 }
                 else if(isset($value[1]['isClickableField']) && $value[1]['isClickableField']){
-
-                    $getSearchValue = $value[1]['searchValue'];
-                    $clickUrl = $this->generateUrl($value[1]['routeName']).'?searchKey=["'.$value[1]['searchKey'].'"]&searchValue=["'.$entity->$getSearchValue().'"]';
-
+                    $clickUrl='#';
+                    if(isset($value[1]['searchValue'])){
+                        $getSearchValue = $value[1]['searchValue'];
+                        $clickUrl = $this->generateUrl($value[1]['routeName']).'?searchKey=["'.$value[1]['searchKey'].'"]&searchValue=["'.$entity->$getSearchValue().'"]';
+                    }
+                    else if(isset($value[1]['params'])){
+                        $clickUrl = $this->generateUrl($value[1]['routeName']).'?';
+                        $i = 1;
+                        foreach ($value[1]['params'] as $parameter) {
+                            $getParamFunction = "get" . ucfirst($parameter);
+                            $clickUrl .= $parameter .'='.$entity->$getParamFunction();
+                            if($i != count($value[1]['params'])){
+                                $clickUrl .= '&';
+                            }
+                        }
+                    }
                     $oneEntity[$value[0]] = '<div data-clickablefield='.$clickUrl.'>'.$entity->$getfunction().'</div>';
                 }
                 else {

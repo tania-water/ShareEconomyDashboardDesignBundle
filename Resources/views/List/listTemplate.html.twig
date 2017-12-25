@@ -127,6 +127,19 @@
                         {% else %}
                             {% set clickUrl = url('item_list')~'?searchKey=["'~column[1].searchKey~'"]&searchValue=["'~attribute(entity, column[1].searchValue)~'"]&isExactSearch='~column[1].isExactSearch %}
                         {% endif %}
+                    {% else %}
+                        {% if column[1].routeName is defined %}
+                            {% set clickUrl = url(column[1].routeName) %}
+                            {% if column[1].params is defined %}
+                                {% set clickUrl = url(column[1].routeName)~'?' %}
+                                {% for parameter in column[1].params %}
+                                    {% set clickUrl = clickUrl~parameter~'='~attribute(result, parameter) %}
+                                    {% if loop.index != column[1].params|length %}
+                                        {% set clickUrl = clickUrl~'&' %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
                     {% endif %}
                 {% endif %}
                 <td {% if column[1].isClickableField is defined %}data-clickablefield="{{ clickUrl }}"{% endif %} {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
