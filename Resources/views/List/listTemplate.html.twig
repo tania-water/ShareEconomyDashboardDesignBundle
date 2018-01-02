@@ -102,7 +102,7 @@
 
         <th class="{{isSortable}}" data-name='{{sortCol}}'>{{ colName|humanize|title|trans({}, list.translationDomain) }}</th>
         {% endfor %}
-        {% if app.request.get('iframe') != 'true' and (list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate)) %}
+        {% if list.actions|length > 0 or (list.additionalActionsTemplate is defined and list.additionalActionsTemplate) %}
         <th data-name='actions' class="text-center">{{ ('Actions')|trans}}</th>
         {% elseif list.isSearchable %}
         <th></th>
