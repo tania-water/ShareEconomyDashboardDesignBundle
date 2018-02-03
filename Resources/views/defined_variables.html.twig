@@ -9,6 +9,15 @@
 {% set locale = app.request and app.request.locale and app.request.locale in supportedLocales ? app.request.locale : defaultLocale %}
 {% set projectName = projectName is defined ? projectName : 'logo' %}
 {% set enableLargeSidebar = enableLargeSidebar is defined ? enableLargeSidebar : false %}
+{% if locale in rtlLocales %}
+    {% set currentSide = 'right' %}
+    {% set oppositeSide = 'left' %}
+    {% set cssDirection = 'rtl' %}
+{% else %}
+    {% set currentSide = 'left' %}
+    {% set oppositeSide = 'right' %}
+    {% set cssDirection = 'ltr' %}
+{% endif %}
 
 {# pages content #}
 {% block page %}{% endblock %}

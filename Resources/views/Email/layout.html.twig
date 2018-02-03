@@ -1,16 +1,6 @@
 {% extends "IbtikarShareEconomyDashboardDesignBundle::defined_variables.html.twig" %}
 
 {% block page %}
-    {% if locale in rtlLocales %}
-        {% set direction = 'rtl' %}
-        {% set currentSide = 'right' %}
-        {% set oppositeSide = 'left' %}
-    {% else %}
-        {% set direction = 'ltr' %}
-        {% set currentSide = 'left' %}
-        {% set oppositeSide = 'right' %}
-    {% endif %}
-
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
@@ -22,7 +12,7 @@
                 div, p, a, li, td { -webkit-text-size-adjust:none; }
                 #outlook a {padding:0;} /* Force Outlook to provide a "view in browser" menu link. */
                 html{width: 100%; }
-                body{direction: {{ direction }};width:100% !important;background:#eeeeee ; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
+                body{direction: {{ cssDirection }};width:100% !important;background:#eeeeee ; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
                 /* Prevent Webkit and Windows Mobile platforms from changing default font sizes, while not breaking desktop design. */
                 .ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */
                 .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing. */
@@ -108,7 +98,7 @@
                                                                     <tr>
                                                                         <td width="600" height="100" align="center">
                                                                             <div class="imgpop">
-                                                                                <a target="_blank" href="#">
+                                                                                <a target="_blank" href="{% if logoLink is defined and logoLink %}{{ logoLink }}{% else %}#{% endif %}">
                                                                                     <img src="{{ absolute_url(asset('/img/' ~ currentTheme ~ '/logo.png')) }}" alt="" border="0" width="200" height="161" style="display:block; border:none; outline:none; text-decoration:none;"/>
                                                                                 </a>
                                                                             </div>
@@ -235,7 +225,7 @@
                                                                                     </a>
                                                                                 </div>
                                                                             </td>
-    
+
                                                                             <td width="28" height="32" align="center">
                                                                                 <div class="imgpop">
                                                                                     <a target="_blank" href="https://www.youtube.com/channel/UCviegwTV6ozfJXRepEdgQzQ">
@@ -243,7 +233,7 @@
                                                                                     </a>
                                                                                 </div>
                                                                             </td>
-    
+
                                                                             <td  width="28" height="32"  align="center">
                                                                                 <div class="imgpop">
                                                                                     <a target="_blank" href="#">
@@ -251,7 +241,7 @@
                                                                                     </a>
                                                                                 </div>
                                                                             </td>
-    
+
                                                                             <td  width="28" height="32" align="center">
                                                                                 <div class="imgpop">
                                                                                     <a target="_blank" href="#">
@@ -259,7 +249,7 @@
                                                                                     </a>
                                                                                 </div>
                                                                             </td>
-    
+
                                                                             <td  width="28" height="32" align="center">
                                                                                 <div class="imgpop">
                                                                                     <a target="_blank" href="#">
@@ -267,7 +257,7 @@
                                                                                     </a>
                                                                                 </div>
                                                                             </td>
-    
+
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -317,7 +307,7 @@
                                                    <a href="#" style="text-decoration:underline ; color:#999">Unsubscribe </a>
                                                </td>
                                            </tr>
-    
+
                                         <!-- Spacing -->
                                         <tr>
                                             <td width="100%" height="20"></td>
