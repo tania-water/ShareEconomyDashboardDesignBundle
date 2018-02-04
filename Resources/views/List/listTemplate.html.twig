@@ -142,7 +142,7 @@
                         {% endif %}
                     {% endif %}
                 {% endif %}
-                <td {% if column[1].isClickableField is defined %}data-clickablefield="{{ clickUrl }}"{% endif %} {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
+                <td {% if column[1].isClickableField is defined %}data-clickablefield="{{ clickUrl }}" style="text-decoration: underline;color: blue;"{% endif %} {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
                     {% if column[1].index is defined %}
                         {% set value = attribute(result, column[1].index) %}
                     {% elseif column[1].method is defined %}
