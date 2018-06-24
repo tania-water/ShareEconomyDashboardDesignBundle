@@ -268,7 +268,7 @@
     <script src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/autocomplete/bootstrap3-typeahead.min.js') }}"></script>
     <script>
         var actionsValidationMessages= {
-            maximumRecordError: '{{('Maximum number of records achieved')|trans({}, list.translationDomain)}}'
+            maximumRecordError: '{{('Maximum number of records achieved')|trans({}, "messages")}}'
         };
         var limit = {{ list.pagesLimit }};
                 var start = {{ list.pagesOffset }};
