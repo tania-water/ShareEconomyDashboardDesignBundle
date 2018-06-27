@@ -69,7 +69,17 @@
                                                 {% else %}
                                                     {%set propertyName = property[0] %}
                                                 {% endif %}
-                                                {% if property[1].entity is defined %}
+                                                {% if property[1].methodsArgs is defined %}
+                                                    {% for method, params in property[1].methodsArgs %}
+                                                        {% if true == loop.first %}
+                                                            {% set value = attribute(entity,method,params) %}
+                                                        {% else %}
+                                                            {% if value is not null %}
+                                                                {% set value = attribute(value,method,params) %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% elseif property[1].entity is defined %}
                                                     {% if property[1].method is defined %}
                                                         {% set value = attribute(attribute(entity,property[1].entity), property[1].method) %}
                                                     {% else %}
