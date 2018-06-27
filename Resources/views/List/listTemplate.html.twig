@@ -145,7 +145,7 @@
                 <td {% if column[1].isClickableField is defined %}data-clickablefield="{{ clickUrl }}" style="text-decoration: underline;color: blue;"{% endif %} {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
                     {% if column[1].methodsArgs is defined %}
                         {% for method, params in column[1].methodsArgs %}
-                            {% if true == loop.first %}
+                            {% if loop.first == true %}
                                 {% set value = attribute(entity,method,params) %}
                             {% else %}
                                 {% if value is not null %}
