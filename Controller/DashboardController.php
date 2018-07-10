@@ -745,7 +745,14 @@ class DashboardController extends Controller
 
                 $getfunction = isset($value[1]['method']) ? $value[1]['method'] : "get" . ucfirst($value[0]);
 
-                if (isset($value[1]['index'])){
+                if(isset($value[1]['manyToManyMethods'])){
+                    $relationObjectArray = $entity->{$value[1]['manyToManyMethods'][0]}();
+                    $oneEntity[$value[0]] = "";
+                    foreach ($relationObjectArray as $relationObject) {
+                        $oneEntity[$value[0]] .= "<div>" . $relationObject->{$value[1]['manyToManyMethods'][1]}()->{$value[1]['manyToManyMethods'][2]}() . "</div>";
+                    }
+                }
+                else if (isset($value[1]['index'])){
                     $index = $value[1]['index'];
                     $oneEntity[$value[0]] = $result[$index];
                 }

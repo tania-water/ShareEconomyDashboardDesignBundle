@@ -143,15 +143,11 @@
                     {% endif %}
                 {% endif %}
                 <td {% if column[1].isClickableField is defined %}data-clickablefield="{{ clickUrl }}" style="text-decoration: underline;color: blue;"{% endif %} {% if column[1].class is defined %}class="{{ column[1].class }}"{% endif %}>
-                    {% if column[1].methodsArgs is defined %}
-                        {% for method, params in column[1].methodsArgs %}
-                            {% if loop.first == true %}
-                                {% set value = attribute(entity,method,params) %}
-                            {% else %}
-                                {% if value is not null %}
-                                    {% set value = attribute(value,method,params) %}
-                                {% endif %}
-                            {% endif %}
+                    {% if column[1].manyToManyMethods is defined %}
+                        {% set value = '' %}
+                        {% set relationObjectArr = attribute(entity,column[1].manyToManyMethods[0]) %}
+                        {% for relationObject in relationObjectArr %}
+                            {% set value = value ~ '<div>' ~ attribute(attribute(relationObject,column[1].manyToManyMethods[1]),column[1].manyToManyMethods[2]) ~ '</div>' %}
                         {% endfor %}
                     {% elseif column[1].index is defined %}
                         {% set value = attribute(result, column[1].index) %}
