@@ -69,17 +69,19 @@
                                                 {% else %}
                                                     {%set propertyName = property[0] %}
                                                 {% endif %}
-                                                {% if property[1].manyToManyMethods is defined %}
-                                                    {% set value = '' %}
-                                                    {% set relationObjectArr = attribute(entity,property[1].manyToManyMethods[0]) %}
-                                                    {% for relationObject in relationObjectArr %}
-                                                        {% set value = value ~ '<div>' ~ attribute(attribute(relationObject,property[1].manyToManyMethods[1]),property[1].manyToManyMethods[2]) ~ '</div>' %}
-                                                    {% endfor %}
+                                                {% if property[1].oneToOneMethods is defined %}
+                                                    {% set value = attribute(attribute(entity,property[1].oneToOneMethods[0]),property[1].oneToOneMethods[1]) %}
                                                 {% elseif property[1].oneToManyMethods is defined %}
                                                     {% set value = '' %}
                                                     {% set ObjectArr = attribute(entity,property[1].oneToManyMethods[0]) %}
                                                     {% for Object in ObjectArr %}
                                                         {% set value = value ~ '<div>' ~ attribute(Object,property[1].oneToManyMethods[1]) ~ '</div>' %}
+                                                    {% endfor %}
+                                                {% elseif property[1].manyToManyMethods is defined %}
+                                                    {% set value = '' %}
+                                                    {% set relationObjectArr = attribute(entity,property[1].manyToManyMethods[0]) %}
+                                                    {% for relationObject in relationObjectArr %}
+                                                        {% set value = value ~ '<div>' ~ attribute(attribute(relationObject,property[1].manyToManyMethods[1]),property[1].manyToManyMethods[2]) ~ '</div>' %}
                                                     {% endfor %}
                                                 {% elseif property[1].entity is defined %}
                                                     {% if property[1].method is defined %}

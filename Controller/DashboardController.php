@@ -745,11 +745,37 @@ class DashboardController extends Controller
 
                 $getfunction = isset($value[1]['method']) ? $value[1]['method'] : "get" . ucfirst($value[0]);
 
-                if(isset($value[1]['manyToManyMethods'])){
+                if(isset($value[1]['oneToOneMethods'])){
+                    $oneEntity[$value[0]] = "";
+                    $object = $entity->{$value[1]['oneToOneMethods'][0]}();
+                    if($object){
+                    $oneEntity[$value[0]] = $object->{$value[1]['oneToOneMethods'][1]}();
+                    }
+                }
+                elseif(isset($value[1]['manyToOneMethods'])){
+                    $oneEntity[$value[0]] = "";
+                    $object = $entity->{$value[1]['manyToOneMethods'][0]}();
+                    if($object){
+                    $oneEntity[$value[0]] = $object->{$value[1]['manyToOneMethods'][1]}();
+                    }
+                }
+                elseif(isset($value[1]['oneToManyMethods'])){
+                    $objectArray = $entity->{$value[1]['oneToManyMethods'][0]}();
+                    $oneEntity[$value[0]] = "";
+                    foreach ($objectArray as $object) {
+                        if($object){
+                            $oneEntity[$value[0]] .= "<div>" . $object->{$value[1]['oneToManyMethods'][1]}() . "</div>";
+                        }
+                    }
+                }
+                elseif(isset($value[1]['manyToManyMethods'])){
                     $relationObjectArray = $entity->{$value[1]['manyToManyMethods'][0]}();
                     $oneEntity[$value[0]] = "";
                     foreach ($relationObjectArray as $relationObject) {
-                        $oneEntity[$value[0]] .= "<div>" . $relationObject->{$value[1]['manyToManyMethods'][1]}()->{$value[1]['manyToManyMethods'][2]}() . "</div>";
+                        $object = $relationObject->{$value[1]['manyToManyMethods'][1]}();
+                        if($object){
+                            $oneEntity[$value[0]] .= "<div>" . $object->{$value[1]['manyToManyMethods'][2]}() . "</div>";
+                        }
                     }
                 }
                 else if (isset($value[1]['index'])){
