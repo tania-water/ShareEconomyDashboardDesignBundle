@@ -24,7 +24,10 @@
                 {% endblock headerNotification %}
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li{% if app.request.attributes.get('_route') in ['order_returned_list'] %} class="active"{% endif %}><a href="{{ path('order_returned_list') }}"><span>{% trans from 'order' %}Returned Orders{% endtrans %}</span> : <span class="dev-get-returned-orders-count "></span></a></li>
+
+                    <input type="hidden" id="returnOrderRoute" class="returnOrderRoute" name="returnOrderRoute" value="{{ path('order_returned_list') }}">
+                    <input type="hidden" id="returnOrderTitle" class="returnOrderTitle" name="returnOrderTitle" value="{% trans from 'order' %}Returned Orders{% endtrans %}">
+                    <li{% if app.request.attributes.get('_route') in ['order_returned_list'] %} class="active"{% endif %}><a href="{{ path('order_returned_list') }}"><span>{% trans from 'order' %}Returned Orders{% endtrans %}</span> : <span class="get-today-returned-orders-count"></span></a></li>
 
                     {% if supportedLocales|length > 1 %}
                         <li class="language-switch">
@@ -39,6 +42,7 @@
                             {% endfor %}
                         </li>
                     {% endif %}
+
                     {% if app.user %}
                         <li class="dropdown dropdown-user">
                             <a class="dropdown-toggle" data-toggle="dropdown">
