@@ -24,6 +24,8 @@
                 {% endblock headerNotification %}
 
                 <ul class="nav navbar-nav navbar-right">
+                    <li{% if app.request.attributes.get('_route') in ['order_returned_list'] %} class="active"{% endif %}><a href="{{ path('order_returned_list') }}"><span>{% trans from 'order' %}Returned Orders{% endtrans %}</span> : <span class="dev-get-returned-orders-count "></span></a></li>
+
                     {% if supportedLocales|length > 1 %}
                         <li class="language-switch">
                             {% for supportedLocale in supportedLocales if locale != supportedLocale %}
