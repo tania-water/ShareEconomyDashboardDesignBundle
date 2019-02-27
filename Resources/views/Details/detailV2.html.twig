@@ -1,0 +1,162 @@
+{% extends "IbtikarShareEconomyDashboardDesignBundle:Dashboard:genericDashboard.html.twig" %}
+
+
+{% block title %}
+    {{ title|trans({}, translationDomain) }}
+{% endblock %}
+
+
+{% block side_menu %}
+    {% include 'AppBundle:Layout:sidebar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <div class="content">
+
+            <!-- Dashboard content -->
+            <div class="row">
+                <div class="col-lg-12">
+
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+
+                            <form class="form-horizontal">
+                                <!-- Navigation -->
+                                <div class="panel panel-flat">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">{{ title|trans({}, translationDomain) }}</h5>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        {% for property in detailsPageDataV2 %}
+                                            {% if property[1].entities is defined %}
+                                                {% if property[1].name is defined %}
+                                                    {%set propertyName = property[1].name %}
+                                                {% else %}
+                                                    {%set propertyName = property[0] %}
+                                                {% endif %}
+                                                {% for innerEntity in attribute(entity,property[1].entities) %}
+                                                    {% if property[1].method is defined %}
+                                                        {% set value = attribute(innerEntity, property[1].method) %}
+                                                    {% else %}
+                                                        {% set value = attribute(innerEntity, property[0]) %}
+                                                    {% endif %}
+                                                    <div class="form-group">
+                                                        <label class="control-label col-lg-2">{{ propertyName|humanize|title|trans({}, translationDomain) }}</label>
+                                                        <div class="col-lg-10 {% if property[1].class is defined %}{{ property[1].class }}{% endif %}">
+                                                            {% if property[1].type is defined %}
+                                                                {% if property[1].type == 'image' %}
+                                                                    <img width="200" height="200" src="{{ asset(attribute(entity, property[1].image)) }}" class="img-responsive" alt="" />
+                                                                {% elseif property[1].type == 'rating' %}
+                                                                    <div class="rating">
+                                                                        <div data-rating="{{ value }}"></div>
+                                                                    </div>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <h5>{{ value }}</h5>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                                {% if property[1].name is defined %}
+                                                    {%set propertyName = property[1].name %}
+                                                {% else %}
+                                                    {%set propertyName = property[0] %}
+                                                {% endif %}
+                                                {% if property[1].oneToOneMethods is defined %}
+                                                    {% set value = attribute(attribute(entity,property[1].oneToOneMethods[0]),property[1].oneToOneMethods[1]) %}
+                                                {% elseif property[1].oneToManyMethods is defined %}
+                                                    {% set value = '' %}
+                                                    {% set ObjectArr = attribute(entity,property[1].oneToManyMethods[0]) %}
+                                                    {% for Object in ObjectArr %}
+                                                        {% set value = value ~ '<div>' ~ attribute(Object,property[1].oneToManyMethods[1]) ~ '</div>' %}
+                                                    {% endfor %}
+                                                {% elseif property[1].manyToManyMethods is defined %}
+                                                    {% set value = '' %}
+                                                    {% set relationObjectArr = attribute(entity,property[1].manyToManyMethods[0]) %}
+                                                    {% for relationObject in relationObjectArr %}
+                                                        {% set value = value ~ '<div>' ~ attribute(attribute(relationObject,property[1].manyToManyMethods[1]),property[1].manyToManyMethods[2]) ~ '</div>' %}
+                                                    {% endfor %}
+                                                {% elseif property[1].entity is defined %}
+                                                    {% if property[1].method is defined %}
+                                                        {% set value = attribute(attribute(entity,property[1].entity), property[1].method) %}
+                                                    {% else %}
+                                                        {% set value = attribute(attribute(entity,property[1].entity), property[0]) %}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% if property[1].method is defined %}
+                                                        {% set value = attribute(entity, property[1].method) %}
+                                                    {% else %}
+                                                        {% set value = attribute(entity, property[0]) %}
+                                                    {% endif %}
+                                                {% endif %}
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">{{ propertyName|humanize|title|trans({}, translationDomain) }}</label>
+                                                    <div class="col-lg-10 {% if property[1].class is defined %}{{ property[1].class }}{% endif %}">
+                                                        {% if property[1].type is defined %}
+                                                            {% if property[1].type == 'image' %}
+                                                                <img width="200" height="200" src="{{ asset(attribute(entity, property[1].image)) }}" class="img-responsive" alt="" />
+                                                            {% elseif property[1].type == 'rating' %}
+                                                                <div class="rating">
+                                                                    <div data-rating="{{ value }}"></div>
+                                                                </div>
+                                                            {% elseif property[1].type == 'date' %}
+                                                                {% set value = value|date(defaultDateFormat) %}
+                                                                <h5>{{ value }}</h5>
+                                                            {% elseif property[1].type == 'bool' %}
+                                                                {% if attribute(entity, column[0]) %}
+                                                                    {% set value = 'true'|trans %}
+                                                                {% else %}
+                                                                    {% set value = 'false'|trans %}
+                                                                {% endif %}
+                                                                <h5>{{ value }}</h5>
+                                                            {% endif %}
+                                                        {% elseif property[1].ishtml is defined and property[1].ishtml %}
+                                                            <h5>{{ value|raw }}</h5>
+                                                        {% else %}
+                                                            <h5>{{ value }}</h5>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+                            <div class="row actionButtons">
+                                <div class="col-xs-12">
+                                <a class="btn btn-primary btn-lg dev-form-save-button" href="{% if closeRedirection is defined %}{{ closeRedirection }}{% else %}{{path('ibtikar_share_economy_dashboard_design_dashboard_home')}}{% endif %}">{% trans %}Next{% endtrans %}<i class="icon-checkmark4 position-right"></i></a>
+
+                                </div>
+                            </div>
+                                    </div><!-- panel-body end -->
+                                </div><!-- panel end -->
+                            </form>
+
+                        </div><!-- col-lg-12 -->
+                    </div><!-- row end -->
+                </div><!-- col-lg-12 tabs -->
+            </div>
+            <!-- /dashboard content -->
+        </div>
+    </div>
+    <!-- /main content -->
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/forms/rating/jquery.rateyo.js')}}"></script>
+    <script>
+        $('[data-rating').each(function () {
+            $($(this)).rateYo({
+                rating: $(this).attr("data-rating"),
+                readOnly: true
+            });
+        });
+    </script>
+{% endblock %}
