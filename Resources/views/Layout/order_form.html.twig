@@ -1,0 +1,106 @@
+{% extends "IbtikarShareEconomyDashboardDesignBundle:Layout:dashboard.html.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% form_theme form 'IbtikarShareEconomyDashboardDesignBundle:Theme:dashboard.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+        <!-- Main content -->
+        <div class="content-wrapper{% if enableLargeSidebar %} fixednav{% endif %}">
+
+                {% if enableLargeSidebar %}
+                <div class="content">
+                {% endif %}
+                    {% if breadcrumb is defined and breadcrumb|length > 0 %}
+                    <!-- Basic button -->
+                    <div class="content-group">
+                        <div class="heading-elemnts">
+                            <div class="heading-btn-group">
+                                {% for breadcrumbLink in breadcrumb %}
+                                <a class="btn btn-link btn-float has-text{% if breadcrumbLink.active %} activeLink{% endif %}" href="{{ breadcrumbLink.link }}"><i class="{{ breadcrumbLink.linkType == 'add' ? 'icon-add' : 'icon-table2' }}"></i><span>{{ breadcrumbLink.text }}</span></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /basic button -->
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Add Role -->
+                            <div id="NewRoleBox" class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-flat sticky-parent">
+                                        <div id="sticky-anchor"></div>
+
+                                        <div class="panel-heading">
+                                            <h5 class="panel-title">{{ title }}</h5>
+                                        </div>
+
+                                        <div class="panel-body dev-main-form-container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    {% for flashMessageType, flashMessageArray in app.session.flashBag.all %}
+                                                        {% for flashMessage in flashMessageArray %}
+                                                    <div class="alert {{ flashMessageType == 'error' ? 'alert-danger' : flashMessageType == 'success' ? 'alert-success' : 'alert-info' }} no-border">
+                                                        <button data-dismiss="alert" class="close" type="button"><span>×</span><span class="sr-only">{% trans %}Close{% endtrans %}</span></button>{{ flashMessage }}
+                                                    </div>
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                    {% block form_container %}
+                                                        {{ form(form) }}
+                                                    {% endblock %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                            {%block form_extras %}
+                                            {% endblock%}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% if enableLargeSidebar %}
+                </div>
+                {% endif %}
+        </div>
+{% endblock %}
+
+{% block form_buttons %}
+                <div class="row actionButtons">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary btn-lg dev-form-save-button" type="button">{% trans %}Save{% endtrans %}<i class="icon-checkmark4 position-right"></i></button>
+                        <button class="btn btn-default btn-lg dev-form-reset-button" type="button">{% trans %}Reset{% endtrans %}<i class="icon-cross2 position-right"></i></button>
+                    </div>
+                </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/fileupload/bootstrap-fileupload.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/forms-layout.js') }}"></script>
+        {% if app.session.get('_locale') == 'en' %}
+            <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/forms/selects/select2.min.js') }}"></script>
+        {% else %}
+            <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/forms/selects/select2_ar.min.js') }}"></script>
+        {% endif %}
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/date/moment.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ibtikarshareeconomydashboarddesign/js/plugins/date/bootstrap-datetimepicker.min.js') }}"></script>
+        <script>
+            $(function() {
+                // Select2 selects
+                $('.select').select2();
+            });
+            function getFormatedDate(date) {
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return year + '-' + month + '-' + day;
+            }
+        </script>
+{% endblock %}
